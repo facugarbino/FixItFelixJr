@@ -13,5 +13,12 @@ public class Juego {
 	
 	public void loop() {
 		
+		if (mapa.felixMartilla()) {
+			if (!mapa.getEdificio().getSeccion().estaSana()) {
+				jugador.sumarPuntos(100);
+			} else {
+				jugador.sumarPuntos(500);
+			}
+		}
 	}
 }

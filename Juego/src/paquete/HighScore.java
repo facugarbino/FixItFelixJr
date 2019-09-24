@@ -15,6 +15,8 @@ public class HighScore implements Comparable<HighScore> {
 		return puntaje;
 	}
 	public int compareTo(HighScore j) {
-		return (int) (this.puntaje - j.getPuntaje());
+		//Devolvemos > 0 si el receptor es menor, para ordenar
+		//el arreglo descendentemente.
+		return (int) (j.getPuntaje() - this.puntaje);
 	}
 }

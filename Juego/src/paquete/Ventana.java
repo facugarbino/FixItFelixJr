@@ -17,7 +17,15 @@ public abstract class Ventana {
 	private int panelesReparados;
 
 	public Ventana getVentana(Orientacion orientacion) {
-		if
+		if (!tieneObstaculo(orientacion)) {
+			return seccion.getVentanaAledana(this, orientacion);
+		} else {
+			return null;
+		}
+	}
+	
+	public Point getPosicion() {
+		return posicion;
 	}
 
 	public boolean reparar() {
@@ -53,7 +61,7 @@ public abstract class Ventana {
 		this.pastel = comida;
 	}
 
-	public boolean tieneObstaculo(Orientacion o) {
+	private boolean tieneObstaculo(Orientacion o) {
 		if (!obstaculos.isEmpty()) {
 			Iterator<Obstaculo> i = obstaculos.iterator();
 			while (i.hasNext()) {

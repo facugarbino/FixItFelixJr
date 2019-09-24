@@ -5,18 +5,21 @@ import java.awt.Point;
 public class FelixJr extends Personaje {
 	private int vidas;
 	private Ventana ventanaActual;
+	private boolean inmune;
 
 	public FelixJr(Point p, Ventana v) {
-
+		this.posicion=p;
+		ventanaActual = v;
 	}
 
-	public void darMartillazo() {
-
+	public boolean darMartillazo() {
+		return ventanaActual.reparar();
 	}
 
 	public void mover(Orientacion o) {
-		if (!ventanaActual.tieneObstaculo(o)) {
-			v = ventanaActual.getVentana(o);
+		Ventana v = ventanaActual.getVentana(o);
+		if (v!=null) {
+			ventanaActual = v;
 			switch (o) {
 			case IZQUIERDA:
 				posicion.x -= 10;
@@ -39,7 +42,7 @@ public class FelixJr extends Personaje {
 	}
 
 	public void golpear(Pajaro p) {
-
+		
 	}
 
 	public int getVidas() {
@@ -47,11 +50,14 @@ public class FelixJr extends Personaje {
 	}
 
 	private void inmunizar() {
-
+		inmune = true;
 	}
 
 	public void chequearInmunizacion() {
-
+		if (inmune && timer.contar()) {
+			timer.resetear();
+			inmune=false;
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package paquete;
 
+import java.awt.Point;
 import java.util.List;
 
 public class Seccion {
@@ -29,7 +30,25 @@ public class Seccion {
 	}
 
 	public Ventana getVentanaAledana(Ventana v, Orientacion o) {
-		XXXX
+		Point p = getXY(v);
+		int x = p.x;
+		int y = p.y;
+		switch (o) {
+			case IZQUIERDA: if (x>0)return ventanas[x-1][y]; break; 
+			case DERECHA:if (x<4)return ventanas[x+1][y]; break;
+			case ARRIBA:  if (y<4)return ventanas[x][y+1]; break;
+			case ABAJO: if (y>0)return ventanas[x][y-1]; break;
+		}
+		return null;
+	}
+	public Point getXY(Ventana v) {
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<5;j++) {
+				if (ventanas[i][j].equals(v))
+					return new Point(i,j);
+			}
+		}
+		return null;
 	}
 
 	public void seArregloUnaVentana() {

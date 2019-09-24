@@ -15,6 +15,12 @@ public class Mapa {
 		ralph = new Ralph(n.getCantLadrillos(), n.getFrecuenciaLadrillo(), n.getVelocidadLadrillo());
 	}
 	
+	public Edificio getEdificio() {
+		return edificio;
+	}
+	public boolean felixMartilla() { 
+		return felix.darMartillazo();
+	}
 	public void agregarComponente(Componente c) {
 		componentes.add(c);
 		
