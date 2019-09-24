@@ -2,5 +2,6 @@ package paquete;
 
 public abstract class Obstaculo {
 
-	public boolean estasEn(Orientacion); 
+	public abstract boolean estasEn(Orientacion o);
+	
 }

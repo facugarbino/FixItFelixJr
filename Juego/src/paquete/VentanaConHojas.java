@@ -1,5 +1,6 @@
 package paquete;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class VentanaConHojas extends Ventana {

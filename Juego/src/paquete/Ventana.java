@@ -17,7 +17,7 @@ public abstract class Ventana {
 	private int panelesReparados;
 
 	public Ventana getVentana(Orientacion orientacion) {
-		return seccion.getVentana(this, orientacion);
+		if
 	}
 
 	public boolean reparar() {
@@ -62,7 +62,7 @@ public abstract class Ventana {
 				}
 			}
 		}
-		Ventana v = getVentanaAladeana(this, o);
+		Ventana v = seccion.getVentanaAledana(this, o);
 		if (v != null) {
 			return tieneObstaculo(o.invertir());
 		}
@@ -87,7 +87,8 @@ public abstract class Ventana {
 			case 3:
 				p = new Sano();
 				break;
-
+			default:
+				p = new Roto();
 			}
 			lista.add(new Panel(p));
 		}

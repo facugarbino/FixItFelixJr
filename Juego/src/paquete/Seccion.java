@@ -28,8 +28,8 @@ public class Seccion {
 		return false;
 	}
 
-	public void getVentanaAledana(Ventana v, Orientacion o) {
-
+	public Ventana getVentanaAledana(Ventana v, Orientacion o) {
+		XXXX
 	}
 
 	public void seArregloUnaVentana() {

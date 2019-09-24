@@ -1,6 +1,6 @@
 package paquete;
 
-public class HighScore implements Comparable<T> {
+public class HighScore implements Comparable<HighScore> {
 	private String nombreJugador;
 	private long puntaje;
 	
