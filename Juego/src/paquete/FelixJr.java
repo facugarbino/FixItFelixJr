@@ -6,14 +6,15 @@ public class FelixJr extends Personaje {
 	private int vidas;
 	private Ventana ventanaActual;
 	private boolean inmune;
+	private Jugador jugador;
 
-	public FelixJr(Point p, Ventana v) {
+	public FelixJr(Point p, Ventana v, Jugador j) {
 		this.posicion=p;
 		ventanaActual = v;
 	}
 
-	public boolean darMartillazo() {
-		return ventanaActual.reparar();
+	public void darMartillazo() {
+		
 	}
 
 	public void mover(Orientacion o) {
@@ -33,6 +34,10 @@ public class FelixJr extends Personaje {
 			case ARRIBA:
 				posicion.y += 10;
 				break;
+			}
+			if (ventanaActual.hayPastel()) {
+				ventanaActual.comerPastel();
+				inmunizar();
 			}
 		}
 	}
