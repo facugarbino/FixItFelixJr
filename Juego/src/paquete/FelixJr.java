@@ -43,11 +43,17 @@ public class FelixJr extends Personaje {
 	}
 
 	public void golpear(Ladrillo l) {
-
+		Juego.getJuego().reiniciarNivel();
+		if (vidas>1) {
+			vidas--;
+		} else {
+			Juego.getJuego().perder();
+		}
 	}
 
 	public void golpear(Pajaro p) {
-		
+		ventanaActual.getSeccion().reiniciar();
+		ventanaActual = ventanaActual.getSeccion().getVentanaInicial();
 	}
 
 	public int getVidas() {
