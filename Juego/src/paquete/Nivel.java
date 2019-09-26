@@ -1,6 +1,8 @@
 package paquete;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Nivel {
 	private final double velocidadNube = 5;
@@ -14,7 +16,7 @@ public class Nivel {
 	private int tiempo;
 	private int porcentaje;
 	private int cantLadrillos;
-	private boolean primeraVez=true;
+	private boolean primeraVez = true;
 
 	public Nivel(int nivelMax, int cantVentanasRotas, double frecuenciaLadrillo, double velocidadLadrillo,
 			double velocidadPajaro, int ventanasConObstaculo, int tiempo, int porcentaje, int cantLadrillos) {
@@ -30,7 +32,12 @@ public class Nivel {
 	}
 
 	public Mapa regenerarMapa() {
-		Mapa m = new Mapa(200, 400, this);
+		List<Seccion> secciones = new ArrayList<Seccion>();
+		secciones.add(new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
+		secciones.add(new Seccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
+		secciones.add(new Seccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
+		Edificio e = new Edificio(new Point(50, 0), secciones);
+		Mapa m = new Mapa(200, 400, e);
 		m.agregarComponente(new Nube(new Point(0, 60), velocidadNube));
 		m.agregarComponente(new Nube(new Point(50, 130), velocidadNube));
 		m.agregarComponente(new Nube(new Point(100, 245), velocidadNube));

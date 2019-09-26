@@ -23,10 +23,10 @@ public class VentanaComun extends Ventana {
 		}
 	}
 
-	public boolean generarNiceLander() {
+	public boolean generarNicelander() {
 
 		if (elDeAbajoEstaRoto() && timer.contar()) {
-			Nicelander nicelander = new Nicelander(
+			nicelander = new Nicelander(
 					new Color((float) Math.random() * 255, (float) Math.random() * 255, (float) Math.random() * 255),
 					this);
 			return true;
@@ -34,7 +34,7 @@ public class VentanaComun extends Ventana {
 		return false;
 	}
 
-	public boolean elDeAbajoEstaRoto() {
+	private boolean elDeAbajoEstaRoto() {
 		return (paneles.get(0).estaRoto());
 	}
 }

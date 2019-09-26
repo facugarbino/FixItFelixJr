@@ -9,7 +9,7 @@ public abstract class Ventana {
 	protected Point posicion;
 	protected Seccion seccion;
 	private Pastel pastel;
-	private Nicelander nicelander;
+	protected Nicelander nicelander;
 	private List<Obstaculo> obstaculos = new ArrayList<>();
 	protected List<Panel> paneles;
 	private int cantMartillazos;
@@ -23,7 +23,10 @@ public abstract class Ventana {
 			return null;
 		}
 	}
-	
+	public Seccion getSeccion() {
+		return seccion;
+	}
+
 	public Point getPosicion() {
 		return posicion;
 	}
@@ -53,7 +56,7 @@ public abstract class Ventana {
 		pastel = null;
 	}
 
-	public boolean generarNiceLander() {
+	public boolean generarNicelander() {
 		return false;
 	}
 
@@ -106,4 +109,7 @@ public abstract class Ventana {
 		return lista;
 	}
 
+	public boolean estaRota() {
+		return panelesRotos != panelesReparados;
+	}
 }

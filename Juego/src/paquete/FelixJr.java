@@ -6,20 +6,32 @@ public class FelixJr extends Personaje {
 	private int vidas;
 	private Ventana ventanaActual;
 	private boolean inmune;
-	private Jugador jugador;
+	private long puntajeNivel;
+	private long puntajeSeccion;
 
-	public FelixJr(Point p, Ventana v, Jugador j) {
-		this.posicion=p;
+	public FelixJr(Point p, Ventana v) {
+		this.posicion = p;
 		ventanaActual = v;
+		puntajeNivel = 0;
+		puntajeSeccion = 0;
 	}
 
 	public void darMartillazo() {
-		
+		if (ventanaActual.reparar()) {
+			if (ventanaActual.getSeccion().estaSana()) {
+				puntajeSeccion += 500;
+				puntajeNivel += puntajeSeccion;
+				puntajeSeccion = 0;
+
+			} else {
+				puntajeSeccion += 100;
+			}
+		}
 	}
 
 	public void mover(Orientacion o) {
 		Ventana v = ventanaActual.getVentana(o);
-		if (v!=null) {
+		if (v != null) {
 			ventanaActual = v;
 			switch (o) {
 			case IZQUIERDA:
@@ -43,17 +55,19 @@ public class FelixJr extends Personaje {
 	}
 
 	public void golpear(Ladrillo l) {
-		Juego.getJuego().reiniciarNivel();
-		if (vidas>1) {
-			vidas--;
+		vidas--;
+		if (vidas > 0) {
+			Juego.getJuego().reiniciarNivel();
+			puntajeNivel = 0;
+			puntajeSeccion = 0;
 		} else {
-			Juego.getJuego().perder();
+			Juego.getJuego().perder(puntajeNivel + puntajeSeccion);
 		}
 	}
 
 	public void golpear(Pajaro p) {
-		ventanaActual.getSeccion().reiniciar();
-		ventanaActual = ventanaActual.getSeccion().getVentanaInicial();
+		Juego.getJuego().reiniciarSeccion();
+		puntajeSeccion = 0;
 	}
 
 	public int getVidas() {
@@ -67,7 +81,7 @@ public class FelixJr extends Personaje {
 	public void chequearInmunizacion() {
 		if (inmune && timer.contar()) {
 			timer.resetear();
-			inmune=false;
+			inmune = false;
 		}
 	}
 

@@ -18,7 +18,7 @@ public class Jugador {
 		return puntaje;
 	}
 
-	public void sumarPuntos(int i) {
+	public void sumarPuntos(long i) {
 		this.puntaje += i;
 	}
 }
