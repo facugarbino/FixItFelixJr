@@ -69,7 +69,7 @@ public class Juego {
 	public void reiniciarSeccion() {
 		Seccion s = mapa.getEdificio().getSeccionActual();
 		if (s instanceof PrimeraSeccion) {
-			mapa.getEdificio().reemplazarSeccion(new PrimeraSeccion(s), s);
+			mapa.getEdificio().reemplazarSeccion(new PrimeraSeccion((PrimeraSeccion) s), s);
 		} else {
 			mapa.getEdificio().reemplazarSeccion(new Seccion(s), s);
 		}
