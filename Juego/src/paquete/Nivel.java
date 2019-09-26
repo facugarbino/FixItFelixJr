@@ -34,8 +34,8 @@ public class Nivel {
 	public Mapa regenerarMapa() {
 		List<Seccion> secciones = new ArrayList<Seccion>();
 		secciones.add(new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
-		secciones.add(new Seccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
-		secciones.add(new Seccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
+		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3),2));
+		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6),3));
 		Edificio e = new Edificio(new Point(50, 0), secciones);
 		Mapa m = new Mapa(200, 400, e);
 		m.agregarComponente(new Nube(new Point(0, 60), velocidadNube));

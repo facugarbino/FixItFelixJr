@@ -85,4 +85,8 @@ public class FelixJr extends Personaje {
 		}
 	}
 
+	public long getPuntaje() {
+		return (puntajeNivel + puntajeSeccion);
+	}
+
 }

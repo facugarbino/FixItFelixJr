@@ -10,7 +10,7 @@ public abstract class Ventana {
 	protected Seccion seccion;
 	private Pastel pastel;
 	protected Nicelander nicelander;
-	private List<Obstaculo> obstaculos = new ArrayList<>();
+	protected List<Obstaculo> obstaculos = new ArrayList<>();
 	protected List<Panel> paneles;
 	private int cantMartillazos;
 	private int panelesRotos;

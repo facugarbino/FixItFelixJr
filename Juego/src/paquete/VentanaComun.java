@@ -10,7 +10,7 @@ public class VentanaComun extends Ventana {
 	public static final int CANT_PANELES = 2;
 	Contador timer = new Contador(Math.random() * 75 + 25);
 
-	public VentanaComun(Point posicion, Seccion seccion, boolean estaRoto) {
+	public VentanaComun(Point posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
 		this.posicion = posicion;
 		this.seccion = seccion;
 		paneles = new ArrayList<>();
@@ -19,6 +19,19 @@ public class VentanaComun extends Ventana {
 		} else {
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
+			}
+		}
+		if (tieneObstaculo) {
+			double random = Math.random();
+			if (random<(1/3)) { 
+				obstaculos.add(new Macetero());
+			} else {
+				if (random<(2/3)) {
+					obstaculos.add(new Moldura());
+				} else {
+					obstaculos.add(new Macetero());
+					obstaculos.add(new Moldura());
+				}
 			}
 		}
 	}

@@ -10,8 +10,10 @@ public class Juego {
 	private Mapa mapa;
 	private FelixJr felix;
 	private Ralph ralph;
+	private int tiempo;
+	private Contador timer;
 
-	public void crearJuego() {
+	public static void crearJuego() {
 		juego = new Juego();
 	}
 
@@ -49,13 +51,27 @@ public class Juego {
 		ralph.tirarLadrillo();
 		mapa.getEdificio().getSeccionActual().generarNicelanders();
 		mapa.avanzarComponentes();
+		checkTiempo();
 	}
 
 	public void pasarDeNivel() {
 		mapa = nivel.generarMapaSiguiente();
 		felix = new FelixJr(new Point(50, 5), mapa.getEdificio().getSeccionActual().getVentanaInicial());
 		ralph = new Ralph(nivel.getCantLadrillos(), nivel.getFrecuenciaLadrillo(), nivel.getVelocidadLadrillo());
+		tiempo = nivel.getTiempo();
+		timer = new Contador(1);
 	}
+	
+	private void checkTiempo() {
+		if (timer.contar()) {
+			timer.resetear();
+			tiempo--;
+			if(tiempo<1) {
+				perder(felix.getPuntaje());
+			}
+		}
+	}
+	
 
 	public void reiniciarNivel() {
 		mapa = nivel.regenerarMapa();
@@ -74,4 +90,6 @@ public class Juego {
 			mapa.getEdificio().reemplazarSeccion(new Seccion(s), s);
 		}
 	}
+	
+	
 }
