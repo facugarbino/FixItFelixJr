@@ -4,10 +4,10 @@ import java.awt.Point;
 import java.util.List;
 
 public class Seccion {
-	private int ventanasRotas;
-	private int ventanasConObstaculo;
+	protected int ventanasRotas;
+	protected int ventanasConObstaculo;
 	private int ventanasReparadas;
-	private Ventana[][] ventanas;
+	protected Ventana[][] ventanas;
 
 	public Seccion(Seccion s) {
 		this(s.ventanasRotas, s.ventanasConObstaculo);
