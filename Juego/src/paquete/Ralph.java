@@ -10,12 +10,12 @@ public class Ralph extends Personaje {
 	private double velocidadLadrillo;
 
 	public Ralph(int cantLadrillos, double frecuencia, double velocidadLadrillo) {
-		timer = new Timer(frecuencia);
+		timer = new Contador(frecuencia);
 		this.velocidadLadrillo = velocidadLadrillo;
 	}
 
 	public void mover() {
-
+		
 	}
 
 	public Ladrillo tirarLadrillo() {

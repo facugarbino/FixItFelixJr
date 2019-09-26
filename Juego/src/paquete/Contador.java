@@ -1,10 +1,10 @@
 package paquete;
 
-public class Timer {
+public class Contador {
 	private int limite;
 	private int contador;
 
-	public Timer(double limite) {
+	public Contador(double limite) {
 		this.limite = (int) (100000 * limite);
 		contador = 0;
 	}

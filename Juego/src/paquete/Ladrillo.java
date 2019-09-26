@@ -8,7 +8,7 @@ public class Ladrillo extends Componente {
 
 	public Ladrillo(Point p, double frecuencia) {
 		posicion = p;
-		timer = new Timer(frecuencia);
+		timer = new Contador(frecuencia);
 
 	}
 

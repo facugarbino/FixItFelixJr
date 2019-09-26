@@ -8,14 +8,14 @@ import java.util.Iterator;
 public class VentanaComun extends Ventana {
 
 	public static final int CANT_PANELES = 2;
-	Timer timer = new Timer(Math.random() * 75 + 25);
+	Contador timer = new Contador(Math.random() * 75 + 25);
 
 	public VentanaComun(Point posicion, Seccion seccion, boolean estaRoto) {
 		this.posicion = posicion;
 		this.seccion = seccion;
 		paneles = new ArrayList<>();
 		if (estaRoto) {
-			paneles = getPanelesRandom(CANT_PANELES);
+			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));

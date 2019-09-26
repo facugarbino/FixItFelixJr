@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public abstract class Componente {
 	protected Point posicion;
-	protected Timer timer;
+	protected Contador timer;
 	protected Mapa mapa;
 	protected Orientacion orientacion;
 

@@ -8,7 +8,7 @@ public class Nube extends Componente {
 
 	public Nube(Point p, double frecuencia) {
 		posicion = p;
-		timer = new Timer(frecuencia);
+		timer = new Contador(frecuencia);
 		orientacion = Orientacion.DERECHA;
 
 	}

@@ -9,10 +9,17 @@ public class Seccion {
 	private int ventanasReparadas;
 	protected Ventana[][] ventanas;
 
+	/**
+	 * @see constructor usado para reiniciar una sección
+	 * (debe generarse aleatoriamente otra sección con la 
+	 * misma cantidad de ventanas rotas y obstáculos)
+	 * @param s sección a reiniciar
+	 */
 	public Seccion(Seccion s) {
 		this(s.ventanasRotas, s.ventanasConObstaculo);
 		
 	}
+	
 	public Seccion(int ventanasRotas, int ventanasConObstaculo) {
 		this.ventanasRotas = ventanasRotas;
 		this.ventanasConObstaculo = ventanasConObstaculo;
@@ -33,6 +40,12 @@ public class Seccion {
 		}
 	}
 
+	/**
+	 * 
+	 * @param v ventana
+	 * @return <b>true</b> si la ventana pertenece a la
+	 * sección , o <b>false</b> en caso contrario
+	 */
 	public boolean esDeEstaSeccion(Ventana v) {
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 5; j++)

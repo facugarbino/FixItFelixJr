@@ -8,7 +8,7 @@ public class Pajaro extends Componente {
 
 	public Pajaro(Point p, int frecuencia, Orientacion o) {
 		posicion = p;
-		timer = new Timer(frecuencia);
+		timer = new Contador(frecuencia);
 		orientacion = o;
 	}
 
