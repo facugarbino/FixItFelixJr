@@ -36,12 +36,12 @@ public class Seccion {
 		}
 
 	}
-	
+
 	private Ventana ventanaRandom(Point point, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
-		if (random<0.5) {
-			//Con hojas
-			return new VentanaConHojas(point,this, tieneObstaculo);
+		if (random < 0.5) {
+			// Con hojas
+			return new VentanaConHojas(point, this, tieneObstaculo);
 		} else {
 			return new VentanaComun(point, this, rota, tieneObstaculo);
 		}
@@ -121,8 +121,8 @@ public class Seccion {
 		boolean[][] matriz = new boolean[3][5];
 		int hits = 0;
 		while (hits < n) {
-			int i = (int) (Math.random() * 3 + 1);
-			int j = (int) (Math.random() * 5 + 1);
+			int i = (int) (Math.random() * 3);
+			int j = (int) (Math.random() * 5);
 			if (!matriz[i][j]) {
 				matriz[i][j] = true;
 			}
