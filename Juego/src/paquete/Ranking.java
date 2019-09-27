@@ -8,16 +8,18 @@ public class Ranking {
 	private int cantScores;
 
 	public Ranking() {
-		scores = new HighScore[4];
+		scores = new HighScore[5];
 		cantScores = 0;
+		for (int i=0;i<5;i++)
+			scores[i] = new HighScore(new Jugador(""));
 	}
 
 	public void agregarHighScore(HighScore score) {
 		if (cantScores < 5) {
 			scores[cantScores++] = score;
 		} else {
-			if (score.getPuntaje()>scores[5].getPuntaje()) {
-				scores[5] = score;
+			if (score.getPuntaje() > scores[4].getPuntaje()) {
+				scores[4] = score;
 			}
 		}
 		Arrays.sort(scores);

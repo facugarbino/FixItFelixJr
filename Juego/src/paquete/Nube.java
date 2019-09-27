@@ -1,12 +1,10 @@
 package paquete;
 
-import java.awt.Point;
-
 public class Nube extends Componente {
 
 	private int ANCHO = 30;
 
-	public Nube(Point p, double frecuencia) {
+	public Nube(Posicion p, double frecuencia) {
 		posicion = p;
 		timer = new Contador(frecuencia);
 		orientacion = Orientacion.DERECHA;
@@ -15,15 +13,15 @@ public class Nube extends Componente {
 
 	public void comoAvanzo() {
 		if (orientacion == Orientacion.IZQUIERDA) {
-			if (posicion.x > 0) {
-				posicion.x--;
+			if (posicion.getX() > 0) {
+				posicion.moverX(-1);;
 			} else {
 				setOrientacion(Orientacion.DERECHA);
 				comoAvanzo();
 			}
 		} else {
-			if (posicion.x < (200 - (ANCHO))) {
-				posicion.x++;
+			if (posicion.getX() < (200 - (ANCHO))) {
+				posicion.moverX(1);
 			} else {
 				setOrientacion(Orientacion.IZQUIERDA);
 				comoAvanzo();

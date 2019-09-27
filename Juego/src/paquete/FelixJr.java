@@ -1,7 +1,5 @@
 package paquete;
 
-import java.awt.Point;
-
 public class FelixJr extends Personaje {
 	private int vidas;
 	private Ventana ventanaActual;
@@ -9,7 +7,7 @@ public class FelixJr extends Personaje {
 	private long puntajeNivel;
 	private long puntajeSeccion;
 
-	public FelixJr(Point p, Ventana v) {
+	public FelixJr(Posicion p, Ventana v) {
 		this.posicion = p;
 		ventanaActual = v;
 		puntajeNivel = 0;
@@ -35,16 +33,16 @@ public class FelixJr extends Personaje {
 			ventanaActual = v;
 			switch (o) {
 			case IZQUIERDA:
-				posicion.x -= 15;
+				posicion.moverX(-15);
 				break;
 			case DERECHA:
-				posicion.x += 15;
+				posicion.moverX(15);
 				break;
 			case ABAJO:
-				posicion.y -= 30;
+				posicion.moverY(-30);
 				break;
 			case ARRIBA:
-				posicion.y += 30;
+				posicion.moverY(30);
 				break;
 			}
 			if (ventanaActual.hayPastel()) {

@@ -1,6 +1,5 @@
 package paquete;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 public class VentanaConHojas extends Ventana {
@@ -8,7 +7,7 @@ public class VentanaConHojas extends Ventana {
 	public static final int CANT_PANELES = 2;
 	private boolean cerrada;
 
-	public VentanaConHojas(Point posicion, Seccion seccion, boolean tieneObstaculo) {
+	public VentanaConHojas(Posicion posicion, Seccion seccion, boolean tieneObstaculo) {
 		this.posicion = posicion;
 		this.seccion = seccion;
 		boolean estaCerrada = !tieneObstaculo;
@@ -25,5 +24,5 @@ public class VentanaConHojas extends Ventana {
 			}
 		}
 	}
-	
+
 }

@@ -1,12 +1,11 @@
 package paquete;
 
-import java.awt.Point;
 
 public abstract class Personaje {
-	protected Point posicion;
+	protected Posicion posicion;
 	protected Contador timer;
-	
-	public Point getPosicion() {
+
+	public Posicion getPosicion() {
 		return posicion;
 	}
 

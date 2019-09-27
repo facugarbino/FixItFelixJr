@@ -1,6 +1,5 @@
 package paquete;
 
-import java.awt.Point;
 
 public class Ralph extends Personaje {
 	// El edificio mide 100x300
@@ -15,19 +14,19 @@ public class Ralph extends Personaje {
 	}
 
 	public void mover() {
-		
+
 	}
 
 	public Ladrillo tirarLadrillo() {
 		if (timer.contar()) {
 			timer.resetear();
-			return new Ladrillo(new Point(obtenerX(), this.getPosicion().y), velocidadLadrillo);
+			return new Ladrillo(new Posicion(obtenerXRandom(), this.getPosicion().getY()), velocidadLadrillo);
 		} else {
 			return null;
 		}
 	}
 
-	private int obtenerX() {
-		return (int) ((Math.floor(Math.random() * 25) - (25 / 2)) + (this.getPosicion().x));
+	private int obtenerXRandom() {
+		return (int) ((Math.floor(Math.random() * 25) - (25 / 2)) + (this.getPosicion().getX()));
 	}
 }

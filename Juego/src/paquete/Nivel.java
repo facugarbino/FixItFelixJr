@@ -1,6 +1,5 @@
 package paquete;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +32,15 @@ public class Nivel {
 
 	public Mapa regenerarMapa() {
 		ArrayList<Seccion> secciones = new ArrayList<>();
-		secciones.add((Seccion)new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
-		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3),2));
-		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6),3));
-		Edificio e = new Edificio(new Point(50, 0), secciones);
+		secciones
+				.add((Seccion) new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
+		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3), 2));
+		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6), 3));
+		Edificio e = new Edificio(new Posicion(50, 0), secciones);
 		Mapa m = new Mapa(200, 400, e);
-		m.agregarComponente(new Nube(new Point(0, 60), velocidadNube));
-		m.agregarComponente(new Nube(new Point(50, 130), velocidadNube));
-		m.agregarComponente(new Nube(new Point(100, 245), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(0, 60), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(50, 130), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(100, 245), velocidadNube));
 		return m;
 	}
 

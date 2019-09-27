@@ -1,14 +1,13 @@
 package paquete;
 
-import java.awt.Point;
 import java.util.List;
 
 public class Edificio {
-	private Point posicion;
+	private Posicion posicion;
 	private List<Seccion> secciones;
 	private Seccion seccionActual;
 
-	public Edificio(Point posicion, List<Seccion> secciones) {
+	public Edificio(Posicion posicion, List<Seccion> secciones) {
 		this.posicion = posicion;
 		this.secciones = secciones;
 		this.seccionActual = secciones.get(0);
@@ -26,9 +25,10 @@ public class Edificio {
 		this.seccionActual = secciones.get(secciones.indexOf(seccionActual) + 1);
 	}
 
-	public Point getPosicion() {
+	public Posicion getPosicion() {
 		return posicion;
 	}
+
 	public void reemplazarSeccion(Seccion nueva, Seccion vieja) {
 		secciones.set(secciones.indexOf(vieja), nueva);
 	}

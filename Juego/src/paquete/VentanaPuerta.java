@@ -1,13 +1,12 @@
 package paquete;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 public class VentanaPuerta extends Ventana {
 
 	public static final int CANT_PANELES = 4;
 
-	public VentanaPuerta(Point posicion, Seccion seccion, boolean estaRoto) {
+	public VentanaPuerta(Posicion posicion, Seccion seccion, boolean estaRoto) {
 		this.posicion = posicion;
 		this.seccion = seccion;
 		paneles = new ArrayList<>();

@@ -1,12 +1,11 @@
 package paquete;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.util.*;
 
 public abstract class Ventana {
 
-	protected Point posicion;
+	protected Posicion posicion;
 	protected Seccion seccion;
 	private Pastel pastel;
 	protected Nicelander nicelander;
@@ -19,14 +18,13 @@ public abstract class Ventana {
 	/**
 	 * @see Método llamado por Felix para moverse
 	 * @param orientacion
-	 * @return la ventana que se encuentra en dicha 
-	 * dirección, si es que no hay obstáculos entre ellas,
-	 * o null en caso contrario.
+	 * @return la ventana que se encuentra en dicha dirección, si es que no hay
+	 *         obstáculos entre ellas, o null en caso contrario.
 	 */
 	public Ventana getVentana(Orientacion orientacion) {
 		if (!tieneObstaculo(orientacion)) {
 			Ventana v = seccion.getVentanaAledana(this, orientacion);
-			if (v!=null && !v.tieneObstaculo(orientacion.invertir()))
+			if (v != null && !v.tieneObstaculo(orientacion.invertir()))
 				return v;
 		}
 		return null;
@@ -36,15 +34,14 @@ public abstract class Ventana {
 		return seccion;
 	}
 
-	public Point getPosicion() {
+	public Posicion getPosicion() {
 		return posicion;
 	}
 
 	/**
 	 * @see Método llamado por Felix
-	 * @return true si el martillazo reparó algún panel o
-	 * false en caso contrario, ya sea porque no hay paneles rotos
-	 * o porque falta dar otro martillazo
+	 * @return true si el martillazo reparó algún panel o false en caso contrario,
+	 *         ya sea porque no hay paneles rotos o porque falta dar otro martillazo
 	 */
 	public boolean reparar() {
 		if (!(panelesReparados == panelesRotos)) {
@@ -94,7 +91,7 @@ public abstract class Ventana {
 	/**
 	 * 
 	 * @param cantPaneles - cantidad de paneles que tiene la ventana
-	 * @return una lista de paneles, aleatoramiente rotos 
+	 * @return una lista de paneles, aleatoramiente rotos
 	 */
 	protected List<Panel> getPanelesRotosRandom(int cantPaneles) {
 		boolean algunoRoto = false;

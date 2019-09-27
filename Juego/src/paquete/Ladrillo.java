@@ -1,21 +1,18 @@
 package paquete;
 
-import java.awt.Point;
-
 public class Ladrillo extends Componente {
 
 	private int ANCHO;
 
-	public Ladrillo(Point p, double frecuencia) {
+	public Ladrillo(Posicion p, double frecuencia) {
 		posicion = p;
 		timer = new Contador(frecuencia);
-
 	}
 
 	public void comoAvanzo() {
 		if (timer.contar()) {
 			timer.resetear();
-			posicion.y--;
+			posicion.moverY(-1);
 		}
 		if (mapa.estaFelix(posicion, ANCHO)) {
 			Juego.getJuego().golpearFelix(this);

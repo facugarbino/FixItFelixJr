@@ -1,6 +1,5 @@
 package paquete;
 
-import java.awt.Point;
 import java.util.List;
 
 public class Seccion {
@@ -30,20 +29,20 @@ public class Seccion {
 		ventanas = new Ventana[3][5];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
-				Point point = new Point(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100);
-				ventanas[i][j] = ventanaRandom(point, rotas[i][j], conObstaculo[i][j]);
+				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100);
+				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}
 
 	}
 
-	private Ventana ventanaRandom(Point point, boolean rota, boolean tieneObstaculo) {
+	private Ventana ventanaRandom(Posicion Posicion, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
 		if (random < 0.5) {
 			// Con hojas
-			return new VentanaConHojas(point, this, tieneObstaculo);
+			return new VentanaConHojas(Posicion, this, tieneObstaculo);
 		} else {
-			return new VentanaComun(point, this, rota, tieneObstaculo);
+			return new VentanaComun(Posicion, this, rota, tieneObstaculo);
 		}
 	}
 
@@ -70,35 +69,35 @@ public class Seccion {
 	}
 
 	public Ventana getVentanaAledana(Ventana v, Orientacion o) {
-		Point p = getXY(v);
-		int x = p.x;
-		int y = p.y;
+		Posicion p = getXY(v);
+		int x = p.getX();
+		int y = p.getY();
 		switch (o) {
 		case IZQUIERDA:
 			if (x > 0)
-				return ventanas[y][x-1];
+				return ventanas[y][x - 1];
 			break;
 		case DERECHA:
 			if (x < 4)
-				return ventanas[y][x+1];
+				return ventanas[y][x + 1];
 			break;
 		case ABAJO:
 			if (y < 2)
-				return ventanas[y+1][x];
+				return ventanas[y + 1][x];
 			break;
 		case ARRIBA:
 			if (y > 0)
-				return ventanas[y-1][x];
+				return ventanas[y - 1][x];
 			break;
 		}
 		return null;
 	}
 
-	public Point getXY(Ventana v) {
+	public Posicion getXY(Ventana v) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
-				if (ventanas[i][j].equals(v)) 
-					return new Point(j, i);
+				if (ventanas[i][j].equals(v))
+					return new Posicion(j, i);
 			}
 		}
 		return null;

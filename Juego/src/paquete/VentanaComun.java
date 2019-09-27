@@ -1,7 +1,6 @@
 package paquete;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,7 +9,7 @@ public class VentanaComun extends Ventana {
 	public static final int CANT_PANELES = 2;
 	Contador timer = new Contador(Math.random() * 75 + 25);
 
-	public VentanaComun(Point posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
+	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
 		this.posicion = posicion;
 		this.seccion = seccion;
 		paneles = new ArrayList<>();
@@ -23,10 +22,10 @@ public class VentanaComun extends Ventana {
 		}
 		if (tieneObstaculo) {
 			double random = Math.random();
-			if (random<(1/3)) { 
+			if (random < (1 / 3)) {
 				obstaculos.add(new Macetero());
 			} else {
-				if (random<(2/3)) {
+				if (random < (2 / 3)) {
 					obstaculos.add(new Moldura());
 				} else {
 					obstaculos.add(new Macetero());
@@ -40,7 +39,7 @@ public class VentanaComun extends Ventana {
 
 		if (elDeAbajoEstaRoto() && timer.contar()) {
 			nicelander = new Nicelander(
-					new Color((float) Math.random() * 255, (float) Math.random() * 255, (float) Math.random() * 255),
+					new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
 					this);
 			return true;
 		}

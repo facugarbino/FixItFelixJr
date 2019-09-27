@@ -1,6 +1,4 @@
 package paquete;
-
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +29,10 @@ public class Mapa {
 		}
 	}
 
-	public boolean estaFelix(Point p, int radio) {
+	public boolean estaFelix(Posicion p, int radio) {
 		FelixJr felix = Juego.getJuego().getFelix();
-		return (estaEntre(felix.getPosicion().x, p.x - (radio / 2), p.x + (radio / 2)))
-				&& (estaEntre(felix.getPosicion().y, p.y - (radio / 2), p.y + (radio / 2)));
+		return (estaEntre(felix.getPosicion().getX(), p.getX() - (radio / 2), p.getX() + (radio / 2)))
+				&& (estaEntre(felix.getPosicion().getY(), p.getY() - (radio / 2), p.getY() + (radio / 2)));
 
 	}
 

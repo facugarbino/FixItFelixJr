@@ -1,14 +1,12 @@
 package paquete;
 
-import java.awt.Point;
-
 public abstract class Componente {
-	protected Point posicion;
+	protected Posicion posicion;
 	protected Contador timer;
 	protected Mapa mapa;
 	protected Orientacion orientacion;
 
-	public Point getPosicion() {
+	public Posicion getPosicion() {
 		return posicion;
 	}
 

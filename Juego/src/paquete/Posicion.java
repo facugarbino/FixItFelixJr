@@ -28,4 +28,8 @@ public class Posicion {
 	public String toString() {
 		return "(" + x + "," + y + ")";
 	}
+	
+	public boolean equals(Posicion p) {
+		return (x == p.x && y == p.y);
+	}
 }

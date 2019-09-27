@@ -1,12 +1,11 @@
 package paquete;
 
-import java.awt.Point;
 
 public class Pajaro extends Componente {
 
 	final int ANCHO = 15;
 
-	public Pajaro(Point p, int frecuencia, Orientacion o) {
+	public Pajaro(Posicion p, int frecuencia, Orientacion o) {
 		posicion = p;
 		timer = new Contador(frecuencia);
 		orientacion = o;
@@ -14,15 +13,15 @@ public class Pajaro extends Componente {
 
 	public void comoAvanzo() {
 		if (orientacion == Orientacion.IZQUIERDA) {
-			if (posicion.x > 0) {
-				posicion.x--;
+			if (posicion.getX() > 0) {
+				posicion.moverX(-1);
 			} else {
 				setOrientacion(Orientacion.DERECHA);
 				comoAvanzo();
 			}
 		} else {
-			if (posicion.x < (200 - (ANCHO))) {
-				posicion.x++;
+			if (posicion.getX() < (200 - (ANCHO))) {
+				posicion.moverX(1);
 			} else {
 				setOrientacion(Orientacion.IZQUIERDA);
 				comoAvanzo();

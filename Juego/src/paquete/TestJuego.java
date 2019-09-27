@@ -5,7 +5,7 @@ public class TestJuego {
 	static Juego j;
 
 	public static void main(String[] args) {
-		Juego.crearJuego();
+		Juego.crearJuego("Facundo");
 		j = Juego.getJuego();
 		loop();
 		/*
@@ -22,14 +22,13 @@ public class TestJuego {
 	}
 
 	static void loop() {
-		Contador timer = new Contador(100000);
+		Contador timer = new Contador(1000);
 		System.out.println(
-				"Felix comienza en la posicion " + j.getFelix().getPosicion().x + "," + j.getFelix().getPosicion().y);
+				"Felix comienza en la posicion "+ j.getFelix().getPosicion());
 		while (true) {
-			// j.hacerTodo();
+			j.hacerTodo();
 			if (timer.contar()) {
 				double xd = Math.random();
-				System.out.println("Random: " + xd);
 				if (xd < 0.25)
 					j.getFelix().mover(Orientacion.IZQUIERDA);
 				else if (xd < 0.50)
@@ -39,8 +38,7 @@ public class TestJuego {
 				else
 					j.getFelix().mover(Orientacion.ARRIBA);
 				timer.resetear();
-				System.out.println("Felix se ha movido a (" + j.getFelix().getPosicion().x + ","
-						+ j.getFelix().getPosicion().y + ")");
+				System.out.println("Felix se ha movido a "+ j.getFelix().getPosicion());
 				j.darMartillazo();
 				System.out.println("Felix ha dado un martillazo!");
 			}
