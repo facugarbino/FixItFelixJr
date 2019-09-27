@@ -13,10 +13,11 @@ public class Juego {
 
 	public static void crearJuego(String nombreJugador) {
 		juego = new Juego(nombreJugador);
+		System.out.println("Comienza el juego. Juega: "+ nombreJugador);
 	}
 
 	private Juego(String nombre) {
-		nivel = new Nivel(10, 10, 10, 10, 10, 2, 200, 10, 40);
+		nivel = new Nivel(10, 15, 10, 10, 10, 5, 200, 10, 40);
 		jugador = new Jugador(nombre);
 		ranking = new Ranking();
 		ranking.agregarHighScore(new HighScore(new Jugador("Fabian")));
@@ -57,7 +58,7 @@ public class Juego {
 
 	public void pasarDeNivel() {
 		mapa = nivel.generarMapaSiguiente();
-		felix = new FelixJr(new Posicion(50, 5), mapa.getEdificio().getSeccionActual().getVentanaInicial());
+		felix = new FelixJr(new Posicion(95, 10), mapa.getEdificio().getSeccionActual().getVentanaInicial());
 		ralph = new Ralph(nivel.getCantLadrillos(), nivel.getFrecuenciaLadrillo(), nivel.getVelocidadLadrillo());
 		tiempo = nivel.getTiempo();
 		timer = new Contador(50);

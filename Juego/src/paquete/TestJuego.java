@@ -22,7 +22,7 @@ public class TestJuego {
 	}
 
 	static void loop() {
-		Contador timer = new Contador(1000);
+		Contador timer = new Contador(50);
 		System.out.println(
 				"Felix comienza en la posicion "+ j.getFelix().getPosicion());
 		while (true) {
@@ -41,6 +41,14 @@ public class TestJuego {
 				System.out.println("Felix se ha movido a "+ j.getFelix().getPosicion());
 				j.darMartillazo();
 				System.out.println("Felix ha dado un martillazo!");
+				j.darMartillazo();
+				System.out.println("Felix ha dado un martillazo!");
+				j.darMartillazo();
+				System.out.println("Felix ha dado un martillazo!");
+				j.darMartillazo();
+				System.out.println("Felix ha dado un martillazo!");
+				
+				
 			}
 		}
 	}

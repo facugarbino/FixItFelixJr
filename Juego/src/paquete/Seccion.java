@@ -29,20 +29,23 @@ public class Seccion {
 		ventanas = new Ventana[3][5];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
-				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100);
+				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2-i)*30 );
+				System.out.print( "("+i+","+j+")"+": " );
 				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}
 
 	}
 
-	private Ventana ventanaRandom(Posicion Posicion, boolean rota, boolean tieneObstaculo) {
+	private Ventana ventanaRandom(Posicion posicion, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
+		System.out.println(
+				"La ventana en " + posicion + (rota ? "está rota" : "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
 		if (random < 0.5) {
 			// Con hojas
-			return new VentanaConHojas(Posicion, this, tieneObstaculo);
+			return new VentanaConHojas(posicion, this, tieneObstaculo);
 		} else {
-			return new VentanaComun(Posicion, this, rota, tieneObstaculo);
+			return new VentanaComun(posicion, this, rota, tieneObstaculo);
 		}
 	}
 

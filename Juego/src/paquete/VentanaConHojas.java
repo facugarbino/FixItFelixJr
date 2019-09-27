@@ -10,6 +10,8 @@ public class VentanaConHojas extends Ventana {
 	public VentanaConHojas(Posicion posicion, Seccion seccion, boolean tieneObstaculo) {
 		this.posicion = posicion;
 		this.seccion = seccion;
+		panelesReparados = 0;
+		cantMartillazos = 0;
 		boolean estaCerrada = !tieneObstaculo;
 		paneles = new ArrayList<>();
 		cerrada = estaCerrada;

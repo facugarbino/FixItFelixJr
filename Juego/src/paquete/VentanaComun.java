@@ -12,10 +12,13 @@ public class VentanaComun extends Ventana {
 	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
 		this.posicion = posicion;
 		this.seccion = seccion;
+		panelesReparados = 0;
+		cantMartillazos = 0;
 		paneles = new ArrayList<>();
 		if (estaRoto) {
 			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
+			panelesRotos = 0;
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
 			}

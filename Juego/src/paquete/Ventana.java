@@ -1,6 +1,5 @@
 package paquete;
 
-import java.awt.Color;
 import java.util.*;
 
 public abstract class Ventana {
@@ -11,9 +10,9 @@ public abstract class Ventana {
 	protected Nicelander nicelander;
 	protected List<Obstaculo> obstaculos = new ArrayList<>();
 	protected List<Panel> paneles;
-	private int cantMartillazos;
-	private int panelesRotos;
-	private int panelesReparados;
+	protected int cantMartillazos;
+	protected int panelesRotos;
+	protected int panelesReparados;
 
 	/**
 	 * @see Método llamado por Felix para moverse
@@ -44,7 +43,7 @@ public abstract class Ventana {
 	 *         ya sea porque no hay paneles rotos o porque falta dar otro martillazo
 	 */
 	public boolean reparar() {
-		if (!(panelesReparados == panelesRotos)) {
+		if (estaRota()) {
 			cantMartillazos++;
 			if (cantMartillazos == 2) {
 				Iterator<Panel> i = paneles.iterator();
@@ -54,8 +53,8 @@ public abstract class Ventana {
 				if (panelesReparados == panelesRotos) {
 					seccion.seArregloUnaVentana();
 				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}
@@ -97,15 +96,18 @@ public abstract class Ventana {
 		boolean algunoRoto = false;
 		EstadoPanel p;
 		List<Panel> lista = new ArrayList<>();
+		int cuantosRotos = 0;
 
 		for (int i = 0; i < cantPaneles; i++) {
 			switch ((int) Math.floor(Math.random() * 3 + 1)) {
 			case 1:
 				p = new Roto();
+				cuantosRotos++;
 				algunoRoto = true;
 				break;
 			case 2:
 				p = new MedioRoto();
+				cuantosRotos++;
 				algunoRoto = true;
 				break;
 			case 3:
@@ -119,6 +121,7 @@ public abstract class Ventana {
 		if (!algunoRoto) {
 			return getPanelesRotosRandom(cantPaneles);
 		}
+		panelesRotos = cuantosRotos;
 		return lista;
 	}
 

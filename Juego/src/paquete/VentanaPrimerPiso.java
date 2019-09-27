@@ -9,6 +9,8 @@ public class VentanaPrimerPiso extends Ventana {
 	public VentanaPrimerPiso(Posicion posicion, Seccion seccion, boolean estaRoto) {
 		this.posicion = posicion;
 		this.seccion = seccion;
+		panelesReparados = 0;
+		cantMartillazos = 0;
 		paneles = new ArrayList<>();
 		if (estaRoto) {
 			paneles = getPanelesRotosRandom(CANT_PANELES);
