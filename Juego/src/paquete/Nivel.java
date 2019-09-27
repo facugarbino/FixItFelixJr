@@ -32,7 +32,7 @@ public class Nivel {
 	}
 
 	public Mapa regenerarMapa() {
-		List<Seccion> secciones = new ArrayList<>();
+		ArrayList<Seccion> secciones = new ArrayList<>();
 		secciones.add((Seccion)new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
 		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3),2));
 		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6),3));

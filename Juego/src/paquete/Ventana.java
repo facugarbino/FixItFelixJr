@@ -26,7 +26,7 @@ public abstract class Ventana {
 	public Ventana getVentana(Orientacion orientacion) {
 		if (!tieneObstaculo(orientacion)) {
 			Ventana v = seccion.getVentanaAledana(this, orientacion);
-			if (!v.tieneObstaculo(orientacion.invertir()))
+			if (v!=null && !v.tieneObstaculo(orientacion.invertir()))
 				return v;
 		}
 		return null;

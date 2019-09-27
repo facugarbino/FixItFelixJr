@@ -76,19 +76,19 @@ public class Seccion {
 		switch (o) {
 		case IZQUIERDA:
 			if (x > 0)
-				return ventanas[x - 1][y];
+				return ventanas[y][x-1];
 			break;
 		case DERECHA:
 			if (x < 4)
-				return ventanas[x + 1][y];
-			break;
-		case ARRIBA:
-			if (y < 4)
-				return ventanas[x][y + 1];
+				return ventanas[y][x+1];
 			break;
 		case ABAJO:
+			if (y < 2)
+				return ventanas[y+1][x];
+			break;
+		case ARRIBA:
 			if (y > 0)
-				return ventanas[x][y - 1];
+				return ventanas[y-1][x];
 			break;
 		}
 		return null;
@@ -97,8 +97,8 @@ public class Seccion {
 	public Point getXY(Ventana v) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
-				if (ventanas[i][j].equals(v))
-					return new Point(i, j);
+				if (ventanas[i][j].equals(v)) 
+					return new Point(j, i);
 			}
 		}
 		return null;
@@ -125,6 +125,7 @@ public class Seccion {
 			int j = (int) (Math.random() * 5);
 			if (!matriz[i][j]) {
 				matriz[i][j] = true;
+				hits++;
 			}
 		}
 		return matriz;

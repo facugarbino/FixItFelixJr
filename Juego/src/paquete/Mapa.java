@@ -1,6 +1,7 @@
 package paquete;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa {
@@ -13,6 +14,7 @@ public class Mapa {
 		this.ancho = ancho;
 		this.alto = alto;
 		this.edificio = edificio;
+		componentes = new ArrayList<>();
 	}
 
 	public Edificio getEdificio() {

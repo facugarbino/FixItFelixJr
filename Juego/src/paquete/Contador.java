@@ -5,7 +5,7 @@ public class Contador {
 	private int contador;
 
 	public Contador(double limite) {
-		this.limite = (int) (100000 * limite);
+		this.limite = (int) (10000000 * limite);
 		contador = 0;
 	}
 

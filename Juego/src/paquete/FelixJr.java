@@ -35,16 +35,16 @@ public class FelixJr extends Personaje {
 			ventanaActual = v;
 			switch (o) {
 			case IZQUIERDA:
-				posicion.x -= 10;
+				posicion.x -= 15;
 				break;
 			case DERECHA:
-				posicion.x += 10;
+				posicion.x += 15;
 				break;
 			case ABAJO:
-				posicion.y -= 10;
+				posicion.y -= 30;
 				break;
 			case ARRIBA:
-				posicion.y += 10;
+				posicion.y += 30;
 				break;
 			}
 			if (ventanaActual.hayPastel()) {
