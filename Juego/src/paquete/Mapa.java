@@ -1,5 +1,6 @@
 package paquete;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Mapa {
@@ -24,8 +25,9 @@ public class Mapa {
 	}
 
 	public void avanzarComponentes() {
-		for (Componente c : componentes) {
-			c.avanzar();
+		Iterator<Componente> it = componentes.iterator();
+		while (it.hasNext()) {
+			it.next().avanzar();
 		}
 	}
 

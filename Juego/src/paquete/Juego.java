@@ -10,10 +10,11 @@ public class Juego {
 	private Ralph ralph;
 	private int tiempo;
 	private Contador timer;
+	private boolean pausa;
 
 	public static void crearJuego(String nombreJugador) {
 		juego = new Juego(nombreJugador);
-		System.out.println("Comienza el juego. Juega: "+ nombreJugador);
+		System.out.println("Comienza el juego. Juega: " + nombreJugador);
 	}
 
 	private Juego(String nombre) {
@@ -22,6 +23,25 @@ public class Juego {
 		ranking = new Ranking();
 		ranking.agregarHighScore(new HighScore(new Jugador("Fabian")));
 		pasarDeNivel();
+		pausa = false;
+	}
+
+	public boolean estaPausado() {
+		return !pausa;
+	}
+
+	public void pausar() {
+		if (pausa) {
+			System.out.println("JUEGO DESPAUSADO");
+		} else {
+			System.out.println("JUEGO PAUSADO");
+		}
+		pausa = !pausa;
+
+	}
+
+	public void resetearTiempo() {
+		tiempo = nivel.getTiempo();
 	}
 
 	public static Juego getJuego() {
@@ -49,10 +69,13 @@ public class Juego {
 	}
 
 	public void hacerTodo() {
-		//ralph.mover();
-		//ralph.tirarLadrillo();
-		//mapa.getEdificio().getSeccionActual().generarNicelanders();
-		//mapa.avanzarComponentes();
+		ralph.mover();
+		Ladrillo l = ralph.tirarLadrillo();
+		if (l!=null) {
+			mapa.agregarComponente(l);
+		}
+		mapa.getEdificio().getSeccionActual().generarNicelanders();
+		mapa.avanzarComponentes();
 		checkTiempo();
 	}
 
@@ -66,7 +89,7 @@ public class Juego {
 
 	private void checkTiempo() {
 		if (timer.contar()) {
-			System.out.println("Quedan "+ tiempo + " segundos");
+			System.out.println("Tiempo: " + tiempo);
 			timer.resetear();
 			tiempo--;
 			if (tiempo < 1) {
@@ -83,6 +106,9 @@ public class Juego {
 		jugador.sumarPuntos(puntajeFelix);
 		HighScore hs = new HighScore(jugador);
 		ranking.agregarHighScore(hs);
+		pausa = true;
+		System.out.println("GAME OVER");
+		System.out.println("Perdió con " + jugador.getPuntaje() + " puntos.");
 
 	}
 

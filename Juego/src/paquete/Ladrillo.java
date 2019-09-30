@@ -17,6 +17,7 @@ public class Ladrillo extends Componente {
 		if (mapa.estaFelix(posicion, ANCHO)) {
 			Juego.getJuego().golpearFelix(this);
 		}
+		
 	}
 
 }

@@ -30,7 +30,7 @@ public class Seccion {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
 				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2-i)*30 );
-				System.out.print( "("+i+","+j+")"+": " );
+				//System.out.print( "("+i+","+j+")"+": " );
 				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}

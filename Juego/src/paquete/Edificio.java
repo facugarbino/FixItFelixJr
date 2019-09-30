@@ -23,6 +23,7 @@ public class Edificio {
 
 	public void avanzarSeccion() {
 		this.seccionActual = secciones.get(secciones.indexOf(seccionActual) + 1);
+		Juego.getJuego().resetearTiempo();
 	}
 
 	public Posicion getPosicion() {

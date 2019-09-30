@@ -50,7 +50,8 @@ public abstract class Ventana {
 				while (i.hasNext() && !i.next().reparar())
 					;
 				panelesReparados++;
-				if (panelesReparados == panelesRotos) {
+				cantMartillazos=0;
+				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
 				}
 				return true;
@@ -89,7 +90,7 @@ public abstract class Ventana {
 
 	/**
 	 * 
-	 * @param cantPaneles - cantidad de paneles que tiene la ventana
+	 * @param cantPaneles cantidad de paneles que tiene la ventana
 	 * @return una lista de paneles, aleatoramiente rotos
 	 */
 	protected List<Panel> getPanelesRotosRandom(int cantPaneles) {
