@@ -16,18 +16,7 @@ public class Nivel {
 	private int porcentaje;
 	private int cantLadrillos;
 
-	/**
-	 * 
-	 * @param nivelMax
-	 * @param cantVentanasRotas
-	 * @param frecuenciaLadrillo
-	 * @param velocidadLadrillo
-	 * @param velocidadPajaro
-	 * @param ventanasConObstaculo
-	 * @param tiempo
-	 * @param porcentaje
-	 * @param cantLadrillos
-	 */
+	
 	public Nivel(int nivelMax, int cantVentanasRotas, double frecuenciaLadrillo, double velocidadLadrillo,
 			double velocidadPajaro, int ventanasConObstaculo, int tiempo, int porcentaje, int cantLadrillos) {
 		this.nivelMax = nivelMax;
@@ -61,7 +50,7 @@ public class Nivel {
 	}
 
 	/**
-	 * actualiza los valores correspondientes al 
+	 * Actualiza los valores correspondientes al 
 	 * próximo nivel
 	 */
 	public void avanzarDeNivel() {

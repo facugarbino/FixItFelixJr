@@ -10,7 +10,7 @@ public class Contador {
 	}
 
 	/**
-	 * resetea el timer para volver a contar otro ciclo
+	 * Resetea el timer para volver a contar otro ciclo
 	 */
 	public void resetear() {
 		contador = 0;
@@ -20,8 +20,7 @@ public class Contador {
 	 * 
 	 * @return <b>true</b> si el timer cumplió
 	 * su ciclo
-	 * @see se debe usar <b>resetear()</b> para seguir
-	 * contando ciclos
+	 * 
 	 */
 	public boolean contar() {
 		return (++contador == limite);

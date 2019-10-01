@@ -17,17 +17,12 @@ public class Juego {
 	/**
 	 * crea la única instancia de Juego
 	 * 
-	 * @param nombreJugador
 	 */
 	public static void crearJuego(String nombreJugador) {
 		juego = new Juego(nombreJugador);
 		System.out.println("Comienza el juego. Juega: " + nombreJugador);
 	}
 
-	/**
-	 * 
-	 * @param nombre
-	 */
 	private Juego(String nombre) {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
 		nivel = new Nivel(10, 15, 10000, 50, 10, 6, 600, 10, 40);
@@ -64,28 +59,19 @@ public class Juego {
 		return felix;
 	}
 
-	/**
-	 * 
-	 * @param orientacion
-	 */
-	public void moverFelix(Orientacion orientacion) {
-		felix.mover(orientacion);
+
+	public void moverFelix(Orientacion o) {
+		felix.mover(o);
+		
 	}
 
-	/**
-	 * 
-	 * @param ladrillo
-	 */
-	public void golpearFelix(Ladrillo ladrillo) {
-		felix.golpear(ladrillo);
+
+	public void golpearFelix(Ladrillo l) {
+		felix.golpear(l);
 	}
 
-	/**
-	 * 
-	 * @param pajaro
-	 */
-	public void golpearFelix(Pajaro pajaro) {
-		felix.golpear(pajaro);
+	public void golpearFelix(Pajaro p) {
+		felix.golpear(p);
 	}
 
 	public void darMartillazo() {
@@ -93,7 +79,7 @@ public class Juego {
 	}
 
 	/**
-	 * se encarga de actualizar el estado del juego,
+	 * Se encarga de actualizar el estado del juego,
 	 * se ejecuta constantemente
 	 */
 	public void hacerTodo() {
@@ -135,7 +121,7 @@ public class Juego {
 	}
 
 	/**
-	 * hace la lógica para llevar la cuenta
+	 * Hace la lógica para llevar la cuenta
 	 * regresiva del tiempo
 	 */
 	private void checkTiempo() {
@@ -164,9 +150,8 @@ public class Juego {
 	}
 
 	/**
-	 * "reinicia" el nivel, o bien por primera vez, o
-	 * bien si es la segunda o tercera vida de Felix
-	 * @param vidasDeFelix
+	 * "Reinicia" el nivel
+	 * @param vidasDeFelix las vidas con que Felix Jr. aparecerá
 	 */
 	public void reiniciarNivel(int vidasDeFelix) {
 		mapa = nivel.crearMapa();
@@ -180,7 +165,7 @@ public class Juego {
 
 	/**
 	 * GAME OVER y agrega el puntaje al Ranking
-	 * @param puntajeFelix
+	 * @param puntajeFelix - el puntaje que tenía Felix acumulado
 	 */
 	public void perder(long puntajeFelix) {
 		jugador.sumarPuntos(puntajeFelix);
@@ -193,7 +178,7 @@ public class Juego {
 	}
 
 	/**
-	 * se ejecuta cuando un pájaro golpea a Felix
+	 * Se ejecuta cuando un pájaro golpea a Felix
 	 * y debe reiniciarse la sección donde se encuentra
 	 */
 	public void reiniciarSeccion() {

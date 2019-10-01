@@ -12,7 +12,7 @@ public class Nube extends Componente {
 	}
 
 	/**
-	 * hace la lógica para que la nube se mueva
+	 * Hace la lógica para que la nube se mueva
 	 * de extremo a extremo
 	 */
 	public void comoAvanzo() {

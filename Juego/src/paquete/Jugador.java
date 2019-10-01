@@ -5,10 +5,6 @@ public class Jugador {
 	private String nombre;
 	private long puntaje;
 
-	/**
-	 * 
-	 * @param nombre
-	 */
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		this.puntaje = 0;
@@ -22,10 +18,6 @@ public class Jugador {
 		return puntaje;
 	}
 
-	/**
-	 * 
-	 * @param puntos
-	 */
 	public void sumarPuntos(long puntos) {
 		this.puntaje += puntos;
 	}

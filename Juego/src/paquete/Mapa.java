@@ -40,6 +40,13 @@ public class Mapa {
 		componentesABorrar.clear();
 	}
 
+	/**
+	 * 
+	 * @param p posicion del componente
+	 * @param diametro lado del cuadrado que forma 
+	 * @return <b>true</b> si colisiona con Felix,
+	 * <b>false</b> si no se chocan
+	 */
 	public boolean estaFelix(Posicion p, int diametro) {
 		Posicion pFelix = Juego.getJuego().getFelix().getPosicion();
 		int radio = diametro / 2;

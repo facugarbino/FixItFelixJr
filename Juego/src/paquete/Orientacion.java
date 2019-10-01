@@ -8,9 +8,6 @@ public enum Orientacion {
 	 * @return una orientacion con la misma
 	 * dirección, pero sentido contrario
 	 * 
-	 * @see Por ejemplo:
-	 * 	izquierda -> derecha
-	 * 	abajo -> arriba
 	 */
 	public Orientacion invertir() {
 		switch (this) {
