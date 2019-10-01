@@ -21,16 +21,20 @@ public class Edificio {
 		return seccionActual;
 	}
 
-	public void avanzarSeccion() {
+	public Seccion avanzarSeccion() {
 		this.seccionActual = secciones.get(secciones.indexOf(seccionActual) + 1);
-		Juego.getJuego().resetearTiempo();
+		return seccionActual;
 	}
 
 	public Posicion getPosicion() {
 		return posicion;
 	}
 
-	public void reemplazarSeccion(Seccion nueva, Seccion vieja) {
-		secciones.set(secciones.indexOf(vieja), nueva);
+	public void reemplazarSeccion(Seccion vieja) {
+		if (vieja instanceof PrimeraSeccion) {
+			secciones.set(secciones.indexOf(vieja), new PrimeraSeccion(vieja));
+		} else {
+			secciones.set(secciones.indexOf(vieja), new Seccion(vieja));
+		}
 	}
 }

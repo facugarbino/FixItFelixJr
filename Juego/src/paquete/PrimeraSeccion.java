@@ -10,11 +10,7 @@ public class PrimeraSeccion extends Seccion {
 				ventanas[2][1].estaRota());
 	}
 
-	public PrimeraSeccion(PrimeraSeccion s) {
+	public PrimeraSeccion(Seccion s) {
 		super(s.ventanasRotas, s.ventanasConObstaculo, 1);
-		ventanas[2][2] = new VentanaPuerta(ventanas[2][2].getPosicion(), ventanas[2][2].getSeccion(),
-				ventanas[2][2].estaRota());
-		ventanas[2][1] = new VentanaPrimerPiso(ventanas[2][1].getPosicion(), ventanas[2][1].getSeccion(),
-				ventanas[2][1].estaRota());
 	}
 }

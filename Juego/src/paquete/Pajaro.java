@@ -4,7 +4,7 @@ package paquete;
 public class Pajaro extends Componente {
 
 	final int ANCHO = 15;
-
+	//sus coordenadas indican el centro
 	public Pajaro(Posicion p, int frecuencia, Orientacion o) {
 		posicion = p;
 		timer = new Contador(frecuencia);

@@ -1,34 +1,107 @@
 package paquete;
 
-
-public class Ralph extends Personaje {
+public class Ralph {
 	// El edificio mide 100x300
 	// La ventana mide 10x20
 	// Ralph mide en X: 25
-	
-	private int cantLadrillos;
-	private double velocidadLadrillo;
-	
 
-	public Ralph(int cantLadrillos, double frecuencia, double velocidadLadrillo) {
-		timer = new Contador(frecuencia);
+	private Orientacion orientacion;
+	private Posicion posicion;
+	private int cantLadrillos;
+	private int ladrillosTirados;
+	private double velocidadLadrillo;
+	private boolean estaTirando;
+	private Contador timerFrecuencia;
+	private Contador timerEntreLadrillos;
+	private Contador timerCaminar;
+
+	public Ralph(Posicion p, int cantLadrillos, double frecuencia, double velocidadLadrillo) {
+		this.cantLadrillos = cantLadrillos;
+		timerFrecuencia = new Contador(frecuencia);
+		timerEntreLadrillos = new Contador(200);
+		timerCaminar = new Contador(100);
 		this.velocidadLadrillo = velocidadLadrillo;
+		posicion = p;
+		estaTirando = false;
 	}
 
 	public void mover() {
+		if (!estaTirando) {
+			if (timerFrecuencia.contar()) {
+				estaTirando=true;
+			}
+			if (timerCaminar.contar()) {
+				timerCaminar.resetear();
+				double random = Math.random();
+				if (random < 0.45) {
+					darPaso(Orientacion.IZQUIERDA);
+				} else {
+					if (random < 0.9) {
+						darPaso(Orientacion.DERECHA);
+					} else {
+						orientacion = Orientacion.ABAJO;
+						System.out.println("Ralph mira para adelante");
+						// Significa que mira para adelante (10%)
+					}
+				}
+			}
+		}
+
+	}
+
+	private void darPaso(Orientacion o) {
+		if (o == Orientacion.IZQUIERDA && posicion.getX() > 77) {
+			orientacion = o;
+			posicion.moverX(-5);
+			System.out.println("Ralph se mueve a la izquierda");
+		} else {
+			if (!(posicion.getX() < 177)) {
+				darPaso(Orientacion.IZQUIERDA);
+			} else {
+				orientacion = Orientacion.DERECHA;
+				posicion.moverX(5);
+				System.out.println("Ralph se mueve a la derecha");
+			}
+		}
+	}
+
+	public void subirDeSeccion() {
+		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion();
+		p.moverY(100);
+		posicion = p;
 
 	}
 
 	public Ladrillo tirarLadrillo() {
-		if (timer.contar()) {
-			timer.resetear();
-			return new Ladrillo(new Posicion(obtenerXRandom(), this.getPosicion().getY()), velocidadLadrillo);
+		if (estaTirando) {
+			// moverBrazos
+			if (ladrillosTirados == 3 || cantLadrillos == 0) {
+				// Deja de tirar
+				estaTirando = false;
+				System.out.println("Ralph deja de tirar ladrillos");
+			} else {
+				if (timerEntreLadrillos.contar()) {
+					ladrillosTirados++;
+					cantLadrillos--;
+					timerEntreLadrillos.resetear();
+					System.out.println("Ralph tira una roca");
+					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY()), velocidadLadrillo,
+							Juego.getJuego().getMapa());
+				}
+			}
 		} else {
-			return null;
+			if (cantLadrillos > 0 && timerFrecuencia.contar()) {
+				estaTirando = true;
+				orientacion = Orientacion.ABAJO;
+				ladrillosTirados = 0;
+				timerFrecuencia.resetear();
+				System.out.println("Ralph se pone a tirar ladrillos");
+			}
 		}
+		return null;
 	}
 
 	private int obtenerXRandom() {
-		return (int) ((Math.floor(Math.random() * 25) - (25 / 2)) + (this.getPosicion().getX()));
+		return (int) ((Math.floor(Math.random() * 25) - (25 / 2)) + (this.posicion.getX()));
 	}
 }

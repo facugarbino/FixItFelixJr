@@ -7,11 +7,12 @@ public class FelixJr extends Personaje {
 	private long puntajeNivel;
 	private long puntajeSeccion;
 
-	public FelixJr(Posicion p, Ventana v) {
+	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;
 		ventanaActual = v;
 		puntajeNivel = 0;
 		puntajeSeccion = 0;
+		this.vidas = vidas;
 	}
 
 	public void darMartillazo() {
@@ -48,9 +49,9 @@ public class FelixJr extends Personaje {
 			}
 			System.out.println("Felix se mueve a la posicion " + getPosicion());
 			if (ventanaActual.estaRota()) {
-				System.out.println(ventanaActual.getPosicion()+"La ventana esta rota");
+				System.out.println(ventanaActual.getPosicion() + "La ventana esta rota");
 			} else {
-				System.out.println(ventanaActual.getPosicion()+"La ventana esta SANA");
+				System.out.println(ventanaActual.getPosicion() + "La ventana esta SANA");
 			}
 			if (ventanaActual.hayPastel()) {
 				ventanaActual.comerPastel();
@@ -62,15 +63,14 @@ public class FelixJr extends Personaje {
 	}
 
 	public void golpear(Ladrillo l) {
-		vidas--;
-		if (vidas > 0) {
-			Juego.getJuego().reiniciarNivel();
+		System.out.println("Felix es golpeado por un ladrillo.");
+		if (--vidas > 0) {
+			Juego.getJuego().reiniciarNivel(vidas);
 			puntajeNivel = 0;
 			puntajeSeccion = 0;
-			System.out.println("Felix es golpeado por un ladrillo. Pierde una vida. (Quedan " + vidas + " )");
+			System.out.println("Pierde una vida. (Quedan " + vidas + " )");
 		} else {
 			Juego.getJuego().perder(puntajeNivel + puntajeSeccion);
-			System.out.println("Felix es golpeado por un ladrillo. Game over");
 		}
 	}
 
@@ -99,6 +99,10 @@ public class FelixJr extends Personaje {
 
 	public long getPuntaje() {
 		return (puntajeNivel + puntajeSeccion);
+	}
+
+	public void setPosicion(Posicion p) {
+		posicion = p;
 	}
 
 }

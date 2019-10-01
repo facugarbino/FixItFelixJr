@@ -9,4 +9,5 @@ public abstract class Personaje {
 		return posicion;
 	}
 
+	
 }

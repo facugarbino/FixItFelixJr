@@ -11,11 +11,10 @@ public class TestJuego {
 	}
 
 	static void loop() {
-		Contador timer = new Contador(750);
+		Contador timer = new Contador(500);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
 		while (true) {
-			if (j.estaPausado()) {
-				j.hacerTodo();
+			if (!j.estaPausado()) {
 				if (timer.contar()) {
 					double xd = Math.random();
 					if (xd < 0.25)
@@ -32,8 +31,10 @@ public class TestJuego {
 						j.darMartillazo();
 						System.out.println("Felix ha dado un martillazo!");
 					}
-
 				}
+				j.hacerTodo();
+			} else {
+				break;
 			}
 		}
 	}

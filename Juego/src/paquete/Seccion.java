@@ -36,6 +36,10 @@ public class Seccion {
 		}
 
 	}
+	
+	public int getNroSeccion() {
+		return nroSeccion;
+	}
 
 	private Ventana ventanaRandom(Posicion posicion, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
