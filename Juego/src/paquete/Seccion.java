@@ -1,6 +1,5 @@
 package paquete;
 
-import java.util.List;
 
 public class Seccion {
 	protected int ventanasRotas;
@@ -20,6 +19,14 @@ public class Seccion {
 
 	}
 
+	/**
+	 * @see constructor que elige aleatoramiente una distribución de ventanas
+	 * que cumple con la cantidad solicitad de ventanas rotas y con obstáculo
+	 * 
+	 * @param ventanasRotas
+	 * @param ventanasConObstaculo
+	 * @param nroSeccion
+	 */
 	public Seccion(int ventanasRotas, int ventanasConObstaculo, int nroSeccion) {
 		this.ventanasRotas = ventanasRotas;
 		this.ventanasConObstaculo = ventanasConObstaculo;
@@ -40,7 +47,15 @@ public class Seccion {
 	public int getNroSeccion() {
 		return nroSeccion;
 	}
-
+	
+	/**
+	 * 
+	 * @param posicion 
+	 * @param rota
+	 * @param tieneObstaculo
+	 * @return una ventana aleatoria (común o con hojas) según
+	 * sus parámetros de entrada
+	 */
 	private Ventana ventanaRandom(Posicion posicion, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
 		System.out.println(
@@ -52,7 +67,12 @@ public class Seccion {
 			return new VentanaComun(posicion, this, rota, tieneObstaculo);
 		}
 	}
-
+	
+	/**
+	 * método llamado por juego en cada iteración, que
+	 * delega a cada ventana la decisión de que se coloque
+	 * un Nicelander o no en su panel inferior
+	 */
 	public void generarNicelanders() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -64,8 +84,8 @@ public class Seccion {
 	/**
 	 * 
 	 * @param v ventana
-	 * @return <b>true</b> si la ventana pertenece a la sección , o <b>false</b> en
-	 *         caso contrario
+	 * @return <b>true</b> si la ventana pertenece a la sección,
+	 *  o <b>false</b> en caso contrario
 	 */
 	public boolean esDeEstaSeccion(Ventana v) {
 		for (int i = 0; i < 3; i++)
@@ -75,11 +95,18 @@ public class Seccion {
 		return false;
 	}
 
-	public Ventana getVentanaAledana(Ventana v, Orientacion o) {
-		Posicion p = getXY(v);
+	/**
+	 * 
+	 * @param ventana
+	 * @param orientacion
+	 * @return la <b>ventana</b> que se encuentra en la direccion
+	 * indicada a cierta ventana, dentro de la sección
+	 */
+	public Ventana getVentanaAledana(Ventana ventana, Orientacion orientacion) {
+		Posicion p = getXY(ventana);
 		int x = p.getX();
 		int y = p.getY();
-		switch (o) {
+		switch (orientacion) {
 		case IZQUIERDA:
 			if (x > 0)
 				return ventanas[y][x - 1];
@@ -122,6 +149,12 @@ public class Seccion {
 		return ventanas[2][2];
 	}
 
+	/**
+	 * 
+	 * @param n
+	 * @return una matriz de booleanos de 3x5 
+	 * con <b>n</b> elementos en <b>true</b>
+	 */
 	private boolean[][] getMatrizRandom(int n) {
 		// la cantidad de trues tiene q ser n
 		boolean[][] matriz = new boolean[3][5];

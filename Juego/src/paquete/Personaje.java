@@ -8,6 +8,5 @@ public abstract class Personaje {
 	public Posicion getPosicion() {
 		return posicion;
 	}
-
 	
 }

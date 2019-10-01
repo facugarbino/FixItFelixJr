@@ -68,8 +68,8 @@ public abstract class Ventana {
 		pastel = null;
 	}
 
-	public boolean generarNicelander() {
-		return false;
+	public void generarNicelander() {
+		
 	}
 
 	public void ponerPastel(Pastel comida) {

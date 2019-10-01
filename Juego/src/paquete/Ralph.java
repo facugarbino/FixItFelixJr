@@ -25,6 +25,9 @@ public class Ralph {
 		estaTirando = false;
 	}
 
+	/**
+	 * Ralph decide si se mueve y hacia dónde 
+	 */
 	public void mover() {
 		if (!estaTirando) {
 			if (timerFrecuencia.contar()) {
@@ -49,6 +52,12 @@ public class Ralph {
 
 	}
 
+	/**
+	 * Ralph da un paso en el sentido solicitado 
+	 * si es posible y, si no, lo da
+	 * en sentido contrario.
+	 * @param o
+	 */
 	private void darPaso(Orientacion o) {
 		if (o == Orientacion.IZQUIERDA && posicion.getX() > 77) {
 			orientacion = o;
@@ -72,6 +81,11 @@ public class Ralph {
 
 	}
 
+	/**
+	 * Ralph decide si tirar un ladrillo
+	 * @return <b>el ladrillo</b> que efectivamente fue tirado
+	 * o <b>null</b> si no tiró ninguno
+	 */
 	public Ladrillo tirarLadrillo() {
 		if (estaTirando) {
 			// moverBrazos
@@ -101,6 +115,11 @@ public class Ralph {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return un valor de x aleatorio para la
+	 * trayectoria de un ladrillo
+	 */
 	private int obtenerXRandom() {
 		return (int) ((Math.floor(Math.random() * 25) - (25 / 2)) + (this.posicion.getX()));
 	}

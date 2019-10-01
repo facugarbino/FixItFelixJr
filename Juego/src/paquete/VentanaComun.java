@@ -2,11 +2,11 @@ package paquete;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class VentanaComun extends Ventana {
 
-	public static final int CANT_PANELES = 2;
+	private static final int CANT_PANELES = 2;
+	private boolean yaHuboNicelander = false;
 	Contador timer = new Contador(Math.random() * 75 + 25);
 
 	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
@@ -38,17 +38,25 @@ public class VentanaComun extends Ventana {
 		}
 	}
 
-	public boolean generarNicelander() {
-
-		if (elDeAbajoEstaRoto() && timer.contar()) {
+	/**
+	 * decide si poner un Nicelander en el panel
+	 * inferior de la ventana
+	 * 
+	 */
+	public void generarNicelander() {
+		if (!yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
 			nicelander = new Nicelander(
 					new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
 					this);
-			return true;
+			yaHuboNicelander = true;
 		}
-		return false;
 	}
 
+	/**
+	 * 
+	 * @return si el panel inferior está completamente
+	 * roto (si es elegible para que aparezca un Nicelander)
+	 */
 	private boolean elDeAbajoEstaRoto() {
 		return (paneles.get(0).estaRoto());
 	}

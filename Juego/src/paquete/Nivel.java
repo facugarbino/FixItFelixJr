@@ -15,8 +15,19 @@ public class Nivel {
 	private int tiempo;
 	private int porcentaje;
 	private int cantLadrillos;
-	private boolean primeraVez = true;
 
+	/**
+	 * 
+	 * @param nivelMax
+	 * @param cantVentanasRotas
+	 * @param frecuenciaLadrillo
+	 * @param velocidadLadrillo
+	 * @param velocidadPajaro
+	 * @param ventanasConObstaculo
+	 * @param tiempo
+	 * @param porcentaje
+	 * @param cantLadrillos
+	 */
 	public Nivel(int nivelMax, int cantVentanasRotas, double frecuenciaLadrillo, double velocidadLadrillo,
 			double velocidadPajaro, int ventanasConObstaculo, int tiempo, int porcentaje, int cantLadrillos) {
 		this.nivelMax = nivelMax;
@@ -30,7 +41,12 @@ public class Nivel {
 		this.cantLadrillos = cantLadrillos;
 	}
 
-	public Mapa getMapa() {
+	/**
+	 * 
+	 * @return un mapa nuevo con su edificio y secciones
+	 * correspondientes al nivel actual
+	 */
+	public Mapa crearMapa() {
 		ArrayList<Seccion> secciones = new ArrayList<>();
 		secciones
 				.add((Seccion) new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
@@ -44,21 +60,17 @@ public class Nivel {
 		return m;
 	}
 
-	public void generarMapaSiguiente() {
-		if (!primeraVez)
-			actualizarValores();
-		else
-			primeraVez = false;
-	}
-
-	private void actualizarValores() {
+	/**
+	 * actualiza los valores correspondientes al 
+	 * próximo nivel
+	 */
+	public void avanzarDeNivel() {
 		nroNivel++;
 		cantVentanasRotas *= ((100 + porcentaje) / 100.0);
 		frecuenciaLadrillo -= frecuenciaLadrillo * (porcentaje / 100.0);
 		velocidadLadrillo *= ((100 + porcentaje) / 100.0);
 		ventanasConObstaculo *= ((100 + porcentaje) / 100.0);
 		tiempo -= tiempo * 0.1;
-
 	}
 
 	public int getCantVentanasRotas() {

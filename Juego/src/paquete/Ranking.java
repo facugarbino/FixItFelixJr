@@ -14,6 +14,10 @@ public class Ranking {
 			scores[i] = new HighScore(new Jugador(""));
 	}
 
+	/**
+	 * 
+	 * @param score
+	 */
 	public void agregarHighScore(HighScore score) {
 		if (cantScores < 5) {
 			scores[cantScores++] = score;

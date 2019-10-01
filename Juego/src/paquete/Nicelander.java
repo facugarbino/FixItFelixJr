@@ -13,7 +13,6 @@ public class Nicelander {
 	}
 
 	public void ponerPastel() {
-		ventana.ponerPastel(new Pastel(
-				new Color((float) Math.random() * 255, (float) Math.random() * 255, (float) Math.random() * 255)));
+		ventana.ponerPastel(new Pastel());
 	}
 }

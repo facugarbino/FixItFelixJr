@@ -14,11 +14,20 @@ public class Juego {
 	private Seccion seccionActual;
 	private boolean primeraVez;
 
+	/**
+	 * crea la única instancia de Juego
+	 * 
+	 * @param nombreJugador
+	 */
 	public static void crearJuego(String nombreJugador) {
 		juego = new Juego(nombreJugador);
 		System.out.println("Comienza el juego. Juega: " + nombreJugador);
 	}
 
+	/**
+	 * 
+	 * @param nombre
+	 */
 	private Juego(String nombre) {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
 		nivel = new Nivel(10, 15, 10000, 50, 10, 6, 600, 10, 40);
@@ -55,22 +64,38 @@ public class Juego {
 		return felix;
 	}
 
-	public void moverFelix(Orientacion o) {
-		felix.mover(o);
+	/**
+	 * 
+	 * @param orientacion
+	 */
+	public void moverFelix(Orientacion orientacion) {
+		felix.mover(orientacion);
 	}
 
-	public void golpearFelix(Ladrillo l) {
-		felix.golpear(l);
+	/**
+	 * 
+	 * @param ladrillo
+	 */
+	public void golpearFelix(Ladrillo ladrillo) {
+		felix.golpear(ladrillo);
 	}
 
-	public void golpearFelix(Pajaro p) {
-		felix.golpear(p);
+	/**
+	 * 
+	 * @param pajaro
+	 */
+	public void golpearFelix(Pajaro pajaro) {
+		felix.golpear(pajaro);
 	}
 
 	public void darMartillazo() {
 		felix.darMartillazo();
 	}
 
+	/**
+	 * se encarga de actualizar el estado del juego,
+	 * se ejecuta constantemente
+	 */
 	public void hacerTodo() {
 		ralph.mover();
 		Ladrillo l = ralph.tirarLadrillo();
@@ -85,26 +110,34 @@ public class Juego {
 		checkTiempo();
 	}
 
+	
 	public void pasarDeNivel() {
-		long puntitos;
-		if (primeraVez)
-			puntitos = 0;
-		else
-			puntitos = felix.getPuntaje();
-		jugador.sumarPuntos(puntitos);
-		if (nivel.hayOtroNivel()) {
-			nivel.generarMapaSiguiente();
+		if (primeraVez) {
 			reiniciarNivel(3);
 		} else {
-			ganar();
+			jugador.sumarPuntos(felix.getPuntaje());
+			if (nivel.hayOtroNivel()) {
+				nivel.avanzarDeNivel();
+				reiniciarNivel(3);
+			} else {
+				ganar();
+			}
 		}
 
 	}
 
 	private void ganar() {
+		HighScore hs = new HighScore(jugador);
+		ranking.agregarHighScore(hs);
+		pausa = true;
+		System.out.println("¡FELICITACIONES! Ganaste el juego.");
 
 	}
 
+	/**
+	 * hace la lógica para llevar la cuenta
+	 * regresiva del tiempo
+	 */
 	private void checkTiempo() {
 		if (timer.contar()) {
 			// System.out.println("Tiempo: " + tiempo);
@@ -116,6 +149,7 @@ public class Juego {
 		}
 	}
 
+	
 	public void avanzarSeccion() {
 		if (seccionActual.getNroSeccion() < 3) {
 			System.out.println("Felix Jr. avanza de seccion");
@@ -129,8 +163,13 @@ public class Juego {
 		}
 	}
 
+	/**
+	 * "reinicia" el nivel, o bien por primera vez, o
+	 * bien si es la segunda o tercera vida de Felix
+	 * @param vidasDeFelix
+	 */
 	public void reiniciarNivel(int vidasDeFelix) {
-		mapa = nivel.getMapa();
+		mapa = nivel.crearMapa();
 		seccionActual = mapa.getEdificio().getSeccionActual();
 		felix = new FelixJr(new Posicion(95, 10), seccionActual.getVentanaInicial(), vidasDeFelix);
 		ralph = new Ralph(new Posicion(95, 110), nivel.getCantLadrillos(), nivel.getFrecuenciaLadrillo(),
@@ -139,6 +178,10 @@ public class Juego {
 		timer = new Contador(50);
 	}
 
+	/**
+	 * GAME OVER y agrega el puntaje al Ranking
+	 * @param puntajeFelix
+	 */
 	public void perder(long puntajeFelix) {
 		jugador.sumarPuntos(puntajeFelix);
 		HighScore hs = new HighScore(jugador);
@@ -149,6 +192,10 @@ public class Juego {
 
 	}
 
+	/**
+	 * se ejecuta cuando un pájaro golpea a Felix
+	 * y debe reiniciarse la sección donde se encuentra
+	 */
 	public void reiniciarSeccion() {
 		mapa.getEdificio().reemplazarSeccion(seccionActual);
 	}

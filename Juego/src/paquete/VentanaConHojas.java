@@ -12,13 +12,12 @@ public class VentanaConHojas extends Ventana {
 		this.seccion = seccion;
 		panelesReparados = 0;
 		cantMartillazos = 0;
-		boolean estaCerrada = !tieneObstaculo;
+		cerrada = !tieneObstaculo;
 		paneles = new ArrayList<>();
-		cerrada = estaCerrada;
 		for (int i = 0; i < CANT_PANELES; i++) {
 			paneles.add(new Panel(new Sano()));
 		}
-		if (!estaCerrada) {
+		if (!cerrada) {
 			if (Math.random() < 0.5) {
 				obstaculos.add(new HojaIzquierda());
 			} else {

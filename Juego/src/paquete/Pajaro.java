@@ -11,6 +11,11 @@ public class Pajaro extends Componente {
 		orientacion = o;
 	}
 
+	/**
+	 * hace la lógica para que el pájaro se mueva,
+	 * de acuerdo al sentido en que está volando, y 
+	 * cambia de sentido cuando llega a los extremos
+	 */
 	public void comoAvanzo() {
 		if (orientacion == Orientacion.IZQUIERDA) {
 			if (posicion.getX() > 0) {

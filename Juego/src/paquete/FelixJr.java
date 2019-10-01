@@ -15,6 +15,10 @@ public class FelixJr extends Personaje {
 		this.vidas = vidas;
 	}
 
+	/**
+	 * martilla la ventana en la que se encuentra
+	 * y acumula puntaje en caso de repararla
+	 */
 	public void darMartillazo() {
 		if (ventanaActual.reparar()) {
 			if (ventanaActual.getSeccion().estaSana()) {
@@ -29,6 +33,13 @@ public class FelixJr extends Personaje {
 		}
 	}
 
+	/**
+	 * se mueve en función del sentido indicado,
+	 * siempre y cuando sea posible
+	 * @param o
+	 * @see puede haber un obstáculo o caerse del mapa
+	 * o de la sección
+	 */
 	public void mover(Orientacion o) {
 		Ventana v = ventanaActual.getVentana(o);
 		if (v != null) {
@@ -62,7 +73,12 @@ public class FelixJr extends Personaje {
 		}
 	}
 
-	public void golpear(Ladrillo l) {
+	/**
+	 * responde a que un ladrillo lo golpee, quitando
+	 * una vida y reiniciando el nivel (o perdiendo)
+	 * @param ladrillo
+	 */
+	public void golpear(Ladrillo ladrillo) {
 		System.out.println("Felix es golpeado por un ladrillo.");
 		if (--vidas > 0) {
 			Juego.getJuego().reiniciarNivel(vidas);
@@ -74,7 +90,12 @@ public class FelixJr extends Personaje {
 		}
 	}
 
-	public void golpear(Pajaro p) {
+	/**
+	 * responde a que un pájaro lo golpee, reiniciando
+	 * la sección donde ese encuentra
+	 * @param pajaro
+	 */
+	public void golpear(Pajaro pajaro) {
 		Juego.getJuego().reiniciarSeccion();
 		puntajeSeccion = 0;
 		System.out.println("Felix es golpeado por un pajaro, reinicia la seccion");
@@ -89,6 +110,11 @@ public class FelixJr extends Personaje {
 		System.out.println("Felix come un pastel. Se inmuniza.");
 	}
 
+	/**
+	 * método que se ejecuta constantemente para
+	 * que Felix Jr. pierda su inmunización lueg de un tiempo
+	 * en caso de haberla obtenido, comiendo un pastel
+	 */
 	public void chequearInmunizacion() {
 		if (inmune && timer.contar()) {
 			timer.resetear();

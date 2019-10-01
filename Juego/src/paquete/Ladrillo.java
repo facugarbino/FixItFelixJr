@@ -13,7 +13,7 @@ public class Ladrillo extends Componente {
 
 	public void comoAvanzo() {
 		posicion.moverY(-1);
-		System.out.println("Un ladrillo avanza a la posicion " + posicion);
+		//System.out.println("Un ladrillo avanza a la posicion " + posicion);
 		if (mapa.estaFelix(posicion, ANCHO)) {
 			System.out.println("Un ladrillo en la posicion " + posicion + " golpea a Felix");
 			Juego.getJuego().golpearFelix(this);
