@@ -16,8 +16,10 @@ public class VentanaComun extends Ventana {
 		cantMartillazos = 0;
 		paneles = new ArrayList<>();
 		if (estaRoto) {
+			caracter = 'X';
 			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
+			caracter ='□';
 			panelesRotos = 0;
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
@@ -54,7 +56,7 @@ public class VentanaComun extends Ventana {
 
 	/**
 	 * 
-	 * @return si el panel inferior está completamente
+	 * @return si el panel inferior estÃ¡ completamente
 	 * roto (si es elegible para que aparezca un Nicelander)
 	 */
 	private boolean elDeAbajoEstaRoto() {

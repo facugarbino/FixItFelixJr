@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Nivel {
-	private final double velocidadNube = 5;
+	private final double velocidadNube = 100;
 	private int nivelMax;
 	private int nroNivel;
 	private int cantVentanasRotas;

@@ -13,8 +13,10 @@ public class VentanaPuerta extends Ventana {
 		cantMartillazos = 0;
 		paneles = new ArrayList<>();
 		if (estaRoto) {
+			caracter ='X';
 			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
+			caracter ='□';
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
 			}

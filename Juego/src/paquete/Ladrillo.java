@@ -2,13 +2,14 @@ package paquete;
 
 public class Ladrillo extends Componente {
 
-	private int ANCHO = 2;
+	private static final int ANCHO = 2;
 	private Mapa mapa;
 
 	public Ladrillo(Posicion p, double velocidad, Mapa m) {
 		posicion = p;
 		timer = new Contador(velocidad);
 		mapa = m;
+		caracter = 'O';
 	}
 
 	/**

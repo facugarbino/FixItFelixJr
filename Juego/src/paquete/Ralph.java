@@ -18,11 +18,14 @@ public class Ralph {
 	public Ralph(Posicion p, int cantLadrillos, double frecuencia, double velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
 		timerFrecuencia = new Contador(frecuencia);
-		timerEntreLadrillos = new Contador(200);
+		timerEntreLadrillos = new Contador(1000);
 		timerCaminar = new Contador(100);
 		this.velocidadLadrillo = velocidadLadrillo;
 		posicion = p;
 		estaTirando = false;
+	}
+	public Posicion getPosicion(){
+		return posicion;
 	}
 
 	/**

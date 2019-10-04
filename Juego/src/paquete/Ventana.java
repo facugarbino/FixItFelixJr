@@ -2,7 +2,10 @@ package paquete;
 
 import java.util.*;
 
-public abstract class Ventana {
+import taller2.modelo.Dibujable;
+import taller2.modelo.InformacionDibujable;
+
+public abstract class Ventana implements Dibujable{
 
 	protected Posicion posicion;
 	protected Seccion seccion;
@@ -13,6 +16,7 @@ public abstract class Ventana {
 	protected int cantMartillazos;
 	protected int panelesRotos;
 	protected int panelesReparados;
+	Character caracter;
 
 	/**
 	 * @see Método llamado por Felix para moverse
@@ -36,7 +40,12 @@ public abstract class Ventana {
 	public Posicion getPosicion() {
 		return posicion;
 	}
+	
 
+	public InformacionDibujable getInformacionDibujable(){
+		return new InformacionDibujable(posicion.getX(),300-posicion.getY(), caracter);
+		
+	}
 	/**
 	 * @see Método llamado por Felix
 	 * @return true si el martillazo reparó algún panel o false en caso contrario,

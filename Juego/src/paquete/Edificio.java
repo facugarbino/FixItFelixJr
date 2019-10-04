@@ -14,7 +14,7 @@ public class Edificio {
 	}
 
 	public Seccion getSeccion(int i) {
-		return secciones.get(i + 1);
+		return secciones.get(i - 1);
 	}
 
 	public Seccion getSeccionActual() {

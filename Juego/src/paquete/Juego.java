@@ -1,5 +1,6 @@
 package paquete;
 
+
 public class Juego {
 	private static Juego juego;
 	private Ranking ranking;
@@ -72,6 +73,9 @@ public class Juego {
 
 	public void golpearFelix(Pajaro p) {
 		felix.golpear(p);
+	}
+	public Ralph getRalph(){
+		return ralph;
 	}
 
 	public void darMartillazo() {

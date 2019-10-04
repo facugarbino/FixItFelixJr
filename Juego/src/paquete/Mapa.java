@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import taller2.modelo.Dibujable;
+import taller2.modelo.InformacionDibujable;
+
 public class Mapa {
 	private int ancho;
 	private int alto;
@@ -29,6 +32,15 @@ public class Mapa {
 
 	public void borrarComponente(Componente c) {
 		componentesABorrar.add(c);
+	}
+	
+	public List<Dibujable> getComponentesDibujables(){
+		List<Dibujable> lista = new ArrayList<>();
+		Iterator<Componente> ite = componentes.iterator();
+		while (ite.hasNext()){
+			lista.add(ite.next());
+		}
+		return lista;
 	}
 
 	public void avanzarComponentes() {

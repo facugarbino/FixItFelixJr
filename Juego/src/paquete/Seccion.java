@@ -1,7 +1,13 @@
 package paquete;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import taller2.modelo.Dibujable;
 
 public class Seccion {
+	
 	protected int ventanasRotas;
 	protected int ventanasConObstaculo;
 	private int ventanasReparadas;
@@ -168,5 +174,15 @@ public class Seccion {
 			}
 		}
 		return matriz;
+	}
+	
+	public List<Dibujable> getComponentesDibujables(){
+		List<Dibujable> lista = new ArrayList<>();
+		for (int i=0;i<3;i++){
+			for (int j=0;j<5;j++){
+				lista.add(ventanas[i][j]);
+			}
+		}
+		return lista;
 	}
 }

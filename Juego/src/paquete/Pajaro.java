@@ -9,6 +9,7 @@ public class Pajaro extends Componente {
 		posicion = p;
 		timer = new Contador(frecuencia);
 		orientacion = o;
+		caracter = 'P';
 	}
 
 	/**
