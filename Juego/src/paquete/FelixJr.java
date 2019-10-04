@@ -128,4 +128,7 @@ public class FelixJr extends Personaje {
 		posicion = p;
 	}
 
+	public void setVentana(Ventana v) {
+		ventanaActual = v;
+	}
 }

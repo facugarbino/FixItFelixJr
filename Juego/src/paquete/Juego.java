@@ -145,7 +145,8 @@ public class Juego {
 			System.out.println("Felix Jr. avanza de seccion");
 			seccionActual = mapa.getEdificio().avanzarSeccion();
 			tiempo = nivel.getTiempo();
-			felix.setPosicion(seccionActual.getVentanaInicial().getPosicion());
+			felix.setPosicion(seccionActual.getVentanaInicial().getPosicion().copia());
+			felix.setVentana(seccionActual.getVentanaInicial());
 			ralph.subirDeSeccion();
 		} else {
 			pasarDeNivel();

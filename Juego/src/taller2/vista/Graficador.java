@@ -1,11 +1,15 @@
 package taller2.vista;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
+import paquete.Juego;
+import paquete.Orientacion;
 import taller2.modelo.Dibujable;
 import taller2.modelo.InformacionDibujable;
 
@@ -19,11 +23,44 @@ public class Graficador {
    private static final int DELTA = 50;
    private static JFrame frame = new JFrame("Visualización Fix It Felix");
    private static final int margen = 50;
+   private static Juego juego = Juego.getJuego();
 
    static {
       frame.setSize(300, 400);
       frame.setVisible(true);
       frame.setResizable(false);
+      frame.addKeyListener(new KeyListener() {
+
+	
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			int key = e.getKeyCode();
+			   switch (key) {
+			   case (KeyEvent.VK_LEFT): juego.moverFelix(Orientacion.IZQUIERDA); break; 
+			   case (KeyEvent.VK_RIGHT): juego.moverFelix(Orientacion.DERECHA); break;
+			   case (KeyEvent.VK_UP): juego.moverFelix(Orientacion.ARRIBA); break;
+			   case (KeyEvent.VK_DOWN): juego.moverFelix(Orientacion.ABAJO); break;
+			   case (KeyEvent.VK_SPACE): juego.darMartillazo(); break;
+			   case (KeyEvent.VK_P): juego.pausar(); break;
+				   
+			   }
+			   
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+    	  
+      });
    }
 
    public static void refrescarTopDown(List<? extends Dibujable> listaDibujables, int delayMilis) {
@@ -44,6 +81,7 @@ public class Graficador {
 
       
    }
+   
 
    public static void refrescarDownTop(List<? extends Dibujable> listaDibujables, int delayMilis) {
       Graphics gr = frame.getContentPane().getGraphics();

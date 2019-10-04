@@ -32,4 +32,7 @@ public class Posicion {
 	public boolean equals(Posicion p) {
 		return (x == p.x && y == p.y);
 	}
+	public Posicion copia() {
+		return new Posicion(x,y);
+	}
 }

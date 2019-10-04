@@ -65,20 +65,20 @@ public class Ralph {
 		if (o == Orientacion.IZQUIERDA && posicion.getX() > 77) {
 			orientacion = o;
 			posicion.moverX(-5);
-			System.out.println("Ralph se mueve a la izquierda");
+			//System.out.println("Ralph se mueve a la izquierda");
 		} else {
 			if (!(posicion.getX() < 177)) {
 				darPaso(Orientacion.IZQUIERDA);
 			} else {
 				orientacion = Orientacion.DERECHA;
 				posicion.moverX(5);
-				System.out.println("Ralph se mueve a la derecha");
+				//System.out.println("Ralph se mueve a la derecha");
 			}
 		}
 	}
 
 	public void subirDeSeccion() {
-		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion();
+		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion().copia();
 		p.moverY(100);
 		posicion = p;
 

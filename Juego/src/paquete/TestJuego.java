@@ -32,12 +32,13 @@ public class TestJuego {
 	}
 
 	static void loop() {
-		Contador timer = new Contador(500);
+		Contador timer = new Contador(50);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
 		List<Dibujable> lista = new ArrayList<Dibujable>(); 
 		while (true) {
 			if (!j.estaPausado()) {
 				if (timer.contar()) {
+					/*
 					double xd = Math.random();
 					if (xd < 0.25)
 						j.getFelix().mover(Orientacion.IZQUIERDA);
@@ -47,8 +48,13 @@ public class TestJuego {
 						j.getFelix().mover(Orientacion.ABAJO);
 					else
 						j.getFelix().mover(Orientacion.ARRIBA);
+					System.out.println("Felix se ha movido a " + j.getFelix().getPosicion());
+					for (int i = 0; i < 4; i++) {
+						j.darMartillazo();
+						System.out.println("Felix ha dado un martillazo!");
+					}
+					*/
 					timer.resetear();
-					
 					List<List<Dibujable>> listaGeneral = new ArrayList<>();
 					listaGeneral.add(j.getMapa().getComponentesDibujables());
 					listaGeneral.add(j.getMapa().getEdificio().getSeccion(1).getComponentesDibujables());
@@ -57,12 +63,7 @@ public class TestJuego {
 					lista = unirListas(listaGeneral);
 					lista.add(new Dato(j.getRalph().getPosicion().getX(),300-j.getRalph().getPosicion().getY(),'R'));
 					lista.add(new Dato(j.getFelix().getPosicion().getX(),300-j.getFelix().getPosicion().getY(),'F'));
-					System.out.println("Felix se ha movido a " + j.getFelix().getPosicion());
 					Graficador.refrescarTopDown(lista,1);
-					for (int i = 0; i < 4; i++) {
-						j.darMartillazo();
-						System.out.println("Felix ha dado un martillazo!");
-					}
 				}
 				j.hacerTodo();
 				

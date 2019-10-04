@@ -37,6 +37,7 @@ public class Seccion {
 		this.ventanasRotas = ventanasRotas;
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		ventanasReparadas = 0;
+		this.nroSeccion = nroSeccion;
 		boolean[][] conObstaculo = getMatrizRandom(ventanasConObstaculo);
 		boolean[][] rotas = getMatrizRandom(ventanasRotas);
 		ventanas = new Ventana[3][5];
