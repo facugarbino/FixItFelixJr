@@ -62,6 +62,7 @@ public abstract class Ventana implements Dibujable{
 				cantMartillazos=0;
 				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
+					caracter = '□';
 				}
 				return true;
 			}

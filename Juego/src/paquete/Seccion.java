@@ -66,7 +66,7 @@ public class Seccion {
 		double random = Math.random();
 		System.out.println(
 				"La ventana en " + posicion + (rota ? "está rota" : "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
-		if (random < 0.5) {
+		if (random < 0.2 && !rota) {
 			// Con hojas
 			return new VentanaConHojas(posicion, this, tieneObstaculo);
 		} else {
@@ -168,7 +168,7 @@ public class Seccion {
 		while (hits < n) {
 			int i = (int) (Math.random() * 3);
 			int j = (int) (Math.random() * 5);
-			if (!matriz[i][j]) {
+			if (matriz[i][j]==false) {
 				matriz[i][j] = true;
 				hits++;
 			}
