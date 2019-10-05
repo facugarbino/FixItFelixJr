@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 import paquete.Juego;
+import paquete.Mapa;
 import paquete.Orientacion;
 import taller2.modelo.Dibujable;
 import taller2.modelo.InformacionDibujable;
@@ -18,8 +19,8 @@ import taller2.modelo.InformacionDibujable;
  * interfaz Dibujable), sólo necesito su posicón y un caracter representativo para mostrarlo
  * */
 public class Graficador {
-   private static final int ANCHO = 200;
-   private static final int ALTO = 300;
+   private static final int ANCHO = Mapa.ANCHO;
+   private static final int ALTO = Mapa.ALTO;
    private static final int DELTA = 50;
    private static JFrame frame = new JFrame("Visualización Fix It Felix");
    private static final int margen = 50;
@@ -30,7 +31,6 @@ public class Graficador {
       frame.setVisible(true);
       frame.setResizable(false);
       frame.addKeyListener(new KeyListener() {
-
 	
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -43,17 +43,13 @@ public class Graficador {
 			   case (KeyEvent.VK_DOWN): juego.moverFelix(Orientacion.ABAJO); break;
 			   case (KeyEvent.VK_SPACE): juego.darMartillazo(); break;
 			   case (KeyEvent.VK_P): juego.pausar(); break;
-				   
 			   }
-			   
 		}
-
 		@Override
 		public void keyTyped(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
-
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub

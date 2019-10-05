@@ -3,6 +3,8 @@ package paquete;
 import java.util.List;
 
 public class Edificio {
+	public static final int ANCHO = 100;
+	public static final int ALTO = 3*ANCHO;
 	private Posicion posicion;
 	private List<Seccion> secciones;
 	private Seccion seccionActual;

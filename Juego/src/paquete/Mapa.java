@@ -8,15 +8,13 @@ import taller2.modelo.Dibujable;
 import taller2.modelo.InformacionDibujable;
 
 public class Mapa {
-	private int ancho;
-	private int alto;
+	public static final int ANCHO = 200;
+	public static final int ALTO = 400;
 	private List<Componente> componentes;
 	private Edificio edificio;
 	private List<Componente> componentesABorrar;
 
-	public Mapa(int ancho, int alto, Edificio edificio) {
-		this.ancho = ancho;
-		this.alto = alto;
+	public Mapa(Edificio edificio) {
 		this.edificio = edificio;
 		componentes = new ArrayList<>();
 		componentesABorrar = new ArrayList<>();
@@ -62,10 +60,6 @@ public class Mapa {
 	public boolean estaFelix(Posicion p, int diametro) {
 		Posicion pFelix = Juego.getJuego().getFelix().getPosicion();
 		int radio = diametro / 2;
-		// return (estaEntre(felix.getPosicion().getX(), p.getX() - (radio / 2),
-		// p.getX() + (radio / 2)))
-		// && (estaEntre(felix.getPosicion().getY(), p.getY() - (radio / 2), p.getY() +
-		// (radio / 2)));
 		if (estaEntre(p.getX() - radio, pFelix.getX(), pFelix.getX() + 5)
 				|| estaEntre(p.getX() + radio, pFelix.getX(), pFelix.getX() + 5)) {
 			if (estaEntre(p.getY() - radio, pFelix.getY(), pFelix.getY() + 20)

@@ -28,6 +28,7 @@ public class Nivel {
 		this.tiempo = tiempo;
 		this.porcentaje = porcentaje;
 		this.cantLadrillos = cantLadrillos;
+		this.nroNivel = 1;
 	}
 
 	/**
@@ -42,10 +43,20 @@ public class Nivel {
 		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3), 2));
 		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6), 3));
 		Edificio e = new Edificio(new Posicion(50, 0), secciones);
-		Mapa m = new Mapa(200, 400, e);
+		Mapa m = new Mapa(e);
 		m.agregarComponente(new Nube(new Posicion(0, 60), velocidadNube));
 		m.agregarComponente(new Nube(new Posicion(50, 130), velocidadNube));
 		m.agregarComponente(new Nube(new Posicion(100, 245), velocidadNube));
+		//Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
+		//y dos pajaros en la ultima seccion
+		if (Math.random()<0.5) { 
+			m.agregarComponente(new Pajaro(new Posicion(0,Seccion.ALTO*(4/3)), velocidadPajaro, Orientacion.DERECHA, m));
+		} else {
+			m.agregarComponente(new Pajaro(new Posicion(0,Seccion.ALTO*(5/3)), velocidadPajaro, Orientacion.DERECHA, m));
+		}
+		m.agregarComponente(new Pajaro(new Posicion(0,Seccion.ALTO*(7/3)), velocidadPajaro, Orientacion.DERECHA, m));
+		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO,Seccion.ALTO*(8/3)), velocidadPajaro, Orientacion.DERECHA, m));
+		
 		return m;
 	}
 

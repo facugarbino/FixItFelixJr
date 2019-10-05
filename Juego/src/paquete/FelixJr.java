@@ -1,5 +1,7 @@
 package paquete;
 
+import java.util.List;
+
 public class FelixJr extends Personaje {
 	private int vidas;
 	private Ventana ventanaActual;
@@ -20,6 +22,7 @@ public class FelixJr extends Personaje {
 	 * y acumula puntaje en caso de repararla
 	 */
 	public void darMartillazo() {
+		System.out.println("Felix ha dado un martillazo!");
 		if (ventanaActual.reparar()) {
 			if (ventanaActual.getSeccion().estaSana()) {
 				puntajeSeccion += 500;

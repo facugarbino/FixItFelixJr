@@ -7,7 +7,10 @@ import java.util.List;
 import taller2.modelo.Dibujable;
 
 public class Seccion {
-	
+	public static final int ANCHO = Edificio.ANCHO;
+	public static final int ALTO = Edificio.ANCHO;
+	private static final int FILAS = 3;
+	private static final int COLUMNAS = 5;
 	protected int ventanasRotas;
 	protected int ventanasConObstaculo;
 	private int ventanasReparadas;
@@ -36,15 +39,17 @@ public class Seccion {
 	public Seccion(int ventanasRotas, int ventanasConObstaculo, int nroSeccion) {
 		this.ventanasRotas = ventanasRotas;
 		this.ventanasConObstaculo = ventanasConObstaculo;
+		this.nroSeccion = nroSeccion;
 		ventanasReparadas = 0;
 		this.nroSeccion = nroSeccion;
 		boolean[][] conObstaculo = getMatrizRandom(ventanasConObstaculo);
 		boolean[][] rotas = getMatrizRandom(ventanasRotas);
-		ventanas = new Ventana[3][5];
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 5; j++) {
+		ventanas = new Ventana[FILAS][COLUMNAS];
+		for (int i = 0; i < FILAS; i++) {
+			for (int j = 0; j < COLUMNAS; j++) {
 				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2-i)*30 );
-				//System.out.print( "("+i+","+j+")"+": " );
+				//Esta posicion luego la genereremos con valores CONSTANTES para poder modificar más simplemente
+				//el tamaño/posición del edificio, el tamaño de las ventanas, etc.
 				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}
@@ -81,8 +86,8 @@ public class Seccion {
 	 * un Nicelander o no en su panel inferior
 	 */
 	public void generarNicelanders() {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < FILAS; i++) {
+			for (int j = 0; j < COLUMNAS; j++) {
 				ventanas[i][j].generarNicelander();
 			}
 		}
@@ -95,8 +100,8 @@ public class Seccion {
 	 *  o <b>false</b> en caso contrario
 	 */
 	public boolean esDeEstaSeccion(Ventana v) {
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 5; j++)
+		for (int i = 0; i < FILAS; i++)
+			for (int j = 0; j < COLUMNAS; j++)
 				if (ventanas[i][j].equals(v))
 					return true;
 		return false;
@@ -135,8 +140,8 @@ public class Seccion {
 	}
 
 	public Posicion getXY(Ventana v) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < FILAS; i++) {
+			for (int j = 0; j < COLUMNAS; j++) {
 				if (ventanas[i][j].equals(v))
 					return new Posicion(j, i);
 			}
@@ -164,11 +169,11 @@ public class Seccion {
 	 */
 	private boolean[][] getMatrizRandom(int n) {
 		// la cantidad de trues tiene q ser n
-		boolean[][] matriz = new boolean[3][5];
+		boolean[][] matriz = new boolean[FILAS][COLUMNAS];
 		int hits = 0;
 		while (hits < n) {
-			int i = (int) (Math.random() * 3);
-			int j = (int) (Math.random() * 5);
+			int i = (int) (Math.random() * FILAS);
+			int j = (int) (Math.random() * COLUMNAS);
 			if (matriz[i][j]==false) {
 				matriz[i][j] = true;
 				hits++;
@@ -179,8 +184,8 @@ public class Seccion {
 	
 	public List<Dibujable> getComponentesDibujables(){
 		List<Dibujable> lista = new ArrayList<>();
-		for (int i=0;i<3;i++){
-			for (int j=0;j<5;j++){
+		for (int i=0;i<FILAS;i++){
+			for (int j=0;j<COLUMNAS;j++){
 				lista.add(ventanas[i][j]);
 			}
 		}

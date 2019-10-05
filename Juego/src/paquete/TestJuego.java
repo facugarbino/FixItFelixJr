@@ -39,6 +39,16 @@ public class TestJuego {
 			if (!j.estaPausado()) {
 				if (timer.contar()) {
 					/*
+					 * Esto que está comentado serviría
+					 * para que Felix se mueva y tire ladrillos sólo.
+					 * Pero mayoritariamente es golpeado por un ladrillo
+					 * o tarda mucho en romper todos los paneles.
+					 * 
+					 * ---------------------IMPORTANTE---------------------
+					 * Entonces, investigamos e hicimos que se pueda jugar
+					 * desde el graficador, usando las teclas.
+					 * ----------------------------------------------------
+					 * 
 					double xd = Math.random();
 					if (xd < 0.25)
 						j.getFelix().mover(Orientacion.IZQUIERDA);
@@ -51,7 +61,6 @@ public class TestJuego {
 					System.out.println("Felix se ha movido a " + j.getFelix().getPosicion());
 					for (int i = 0; i < 4; i++) {
 						j.darMartillazo();
-						System.out.println("Felix ha dado un martillazo!");
 					}
 					*/
 					timer.resetear();
