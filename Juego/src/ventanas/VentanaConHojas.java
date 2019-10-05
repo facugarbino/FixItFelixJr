@@ -1,6 +1,13 @@
-package paquete;
+package ventanas;
 
 import java.util.ArrayList;
+
+import paquete.HojaDerecha;
+import paquete.HojaIzquierda;
+import paquete.Panel;
+import paquete.Posicion;
+import paquete.Sano;
+import paquete.Seccion;
 
 public class VentanaConHojas extends Ventana {
 

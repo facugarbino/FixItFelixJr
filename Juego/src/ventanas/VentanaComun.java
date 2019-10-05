@@ -1,7 +1,16 @@
-package paquete;
+package ventanas;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
+import paquete.Contador;
+import paquete.Macetero;
+import paquete.Moldura;
+import paquete.Nicelander;
+import paquete.Panel;
+import paquete.Posicion;
+import paquete.Sano;
+import paquete.Seccion;
 
 public class VentanaComun extends Ventana {
 

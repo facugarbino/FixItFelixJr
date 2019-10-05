@@ -2,7 +2,7 @@ package paquete;
 
 public class Ladrillo extends Componente {
 
-	private static final int ANCHO = 2;
+	private static final int ANCHO = 3;
 	private Mapa mapa;
 
 	public Ladrillo(Posicion p, double velocidad, Mapa m) {

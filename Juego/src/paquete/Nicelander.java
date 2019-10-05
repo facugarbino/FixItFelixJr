@@ -2,6 +2,8 @@ package paquete;
 
 import java.awt.Color;
 
+import ventanas.Ventana;
+
 public class Nicelander {
 
 	private Color color;

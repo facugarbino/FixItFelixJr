@@ -1,8 +1,16 @@
-package paquete;
+package personajes;
 
-import java.util.List;
+import paquete.Contador;
+import paquete.Juego;
+import paquete.Ladrillo;
+import paquete.Orientacion;
+import paquete.Pajaro;
+import paquete.Posicion;
+import taller2.modelo.InformacionDibujable;
+import ventanas.Ventana;
 
 public class FelixJr extends Personaje {
+	private Contador timer;
 	private int vidas;
 	private Ventana ventanaActual;
 	private boolean inmune;
@@ -15,6 +23,8 @@ public class FelixJr extends Personaje {
 		puntajeNivel = 0;
 		puntajeSeccion = 0;
 		this.vidas = vidas;
+		caracter = 'F';
+		timer = new Contador(1000);
 	}
 
 	/**
@@ -133,5 +143,10 @@ public class FelixJr extends Personaje {
 
 	public void setVentana(Ventana v) {
 		ventanaActual = v;
+	}
+
+	@Override
+	public InformacionDibujable getInformacionDibujable() {
+		return new InformacionDibujable(posicion.getX(), posicion.getY(), 'F');
 	}
 }

@@ -1,7 +1,18 @@
-package paquete;
+package ventanas;
 
 import java.util.*;
 
+import paquete.EstadoPanel;
+import paquete.MedioRoto;
+import paquete.Nicelander;
+import paquete.Obstaculo;
+import paquete.Orientacion;
+import paquete.Panel;
+import paquete.Pastel;
+import paquete.Posicion;
+import paquete.Roto;
+import paquete.Sano;
+import paquete.Seccion;
 import taller2.modelo.Dibujable;
 import taller2.modelo.InformacionDibujable;
 

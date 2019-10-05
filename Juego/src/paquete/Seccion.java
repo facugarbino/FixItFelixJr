@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import taller2.modelo.Dibujable;
+import ventanas.Ventana;
+import ventanas.VentanaComun;
+import ventanas.VentanaConHojas;
 
 public class Seccion {
 	public static final int ANCHO = Edificio.ANCHO;
@@ -48,8 +51,8 @@ public class Seccion {
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
 				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2-i)*30 );
-				//Esta posicion luego la genereremos con valores CONSTANTES para poder modificar más simplemente
-				//el tamaño/posición del edificio, el tamaño de las ventanas, etc.
+				//Esta posicion luego la genereremos con valores CONSTANTES para poder modificar mï¿½s simplemente
+				//el tamaï¿½o/posiciï¿½n del edificio, el tamaï¿½o de las ventanas, etc.
 				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}

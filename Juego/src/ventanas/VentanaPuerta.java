@@ -1,6 +1,11 @@
-package paquete;
+package ventanas;
 
 import java.util.ArrayList;
+
+import paquete.Panel;
+import paquete.Posicion;
+import paquete.Sano;
+import paquete.Seccion;
 
 public class VentanaPuerta extends Ventana {
 

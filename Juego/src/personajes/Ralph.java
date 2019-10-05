@@ -1,12 +1,19 @@
-package paquete;
+package personajes;
 
-public class Ralph {
+import paquete.Contador;
+import paquete.Juego;
+import paquete.Ladrillo;
+import paquete.Orientacion;
+import paquete.Posicion;
+import taller2.modelo.Dibujable;
+import taller2.modelo.InformacionDibujable;
+
+public class Ralph extends Personaje {
 	// El edificio mide 100x300
 	// La ventana mide 10x20
 	// Ralph mide en X: 25
 
 	private Orientacion orientacion;
-	private Posicion posicion;
 	private int cantLadrillos;
 	private int ladrillosTirados;
 	private double velocidadLadrillo;
@@ -23,9 +30,7 @@ public class Ralph {
 		this.velocidadLadrillo = velocidadLadrillo;
 		posicion = p;
 		estaTirando = false;
-	}
-	public Posicion getPosicion(){
-		return posicion;
+		caracter = 'R';
 	}
 
 	/**

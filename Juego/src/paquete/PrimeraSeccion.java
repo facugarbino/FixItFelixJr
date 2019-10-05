@@ -1,5 +1,8 @@
 package paquete;
 
+import ventanas.VentanaPrimerPiso;
+import ventanas.VentanaPuerta;
+
 public class PrimeraSeccion extends Seccion {
 
 	public PrimeraSeccion(int ventanasRotas, int ventanasConObs) {
