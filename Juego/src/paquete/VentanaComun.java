@@ -19,7 +19,7 @@ public class VentanaComun extends Ventana {
 			caracter = 'X';
 			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
-			caracter ='□';
+			caracter ='[';
 			panelesRotos = 0;
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
@@ -41,7 +41,7 @@ public class VentanaComun extends Ventana {
 	}
 
 	/**
-	 * decide si poner un Nicelander en el panel
+	 * Decide si poner un Nicelander en el panel
 	 * inferior de la ventana
 	 * 
 	 */
@@ -50,6 +50,7 @@ public class VentanaComun extends Ventana {
 			nicelander = new Nicelander(
 					new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
 					this);
+			System.out.println("Se asoma un Nicelander en la ventana "+ this.posicion);
 			yaHuboNicelander = true;
 		}
 	}

@@ -16,7 +16,7 @@ public class VentanaPrimerPiso extends Ventana {
 			caracter ='X';
 			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
-			caracter ='□';
+			caracter ='[';
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
 			}

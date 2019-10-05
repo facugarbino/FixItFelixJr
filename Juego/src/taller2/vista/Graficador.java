@@ -1,11 +1,16 @@
 package taller2.vista;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
+import paquete.Juego;
+import paquete.Mapa;
+import paquete.Orientacion;
 import taller2.modelo.Dibujable;
 import taller2.modelo.InformacionDibujable;
 
@@ -14,8 +19,8 @@ import taller2.modelo.InformacionDibujable;
  * interfaz Dibujable), sólo necesito su posicón y un caracter representativo para mostrarlo
  * */
 public class Graficador {
-   private static final int ANCHO = 200;
-   private static final int ALTO = 300;
+   private static final int ANCHO = Mapa.ANCHO;
+   private static final int ALTO = Mapa.ALTO;
    private static final int DELTA = 50;
    private static JFrame frame = new JFrame("Visualización Fix It Felix");
    private static final int margen = 50;
@@ -24,6 +29,36 @@ public class Graficador {
       frame.setSize(300, 400);
       frame.setVisible(true);
       frame.setResizable(false);
+      frame.addKeyListener(new KeyListener() {
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			 int keyCode = arg0.getKeyCode();
+			 Juego j = Juego.getJuego();
+		        switch(keyCode) {
+		        case KeyEvent.VK_UP: j.moverFelix(Orientacion.ARRIBA); break;
+		        case KeyEvent.VK_DOWN: j.moverFelix(Orientacion.ABAJO); break;
+		        case KeyEvent.VK_LEFT: j.moverFelix(Orientacion.IZQUIERDA); break;
+		        case KeyEvent.VK_RIGHT: j.moverFelix(Orientacion.DERECHA); break;
+		        case KeyEvent.VK_ENTER: j.darMartillazo(); break;
+		        case KeyEvent.VK_P: j.pausar(); break;
+		        }
+		            
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+    	  
+      });
    }
 
    public static void refrescarTopDown(List<? extends Dibujable> listaDibujables, int delayMilis) {

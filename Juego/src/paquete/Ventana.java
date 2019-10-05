@@ -7,6 +7,9 @@ import taller2.modelo.InformacionDibujable;
 
 public abstract class Ventana implements Dibujable{
 
+	public static final int ANCHO = 10;
+	public static final int ALTO = 20;
+	
 	protected Posicion posicion;
 	protected Seccion seccion;
 	private Pastel pastel;
@@ -17,6 +20,7 @@ public abstract class Ventana implements Dibujable{
 	protected int panelesRotos;
 	protected int panelesReparados;
 	Character caracter;
+	
 
 	/**
 	 * @see Método llamado por Felix para moverse
@@ -62,7 +66,7 @@ public abstract class Ventana implements Dibujable{
 				cantMartillazos=0;
 				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
-					caracter = '□';
+					caracter = '[';
 				}
 				return true;
 			}

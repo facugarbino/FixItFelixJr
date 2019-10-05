@@ -78,7 +78,7 @@ public class Ralph {
 	}
 
 	public void subirDeSeccion() {
-		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion();
+		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion().copia();
 		p.moverY(100);
 		posicion = p;
 

@@ -145,7 +145,7 @@ public class Juego {
 			System.out.println("Felix Jr. avanza de seccion");
 			seccionActual = mapa.getEdificio().avanzarSeccion();
 			tiempo = nivel.getTiempo();
-			felix.setPosicion(seccionActual.getVentanaInicial().getPosicion());
+			felix.setPosicion(seccionActual.getVentanaInicial().getPosicion().copia());
 			ralph.subirDeSeccion();
 		} else {
 			pasarDeNivel();
@@ -160,9 +160,10 @@ public class Juego {
 	public void reiniciarNivel(int vidasDeFelix) {
 		mapa = nivel.crearMapa();
 		seccionActual = mapa.getEdificio().getSeccionActual();
-		felix = new FelixJr(new Posicion(95, 10), seccionActual.getVentanaInicial(), vidasDeFelix);
-		ralph = new Ralph(new Posicion(95, 110), nivel.getCantLadrillos(), nivel.getFrecuenciaLadrillo(),
+		felix = new FelixJr(seccionActual.getVentanaInicial().getPosicion().copia(), seccionActual.getVentanaInicial(), vidasDeFelix);
+		ralph = new Ralph(seccionActual.getVentanaInicial().getPosicion().copia(), nivel.getCantLadrillos(), nivel.getFrecuenciaLadrillo(),
 				nivel.getVelocidadLadrillo());
+		ralph.getPosicion().moverY(Seccion.ALTO);
 		tiempo = nivel.getTiempo();
 		timer = new Contador(50);
 	}

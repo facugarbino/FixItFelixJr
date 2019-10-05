@@ -3,13 +3,14 @@ package paquete;
 
 public class Pajaro extends Componente {
 
-	final int ANCHO = 15;
+	private final int ANCHO = 15;
 	//sus coordenadas indican el centro
-	public Pajaro(Posicion p, int frecuencia, Orientacion o) {
+	public Pajaro(Posicion p, double frecuencia, Orientacion o, Mapa m) {
 		posicion = p;
 		timer = new Contador(frecuencia);
 		orientacion = o;
 		caracter = 'P';
+		mapa = m;
 	}
 
 	/**
@@ -26,7 +27,7 @@ public class Pajaro extends Componente {
 				comoAvanzo();
 			}
 		} else {
-			if (posicion.getX() < (200 - (ANCHO))) {
+			if (posicion.getX() < (Mapa.ANCHO - (ANCHO))) {
 				posicion.moverX(1);
 			} else {
 				setOrientacion(Orientacion.IZQUIERDA);
