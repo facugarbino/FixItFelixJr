@@ -7,6 +7,7 @@ import juego.Seccion;
 import utils.Contador;
 import utils.Posicion;
 import ventanas.extra.Nicelander;
+import ventanas.extra.Pastel;
 import ventanas.obstaculos.Macetero;
 import ventanas.obstaculos.Moldura;
 import ventanas.paneles.Panel;
@@ -16,7 +17,7 @@ public class VentanaComun extends Ventana {
 
 	private static final int CANT_PANELES = 2;
 	private boolean yaHuboNicelander = false;
-	Contador timer = new Contador(Math.random() * 75 + 25);
+	Contador timer = new Contador(Math.random() * 5000 + 1000);
 
 	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
 		this.posicion = posicion;
@@ -61,6 +62,12 @@ public class VentanaComun extends Ventana {
 					this);
 			System.out.println("Se asoma un Nicelander en la ventana "+ this.posicion);
 			yaHuboNicelander = true;
+		} else {
+			if (nicelander!=null) {
+				if (nicelander.ponerPastel()) {
+					nicelander = null;
+				}
+			}
 		}
 	}
 

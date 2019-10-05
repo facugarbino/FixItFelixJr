@@ -66,7 +66,7 @@ public class Graficador {
       while(var4.hasNext()) {
          Dibujable i = (Dibujable)var4.next();
          InformacionDibujable id = i.getInformacionDibujable();
-         gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, id.getY() + margen);
+         gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, ALTO-(id.getY() + margen));
       }
 
       try {

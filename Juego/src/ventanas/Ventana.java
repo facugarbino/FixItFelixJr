@@ -58,7 +58,7 @@ public abstract class Ventana implements Dibujable{
 	
 
 	public InformacionDibujable getInformacionDibujable(){
-		return new InformacionDibujable(posicion.getX(),300-posicion.getY(), caracter);
+		return new InformacionDibujable(posicion.getX(),posicion.getY(), caracter);
 		
 	}
 	/**

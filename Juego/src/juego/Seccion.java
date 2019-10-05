@@ -75,8 +75,9 @@ public class Seccion {
 	 */
 	private Ventana ventanaRandom(Posicion posicion, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
-		System.out.println(
+		/*System.out.println(
 				"La ventana en " + posicion + (rota ? "está rota" : "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
+				*/
 		if (random < 0.2 && !rota) {
 			// Con hojas
 			return new VentanaConHojas(posicion, this, tieneObstaculo);
