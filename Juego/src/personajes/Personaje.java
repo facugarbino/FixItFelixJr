@@ -1,8 +1,8 @@
 package personajes;
 
-import paquete.Posicion;
-import taller2.modelo.Dibujable;
-import taller2.modelo.InformacionDibujable;
+import graficador.modelo.Dibujable;
+import graficador.modelo.InformacionDibujable;
+import utils.Posicion;
 
 public abstract class Personaje implements Dibujable{
 	protected Posicion posicion;

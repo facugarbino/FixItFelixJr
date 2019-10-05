@@ -2,10 +2,10 @@ package ventanas;
 
 import java.util.ArrayList;
 
-import paquete.Panel;
-import paquete.Posicion;
-import paquete.Sano;
-import paquete.Seccion;
+import juego.Seccion;
+import utils.Posicion;
+import ventanas.paneles.Panel;
+import ventanas.paneles.Sano;
 
 public class VentanaPrimerPiso extends Ventana {
 

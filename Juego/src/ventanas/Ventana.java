@@ -2,19 +2,19 @@ package ventanas;
 
 import java.util.*;
 
-import paquete.EstadoPanel;
-import paquete.MedioRoto;
-import paquete.Nicelander;
-import paquete.Obstaculo;
-import paquete.Orientacion;
-import paquete.Panel;
-import paquete.Pastel;
-import paquete.Posicion;
-import paquete.Roto;
-import paquete.Sano;
-import paquete.Seccion;
-import taller2.modelo.Dibujable;
-import taller2.modelo.InformacionDibujable;
+import graficador.modelo.Dibujable;
+import graficador.modelo.InformacionDibujable;
+import juego.Seccion;
+import utils.Orientacion;
+import utils.Posicion;
+import ventanas.extra.Nicelander;
+import ventanas.extra.Pastel;
+import ventanas.obstaculos.Obstaculo;
+import ventanas.paneles.EstadoPanel;
+import ventanas.paneles.MedioRoto;
+import ventanas.paneles.Panel;
+import ventanas.paneles.Roto;
+import ventanas.paneles.Sano;
 
 public abstract class Ventana implements Dibujable{
 

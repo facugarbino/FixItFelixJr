@@ -3,14 +3,14 @@ package ventanas;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import paquete.Contador;
-import paquete.Macetero;
-import paquete.Moldura;
-import paquete.Nicelander;
-import paquete.Panel;
-import paquete.Posicion;
-import paquete.Sano;
-import paquete.Seccion;
+import juego.Seccion;
+import utils.Contador;
+import utils.Posicion;
+import ventanas.extra.Nicelander;
+import ventanas.obstaculos.Macetero;
+import ventanas.obstaculos.Moldura;
+import ventanas.paneles.Panel;
+import ventanas.paneles.Sano;
 
 public class VentanaComun extends Ventana {
 

@@ -2,12 +2,12 @@ package ventanas;
 
 import java.util.ArrayList;
 
-import paquete.HojaDerecha;
-import paquete.HojaIzquierda;
-import paquete.Panel;
-import paquete.Posicion;
-import paquete.Sano;
-import paquete.Seccion;
+import juego.Seccion;
+import utils.Posicion;
+import ventanas.obstaculos.HojaDerecha;
+import ventanas.obstaculos.HojaIzquierda;
+import ventanas.paneles.Panel;
+import ventanas.paneles.Sano;
 
 public class VentanaConHojas extends Ventana {
 

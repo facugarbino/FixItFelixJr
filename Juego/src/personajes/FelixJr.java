@@ -1,12 +1,12 @@
 package personajes;
 
-import paquete.Contador;
-import paquete.Juego;
-import paquete.Ladrillo;
-import paquete.Orientacion;
-import paquete.Pajaro;
-import paquete.Posicion;
-import taller2.modelo.InformacionDibujable;
+import componentes.Ladrillo;
+import componentes.Pajaro;
+import graficador.modelo.InformacionDibujable;
+import juego.Juego;
+import utils.Contador;
+import utils.Orientacion;
+import utils.Posicion;
 import ventanas.Ventana;
 
 public class FelixJr extends Personaje {

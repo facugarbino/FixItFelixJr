@@ -1,12 +1,12 @@
 package personajes;
 
-import paquete.Contador;
-import paquete.Juego;
-import paquete.Ladrillo;
-import paquete.Orientacion;
-import paquete.Posicion;
-import taller2.modelo.Dibujable;
-import taller2.modelo.InformacionDibujable;
+import componentes.Ladrillo;
+import graficador.modelo.Dibujable;
+import graficador.modelo.InformacionDibujable;
+import juego.Juego;
+import utils.Contador;
+import utils.Orientacion;
+import utils.Posicion;
 
 public class Ralph extends Personaje {
 	// El edificio mide 100x300
