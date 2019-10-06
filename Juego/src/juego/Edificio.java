@@ -17,6 +17,11 @@ public class Edificio {
 		this.seccionActual = secciones.get(0);
 	}
 
+	/**
+	 * 
+	 * @param i el número de seccion (1,2 o 3)
+	 * @return la sección que se solicita
+	 */
 	public Seccion getSeccion(int i) {
 		return secciones.get(i - 1);
 	}
@@ -25,6 +30,10 @@ public class Edificio {
 		return seccionActual;
 	}
 
+	/**
+	 * 
+	 * @return la sección nueva
+	 */
 	public Seccion avanzarSeccion() {
 		this.seccionActual = secciones.get(secciones.indexOf(seccionActual) + 1);
 		return seccionActual;
@@ -34,6 +43,13 @@ public class Edificio {
 		return posicion;
 	}
 
+	/**
+	 * Se regenera una sección nueva aleatoramiente, 
+	 * pero con las mismas características 
+	 * (nro. de ventanas rotas y con obstaculo)
+	 * 
+	 * @param vieja seccion a regenerar
+	 */
 	public void reemplazarSeccion(Seccion vieja) {
 		Seccion nueva;
 		if (vieja instanceof PrimeraSeccion) {

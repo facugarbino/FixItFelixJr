@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
+import juego.Edificio;
 import juego.Juego;
 import juego.Mapa;
 import utils.Orientacion;
@@ -21,12 +22,12 @@ public class Graficador {
 	private static final int ANCHO = Mapa.ANCHO;
 	private static final int ALTO = Mapa.ALTO;
 	private static JFrame frame = new JFrame("Visualización Fix It Felix");
-	private static final int margen = 50;
+	private static final int margen = (int)(Mapa.ANCHO/3.0);
 	private static Juego juego = Juego.getJuego();
 	private static Graphics gr;
 
 	static {
-		frame.setSize(300, 400);
+		frame.setSize(Mapa.ANCHO+2*margen, Mapa.ALTO+margen);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		// Esto para que se cierre por completo el juego
@@ -84,30 +85,25 @@ public class Graficador {
 		});
 	}
 
-	public static void pausa() {
-		gr.clearRect(ANCHO / 2 - 100, ALTO / 2 - 100, 200, 200);
-		gr.drawRect(ANCHO / 2 - 100, ALTO / 2 - 100, 200, 200);
-		gr.drawString("PAUSA", ANCHO / 2 + 20, ALTO / 2);
+	public static void mensaje(String mensaje) {
+		gr.clearRect(margen+(ANCHO / 2)-2 - 100, ALTO / 2 - 100, ANCHO, ALTO / 2);
+		gr.drawRect(margen+(ANCHO / 2)-2 - 100, ALTO / 2 - 100, ANCHO, ALTO / 2);
+		gr.drawString(mensaje, ANCHO / 2 + 20, ALTO / 2);
 	}
-
-	public static void perder() {
-		gr.clearRect(ANCHO / 2 - 100, ALTO / 2 - 100, 200, 200);
-		gr.drawRect(ANCHO / 2 - 100, ALTO / 2 - 100, 200, 200);
-		gr.drawString("GAME OVER", ANCHO / 2, ALTO / 2);
-	}
+	
 
 	public static void refrescarTopDown(List<? extends Dibujable> listaDibujables) {
 		Iterator var4 = listaDibujables.iterator();
-		gr.clearRect(0, 0, ANCHO + margen, ALTO + margen);
+		gr.clearRect(0, 0, ANCHO + 2*margen, ALTO + 2*margen);
 		while (var4.hasNext()) {
 			Dibujable i = (Dibujable) var4.next();
 			InformacionDibujable id = i.getInformacionDibujable();
-			gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, ALTO - (id.getY() + margen));
+			gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, ALTO - (id.getY() ));
 		}
-		gr.drawString("Nivel: " + juego.getNroNivel(), 5, 10);
-		gr.drawString("Tiempo: " + juego.getTiempo(), 60, 10);
-		gr.drawString("Vidas: " + juego.getFelix().getVidas(), 5, 30);
-		gr.drawString("Puntaje: " + (juego.getJugador().getPuntaje() + juego.getFelix().getPuntaje()), 60, 30);
+		gr.drawString("Nivel: " + juego.getNroNivel(), 5, 20);
+		gr.drawString("Tiempo: " + juego.getTiempo(), 60, 20);
+		gr.drawString("Vidas: " + juego.getFelix().getVidas(), 5, 40);
+		gr.drawString("Puntaje: " + (juego.getJugador().getPuntaje() + juego.getFelix().getPuntaje()), 60, 40);
 
 	}
 }

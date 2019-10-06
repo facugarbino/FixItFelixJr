@@ -26,7 +26,7 @@ public class TestJuego {
 		loop();
 	}
 
-	static void loop() {
+	private static void loop() {
 		Contador timer = new Contador(10);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
 		List<Dibujable> lista = new ArrayList<Dibujable>(); 
@@ -67,10 +67,14 @@ public class TestJuego {
 				}
 				j.hacerTodo();
 			} else {
+				if (j.yaGano()) {
+					Graficador.mensaje("HAS GANADO!");
+					break;
+				}
 				if (j.getTiempo()>0&&j.getFelix().getVidas()>1) {
-					Graficador.pausa();
+					Graficador.mensaje("PAUSA");
 				} else {
-					Graficador.perder();
+					Graficador.mensaje("GAME OVER");
 					break;
 				}
 			}

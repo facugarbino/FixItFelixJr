@@ -8,6 +8,12 @@ import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 
+/**
+ * Representa a Ralph, el demoledor.
+ * 
+ * @author facu
+ *
+ */
 public class Ralph extends Personaje {
 	// El edificio mide 100x300
 	// La ventana mide 10x20

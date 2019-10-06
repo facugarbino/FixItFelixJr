@@ -21,7 +21,7 @@ public class Ladrillo extends Componente {
 	 * Tiene la lógica para que un ladrillo avance
 	 * (caiga verticalmente) a determinada velocidad
 	 */
-	public void comoAvanzo() {
+	protected void comoAvanzo() {
 		posicion.moverY(-1);
 		//System.out.println("Un ladrillo avanza a la posicion " + posicion);
 		if (mapa.estaFelix(posicion, ANCHO)) {

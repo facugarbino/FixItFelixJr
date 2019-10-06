@@ -18,7 +18,7 @@ public class Nube extends Componente {
 	/**
 	 * Hace la lógica para que la nube se mueva de extremo a extremo
 	 */
-	public void comoAvanzo() {
+	protected void comoAvanzo() {
 			if (orientacion == Orientacion.IZQUIERDA) {
 				if (posicion.getX() > 0) {
 					posicion.moverX(-1);

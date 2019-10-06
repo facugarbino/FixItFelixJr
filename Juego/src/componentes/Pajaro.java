@@ -23,7 +23,7 @@ public class Pajaro extends Componente {
 	 * de acuerdo al sentido en que está volando, y 
 	 * cambia de sentido cuando llega a los extremos
 	 */
-	public void comoAvanzo() {
+	protected void comoAvanzo() {
 		if (orientacion == Orientacion.IZQUIERDA) {
 			if (posicion.getX() > 0) {
 				posicion.moverX(-1);

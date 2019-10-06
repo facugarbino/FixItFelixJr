@@ -33,6 +33,7 @@ public class Juego {
 	private boolean pausa;
 	private Seccion seccionActual;
 	private boolean primeraVez;
+	private boolean yaGano;
 
 	/**
 	 * crea la única instancia de Juego
@@ -142,10 +143,14 @@ public class Juego {
 
 	}
 
+	public boolean yaGano() {
+		return yaGano;
+	}
 	private void ganar() {
 		HighScore hs = new HighScore(jugador);
 		ranking.agregarHighScore(hs);
 		pausa = true;
+		yaGano = true;
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
 	}
 
