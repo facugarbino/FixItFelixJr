@@ -36,10 +36,10 @@ public class Mapa {
 	
 	public List<Dibujable> getComponentesDibujables(){
 		List<Dibujable> lista = new ArrayList<>();
-		Iterator<Componente> ite = componentes.iterator();
-		while (ite.hasNext()){
-			lista.add(ite.next());
-		}
+		lista.addAll(componentes);
+		lista.addAll(edificio.getSeccion(1).getComponentesDibujables());
+		lista.addAll(edificio.getSeccion(2).getComponentesDibujables());
+		lista.addAll(edificio.getSeccion(3).getComponentesDibujables());	
 		return lista;
 	}
 

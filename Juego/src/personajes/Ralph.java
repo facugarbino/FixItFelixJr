@@ -12,6 +12,7 @@ public class Ralph extends Personaje {
 	// El edificio mide 100x300
 	// La ventana mide 10x20
 	// Ralph mide en X: 25
+	private static final int ANCHO = 25;
 
 	private Orientacion orientacion;
 	private int cantLadrillos;
@@ -51,8 +52,7 @@ public class Ralph extends Personaje {
 						darPaso(Orientacion.DERECHA);
 					} else {
 						orientacion = Orientacion.ABAJO;
-						System.out.println("Ralph mira para adelante");
-						// Significa que mira para adelante (10%)
+						//System.out.println("Ralph mira para adelante");
 					}
 				}
 			}
@@ -129,6 +129,6 @@ public class Ralph extends Personaje {
 	 * trayectoria de un ladrillo
 	 */
 	private int obtenerXRandom() {
-		return (int) ((Math.floor(Math.random() * 25) - (25 / 2)) + (this.posicion.getX()));
+		return (int) ((Math.floor(Math.random() * ANCHO) - (ANCHO / 2)) + (posicion.getX()));
 	}
 }

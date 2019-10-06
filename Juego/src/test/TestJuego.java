@@ -1,7 +1,6 @@
 package test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import graficador.modelo.Dibujable;
@@ -11,25 +10,12 @@ import utils.Contador;
 
 public class TestJuego {
 
-	static Juego j;
+	public static Juego j;
 
 	public static void main(String[] args) {
 		Juego.crearJuego("Facundo");
 		j = Juego.getJuego();
 		loop();
-	}
-
-	private static List<Dibujable> unirListas(List<List<Dibujable>> lista) {
-		List<Dibujable> listaR = new ArrayList<>();
-		Iterator<List<Dibujable>> iterator;
-		iterator = lista.iterator();
-		while (iterator.hasNext()) {
-			Iterator<Dibujable> iterator2 = iterator.next().iterator();
-			while (iterator2.hasNext()) {
-				listaR.add(iterator2.next());
-			}
-		}
-		return listaR;
 	}
 
 	static void loop() {
@@ -41,7 +27,7 @@ public class TestJuego {
 				if (timer.contar()) {
 					/*
 					 * Esto que está comentado serviría
-					 * para que Felix se mueva y tire ladrillos sólo.
+					 * para que Felix se mueva y martille sólo.
 					 * Pero mayoritariamente es golpeado por un ladrillo
 					 * o tarda mucho en romper todos los paneles.
 					 * 
@@ -50,12 +36,12 @@ public class TestJuego {
 					 * desde el graficador, usando las teclas.
 					 * ----------------------------------------------------
 					 * 
-					double xd = Math.random();
-					if (xd < 0.25)
+					double rnd = Math.random();
+					if (rnd < 0.25)
 						j.getFelix().mover(Orientacion.IZQUIERDA);
-					else if (xd < 0.50)
+					else if (rnd < 0.50)
 						j.getFelix().mover(Orientacion.DERECHA);
-					else if (xd < 0.75)
+					else if (rnd < 0.75)
 						j.getFelix().mover(Orientacion.ABAJO);
 					else
 						j.getFelix().mover(Orientacion.ARRIBA);
@@ -65,21 +51,15 @@ public class TestJuego {
 					}
 					*/
 					timer.resetear();
-					List<List<Dibujable>> listaGeneral = new ArrayList<>();
-					listaGeneral.add(j.getMapa().getComponentesDibujables());
-					listaGeneral.add(j.getMapa().getEdificio().getSeccion(1).getComponentesDibujables());
-					listaGeneral.add(j.getMapa().getEdificio().getSeccion(2).getComponentesDibujables());
-					listaGeneral.add(j.getMapa().getEdificio().getSeccion(3).getComponentesDibujables());
-					lista = unirListas(listaGeneral);
+					lista = j.getMapa().getComponentesDibujables();
 					lista.add(j.getRalph());
 					lista.add(j.getFelix());
-					Graficador.refrescarTopDown(lista,1);
+					Graficador.refrescarTopDown(lista);
 				}
 				j.hacerTodo();
-				
 			} else {
-				Graficador.refrescarTopDown(lista,1);
-				break;
+				Graficador.refrescarTopDown(new ArrayList<Dibujable>());
+				//break;
 			}
 		}
 	}

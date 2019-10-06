@@ -55,12 +55,12 @@ public class Nivel {
 		//Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
 		//y dos pajaros en la ultima seccion
 		if (Math.random()<0.5) { 
-			m.agregarComponente(new Pajaro(new Posicion(0,Seccion.ALTO*(4/3)), velocidadPajaro, Orientacion.DERECHA, m));
+			m.agregarComponente(new Pajaro(new Posicion(0,(int) (Seccion.ALTO*(4.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
 		} else {
-			m.agregarComponente(new Pajaro(new Posicion(0,Seccion.ALTO*(5/3)), velocidadPajaro, Orientacion.DERECHA, m));
+			m.agregarComponente(new Pajaro(new Posicion(0,(int) (Seccion.ALTO*(5.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
 		}
-		m.agregarComponente(new Pajaro(new Posicion(0,Seccion.ALTO*(7/3)), velocidadPajaro, Orientacion.DERECHA, m));
-		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO,Seccion.ALTO*(8/3)), velocidadPajaro, Orientacion.DERECHA, m));
+		m.agregarComponente(new Pajaro(new Posicion(0,(int)(Seccion.ALTO*(7/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
+		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO,(int)(Seccion.ALTO*(8/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
 		
 		return m;
 	}

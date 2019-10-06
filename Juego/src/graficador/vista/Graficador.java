@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 import graficador.modelo.Dibujable;
@@ -21,15 +20,19 @@ import utils.Orientacion;
 public class Graficador {
    private static final int ANCHO = Mapa.ANCHO;
    private static final int ALTO = Mapa.ALTO;
-   private static final int DELTA = 50;
    private static JFrame frame = new JFrame("Visualización Fix It Felix");
    private static final int margen = 50;
    private static Juego juego = Juego.getJuego();
-
+   private static Graphics gr;
+   
    static {
       frame.setSize(300, 400);
       frame.setVisible(true);
       frame.setResizable(false);
+      gr = frame.getContentPane().getGraphics();
+      //Investigamos y agregamos este Listener para mover a Felix
+      //así se puede ver cómo funciona el resto del juego,
+      //pasando de sección y de nivel.
       frame.addKeyListener(new KeyListener() {
 	
 		@Override
@@ -59,8 +62,7 @@ public class Graficador {
       });
    }
 
-   public static void refrescarTopDown(List<? extends Dibujable> listaDibujables, int delayMilis) {
-      Graphics gr = frame.getContentPane().getGraphics();
+   public static void refrescarTopDown(List<? extends Dibujable> listaDibujables) {
       Iterator var4 = listaDibujables.iterator();
       gr.clearRect(0, 0, ANCHO + margen, ALTO + margen);
       while(var4.hasNext()) {
@@ -68,32 +70,8 @@ public class Graficador {
          InformacionDibujable id = i.getInformacionDibujable();
          gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, ALTO-(id.getY() + margen));
       }
-
-      try {
-         TimeUnit.MILLISECONDS.sleep((long)delayMilis);
-      } catch (InterruptedException var6) {
-         var6.printStackTrace();
-      }
-
-      
-   }
-   
-
-   public static void refrescarDownTop(List<? extends Dibujable> listaDibujables, int delayMilis) {
-      Graphics gr = frame.getContentPane().getGraphics();
-      Iterator var4 = listaDibujables.iterator();
-      gr.clearRect(0, 0, ANCHO + margen, ALTO + margen);
-      while(var4.hasNext()) {
-         Dibujable i = (Dibujable)var4.next();
-         InformacionDibujable id = i.getInformacionDibujable();
-         gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, 500 - id.getY());
-      }
-
-      try {
-         TimeUnit.MILLISECONDS.sleep((long)delayMilis);
-      } catch (InterruptedException var6) {
-         var6.printStackTrace();
-      }
+      gr.drawString("Nivel: "+ juego.getNroNivel(), 5, 20);
+      gr.drawString("Tiempo: "+ juego.getTiempo(), 60, 20);
 
       
    }

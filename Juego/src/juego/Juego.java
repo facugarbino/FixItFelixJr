@@ -34,7 +34,7 @@ public class Juego {
 
 	private Juego(String nombre) {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
-		nivel = new Nivel(10, 30, 2000, 50, 10, 6, 600, 10, 40);
+		nivel = new Nivel(10, 30, 2000, 50, 30, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador(nombre);
@@ -46,6 +46,12 @@ public class Juego {
 
 	}
 
+	public int getTiempo() {
+		return tiempo;
+	}
+	public int getNroNivel() {
+		return nivel.getNroNivel();
+	}
 	public boolean estaPausado() {
 		return pausa;
 	}
@@ -174,7 +180,7 @@ public class Juego {
 				nivel.getVelocidadLadrillo());
 		ralph.getPosicion().moverY(Seccion.ALTO);
 		tiempo = nivel.getTiempo();
-		timer = new Contador(50);
+		timer = new Contador(100);
 	}
 
 	/**
