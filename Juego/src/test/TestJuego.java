@@ -8,6 +8,14 @@ import graficador.vista.Graficador;
 import juego.Juego;
 import utils.Contador;
 
+/**
+ * Clase que permite testear el juego, con 
+ * mensajes en la consola y un graficador básico
+ * que permite jugar con las teclas.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class TestJuego {
 
 	public static Juego j;
@@ -19,7 +27,7 @@ public class TestJuego {
 	}
 
 	static void loop() {
-		Contador timer = new Contador(50);
+		Contador timer = new Contador(10);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
 		List<Dibujable> lista = new ArrayList<Dibujable>(); 
 		while (true) {
@@ -51,6 +59,7 @@ public class TestJuego {
 					}
 					*/
 					timer.resetear();
+					//Grafica todo
 					lista = j.getMapa().getComponentesDibujables();
 					lista.add(j.getRalph());
 					lista.add(j.getFelix());
@@ -58,8 +67,12 @@ public class TestJuego {
 				}
 				j.hacerTodo();
 			} else {
-				Graficador.refrescarTopDown(new ArrayList<Dibujable>());
-				//break;
+				if (j.getTiempo()>0&&j.getFelix().getVidas()>1) {
+					Graficador.pausa();
+				} else {
+					Graficador.perder();
+					break;
+				}
 			}
 		}
 	}

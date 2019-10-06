@@ -18,7 +18,7 @@ public abstract class Componente implements Dibujable {
 	}
 
 	public void avanzar() {
-		if (timer.contar()) {
+  		if (timer.contar()) {
 			timer.resetear();
 			comoAvanzo();
 		}

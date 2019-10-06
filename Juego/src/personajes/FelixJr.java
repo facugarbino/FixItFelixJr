@@ -95,7 +95,7 @@ public class FelixJr extends Personaje {
 			Juego.getJuego().reiniciarNivel(vidas);
 			puntajeNivel = 0;
 			puntajeSeccion = 0;
-			System.out.println("Pierde una vida. (Quedan " + vidas + " )");
+			System.out.println("Pierde una vida. (Quedan " + vidas + ")");
 		} else {
 			Juego.getJuego().perder(puntajeNivel + puntajeSeccion);
 		}
@@ -108,7 +108,7 @@ public class FelixJr extends Personaje {
 	public void golpear(Pajaro pajaro) {
 		Juego.getJuego().reiniciarSeccion();
 		puntajeSeccion = 0;
-		System.out.println("Felix es golpeado por un pajaro, reinicia la seccion");
+		System.out.println("Felix es golpeado por un pájaro, reinicia la seccion");
 	}
 
 	public int getVidas() {

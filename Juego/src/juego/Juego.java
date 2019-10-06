@@ -8,7 +8,18 @@ import ranking.HighScore;
 import ranking.Ranking;
 import utils.Contador;
 import utils.Orientacion;
+import ventanas.Ventana;
 
+/**
+ * Clase que se encarga del funcionamiento general del juego.
+ * Hace falta llamar a su método hacerTodo() indefinidamente
+ * para que funcione.
+ * Es un singleton. La única instancia se obtiene con el
+ * método getJuego()
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Juego {
 	private static Juego juego;
 	private Ranking ranking;
@@ -34,7 +45,7 @@ public class Juego {
 
 	private Juego(String nombre) {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
-		nivel = new Nivel(10, 30, 2000, 50, 30, 6, 300, 10, 40);
+		nivel = new Nivel(10, 25, 1500, 20, 15, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador(nombre);
@@ -118,6 +129,7 @@ public class Juego {
 	public void pasarDeNivel() {
 		if (primeraVez) {
 			reiniciarNivel(3);
+			primeraVez = false;
 		} else {
 			jugador.sumarPuntos(felix.getPuntaje());
 			if (nivel.hayOtroNivel()) {
@@ -135,7 +147,6 @@ public class Juego {
 		ranking.agregarHighScore(hs);
 		pausa = true;
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
-
 	}
 
 	/**
@@ -178,9 +189,10 @@ public class Juego {
 		felix = new FelixJr(seccionActual.getVentanaInicial().getPosicion().copia(), seccionActual.getVentanaInicial(), vidasDeFelix);
 		ralph = new Ralph(seccionActual.getVentanaInicial().getPosicion().copia(), nivel.getCantLadrillos(), nivel.getFrecuenciaLadrillo(),
 				nivel.getVelocidadLadrillo());
+
 		ralph.getPosicion().moverY(Seccion.ALTO);
 		tiempo = nivel.getTiempo();
-		timer = new Contador(100);
+		timer = new Contador(50);
 	}
 
 	/**
@@ -203,10 +215,17 @@ public class Juego {
 	 */
 	public void reiniciarSeccion() {
 		mapa.getEdificio().reemplazarSeccion(seccionActual);
+		seccionActual = mapa.getEdificio().getSeccionActual();
+		Ventana v = seccionActual.getVentanaInicial();
+		felix.setVentana(v);
+		felix.setPosicion(v.getPosicion().copia());
 	}
 
 	public Mapa getMapa() {
 		return mapa;
 	}
 
+	public Jugador getJugador() {
+		return jugador;
+	}
 }

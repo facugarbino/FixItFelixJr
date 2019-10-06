@@ -35,10 +35,14 @@ public class Edificio {
 	}
 
 	public void reemplazarSeccion(Seccion vieja) {
+		Seccion nueva;
 		if (vieja instanceof PrimeraSeccion) {
-			secciones.set(secciones.indexOf(vieja), new PrimeraSeccion(vieja));
+			nueva = new PrimeraSeccion(vieja);
+			secciones.set(0, nueva);
 		} else {
-			secciones.set(secciones.indexOf(vieja), new Seccion(vieja));
+			nueva = new Seccion(vieja);
+			secciones.set(vieja.getNroSeccion()-1, nueva);
 		}
+		this.seccionActual = nueva;
 	}
 }

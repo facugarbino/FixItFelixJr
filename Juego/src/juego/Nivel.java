@@ -8,6 +8,13 @@ import componentes.Pajaro;
 import utils.Orientacion;
 import utils.Posicion;
 
+/**
+ * Se encarga de actualizar la dificultad y
+ * generar un mapa nuevo para cada nivel.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Nivel {
 	private final double velocidadNube = 100;
 	private int nivelMax;
@@ -43,8 +50,7 @@ public class Nivel {
 	 */
 	public Mapa crearMapa() {
 		ArrayList<Seccion> secciones = new ArrayList<>();
-		secciones
-				.add((Seccion) new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
+		secciones.add((Seccion) new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
 		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3), 2));
 		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6), 3));
 		Edificio e = new Edificio(new Posicion(50, 0), secciones);
@@ -59,9 +65,8 @@ public class Nivel {
 		} else {
 			m.agregarComponente(new Pajaro(new Posicion(0,(int) (Seccion.ALTO*(5.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
 		}
-		m.agregarComponente(new Pajaro(new Posicion(0,(int)(Seccion.ALTO*(7/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
-		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO,(int)(Seccion.ALTO*(8/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
-		
+		m.agregarComponente(new Pajaro(new Posicion(0,(int)(Seccion.ALTO*(7.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
+		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO,(int)(Seccion.ALTO*(8.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
 		return m;
 	}
 
@@ -73,8 +78,10 @@ public class Nivel {
 		nroNivel++;
 		cantVentanasRotas *= ((100 + porcentaje) / 100.0);
 		frecuenciaLadrillo -= frecuenciaLadrillo * (porcentaje / 100.0);
-		velocidadLadrillo *= ((100 + porcentaje) / 100.0);
+		velocidadLadrillo -= velocidadLadrillo * (porcentaje / 100.0);
+		velocidadPajaro -= velocidadPajaro* (porcentaje / 100.0);
 		ventanasConObstaculo *= ((100 + porcentaje) / 100.0);
+		cantLadrillos+=6;
 		tiempo -= tiempo * 0.1;
 	}
 
@@ -107,7 +114,7 @@ public class Nivel {
 	}
 
 	public boolean hayOtroNivel() {
-		return nroNivel != nivelMax;
+		return nroNivel < nivelMax;
 	}
 
 	public int getCantLadrillos() {

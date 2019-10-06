@@ -11,6 +11,13 @@ import ventanas.Ventana;
 import ventanas.VentanaComun;
 import ventanas.VentanaConHojas;
 
+/**
+ * Representa una de las 3 secciones del edificio.
+ * Tiene incluida las 15 ventanas.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Seccion {
 	public static final int ANCHO = Edificio.ANCHO;
 	public static final int ALTO = Edificio.ANCHO;
@@ -34,50 +41,56 @@ public class Seccion {
 	}
 
 	/**
-	 * @see constructor que elige aleatoramiente una distribución de ventanas
-	 * que cumple con la cantidad solicitad de ventanas rotas y con obstáculo
+	 * @see constructor que elige aleatoramiente una distribución de ventanas que
+	 *      cumple con la cantidad solicitad de ventanas rotas y con obstáculo
 	 * 
 	 * @param ventanasRotas
 	 * @param ventanasConObstaculo
 	 * @param nroSeccion
 	 */
 	public Seccion(int ventanasRotas, int ventanasConObstaculo, int nroSeccion) {
-		this.ventanasRotas = ventanasRotas;
+		//chequeamos que no se guarde más de 15 así no se bugea al ganar
+		if (ventanasRotas > 15)
+			ventanasRotas = 15;
+		else
+			this.ventanasRotas = ventanasRotas;
+
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		this.nroSeccion = nroSeccion;
 		ventanasReparadas = 0;
-		this.nroSeccion = nroSeccion;
 		boolean[][] conObstaculo = getMatrizRandom(ventanasConObstaculo);
 		boolean[][] rotas = getMatrizRandom(ventanasRotas);
 		ventanas = new Ventana[FILAS][COLUMNAS];
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
-				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2-i)*30 );
-				//Esta posicion luego la genereremos con valores CONSTANTES para poder modificar m�s simplemente
-				//el tama�o/posici�n del edificio, el tama�o de las ventanas, etc.
+				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2 - i) * 30);
+				// Esta posicion luego la genereremos con valores CONSTANTES para poder
+				// modificar más simplemente
+				// el tamaño/posición del edificio, el tamaño de las ventanas, etc.
 				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}
 
 	}
-	
+
 	public int getNroSeccion() {
 		return nroSeccion;
 	}
-	
+
 	/**
 	 * 
-	 * @param posicion 
+	 * @param posicion
 	 * @param rota
 	 * @param tieneObstaculo
-	 * @return una ventana aleatoria (común o con hojas) según
-	 * sus parámetros de entrada
+	 * @return una ventana aleatoria (común o con hojas) según sus parámetros de
+	 *         entrada
 	 */
 	private Ventana ventanaRandom(Posicion posicion, boolean rota, boolean tieneObstaculo) {
 		double random = Math.random();
-		/*System.out.println(
-				"La ventana en " + posicion + (rota ? "está rota" : "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
-				*/
+		/*
+		 * System.out.println( "La ventana en " + posicion + (rota ? "está rota" :
+		 * "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
+		 */
 		if (random < 0.2 && !rota) {
 			// Con hojas
 			return new VentanaConHojas(posicion, this, tieneObstaculo);
@@ -85,11 +98,10 @@ public class Seccion {
 			return new VentanaComun(posicion, this, rota, tieneObstaculo);
 		}
 	}
-	
+
 	/**
-	 * método llamado por juego en cada iteración, que
-	 * delega a cada ventana la decisión de que se coloque
-	 * un Nicelander o no en su panel inferior
+	 * método llamado por juego en cada iteración, que delega a cada ventana la
+	 * decisión de que se coloque un Nicelander o no en su panel inferior
 	 */
 	public void generarNicelanders() {
 		for (int i = 0; i < FILAS; i++) {
@@ -102,8 +114,8 @@ public class Seccion {
 	/**
 	 * 
 	 * @param v ventana
-	 * @return <b>true</b> si la ventana pertenece a la sección,
-	 *  o <b>false</b> en caso contrario
+	 * @return <b>true</b> si la ventana pertenece a la sección, o <b>false</b> en
+	 *         caso contrario
 	 */
 	public boolean esDeEstaSeccion(Ventana v) {
 		for (int i = 0; i < FILAS; i++)
@@ -117,8 +129,8 @@ public class Seccion {
 	 * 
 	 * @param ventana
 	 * @param orientacion
-	 * @return la <b>ventana</b> que se encuentra en la direccion
-	 * indicada a cierta ventana, dentro de la sección
+	 * @return la <b>ventana</b> que se encuentra en la direccion indicada a cierta
+	 *         ventana, dentro de la sección
 	 */
 	public Ventana getVentanaAledana(Ventana ventana, Orientacion orientacion) {
 		Posicion p = getXY(ventana);
@@ -170,28 +182,29 @@ public class Seccion {
 	/**
 	 * 
 	 * @param n
-	 * @return una matriz de booleanos de 3x5 
-	 * con <b>n</b> elementos en <b>true</b>
+	 * @return una matriz de booleanos de 3x5 con <b>n</b> elementos en <b>true</b>
 	 */
 	private boolean[][] getMatrizRandom(int n) {
 		// la cantidad de trues tiene q ser n
 		boolean[][] matriz = new boolean[FILAS][COLUMNAS];
 		int hits = 0;
+		if (n > 15)
+			n = 15;
 		while (hits < n) {
 			int i = (int) (Math.random() * FILAS);
 			int j = (int) (Math.random() * COLUMNAS);
-			if (matriz[i][j]==false) {
+			if (matriz[i][j] == false) {
 				matriz[i][j] = true;
 				hits++;
 			}
 		}
 		return matriz;
 	}
-	
-	public List<Dibujable> getComponentesDibujables(){
+
+	public List<Dibujable> getComponentesDibujables() {
 		List<Dibujable> lista = new ArrayList<>();
-		for (int i=0;i<FILAS;i++){
-			for (int j=0;j<COLUMNAS;j++){
+		for (int i = 0; i < FILAS; i++) {
+			for (int j = 0; j < COLUMNAS; j++) {
 				lista.add(ventanas[i][j]);
 			}
 		}
