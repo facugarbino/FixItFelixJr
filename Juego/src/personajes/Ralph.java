@@ -26,7 +26,7 @@ public class Ralph extends Personaje {
 	public Ralph(Posicion p, int cantLadrillos, double frecuencia, double velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
 		timerFrecuencia = new Contador(frecuencia);
-		timerEntreLadrillos = new Contador(1000);
+		timerEntreLadrillos = new Contador(frecuencia/5);
 		timerCaminar = new Contador(100);
 		this.velocidadLadrillo = velocidadLadrillo;
 		posicion = p;
@@ -39,9 +39,6 @@ public class Ralph extends Personaje {
 	 */
 	public void mover() {
 		if (!estaTirando) {
-			if (timerFrecuencia.contar()) {
-				estaTirando=true;
-			}
 			if (timerCaminar.contar()) {
 				timerCaminar.resetear();
 				double random = Math.random();
@@ -67,6 +64,7 @@ public class Ralph extends Personaje {
 	 * @param o
 	 */
 	private void darPaso(Orientacion o) {
+		//Hay que cambiar los valores de X porque Ralph se aleja muhcho
 		if (o == Orientacion.IZQUIERDA && posicion.getX() > 77) {
 			orientacion = o;
 			posicion.moverX(-5);
@@ -107,7 +105,7 @@ public class Ralph extends Personaje {
 					cantLadrillos--;
 					timerEntreLadrillos.resetear();
 					System.out.println("Ralph tira una roca");
-					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY()), velocidadLadrillo,
+					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY()-ANCHO/2), velocidadLadrillo,
 							Juego.getJuego().getMapa());
 				}
 			}
