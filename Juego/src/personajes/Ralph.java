@@ -3,6 +3,7 @@ package personajes;
 import componentes.Ladrillo;
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
+import juego.Edificio;
 import juego.Juego;
 import utils.Contador;
 import utils.Orientacion;
@@ -28,6 +29,8 @@ public class Ralph extends Personaje {
 	private Contador timerFrecuencia;
 	private Contador timerEntreLadrillos;
 	private Contador timerCaminar;
+	private int limiteIzquierdo;
+	private int limiteDerecho;
 
 	public Ralph(Posicion p, int cantLadrillos, double frecuencia, double velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
@@ -38,6 +41,8 @@ public class Ralph extends Personaje {
 		posicion = p;
 		estaTirando = false;
 		caracter = 'R';
+		limiteIzquierdo = Edificio.ANCHO/2;
+		limiteDerecho = limiteIzquierdo + Edificio.ANCHO;
 	}
 
 	/**
@@ -71,12 +76,12 @@ public class Ralph extends Personaje {
 	 */
 	private void darPaso(Orientacion o) {
 		//Hay que cambiar los valores de X porque Ralph se aleja muhcho
-		if (o == Orientacion.IZQUIERDA && posicion.getX() > 77) {
+		if (o == Orientacion.IZQUIERDA && posicion.getX() > limiteIzquierdo) {
 			orientacion = o;
 			posicion.moverX(-5);
 			//System.out.println("Ralph se mueve a la izquierda");
 		} else {
-			if (!(posicion.getX() < 177)) {
+			if (!(posicion.getX() < limiteDerecho)) {
 				darPaso(Orientacion.IZQUIERDA);
 			} else {
 				orientacion = Orientacion.DERECHA;

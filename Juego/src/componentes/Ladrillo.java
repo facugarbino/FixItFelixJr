@@ -28,7 +28,6 @@ public class Ladrillo extends Componente {
 			System.out.println("Un ladrillo en la posicion " + posicion + " golpea a Felix");
 			Juego.getJuego().golpearFelix(this);
 		}
-
 		if (posicion.getY()==0) {
 			mapa.borrarComponente(this);
 		}

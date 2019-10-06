@@ -79,7 +79,7 @@ public class Graficador {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-
+			
 			}
 
 		});

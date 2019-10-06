@@ -3,14 +3,13 @@ package juego;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import componentes.Componente;
 import graficador.modelo.Dibujable;
-import graficador.modelo.InformacionDibujable;
 import utils.Posicion;
 
 public class Mapa {
-	public static final int  ANCHO = 200;
+
+	public static final int ANCHO = 200;
 	public static final int ALTO = 400;
 	private List<Componente> componentes;
 	private Edificio edificio;
@@ -33,13 +32,13 @@ public class Mapa {
 	public void borrarComponente(Componente c) {
 		componentesABorrar.add(c);
 	}
-	
-	public List<Dibujable> getComponentesDibujables(){
+
+	public List<Dibujable> getComponentesDibujables() {
 		List<Dibujable> lista = new ArrayList<>();
 		lista.addAll(componentes);
 		lista.addAll(edificio.getSeccion(1).getComponentesDibujables());
 		lista.addAll(edificio.getSeccion(2).getComponentesDibujables());
-		lista.addAll(edificio.getSeccion(3).getComponentesDibujables());	
+		lista.addAll(edificio.getSeccion(3).getComponentesDibujables());
 		return lista;
 	}
 
@@ -54,10 +53,9 @@ public class Mapa {
 
 	/**
 	 * 
-	 * @param p posicion del componente
-	 * @param diametro lado del cuadrado que forma 
-	 * @return <b>true</b> si colisiona con Felix,
-	 * <b>false</b> si no se chocan
+	 * @param p        posicion del componente
+	 * @param diametro lado del cuadrado que forma
+	 * @return <b>true</b> si colisiona con Felix, <b>false</b> si no se chocan
 	 */
 	public boolean estaFelix(Posicion p, int diametro) {
 		Posicion pFelix = Juego.getJuego().getFelix().getPosicion();
@@ -75,5 +73,17 @@ public class Mapa {
 
 	private boolean estaEntre(int num, int a, int b) {
 		return (num >= a && num <= b);
+	}
+
+	public void borrarComponentesDeSeccion(int nroSeccion) {
+		Iterator<Componente> ite = componentes.iterator();
+		Componente c;
+		while (ite.hasNext()) {
+			c = ite.next();
+			if (c.getPosicion().getY() < nroSeccion * Seccion.ALTO) {
+				borrarComponente(c);
+			}
+		}
+
 	}
 }

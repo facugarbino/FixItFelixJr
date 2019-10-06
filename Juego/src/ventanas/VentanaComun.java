@@ -62,6 +62,7 @@ public class VentanaComun extends Ventana {
 					this);
 			System.out.println("Se asoma un Nicelander en la ventana "+ this.posicion);
 			yaHuboNicelander = true;
+			caracter = '®';
 		} else {
 			if (nicelander!=null) {
 				if (nicelander.ponerPastel()) {

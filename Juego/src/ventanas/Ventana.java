@@ -91,6 +91,7 @@ public abstract class Ventana implements Dibujable{
 
 	public void comerPastel() {
 		pastel = null;
+		caracter = 'X';
 	}
 
 	public void generarNicelander() {
@@ -99,6 +100,7 @@ public abstract class Ventana implements Dibujable{
 
 	public void ponerPastel(Pastel comida) {
 		this.pastel = comida;
+		caracter = 'ó';
 	}
 
 	private boolean tieneObstaculo(Orientacion o) {

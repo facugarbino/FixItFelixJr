@@ -5,6 +5,7 @@ import java.util.List;
 import utils.Posicion;
 
 public class Edificio {
+
 	public static final int ANCHO = 100;
 	public static final int ALTO = 3*ANCHO;
 	private Posicion posicion;

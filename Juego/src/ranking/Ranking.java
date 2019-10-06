@@ -12,7 +12,7 @@ public class Ranking {
 	public Ranking() {
 		scores = new HighScore[5];
 		cantScores = 0;
-		for (int i=0;i<5;i++)
+		for (int i = 0; i < 5; i++)
 			scores[i] = new HighScore(new Jugador(""));
 	}
 

@@ -53,9 +53,9 @@ public class Nivel {
 		int sec2 = (int) (cantVentanasRotas * 0.3);
 		int sec1 = (int) (cantVentanasRotas * 0.2);
 		if (sec3 > 15)
-			sec2 += (sec3-15);
+			sec2 += (sec3 - 15);
 		if (sec2 > 15)
-			sec1 += (sec2-15);
+			sec1 += (sec2 - 15);
 
 		secciones.add((Seccion) new PrimeraSeccion(sec1, (int) (ventanasConObstaculo * 0.1)));
 		secciones.add(new Seccion(sec2, (int) (ventanasConObstaculo * 0.3), 2));
@@ -67,17 +67,17 @@ public class Nivel {
 		m.agregarComponente(new Nube(new Posicion(100, 245), velocidadNube));
 		// Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
 		// y dos pajaros en la ultima seccion
-		if (Math.random() < 0.5) {
-			m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (4.0 / 3)) + 10), velocidadPajaro,
-					Orientacion.DERECHA, m));
-		} else {
-			m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (5.0 / 3)) + 10), velocidadPajaro,
-					Orientacion.DERECHA, m));
-		}
-		m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (7.0 / 3)) + 10), velocidadPajaro,
-				Orientacion.DERECHA, m));
-		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO, (int) (Seccion.ALTO * (8.0 / 3)) + 10),
-				velocidadPajaro, Orientacion.DERECHA, m));
+//		if (Math.random() < 0.5) {
+//			m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (4.0 / 3)) + 10), velocidadPajaro,
+//					Orientacion.DERECHA, m));
+//		} else {
+//			m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (5.0 / 3)) + 10), velocidadPajaro,
+//					Orientacion.DERECHA, m));
+//		}
+//		m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (7.0 / 3)) + 10), velocidadPajaro,
+//				Orientacion.DERECHA, m));
+//		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO, (int) (Seccion.ALTO * (8.0 / 3)) + 10),
+//				velocidadPajaro, Orientacion.DERECHA, m));
 		return m;
 	}
 

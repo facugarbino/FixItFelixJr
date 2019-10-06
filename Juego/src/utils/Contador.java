@@ -18,7 +18,7 @@ public class Contador {
 	 */
 
 	// private int contador;
-	private int limite;
+	private int limite;;
 	private long contador;
 
 	public Contador(double limite) {

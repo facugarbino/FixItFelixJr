@@ -14,7 +14,6 @@ public class Nube extends Componente {
 		orientacion = Orientacion.DERECHA;
 		caracter = 'N';
 	}
-
 	/**
 	 * Hace la lógica para que la nube se mueva de extremo a extremo
 	 */

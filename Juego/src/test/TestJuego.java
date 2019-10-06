@@ -9,9 +9,8 @@ import juego.Juego;
 import utils.Contador;
 
 /**
- * Clase que permite testear el juego, con 
- * mensajes en la consola y un graficador básico
- * que permite jugar con las teclas.
+ * Clase que permite testear el juego, con mensajes en la consola y un
+ * graficador básico que permite jugar con las teclas.
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -29,37 +28,29 @@ public class TestJuego {
 	private static void loop() {
 		Contador timer = new Contador(10);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
-		List<Dibujable> lista = new ArrayList<Dibujable>(); 
+		List<Dibujable> lista = new ArrayList<Dibujable>();
 		while (true) {
 			if (!j.estaPausado()) {
 				if (timer.contar()) {
 					/*
-					 * Esto que está comentado serviría
-					 * para que Felix se mueva y martille sólo.
-					 * Pero mayoritariamente es golpeado por un ladrillo
-					 * o tarda mucho en romper todos los paneles.
+					 * Esto que está comentado serviría para que Felix se mueva y martille sólo.
+					 * Pero mayoritariamente es golpeado por un ladrillo o tarda mucho en romper
+					 * todos los paneles.
 					 * 
-					 * ---------------------IMPORTANTE---------------------
-					 * Entonces, investigamos e hicimos que se pueda jugar
-					 * desde el graficador, usando las teclas.
+					 * ---------------------IMPORTANTE--------------------- Entonces, investigamos e
+					 * hicimos que se pueda jugar desde el graficador, usando las teclas.
 					 * ----------------------------------------------------
 					 * 
-					double rnd = Math.random();
-					if (rnd < 0.25)
-						j.getFelix().mover(Orientacion.IZQUIERDA);
-					else if (rnd < 0.50)
-						j.getFelix().mover(Orientacion.DERECHA);
-					else if (rnd < 0.75)
-						j.getFelix().mover(Orientacion.ABAJO);
-					else
-						j.getFelix().mover(Orientacion.ARRIBA);
-					System.out.println("Felix se ha movido a " + j.getFelix().getPosicion());
-					for (int i = 0; i < 4; i++) {
-						j.darMartillazo();
-					}
-					*/
+					 * double rnd = Math.random(); if (rnd < 0.25)
+					 * j.getFelix().mover(Orientacion.IZQUIERDA); else if (rnd < 0.50)
+					 * j.getFelix().mover(Orientacion.DERECHA); else if (rnd < 0.75)
+					 * j.getFelix().mover(Orientacion.ABAJO); else
+					 * j.getFelix().mover(Orientacion.ARRIBA);
+					 * System.out.println("Felix se ha movido a " + j.getFelix().getPosicion()); for
+					 * (int i = 0; i < 4; i++) { j.darMartillazo(); }
+					 */
 					timer.resetear();
-					//Grafica todo
+					// Grafica todo
 					lista = j.getMapa().getComponentesDibujables();
 					lista.add(j.getRalph());
 					lista.add(j.getFelix());
@@ -71,7 +62,7 @@ public class TestJuego {
 					Graficador.mensaje("HAS GANADO!");
 					break;
 				}
-				if (j.getTiempo()>0&&j.getFelix().getVidas()>1) {
+				if (j.getTiempo() > 0 && j.getFelix().getVidas() > 1) {
 					Graficador.mensaje("PAUSA");
 				} else {
 					Graficador.mensaje("GAME OVER");
