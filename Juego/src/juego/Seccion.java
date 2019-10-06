@@ -12,8 +12,8 @@ import ventanas.VentanaComun;
 import ventanas.VentanaConHojas;
 
 /**
- * Representa una de las 3 secciones del edificio.
- * Tiene incluida las 15 ventanas.
+ * Representa una de las 3 secciones del edificio. Tiene incluida las 15
+ * ventanas.
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -49,11 +49,11 @@ public class Seccion {
 	 * @param nroSeccion
 	 */
 	public Seccion(int ventanasRotas, int ventanasConObstaculo, int nroSeccion) {
-		//chequeamos que no se guarde más de 15 así no se bugea al ganar
+		// chequeamos que no se guarde más de 15 así no se bugea al ganar
 		if (ventanasRotas > 15)
 			ventanasRotas = 15;
-		else
-			this.ventanasRotas = ventanasRotas;
+
+		this.ventanasRotas = ventanasRotas;
 
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		this.nroSeccion = nroSeccion;

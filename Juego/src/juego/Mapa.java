@@ -10,7 +10,7 @@ import graficador.modelo.InformacionDibujable;
 import utils.Posicion;
 
 public class Mapa {
-	public static final int ANCHO = 200;
+	public static final int  ANCHO = 200;
 	public static final int ALTO = 400;
 	private List<Componente> componentes;
 	private Edificio edificio;

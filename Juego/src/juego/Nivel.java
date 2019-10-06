@@ -9,8 +9,8 @@ import utils.Orientacion;
 import utils.Posicion;
 
 /**
- * Se encarga de actualizar la dificultad y
- * generar un mapa nuevo para cada nivel.
+ * Se encarga de actualizar la dificultad y generar un mapa nuevo para cada
+ * nivel.
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -28,7 +28,6 @@ public class Nivel {
 	private int porcentaje;
 	private int cantLadrillos;
 
-	
 	public Nivel(int nivelMax, int cantVentanasRotas, double frecuenciaLadrillo, double velocidadLadrillo,
 			double velocidadPajaro, int ventanasConObstaculo, int tiempo, int porcentaje, int cantLadrillos) {
 		this.nivelMax = nivelMax;
@@ -45,43 +44,54 @@ public class Nivel {
 
 	/**
 	 * 
-	 * @return un mapa nuevo con su edificio y secciones
-	 * correspondientes al nivel actual
+	 * @return un mapa nuevo con su edificio y secciones correspondientes al nivel
+	 *         actual
 	 */
 	public Mapa crearMapa() {
 		ArrayList<Seccion> secciones = new ArrayList<>();
-		secciones.add((Seccion) new PrimeraSeccion((int) (cantVentanasRotas * 0.2), (int) (ventanasConObstaculo * 0.1)));
-		secciones.add(new Seccion((int) (cantVentanasRotas * 0.3), (int) (ventanasConObstaculo * 0.3), 2));
-		secciones.add(new Seccion((int) (cantVentanasRotas * 0.5), (int) (ventanasConObstaculo * 0.6), 3));
+		int sec3 = (int) (cantVentanasRotas * 0.5);
+		int sec2 = (int) (cantVentanasRotas * 0.3);
+		int sec1 = (int) (cantVentanasRotas * 0.2);
+		if (sec3 > 15)
+			sec2 += (sec3-15);
+		if (sec2 > 15)
+			sec1 += (sec2-15);
+
+		secciones.add((Seccion) new PrimeraSeccion(sec1, (int) (ventanasConObstaculo * 0.1)));
+		secciones.add(new Seccion(sec2, (int) (ventanasConObstaculo * 0.3), 2));
+		secciones.add(new Seccion(sec3, (int) (ventanasConObstaculo * 0.6), 3));
 		Edificio e = new Edificio(new Posicion(50, 0), secciones);
 		Mapa m = new Mapa(e);
 		m.agregarComponente(new Nube(new Posicion(0, 60), velocidadNube));
 		m.agregarComponente(new Nube(new Posicion(50, 130), velocidadNube));
 		m.agregarComponente(new Nube(new Posicion(100, 245), velocidadNube));
-		//Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
-		//y dos pajaros en la ultima seccion
-		if (Math.random()<0.5) { 
-			m.agregarComponente(new Pajaro(new Posicion(0,(int) (Seccion.ALTO*(4.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
+		// Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
+		// y dos pajaros en la ultima seccion
+		if (Math.random() < 0.5) {
+			m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (4.0 / 3)) + 10), velocidadPajaro,
+					Orientacion.DERECHA, m));
 		} else {
-			m.agregarComponente(new Pajaro(new Posicion(0,(int) (Seccion.ALTO*(5.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
+			m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (5.0 / 3)) + 10), velocidadPajaro,
+					Orientacion.DERECHA, m));
 		}
-		m.agregarComponente(new Pajaro(new Posicion(0,(int)(Seccion.ALTO*(7.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
-		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO,(int)(Seccion.ALTO*(8.0/3))+10), velocidadPajaro, Orientacion.DERECHA, m));
+		m.agregarComponente(new Pajaro(new Posicion(0, (int) (Seccion.ALTO * (7.0 / 3)) + 10), velocidadPajaro,
+				Orientacion.DERECHA, m));
+		m.agregarComponente(new Pajaro(new Posicion(Seccion.ANCHO, (int) (Seccion.ALTO * (8.0 / 3)) + 10),
+				velocidadPajaro, Orientacion.DERECHA, m));
 		return m;
 	}
 
 	/**
-	 * Actualiza los valores correspondientes al 
-	 * próximo nivel
+	 * Actualiza los valores correspondientes al próximo nivel
 	 */
 	public void avanzarDeNivel() {
 		nroNivel++;
 		cantVentanasRotas *= ((100 + porcentaje) / 100.0);
 		frecuenciaLadrillo -= frecuenciaLadrillo * (porcentaje / 100.0);
 		velocidadLadrillo -= velocidadLadrillo * (porcentaje / 100.0);
-		velocidadPajaro -= velocidadPajaro* (porcentaje / 100.0);
+		velocidadPajaro -= velocidadPajaro * (porcentaje / 100.0);
 		ventanasConObstaculo *= ((100 + porcentaje) / 100.0);
-		cantLadrillos+=6;
+		cantLadrillos += 6;
 		tiempo -= tiempo * 0.1;
 	}
 
