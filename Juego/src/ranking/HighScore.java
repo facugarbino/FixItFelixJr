@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import juego.Jugador;
 
+//Implementa Serializable para poder ser escrito/leído de un archivo binario.
 @SuppressWarnings("serial")
 public class HighScore implements Comparable<HighScore>, Serializable {
 	private String nombreJugador;
