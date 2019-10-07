@@ -1,8 +1,11 @@
 package ranking;
 
+import java.io.Serializable;
+
 import juego.Jugador;
 
-public class HighScore implements Comparable<HighScore> {
+@SuppressWarnings("serial")
+public class HighScore implements Comparable<HighScore>, Serializable {
 	private String nombreJugador;
 	private long puntaje;
 
@@ -22,6 +25,11 @@ public class HighScore implements Comparable<HighScore> {
 	public int compareTo(HighScore j) {
 		// Devolvemos > 0 si el receptor es menor, para ordenar
 		// el arreglo descendentemente.
-		return (int) (j.getPuntaje() - this.puntaje);
+		//return (int) (j.getPuntaje() - this.puntaje);
+		return (int) (this.puntaje - j.getPuntaje());
+	}
+	
+	public String toString() {
+		return (nombreJugador+": "+puntaje);
 	}
 }

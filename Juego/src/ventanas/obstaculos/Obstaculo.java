@@ -6,12 +6,11 @@ public abstract class Obstaculo {
 
 	/**
 	 * 
-	 * @param orientacion
 	 * @return <b>true</b> si el obstáculo se encuentra
 	 * posicionado en la ventana, en el sentido indicado
 	 * 
-	 * @see Por ejemplo: para el macetero, devuelve <b>true</b>
-	 * si el sentido es <k>abajo</k>
+	 * Por ejemplo: para el macetero, devuelve <b>true</b>
+	 * si el sentido es <i>abajo</i>
 	 */
 	public abstract boolean estasEn(Orientacion orientacion);
 

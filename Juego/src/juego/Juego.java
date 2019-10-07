@@ -12,7 +12,7 @@ import utils.Posicion;
 import ventanas.Ventana;
 
 /**
- * Clase que se encarga del funcionamiento general del juego. Hace falta llamar
+ * Se encarga del funcionamiento general del juego. Hace falta llamar
  * a su método hacerTodo() indefinidamente para que funcione. Es un singleton.
  * La única instancia se obtiene con el método getJuego()
  * 
@@ -50,13 +50,16 @@ public class Juego {
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador(nombre);
 		ranking = new Ranking();
-		ranking.agregarHighScore(new HighScore(new Jugador("Fabian")));
+		Jugador jug;
 		primeraVez = true;
 		pasarDeNivel();
 		pausa = false;
 
 	}
 
+	public Ranking getRanking() {
+		return ranking;
+	}
 	public int getTiempo() {
 		return tiempo;
 	}
@@ -158,13 +161,16 @@ public class Juego {
 	}
 
 	private void ganar() {
-		HighScore hs = new HighScore(jugador);
-		ranking.agregarHighScore(hs);
+		agregarRanking();
 		pausa = true;
 		yaGano = true;
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
 	}
 
+	private void agregarRanking() {
+		HighScore hs = new HighScore(jugador);
+		ranking.agregarHighScore(hs);
+	}
 	/**
 	 * Hace la lógica para llevar la cuenta regresiva del tiempo
 	 */
@@ -204,8 +210,7 @@ public class Juego {
 			mapa.borrarComponentesDeSeccion(seccionActual.getNroSeccion());
 			seccionActual = mapa.getEdificio().avanzarSeccion();
 			tiempo = nivel.getTiempo();
-			felix.setPosicion(seccionActual.getVentanaInicial().getPosicion().copia());
-			felix.setVentana(seccionActual.getVentanaInicial());
+			felix.subirDeSeccion(seccionActual);
 			ralph.subirDeSeccion();
 		} else {
 			pasarDeNivel();
@@ -238,8 +243,7 @@ public class Juego {
 	 */
 	public void perder(long puntajeFelix) {
 		jugador.sumarPuntos(puntajeFelix);
-		HighScore hs = new HighScore(jugador);
-		ranking.agregarHighScore(hs);
+		agregarRanking();
 		pausa = true;
 		System.out.println("GAME OVER");
 		System.out.println("Perdió con " + jugador.getPuntaje() + " puntos.");

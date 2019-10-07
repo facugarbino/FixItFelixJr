@@ -4,11 +4,18 @@ import componentes.Ladrillo;
 import componentes.Pajaro;
 import graficador.modelo.InformacionDibujable;
 import juego.Juego;
+import juego.Seccion;
 import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 import ventanas.Ventana;
 
+/**
+ * Representa al FelixJr de un determinado nivel. 
+ * 
+ * @author Garbino y Rodríguez Murphy
+ *
+ */
 public class FelixJr extends Personaje {
 	private Contador timer;
 	private int vidas;
@@ -89,7 +96,7 @@ public class FelixJr extends Personaje {
 	 */
 	public void golpear(Ladrillo ladrillo) {
 		if (!inmune) {
-			System.out.println("Felix es golpeado por un ladrillo.");
+			System.out.println("Un ladrillo en la posicion " + ladrillo.getPosicion() + " golpea a Felix");
 			if (--vidas > 0) {
 				Juego.getJuego().reiniciarNivel(vidas);
 				puntajeNivel = 0;
@@ -117,6 +124,12 @@ public class FelixJr extends Personaje {
 		return vidas;
 	}
 
+	public void subirDeSeccion(Seccion s) {
+		posicion = s.getVentanaInicial().getPosicion().copia();
+		ventanaActual = s.getVentanaInicial();
+		inmune = false;
+	}
+	
 	private void inmunizar() {
 		timer.resetear();
 		inmune = true;

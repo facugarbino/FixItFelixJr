@@ -1,1 +1,12 @@
-paquete
+componentes
+graficador.modelo
+graficador.vista
+juego
+personajes
+ranking
+test
+utils
+ventanas
+ventanas.extra
+ventanas.obstaculos
+ventanas.paneles

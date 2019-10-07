@@ -55,7 +55,7 @@ public class VentanaComun extends Ventana {
 	 * 
 	 */
 	public void generarNicelander() {
-		if (!yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
+		if (!seccion.hayNicelander() && !yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
 			nicelander = new Nicelander(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
 					this);
 			seccion.setNicelander(true);
@@ -67,6 +67,8 @@ public class VentanaComun extends Ventana {
 				if (nicelander.ponerPastel()) {
 					nicelander = null;
 				}
+			} else if (seccion.hayNicelander()) {
+				timer.resetear();
 			}
 		}
 	}

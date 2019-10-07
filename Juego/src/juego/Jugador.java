@@ -9,6 +9,10 @@ public class Jugador {
 		this.nombre = nombre;
 		this.puntaje = 0;
 	}
+	public Jugador(String nombre, int puntaje) {
+		this.nombre = nombre;
+		this.puntaje = puntaje;
+	}
 
 	public String getNombre() {
 		return nombre;

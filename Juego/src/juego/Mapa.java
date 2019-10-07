@@ -7,6 +7,12 @@ import componentes.Componente;
 import graficador.modelo.Dibujable;
 import utils.Posicion;
 
+/**
+ * Representa al mapa del nivel actual del juego
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Mapa {
 
 	public static final int ANCHO = 200;

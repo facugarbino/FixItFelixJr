@@ -12,8 +12,7 @@ import ventanas.VentanaComun;
 import ventanas.VentanaConHojas;
 
 /**
- * Representa una de las 3 secciones del edificio. Tiene incluida las 15
- * ventanas.
+ * Representa a una sección del edificio Niceland, que incluye 15 ventanas.
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -31,7 +30,7 @@ public class Seccion {
 	protected boolean hayNicelander;
 
 	/**
-	 * @see constructor usado para reiniciar una sección (debe generarse
+	 * Constructor usado para reiniciar una sección (debe generarse
 	 *      aleatoriamente otra sección con la misma cantidad de ventanas rotas y
 	 *      obstáculos)
 	 * @param s sección a reiniciar
@@ -42,12 +41,12 @@ public class Seccion {
 	}
 
 	/**
-	 * @see constructor que elige aleatoramiente una distribución de ventanas que
+	 * Constructor que elige aleatoramiente una distribución de ventanas que
 	 *      cumple con la cantidad solicitad de ventanas rotas y con obstáculo
 	 * 
-	 * @param ventanasRotas
-	 * @param ventanasConObstaculo
-	 * @param nroSeccion
+	 * @param ventanasRotas	cantidad de ventanas que deben estar rotas
+	 * @param ventanasConObstaculo cantidad de ventanas que deben tener obstaculo
+	 * @param nroSeccion número de la sección (1,2 o 3)
 	 */
 	public Seccion(int ventanasRotas, int ventanasConObstaculo, int nroSeccion) {
 		// chequeamos que no se guarde más de 15 así no se bugea al ganar
@@ -72,6 +71,10 @@ public class Seccion {
 			}
 		}
 
+	}
+
+	public boolean hayNicelander() {
+		return hayNicelander;
 	}
 
 	public int getNroSeccion() {
@@ -101,8 +104,8 @@ public class Seccion {
 	}
 
 	/**
-	 * Se llama una vez que se avanza de sección,
-	 * para que las ventanas reseteen sus timers 
+	 * Se llama una vez que se avanza de sección, para que las ventanas reseteen sus
+	 * timers
 	 */
 	public void resetearTimer() {
 		for (int i = 0; i < FILAS; i++) {
@@ -113,19 +116,14 @@ public class Seccion {
 	}
 
 	/**
-	 * método llamado por juego en cada iteración, que delega a cada ventana la
-	 * decisión de que se coloque un Nicelander o no en su panel inferior o si hay
-	 * algun nicelander, les indica que reseteen sus timers para empezar a competir
-	 * una vez que el anterior ya haya puesto su pastel
+	 * Llamado por juego en cada iteración, que delega a cada ventana la
+	 * decisión de que se coloque un Nicelander o no
+	 * 
 	 */
 	public void generarNicelanders() {
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
-				if (!hayNicelander) {
-					ventanas[i][j].generarNicelander();
-				} else {
-					ventanas[i][j].resetTimer();
-				}
+				ventanas[i][j].generarNicelander();
 			}
 		}
 	}

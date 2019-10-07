@@ -34,7 +34,7 @@ public abstract class Ventana implements Dibujable{
 	
 
 	/**
-	 * @see Método llamado por Felix para moverse
+	 * Método llamado por Felix para moverse
 	 * @param orientacion
 	 * @return la ventana que se encuentra en dicha dirección, si es que no hay
 	 *         obstáculos entre ellas, o null en caso contrario.
@@ -62,9 +62,10 @@ public abstract class Ventana implements Dibujable{
 		
 	}
 	/**
-	 * @see Método llamado por Felix
+	 * Método llamado por Felix cuando da un martillazo
+	 * 
 	 * @return true si el martillazo reparó algún panel o false en caso contrario,
-	 *         ya sea porque no hay paneles rotos o porque falta dar otro martillazo
+	 * ya sea porque no hay paneles rotos o porque falta dar otro martillazo
 	 */
 	public boolean reparar() {
 		if (estaRota()) {
@@ -78,8 +79,10 @@ public abstract class Ventana implements Dibujable{
 				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
 					caracter = '□';
-					this.nicelander = null;
-					seccion.setNicelander(false);
+					if (nicelander!=null) {
+						this.nicelander = null;
+						seccion.setNicelander(false);
+					}
 				}
 				return true;
 			}

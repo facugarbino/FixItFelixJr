@@ -10,7 +10,8 @@ import utils.Orientacion;
 import utils.Posicion;
 
 /**
- * Representa a Ralph, el demoledor.
+ * Representa a Ralph, el demoledor,
+ * el enemigo del personaje principal.
  * 
  * @author facu
  *
@@ -20,6 +21,7 @@ public class Ralph extends Personaje {
 	// La ventana mide 10x20
 	// Ralph mide en X: 25
 	private static final int ANCHO = 25;
+	private static final int VELOCIDAD = 5;
 
 	private Orientacion orientacion;
 	private int cantLadrillos;
@@ -36,7 +38,7 @@ public class Ralph extends Personaje {
 		this.cantLadrillos = cantLadrillos;
 		timerFrecuencia = new Contador(frecuencia);
 		timerEntreLadrillos = new Contador(frecuencia/5);
-		timerCaminar = new Contador(100);
+		timerCaminar = new Contador(VELOCIDAD);
 		this.velocidadLadrillo = velocidadLadrillo;
 		posicion = p;
 		estaTirando = false;
@@ -72,20 +74,20 @@ public class Ralph extends Personaje {
 	 * Ralph da un paso en el sentido solicitado 
 	 * si es posible y, si no, lo da
 	 * en sentido contrario.
-	 * @param o
+	 * 
 	 */
 	private void darPaso(Orientacion o) {
 		//Hay que cambiar los valores de X porque Ralph se aleja muhcho
 		if (o == Orientacion.IZQUIERDA && posicion.getX() > limiteIzquierdo) {
 			orientacion = o;
-			posicion.moverX(-5);
+			posicion.moverX(-3);
 			//System.out.println("Ralph se mueve a la izquierda");
 		} else {
 			if (!(posicion.getX() < limiteDerecho)) {
 				darPaso(Orientacion.IZQUIERDA);
 			} else {
 				orientacion = Orientacion.DERECHA;
-				posicion.moverX(5);
+				posicion.moverX(3);
 				//System.out.println("Ralph se mueve a la derecha");
 			}
 		}
@@ -95,6 +97,7 @@ public class Ralph extends Personaje {
 		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion().copia();
 		p.moverY(100);
 		posicion = p;
+		estaTirando = false;
 
 	}
 
@@ -109,7 +112,7 @@ public class Ralph extends Personaje {
 			if (ladrillosTirados == 3 || cantLadrillos == 0) {
 				// Deja de tirar
 				estaTirando = false;
-				System.out.println("Ralph deja de tirar ladrillos");
+				//System.out.println("Ralph deja de tirar ladrillos");
 			} else {
 				if (timerEntreLadrillos.contar()) {
 					ladrillosTirados++;
@@ -126,7 +129,7 @@ public class Ralph extends Personaje {
 				orientacion = Orientacion.ABAJO;
 				ladrillosTirados = 0;
 				timerFrecuencia.resetear();
-				System.out.println("Ralph se pone a tirar ladrillos");
+				//System.out.println("Ralph se pone a tirar ladrillos");
 			}
 		}
 		return null;

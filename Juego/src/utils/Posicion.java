@@ -1,6 +1,14 @@
 package utils;
 
+/**
+ * Representa la posición absoluta de un 
+ * elemento en el mapa
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Posicion {
+	
 	private int x;
 	private int y;
 
@@ -35,4 +43,5 @@ public class Posicion {
 	public Posicion copia() {
 		return new Posicion(x,y);
 	}
+	
 }

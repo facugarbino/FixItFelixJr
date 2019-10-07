@@ -3,7 +3,12 @@ package juego;
 import java.util.List;
 
 import utils.Posicion;
-
+/**
+ * Representa al edificio con sus 3 secciones
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Edificio {
 
 	public static final int ANCHO = 100;
