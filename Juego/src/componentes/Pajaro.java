@@ -43,7 +43,7 @@ public class Pajaro extends Componente {
 			}
 		}
 		if (mapa.estaFelix(posicion, ANCHO)) {
-			Juego.getJuego().golpearFelix(this);
+			Juego.getInstance().golpearFelix(this);
 		}
 	}
 

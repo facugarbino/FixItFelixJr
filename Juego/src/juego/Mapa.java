@@ -72,7 +72,7 @@ public class Mapa {
 	 * @return <b>true</b> si colisiona con Felix, <b>false</b> si no se chocan
 	 */
 	public boolean estaFelix(Posicion p, int diametro) {
-		Posicion pFelix = Juego.getJuego().getFelix().getPosicion();
+		Posicion pFelix = Juego.getInstance().getFelix().getPosicion();
 		int radio = diametro / 2;
 		if (estaEntre(p.getX() - radio, pFelix.getX(), pFelix.getX() + 5)
 				|| estaEntre(p.getX() + radio, pFelix.getX(), pFelix.getX() + 5)) {

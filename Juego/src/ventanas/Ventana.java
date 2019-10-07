@@ -121,8 +121,8 @@ public abstract class Ventana implements Dibujable {
 	public void ponerPastel(Pastel comida) {
 		this.pastel = comida;
 		seccion.agregarPastel(pastel);
-		if (Juego.getJuego().getMapa().estaFelix(posicion, 1)) {
-			Juego.getJuego().getFelix().comerPastel();
+		if (Juego.getInstance().getMapa().estaFelix(posicion, 1)) {
+			Juego.getInstance().getFelix().comerPastel();
 		}
 	}
 

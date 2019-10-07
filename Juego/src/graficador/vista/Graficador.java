@@ -22,7 +22,7 @@ public class Graficador {
 	private static final int ALTO = Mapa.ALTO;
 	private static JFrame frame = new JFrame("Visualización Fix It Felix");
 	private static final int margen = (int) (Mapa.ANCHO / 3.0);
-	private static Juego juego = Juego.getJuego();
+	private static Juego juego = Juego.getInstance();
 	private static Graphics gr;
 //	private static boolean teclaPresionada;
 

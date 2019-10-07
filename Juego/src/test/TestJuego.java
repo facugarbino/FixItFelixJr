@@ -28,9 +28,9 @@ public class TestJuego {
 	public static Juego j;
 
 	public static void main(String[] args) {
-		String nombre = JOptionPane.showInputDialog(new JFrame("Fix it Felix Jr."), "Nombre: ");
-		Juego.crearJuego(nombre);
-		j = Juego.getJuego();
+		String nombre = JOptionPane.showInputDialog(new JFrame("Fix it Felix Jr."), "Nombre: ");		
+		j = Juego.getInstance();
+		j.setJugador(nombre);
 		loop();
 	}
 

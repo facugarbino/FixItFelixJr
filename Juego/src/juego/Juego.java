@@ -35,20 +35,29 @@ public class Juego {
 	private boolean yaGano;
 
 	/**
-	 * crea la única instancia de Juego
 	 * 
+	 * @return la única de instancia del juuego
+	 * y, si no existe, la devuelve
 	 */
-	public static void crearJuego(String nombreJugador) {
-		juego = new Juego(nombreJugador);
-		System.out.println("Comienza el juego. Juega: " + nombreJugador);
+	public static Juego getInstance() {
+		if (juego==null) {
+			juego = new Juego();
+			System.out.println("Comienza el juego.");
+		}
+		return juego;
 	}
 
-	private Juego(String nombre) {
+	public void setJugador(String nombre) {
+		jugador = new Jugador(nombre);
+		System.out.println("Juega: "+ nombre);
+	}
+	
+	private Juego() {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
 		nivel = new Nivel(10, 25, 10000, 50, 130, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
-		jugador = new Jugador(nombre);
+		jugador = new Jugador("Anonimo");
 		ranking = new Ranking();
 		Jugador jug;
 		primeraVez = true;
@@ -81,10 +90,6 @@ public class Juego {
 		}
 		pausa = !pausa;
 
-	}
-
-	public static Juego getJuego() {
-		return juego;
 	}
 
 	public FelixJr getFelix() {

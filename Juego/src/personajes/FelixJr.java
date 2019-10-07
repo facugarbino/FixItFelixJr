@@ -97,12 +97,12 @@ public class FelixJr extends Personaje {
 		if (!inmune) {
 			System.out.println("Un ladrillo en la posicion " + ladrillo.getPosicion() + " golpea a Felix");
 			if (--vidas > 0) {
-				Juego.getJuego().reiniciarNivel(vidas);
+				Juego.getInstance().reiniciarNivel(vidas);
 				puntajeNivel = 0;
 				puntajeSeccion = 0;
 				System.out.println("Pierde una vida. (Quedan " + vidas + ")");
 			} else {
-				Juego.getJuego().perder(puntajeNivel + puntajeSeccion);
+				Juego.getInstance().perder(puntajeNivel + puntajeSeccion);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class FelixJr extends Personaje {
 	 */
 	public void golpear(Pajaro pajaro) {
 		if (!inmune) {
-			Juego.getJuego().reiniciarSeccion();
+			Juego.getInstance().reiniciarSeccion();
 			puntajeSeccion = 0;
 			System.out.println("Felix es golpeado por un pájaro, reinicia la seccion");
 		}

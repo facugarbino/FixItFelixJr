@@ -28,7 +28,7 @@ public class Ladrillo extends Componente {
 		posicion.moverY(-1);
 		//System.out.println("Un ladrillo avanza a la posicion " + posicion);
 		if (mapa.estaFelix(posicion, ANCHO)) {
-			Juego.getJuego().golpearFelix(this);
+			Juego.getInstance().golpearFelix(this);
 		}
 		if (posicion.getY()==0) {
 			mapa.borrarComponente(this);

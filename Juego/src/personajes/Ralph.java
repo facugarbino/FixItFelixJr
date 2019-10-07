@@ -106,7 +106,7 @@ public class Ralph extends Personaje {
 	}
 
 	public void subirDeSeccion() {
-		Posicion p = Juego.getJuego().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion()
+		Posicion p = Juego.getInstance().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion()
 				.copia();
 		p.moverY(100);
 		posicion = p;
@@ -134,7 +134,7 @@ public class Ralph extends Personaje {
 					timerEntreLadrillos.resetear();
 					System.out.println("Ralph tira una roca");
 					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY() - ANCHO / 2), velocidadLadrillo,
-							Juego.getJuego().getMapa());
+							Juego.getInstance().getMapa());
 				}
 			}
 		} else {
