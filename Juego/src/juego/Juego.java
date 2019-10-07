@@ -45,7 +45,7 @@ public class Juego {
 
 	private Juego(String nombre) {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
-		nivel = new Nivel(10, 25, 750, 5, 13, 6, 300, 10, 40);
+		nivel = new Nivel(10, 25, 1000, 5, 13, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador(nombre);

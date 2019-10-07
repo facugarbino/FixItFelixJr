@@ -28,7 +28,7 @@ public class Seccion {
 	private int ventanasReparadas;
 	private int nroSeccion;
 	protected Ventana[][] ventanas;
-	protected boolean nicelander;
+	protected boolean hayNicelander;
 
 	/**
 	 * @see constructor usado para reiniciar una sección (debe generarse
@@ -55,7 +55,7 @@ public class Seccion {
 			ventanasRotas = 15;
 
 		this.ventanasRotas = ventanasRotas;
-		this.nicelander = false;
+		this.hayNicelander = false;
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		this.nroSeccion = nroSeccion;
 		ventanasReparadas = 0;
@@ -101,13 +101,31 @@ public class Seccion {
 	}
 
 	/**
+	 * Se llama una vez que se avanza de sección,
+	 * para que las ventanas reseteen sus timers 
+	 */
+	public void resetearTimer() {
+		for (int i = 0; i < FILAS; i++) {
+			for (int j = 0; j < COLUMNAS; j++) {
+				ventanas[i][j].resetTimer();
+			}
+		}
+	}
+
+	/**
 	 * método llamado por juego en cada iteración, que delega a cada ventana la
-	 * decisión de que se coloque un Nicelander o no en su panel inferior
+	 * decisión de que se coloque un Nicelander o no en su panel inferior o si hay
+	 * algun nicelander, les indica que reseteen sus timers para empezar a competir
+	 * una vez que el anterior ya haya puesto su pastel
 	 */
 	public void generarNicelanders() {
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
-				ventanas[i][j].generarNicelander();
+				if (!hayNicelander) {
+					ventanas[i][j].generarNicelander();
+				} else {
+					ventanas[i][j].resetTimer();
+				}
 			}
 		}
 	}
@@ -212,11 +230,7 @@ public class Seccion {
 		return lista;
 	}
 
-	public boolean hayNicelander() {
-		return this.nicelander;
-	}
-
 	public void setNicelander(boolean boleano) {
-		this.nicelander = boleano;
+		this.hayNicelander = boleano;
 	}
 }

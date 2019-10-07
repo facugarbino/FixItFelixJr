@@ -1,6 +1,13 @@
 package ventanas.extra;
 
-public class Pastel {
+import utils.Posicion;
 
+public class Pastel {
 	
+	private Posicion posicion;
+
+	public Pastel(Posicion posicion) {
+		this.posicion = posicion;
+	}
+
 }

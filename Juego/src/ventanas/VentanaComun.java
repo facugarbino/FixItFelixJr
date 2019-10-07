@@ -17,7 +17,7 @@ public class VentanaComun extends Ventana {
 
 	private static final int CANT_PANELES = 2;
 	private boolean yaHuboNicelander = false;
-	Contador timer = new Contador(Math.random() * 5000 + 1000);
+	Contador timer = new Contador(Math.random() * 500 + 500);
 
 	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
 		this.posicion = posicion;
@@ -55,24 +55,24 @@ public class VentanaComun extends Ventana {
 	 * 
 	 */
 	public void generarNicelander() {
-		if (!seccion.hayNicelander()) {
-			if (!yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
-				nicelander = new Nicelander(
-						new Color((float) Math.random(), (float) Math.random(), (float) Math.random()), this);
-				seccion.setNicelander(true);
-				yaHuboNicelander = true;
-				System.out.println("Se asoma un Nicelander en la ventana " + this.posicion);
-				caracter = '®';
-			} else {
-				if (nicelander != null) {
-					if (nicelander.ponerPastel()) {
-						nicelander = null;
-					}
+		if (!yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
+			nicelander = new Nicelander(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
+					this);
+			seccion.setNicelander(true);
+			yaHuboNicelander = true;
+			System.out.println("Se asoma un Nicelander en la ventana " + this.posicion);
+			caracter = '®';
+		} else {
+			if (nicelander != null) {
+				if (nicelander.ponerPastel()) {
+					nicelander = null;
 				}
 			}
-		} else {
-			timer.resetear();
 		}
+	}
+
+	public void resetTimer() {
+		timer.resetear();
 	}
 
 	/**

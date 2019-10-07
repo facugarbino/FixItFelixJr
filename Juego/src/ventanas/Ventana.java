@@ -79,6 +79,7 @@ public abstract class Ventana implements Dibujable{
 					seccion.seArregloUnaVentana();
 					caracter = '□';
 					this.nicelander = null;
+					seccion.setNicelander(false);
 				}
 				return true;
 			}
@@ -96,7 +97,18 @@ public abstract class Ventana implements Dibujable{
 	}
 
 	public void generarNicelander() {
-		
+		/*
+		 * Este método sólo lo sobreescribe VentanaComun,
+		 * pues es la única que genera Nicelanders
+		 * 
+		 */
+	}
+	public void resetTimer() {
+		/*
+		 * Este método sólo lo sobreescribe VentanaComun,
+		 * pues es la única que tiene timer para resetear
+		 * 
+		 */
 	}
 
 	public void ponerPastel(Pastel comida) {

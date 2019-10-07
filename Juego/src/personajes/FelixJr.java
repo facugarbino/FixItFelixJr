@@ -88,8 +88,8 @@ public class FelixJr extends Personaje {
 	 * nivel (o perdiendo)
 	 */
 	public void golpear(Ladrillo ladrillo) {
-		System.out.println("Felix es golpeado por un ladrillo.");
 		if (!inmune) {
+			System.out.println("Felix es golpeado por un ladrillo.");
 			if (--vidas > 0) {
 				Juego.getJuego().reiniciarNivel(vidas);
 				puntajeNivel = 0;
@@ -118,8 +118,8 @@ public class FelixJr extends Personaje {
 	}
 
 	private void inmunizar() {
-		inmune = true;
 		timer.resetear();
+		inmune = true;
 		System.out.println("Felix come un pastel. Se inmuniza.");
 	}
 

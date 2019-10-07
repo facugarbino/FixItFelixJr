@@ -37,6 +37,7 @@ public class Edificio {
 	 */
 	public Seccion avanzarSeccion() {
 		this.seccionActual = secciones.get(secciones.indexOf(seccionActual) + 1);
+		seccionActual.resetearTimer();
 		return seccionActual;
 	}
 

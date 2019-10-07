@@ -19,7 +19,7 @@ public class Nicelander {
 
 	public boolean ponerPastel() {
 		if (timer.contar()) {
-			ventana.ponerPastel(new Pastel());
+			ventana.ponerPastel(new Pastel(ventana.getPosicion()));
 			ventana.getSeccion().setNicelander(false);
 			System.out.println("Nicelander pone pastel en " + ventana.getPosicion());
 			return true;
