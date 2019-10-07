@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import graficador.modelo.Dibujable;
 import graficador.vista.Graficador;
@@ -26,7 +28,8 @@ public class TestJuego {
 	public static Juego j;
 
 	public static void main(String[] args) {
-		Juego.crearJuego("Facundo");
+		String nombre = JOptionPane.showInputDialog(new JFrame("Fix it Felix Jr."), "Nombre: ");
+		Juego.crearJuego(nombre);
 		j = Juego.getJuego();
 		loop();
 	}

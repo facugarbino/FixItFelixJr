@@ -137,7 +137,7 @@ public class FelixJr extends Personaje {
 	}
 
 	/**
-	 * Método que se ejecuta constantemente para que Felix Jr. pierda su
+	 * Método que se ej ecuta constantemente para que Felix Jr. pierda su
 	 * inmunización luego de un tiempo en caso de haberla obtenido, comiendo un
 	 * pastel
 	 */

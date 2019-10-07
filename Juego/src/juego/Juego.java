@@ -134,7 +134,6 @@ public class Juego {
 		try {
 			mapa.avanzarComponentes();
 		} catch(Exception e) {
-			System.out.println(e);
 		}
 		checkTiempo();
 		felix.chequearInmunizacion();
