@@ -10,6 +10,8 @@ import utils.Posicion;
 import ventanas.Ventana;
 import ventanas.VentanaComun;
 import ventanas.VentanaConHojas;
+import ventanas.extra.Nicelander;
+import ventanas.extra.Pastel;
 
 /**
  * Representa a una sección del edificio Niceland, que incluye 15 ventanas.
@@ -27,12 +29,13 @@ public class Seccion {
 	private int ventanasReparadas;
 	private int nroSeccion;
 	protected Ventana[][] ventanas;
-	protected boolean hayNicelander;
+	protected Nicelander nicelander;
+	protected List<Pastel> pasteles;
 
 	/**
-	 * Constructor usado para reiniciar una sección (debe generarse
-	 *      aleatoriamente otra sección con la misma cantidad de ventanas rotas y
-	 *      obstáculos)
+	 * Constructor usado para reiniciar una sección (debe generarse aleatoriamente
+	 * otra sección con la misma cantidad de ventanas rotas y obstáculos)
+	 * 
 	 * @param s sección a reiniciar
 	 */
 	public Seccion(Seccion s) {
@@ -41,12 +44,12 @@ public class Seccion {
 	}
 
 	/**
-	 * Constructor que elige aleatoramiente una distribución de ventanas que
-	 *      cumple con la cantidad solicitad de ventanas rotas y con obstáculo
+	 * Constructor que elige aleatoramiente una distribución de ventanas que cumple
+	 * con la cantidad solicitad de ventanas rotas y con obstáculo
 	 * 
-	 * @param ventanasRotas	cantidad de ventanas que deben estar rotas
+	 * @param ventanasRotas        cantidad de ventanas que deben estar rotas
 	 * @param ventanasConObstaculo cantidad de ventanas que deben tener obstaculo
-	 * @param nroSeccion número de la sección (1,2 o 3)
+	 * @param nroSeccion           número de la sección (1,2 o 3)
 	 */
 	public Seccion(int ventanasRotas, int ventanasConObstaculo, int nroSeccion) {
 		// chequeamos que no se guarde más de 15 así no se bugea al ganar
@@ -54,9 +57,10 @@ public class Seccion {
 			ventanasRotas = 15;
 
 		this.ventanasRotas = ventanasRotas;
-		this.hayNicelander = false;
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		this.nroSeccion = nroSeccion;
+		pasteles = new ArrayList<>();
+		nicelander = null;
 		ventanasReparadas = 0;
 		boolean[][] conObstaculo = getMatrizRandom(ventanasConObstaculo);
 		boolean[][] rotas = getMatrizRandom(ventanasRotas);
@@ -74,7 +78,7 @@ public class Seccion {
 	}
 
 	public boolean hayNicelander() {
-		return hayNicelander;
+		return nicelander != null;
 	}
 
 	public int getNroSeccion() {
@@ -116,8 +120,8 @@ public class Seccion {
 	}
 
 	/**
-	 * Llamado por juego en cada iteración, que delega a cada ventana la
-	 * decisión de que se coloque un Nicelander o no
+	 * Llamado por juego en cada iteración, que delega a cada ventana la decisión de
+	 * que se coloque un Nicelander o no
 	 * 
 	 */
 	public void generarNicelanders() {
@@ -225,10 +229,21 @@ public class Seccion {
 				lista.add(ventanas[i][j]);
 			}
 		}
+		if (nicelander!=null)
+				lista.add(nicelander);
+		lista.addAll(pasteles);
 		return lista;
 	}
 
-	public void setNicelander(boolean boleano) {
-		this.hayNicelander = boleano;
+	public void setNicelander(Nicelander nicelander) {
+		this.nicelander = nicelander;
+	}
+
+	public void agregarPastel(Pastel pastel) {
+		pasteles.add(pastel);
+	}
+
+	public void borrarPastel(Pastel pastel) {
+		pasteles.remove(pastel);
 	}
 }

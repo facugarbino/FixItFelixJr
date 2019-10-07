@@ -12,9 +12,9 @@ import utils.Posicion;
 import ventanas.Ventana;
 
 /**
- * Se encarga del funcionamiento general del juego. Hace falta llamar
- * a su método hacerTodo() indefinidamente para que funcione. Es un singleton.
- * La única instancia se obtiene con el método getJuego()
+ * Se encarga del funcionamiento general del juego. Hace falta llamar a su
+ * método hacerTodo() indefinidamente para que funcione. Es un singleton. La
+ * única instancia se obtiene con el método getJuego()
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -45,7 +45,7 @@ public class Juego {
 
 	private Juego(String nombre) {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
-		nivel = new Nivel(10, 25, 1000, 5, 13, 6, 300, 10, 40);
+		nivel = new Nivel(10, 25, 10000, 50, 130, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador(nombre);
@@ -60,6 +60,7 @@ public class Juego {
 	public Ranking getRanking() {
 		return ranking;
 	}
+
 	public int getTiempo() {
 		return tiempo;
 	}
@@ -124,19 +125,19 @@ public class Juego {
 		if (seccionActual.estaSana()) {
 			avanzarSeccion();
 		}
-		
+
 		/*
-		 * Agregamos este TRY porque cuando Felix
-		 * choca con un pajaro, lo borramos y nos
+		 * Agregamos este TRY porque cuando Felix choca con un pajaro, lo borramos y nos
 		 * tira un error de concurrencia...
+		 * 
+		 * 
+		 * try { mapa.avanzarComponentes(); } catch(Exception e) { e.printStackTrace();}
+		 * 
 		 */
-		
-		try {
-			mapa.avanzarComponentes();
-		} catch(Exception e) {
-		}
+		mapa.avanzarComponentes();
 		checkTiempo();
 		felix.chequearInmunizacion();
+
 	}
 
 	public void pasarDeNivel() {
@@ -170,6 +171,7 @@ public class Juego {
 		HighScore hs = new HighScore(jugador);
 		ranking.agregarHighScore(hs);
 	}
+
 	/**
 	 * Hace la lógica para llevar la cuenta regresiva del tiempo
 	 */
@@ -200,12 +202,13 @@ public class Juego {
 					nivel.getVelocidadPajaro(), Orientacion.DERECHA, mapa));
 		}
 	}
+
 	public void avanzarSeccion() {
 		int nroSeccion = seccionActual.getNroSeccion();
 		if (nroSeccion < 3) {
 			System.out.println("Felix Jr. avanza de seccion");
 			// Crear pajaros acá
-			agregarPajaros(nroSeccion+1);
+			agregarPajaros(nroSeccion + 1);
 			mapa.borrarComponentesDeSeccion(seccionActual.getNroSeccion());
 			seccionActual = mapa.getEdificio().avanzarSeccion();
 			tiempo = nivel.getTiempo();
@@ -232,7 +235,7 @@ public class Juego {
 
 		ralph.getPosicion().moverY(Seccion.ALTO);
 		tiempo = nivel.getTiempo();
-		timer = new Contador(50);
+		timer = new Contador(500);
 	}
 
 	/**

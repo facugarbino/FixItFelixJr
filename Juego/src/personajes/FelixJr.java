@@ -1,5 +1,7 @@
 package personajes;
 
+import java.awt.Color;
+
 import componentes.Ladrillo;
 import componentes.Pajaro;
 import graficador.modelo.InformacionDibujable;
@@ -31,7 +33,7 @@ public class FelixJr extends Personaje {
 		puntajeSeccion = 0;
 		this.vidas = vidas;
 		caracter = 'F';
-		timer = new Contador(500);
+		timer = new Contador(5000);
 	}
 
 	/**
@@ -81,10 +83,7 @@ public class FelixJr extends Personaje {
 			} else {
 				System.out.println(ventanaActual.getPosicion() + "La ventana esta SANA");
 			}
-			if (ventanaActual.hayPastel()) {
-				ventanaActual.comerPastel();
-				inmunizar();
-			}
+			comerPastel();
 		} else {
 			System.out.println("Felix no se puede mover a la " + o + ". Hay un obstaculo");
 		}
@@ -130,6 +129,13 @@ public class FelixJr extends Personaje {
 		inmune = false;
 	}
 	
+	public void comerPastel() {
+		if (ventanaActual.hayPastel()) {
+			ventanaActual.comerPastel();
+			inmunizar();
+		}
+	}
+	
 	private void inmunizar() {
 		timer.resetear();
 		inmune = true;
@@ -164,6 +170,6 @@ public class FelixJr extends Personaje {
 	@Override
 	public InformacionDibujable getInformacionDibujable() {
 		Character c = ((inmune) ? 'ƒ' : 'F');
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), c);
+		return new InformacionDibujable(posicion.getX(), posicion.getY(), c, Color.BLUE);
 	}
 }

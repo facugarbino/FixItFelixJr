@@ -16,20 +16,20 @@ import utils.Posicion;
  *
  */
 public class Nivel {
-	private final double velocidadNube = 100;
+	private final int velocidadNube = 500;
 	private int nivelMax;
 	private int nroNivel;
 	private int cantVentanasRotas;
-	private double frecuenciaLadrillo;
-	private double velocidadLadrillo;
-	private double velocidadPajaro;
+	private int frecuenciaLadrillo;
+	private int velocidadLadrillo;
+	private int velocidadPajaro;
 	private int ventanasConObstaculo;
 	private int tiempo;
 	private int porcentaje;
 	private int cantLadrillos;
 
-	public Nivel(int nivelMax, int cantVentanasRotas, double frecuenciaLadrillo, double velocidadLadrillo,
-			double velocidadPajaro, int ventanasConObstaculo, int tiempo, int porcentaje, int cantLadrillos) {
+	public Nivel(int nivelMax, int cantVentanasRotas, int frecuenciaLadrillo, int velocidadLadrillo,
+			int velocidadPajaro, int ventanasConObstaculo, int tiempo, int porcentaje, int cantLadrillos) {
 		this.nivelMax = nivelMax;
 		this.cantVentanasRotas = cantVentanasRotas;
 		this.frecuenciaLadrillo = frecuenciaLadrillo;
@@ -99,15 +99,15 @@ public class Nivel {
 		return cantVentanasRotas;
 	}
 
-	public double getFrecuenciaLadrillo() {
+	public int getFrecuenciaLadrillo() {
 		return frecuenciaLadrillo;
 	}
 
-	public double getVelocidadLadrillo() {
+	public int getVelocidadLadrillo() {
 		return velocidadLadrillo;
 	}
 
-	public double getVelocidadPajaro() {
+	public int getVelocidadPajaro() {
 		return velocidadPajaro;
 	}
 

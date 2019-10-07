@@ -1,5 +1,7 @@
 package componentes;
 
+import java.awt.Color;
+
 import juego.Juego;
 import juego.Mapa;
 import utils.Contador;
@@ -10,11 +12,12 @@ public class Ladrillo extends Componente {
 	private static final int ANCHO = 3;
 	private Mapa mapa;
 
-	public Ladrillo(Posicion p, double velocidad, Mapa m) {
+	public Ladrillo(Posicion p, int velocidad, Mapa m) {
 		posicion = p;
 		timer = new Contador(velocidad);
 		mapa = m;
 		caracter = 'O';
+		color = new Color(95,2,31);
 	}
 
 	/**

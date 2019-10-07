@@ -3,6 +3,8 @@ package juego;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import componentes.Componente;
 import graficador.modelo.Dibujable;
 import utils.Posicion;
@@ -23,7 +25,13 @@ public class Mapa {
 
 	public Mapa(Edificio edificio) {
 		this.edificio = edificio;
-		componentes = new ArrayList<>();
+		/*
+		 * Usamos la clase CopyOnWriteArrayList para solucionar un problema de
+		 * concurrencia que teníamos cuando un pájaro golpea a Felix y se reinicia
+		 * la sección.
+		 */
+		componentes = new CopyOnWriteArrayList<>();
+		// componentes = new ArrayList<>();
 		componentesABorrar = new ArrayList<>();
 	}
 

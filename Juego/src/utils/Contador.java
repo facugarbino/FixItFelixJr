@@ -18,14 +18,14 @@ public class Contador {
 	 */
 
 	// private int contador;
-	private int limite;;
+	private int limite;
 	private long contador;
 
-	public Contador(double limite) {
+	public Contador(int limite) {
 		// this.limite = (int) (10000 * limite);
 		// contador = 0;
 		
-		this.limite = (int) (10 * limite);
+		this.limite = (int) (limite);
 		//el 10 lo usamos como escala, podrían cambiarse
 		//de acá todas las frecuencias a la vez
 		contador = System.currentTimeMillis();

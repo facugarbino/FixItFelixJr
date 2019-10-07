@@ -1,9 +1,11 @@
 package ventanas;
 
+import java.awt.Color;
 import java.util.*;
 
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
+import juego.Juego;
 import juego.Seccion;
 import utils.Orientacion;
 import utils.Posicion;
@@ -16,11 +18,11 @@ import ventanas.paneles.Panel;
 import ventanas.paneles.Roto;
 import ventanas.paneles.Sano;
 
-public abstract class Ventana implements Dibujable{
+public abstract class Ventana implements Dibujable {
 
 	public static final int ANCHO = 10;
 	public static final int ALTO = 20;
-	
+
 	protected Posicion posicion;
 	protected Seccion seccion;
 	private Pastel pastel;
@@ -30,11 +32,11 @@ public abstract class Ventana implements Dibujable{
 	protected int cantMartillazos;
 	protected int panelesRotos;
 	protected int panelesReparados;
-	Character caracter;
-	
+	Character caracter = '□';
 
 	/**
 	 * Método llamado por Felix para moverse
+	 * 
 	 * @param orientacion
 	 * @return la ventana que se encuentra en dicha dirección, si es que no hay
 	 *         obstáculos entre ellas, o null en caso contrario.
@@ -55,17 +57,18 @@ public abstract class Ventana implements Dibujable{
 	public Posicion getPosicion() {
 		return posicion;
 	}
-	
 
-	public InformacionDibujable getInformacionDibujable(){
-		return new InformacionDibujable(posicion.getX(),posicion.getY(), caracter);
-		
+	public InformacionDibujable getInformacionDibujable() {
+		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter,
+				(estaRota()) ? Color.RED : Color.GREEN);
+
 	}
+
 	/**
 	 * Método llamado por Felix cuando da un martillazo
 	 * 
 	 * @return true si el martillazo reparó algún panel o false en caso contrario,
-	 * ya sea porque no hay paneles rotos o porque falta dar otro martillazo
+	 *         ya sea porque no hay paneles rotos o porque falta dar otro martillazo
 	 */
 	public boolean reparar() {
 		if (estaRota()) {
@@ -75,13 +78,13 @@ public abstract class Ventana implements Dibujable{
 				while (i.hasNext() && !i.next().reparar())
 					;
 				panelesReparados++;
-				cantMartillazos=0;
+				cantMartillazos = 0;
 				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
-					caracter = '□';
-					if (nicelander!=null) {
+					//caracter = '□';
+					if (nicelander != null) {
 						this.nicelander = null;
-						seccion.setNicelander(false);
+						seccion.setNicelander(null);
 					}
 				}
 				return true;
@@ -95,28 +98,32 @@ public abstract class Ventana implements Dibujable{
 	}
 
 	public void comerPastel() {
+		seccion.borrarPastel(pastel);
 		pastel = null;
-		caracter = 'X';
 	}
 
 	public void generarNicelander() {
 		/*
-		 * Este método sólo lo sobreescribe VentanaComun,
-		 * pues es la única que genera Nicelanders
+		 * Este método sólo lo sobreescribe VentanaComun, pues es la única que genera
+		 * Nicelanders
 		 * 
 		 */
 	}
+
 	public void resetTimer() {
 		/*
-		 * Este método sólo lo sobreescribe VentanaComun,
-		 * pues es la única que tiene timer para resetear
+		 * Este método sólo lo sobreescribe VentanaComun, pues es la única que tiene
+		 * timer para resetear
 		 * 
 		 */
 	}
 
 	public void ponerPastel(Pastel comida) {
 		this.pastel = comida;
-		caracter = 'ó';
+		seccion.agregarPastel(pastel);
+		if (Juego.getJuego().getMapa().estaFelix(posicion, 1)) {
+			Juego.getJuego().getFelix().comerPastel();
+		}
 	}
 
 	private boolean tieneObstaculo(Orientacion o) {

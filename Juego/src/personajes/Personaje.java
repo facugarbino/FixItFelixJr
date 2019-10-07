@@ -12,9 +12,5 @@ public abstract class Personaje implements Dibujable{
 		return posicion;
 	}
 	
-	@Override
-	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter);
-	}
 	
 }

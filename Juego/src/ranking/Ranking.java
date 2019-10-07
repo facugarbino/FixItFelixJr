@@ -27,9 +27,8 @@ public class Ranking {
 			ObjectInputStream input = new ObjectInputStream(new FileInputStream("ranking.dat"));
 			scores = (ArrayList<HighScore>) input.readObject();
 			input.close();
-			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("No se encontro el archivo de ranking. Se crea.");
 			Jugador jug;
 			jug = new Jugador("Tati", 8900);
 			agregarHighScore(new HighScore(jug));

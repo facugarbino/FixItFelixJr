@@ -1,15 +1,14 @@
 package graficador.vista;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
-
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
-import juego.Edificio;
 import juego.Juego;
 import juego.Mapa;
 import utils.Orientacion;
@@ -25,7 +24,7 @@ public class Graficador {
 	private static final int margen = (int) (Mapa.ANCHO / 3.0);
 	private static Juego juego = Juego.getJuego();
 	private static Graphics gr;
-	private static boolean teclaPresionada;
+//	private static boolean teclaPresionada;
 
 	static {
 		frame.setSize(Mapa.ANCHO + 2 * margen, Mapa.ALTO + margen);
@@ -38,27 +37,16 @@ public class Graficador {
 		// Investigamos y agregamos este Listener para mover a Felix
 		// así se puede ver cómo funciona el resto del juego,
 		// pasando de sección y de nivel.
-		frame.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-
-			}
-
+		frame.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				//Usamos keyReleased porque 
+				// Usamos keyReleased porque
 				int key = e.getKeyCode();
 				if (key == KeyEvent.VK_P) {
 					juego.pausar();
 				} else {
 					if (!juego.estaPausado()) {
-						teclaPresionada = true;
+						// teclaPresionada = true;
 						switch (key) {
 						case (KeyEvent.VK_LEFT):
 							juego.moverFelix(Orientacion.IZQUIERDA);
@@ -101,8 +89,10 @@ public class Graficador {
 		while (var4.hasNext()) {
 			Dibujable i = (Dibujable) var4.next();
 			InformacionDibujable id = i.getInformacionDibujable();
+			gr.setColor(id.getColor());
 			gr.drawString(id.getRepresentacion().toString(), id.getX() + margen, ALTO - (id.getY()));
 		}
+		gr.setColor(Color.BLACK);
 		gr.drawString("Nivel: " + juego.getNroNivel(), 5, 20);
 		gr.drawString("Tiempo: " + juego.getTiempo(), 60, 20);
 		gr.drawString("Vidas: " + juego.getFelix().getVidas(), 5, 40);

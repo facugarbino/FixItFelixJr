@@ -1,5 +1,7 @@
 package componentes;
 
+import java.awt.Color;
+
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
 import juego.Mapa;
@@ -12,7 +14,8 @@ public abstract class Componente implements Dibujable {
 	protected Contador timer;
 	protected Mapa mapa;
 	protected Orientacion orientacion;
-	Character caracter;
+	protected Character caracter;
+	protected Color color;
 
 	public Posicion getPosicion() {
 		return posicion;
@@ -26,7 +29,7 @@ public abstract class Componente implements Dibujable {
 	}
 
 	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter);
+		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter, color);
 	}
 
 	protected abstract void comoAvanzo();

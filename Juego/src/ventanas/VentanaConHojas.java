@@ -21,7 +21,7 @@ public class VentanaConHojas extends Ventana {
 		cantMartillazos = 0;
 		cerrada = !tieneObstaculo;
 		paneles = new ArrayList<>();
-		caracter ='□';
+		//caracter ='□';
 		for (int i = 0; i < CANT_PANELES; i++) {
 			paneles.add(new Panel(new Sano()));
 		}
@@ -31,6 +31,8 @@ public class VentanaConHojas extends Ventana {
 			} else {
 				obstaculos.add(new HojaDerecha());
 			}
+		} else {
+			caracter = '■';
 		}
 	}
 

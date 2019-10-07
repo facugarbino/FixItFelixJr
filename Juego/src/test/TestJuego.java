@@ -35,7 +35,7 @@ public class TestJuego {
 	}
 
 	private static void loop() {
-		Contador timer = new Contador(10);
+		Contador timer = new Contador(100);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
 		List<Dibujable> lista = new ArrayList<Dibujable>();
 		while (true) {

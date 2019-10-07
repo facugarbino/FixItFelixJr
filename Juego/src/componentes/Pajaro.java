@@ -1,5 +1,7 @@
 package componentes;
 
+import java.awt.Color;
+
 import juego.Juego;
 import juego.Mapa;
 import utils.Contador;
@@ -10,11 +12,12 @@ public class Pajaro extends Componente {
 
 	private final int ANCHO = 15;
 	//sus coordenadas indican el centro
-	public Pajaro(Posicion p, double frecuencia, Orientacion o, Mapa m) {
+	public Pajaro(Posicion p, int frecuencia, Orientacion o, Mapa m) {
 		posicion = p;
 		timer = new Contador(frecuencia);
 		orientacion = o;
 		caracter = 'P';
+		color = Color.BLACK;
 		mapa = m;
 	}
 
