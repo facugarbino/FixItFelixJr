@@ -78,6 +78,7 @@ public abstract class Ventana implements Dibujable{
 				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
 					caracter = '□';
+					this.nicelander = null;
 				}
 				return true;
 			}

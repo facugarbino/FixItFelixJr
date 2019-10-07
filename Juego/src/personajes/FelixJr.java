@@ -24,7 +24,7 @@ public class FelixJr extends Personaje {
 		puntajeSeccion = 0;
 		this.vidas = vidas;
 		caracter = 'F';
-		timer = new Contador(2000);
+		timer = new Contador(500);
 	}
 
 	/**
@@ -106,9 +106,11 @@ public class FelixJr extends Personaje {
 	 * encuentra
 	 */
 	public void golpear(Pajaro pajaro) {
-		Juego.getJuego().reiniciarSeccion();
-		puntajeSeccion = 0;
-		System.out.println("Felix es golpeado por un pájaro, reinicia la seccion");
+		if (!inmune) {
+			Juego.getJuego().reiniciarSeccion();
+			puntajeSeccion = 0;
+			System.out.println("Felix es golpeado por un pájaro, reinicia la seccion");
+		}
 	}
 
 	public int getVidas() {
@@ -117,6 +119,7 @@ public class FelixJr extends Personaje {
 
 	private void inmunizar() {
 		inmune = true;
+		timer.resetear();
 		System.out.println("Felix come un pastel. Se inmuniza.");
 	}
 

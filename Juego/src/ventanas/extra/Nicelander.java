@@ -14,12 +14,13 @@ public class Nicelander {
 	public Nicelander(Color color, Ventana ventana) {
 		this.color = color;
 		this.ventana = ventana;
-		timer = new Contador(3000);
+		timer = new Contador(500);
 	}
 
 	public boolean ponerPastel() {
 		if (timer.contar()) {
 			ventana.ponerPastel(new Pastel());
+			ventana.getSeccion().setNicelander(false);
 			System.out.println("Nicelander pone pastel en " + ventana.getPosicion());
 			return true;
 		}

@@ -29,7 +29,7 @@ public class VentanaComun extends Ventana {
 			caracter = 'X';
 			paneles = getPanelesRotosRandom(CANT_PANELES);
 		} else {
-			caracter ='□';
+			caracter = '□';
 			panelesRotos = 0;
 			for (int i = 0; i < CANT_PANELES; i++) {
 				paneles.add(new Panel(new Sano()));
@@ -51,31 +51,34 @@ public class VentanaComun extends Ventana {
 	}
 
 	/**
-	 * Decide si poner un Nicelander en el panel
-	 * inferior de la ventana
+	 * Decide si poner un Nicelander en el panel inferior de la ventana
 	 * 
 	 */
 	public void generarNicelander() {
-		if (!yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
-			nicelander = new Nicelander(
-					new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
-					this);
-			System.out.println("Se asoma un Nicelander en la ventana "+ this.posicion);
-			yaHuboNicelander = true;
-			caracter = '®';
-		} else {
-			if (nicelander!=null) {
-				if (nicelander.ponerPastel()) {
-					nicelander = null;
+		if (!seccion.hayNicelander()) {
+			if (!yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
+				nicelander = new Nicelander(
+						new Color((float) Math.random(), (float) Math.random(), (float) Math.random()), this);
+				seccion.setNicelander(true);
+				yaHuboNicelander = true;
+				System.out.println("Se asoma un Nicelander en la ventana " + this.posicion);
+				caracter = '®';
+			} else {
+				if (nicelander != null) {
+					if (nicelander.ponerPastel()) {
+						nicelander = null;
+					}
 				}
 			}
+		} else {
+			timer.resetear();
 		}
 	}
 
 	/**
 	 * 
-	 * @return si el panel inferior estÃ¡ completamente
-	 * roto (si es elegible para que aparezca un Nicelander)
+	 * @return si el panel inferior estÃ¡ completamente roto (si es elegible para
+	 *         que aparezca un Nicelander)
 	 */
 	private boolean elDeAbajoEstaRoto() {
 		return (paneles.get(0).estaRoto());

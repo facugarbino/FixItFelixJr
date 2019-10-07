@@ -28,6 +28,7 @@ public class Seccion {
 	private int ventanasReparadas;
 	private int nroSeccion;
 	protected Ventana[][] ventanas;
+	protected boolean nicelander;
 
 	/**
 	 * @see constructor usado para reiniciar una sección (debe generarse
@@ -54,7 +55,7 @@ public class Seccion {
 			ventanasRotas = 15;
 
 		this.ventanasRotas = ventanasRotas;
-
+		this.nicelander = false;
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		this.nroSeccion = nroSeccion;
 		ventanasReparadas = 0;
@@ -209,5 +210,13 @@ public class Seccion {
 			}
 		}
 		return lista;
+	}
+
+	public boolean hayNicelander() {
+		return this.nicelander;
+	}
+
+	public void setNicelander(boolean boleano) {
+		this.nicelander = boleano;
 	}
 }
