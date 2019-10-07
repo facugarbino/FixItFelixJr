@@ -29,8 +29,8 @@ public class Juego {
 	private Ralph ralph;
 	private int tiempo;
 	private Contador timer;
-	private boolean pausa;
 	private Seccion seccionActual;
+	private boolean pausa;
 	private boolean primeraVez;
 	private boolean yaGano;
 
@@ -120,7 +120,7 @@ public class Juego {
 	/**
 	 * Se encarga de actualizar el estado del juego, se ejecuta constantemente
 	 */
-	public void hacerTodo() {
+	public void actualizar() {
 		ralph.mover();
 		Ladrillo l = ralph.tirarLadrillo();
 		if (l != null) {

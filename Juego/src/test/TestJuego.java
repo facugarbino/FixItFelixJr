@@ -65,7 +65,7 @@ public class TestJuego {
 					lista.add(j.getFelix());
 					Graficador.refrescarTopDown(lista);
 				}
-				j.hacerTodo();
+				j.actualizar();
 			} else {
 				if (j.yaGano()) {
 					Graficador.mensaje("HAS GANADO!");
