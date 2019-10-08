@@ -67,7 +67,7 @@ public class Mapa {
 
 	/**
 	 * 
-	 * @param p        posicion del componente
+	 * @param p        posicion del componente (su centro)
 	 * @param diametro lado del cuadrado que forma
 	 * @return <b>true</b> si colisiona con Felix, <b>false</b> si no se chocan
 	 */
