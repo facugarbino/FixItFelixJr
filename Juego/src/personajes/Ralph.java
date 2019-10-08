@@ -46,12 +46,14 @@ public class Ralph extends Personaje {
 		posicion = p;
 		estaTirando = false;
 		caracter = 'R';
+		orientacion = Orientacion.ABAJO;
 	}
 
 	/**
 	 * Ralph decide si se mueve y hacia dónde
 	 */
 	public void mover() {
+		caracter = caracterSegunOrientacion(orientacion);
 		if (!estaTirando) {
 			if (timerCaminar.contar()) {
 				timerCaminar.resetear();
@@ -91,7 +93,6 @@ public class Ralph extends Personaje {
 				// System.out.println("Ralph se mueve a la derecha");
 			}
 		}
-		caracter = caracterSegunOrientacion(orientacion);
 	}
 
 	private Character caracterSegunOrientacion(Orientacion o) {
@@ -160,6 +161,6 @@ public class Ralph extends Personaje {
 
 	@Override
 	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), 'R', Color.BLACK);
+		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter, Color.BLACK);
 	}
 }

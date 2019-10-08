@@ -21,6 +21,10 @@ public class Contador {
 	private int limite;
 	private long contador;
 
+	/**
+	 * 
+	 * @param limite la cantidad de milisegundos a contar
+	 */
 	public Contador(int limite) {
 		// this.limite = (int) (10000 * limite);
 		// contador = 0;

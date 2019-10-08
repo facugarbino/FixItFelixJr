@@ -31,6 +31,6 @@ public class Nicelander implements Dibujable{
 
 	@Override
 	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(ventana.getPosicion().getX(), ventana.getPosicion().getY(),'®', color);
+		return new InformacionDibujable(ventana.getPosicion().getX(), ventana.getPosicion().getY(),'@', color);
 	}
 }

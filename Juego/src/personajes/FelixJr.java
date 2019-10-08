@@ -106,7 +106,7 @@ public class FelixJr extends Personaje {
 			}
 		}
 	}
-
+	
 	/**
 	 * Responde a que un pájaro lo golpee, reiniciando la sección donde ese
 	 * encuentra

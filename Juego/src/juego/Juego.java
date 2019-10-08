@@ -36,11 +36,10 @@ public class Juego {
 
 	/**
 	 * 
-	 * @return la única de instancia del juuego
-	 * y, si no existe, la devuelve
+	 * @return la única de instancia del juuego y, si no existe, la devuelve
 	 */
 	public static Juego getInstance() {
-		if (juego==null) {
+		if (juego == null) {
 			juego = new Juego();
 			System.out.println("Comienza el juego.");
 		}
@@ -49,9 +48,9 @@ public class Juego {
 
 	public void setJugador(String nombre) {
 		jugador = new Jugador(nombre);
-		System.out.println("Juega: "+ nombre);
+		System.out.println("Juega: " + nombre);
 	}
-	
+
 	private Juego() {
 		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
 		nivel = new Nivel(10, 25, 10000, 50, 130, 6, 300, 10, 40);
@@ -59,7 +58,6 @@ public class Juego {
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador("Anonimo");
 		ranking = new Ranking();
-		Jugador jug;
 		primeraVez = true;
 		pasarDeNivel();
 		pausa = false;
@@ -185,8 +183,12 @@ public class Juego {
 			// System.out.println("Tiempo: " + tiempo);
 			timer.resetear();
 			tiempo--;
-			if (tiempo < 1) {
-				perder(felix.getPuntaje());
+			if (tiempo < 0) {
+				if (felix.getVidas() > 1) {
+					reiniciarNivel(felix.getVidas() - 1);
+				} else {
+					perder(felix.getPuntaje());
+				}
 			}
 		}
 	}
