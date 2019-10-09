@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import componentes.Componente;
+import componentes.Nube;
 import graficador.modelo.Dibujable;
 import utils.Posicion;
 
@@ -89,6 +90,11 @@ public class Mapa {
 		return (num >= a && num <= b);
 	}
 
+	/**
+	 * Borra todos los componentes pertenecientes a esa sección
+	 * 
+	 * @param nroSeccion número de sección (1, 2 o 3)
+	 */
 	public void borrarComponentesDeSeccion(int nroSeccion) {
 		Iterator<Componente> ite = componentes.iterator();
 		Componente c;

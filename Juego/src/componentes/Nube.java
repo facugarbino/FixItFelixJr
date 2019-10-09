@@ -9,7 +9,7 @@ import utils.Posicion;
 
 public class Nube extends Componente {
 
-	private int ANCHO = 30;
+	private int ANCHO = 20;
 
 	public Nube(Posicion p, int frecuencia) {
 		posicion = p;
@@ -30,7 +30,7 @@ public class Nube extends Componente {
 					comoAvanzo();
 				}
 			} else {
-				if (posicion.getX() < (200 - (ANCHO))) {
+				if (posicion.getX() < (200)) {
 					posicion.moverX(1);
 				} else {
 					setOrientacion(Orientacion.IZQUIERDA);

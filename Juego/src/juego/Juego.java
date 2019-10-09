@@ -1,6 +1,7 @@
 package juego;
 
 import componentes.Ladrillo;
+import componentes.Nube;
 import componentes.Pajaro;
 import personajes.FelixJr;
 import personajes.Ralph;
@@ -13,8 +14,8 @@ import ventanas.Ventana;
 
 /**
  * Se encarga del funcionamiento general del juego. Hace falta llamar a su
- * método hacerTodo() indefinidamente para que funcione. Es un singleton. La
- * única instancia se obtiene con el método getJuego()
+ * método actualizar() indefinidamente para que funcione. Es un singleton. La
+ * única instancia se obtiene con el método getInstance()
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -36,7 +37,7 @@ public class Juego {
 
 	/**
 	 * 
-	 * @return la única de instancia del juuego y, si no existe, la devuelve
+	 * @return la única de instancia del juuego y, si no existe, la genera
 	 */
 	public static Juego getInstance() {
 		if (juego == null) {
@@ -128,14 +129,13 @@ public class Juego {
 		if (seccionActual.estaSana()) {
 			avanzarSeccion();
 		}
-
 		/*
-		 * Agregamos este TRY porque cuando Felix choca con un pajaro, lo borramos y nos
+		 * Agregamos este TRY porque cuando Felix choca con un pajaro, nos
 		 * tira un error de concurrencia...
-		 * 
 		 * 
 		 * try { mapa.avanzarComponentes(); } catch(Exception e) { e.printStackTrace();}
 		 * 
+		 * Al final, lo solucionamos con el CopyOnWriteArrayList
 		 */
 		mapa.avanzarComponentes();
 		checkTiempo();
@@ -268,6 +268,11 @@ public class Juego {
 		mapa.getEdificio().reemplazarSeccion(seccionActual);
 		seccionActual = mapa.getEdificio().getSeccionActual();
 		agregarPajaros(seccionActual.getNroSeccion());
+		switch (seccionActual.getNroSeccion()){
+			case 1: mapa.agregarComponente(new Nube(new Posicion(0, 60), nivel.getVelocidadNube())); break;
+			case 2: mapa.agregarComponente(new Nube(new Posicion(0, 130), nivel.getVelocidadNube())); break;
+			case 3: mapa.agregarComponente(new Nube(new Posicion(0, 245), nivel.getVelocidadNube())); break;
+		}
 		Ventana v = seccionActual.getVentanaInicial();
 		felix.setVentana(v);
 		felix.setPosicion(v.getPosicion().copia());

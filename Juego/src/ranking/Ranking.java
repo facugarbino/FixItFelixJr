@@ -9,9 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import juego.Jugador;
 
-
 /**
- * Almacena el ranking (hasta 5 jugadores) del juego.
+ * Almacena el ranking (hasta 5 HighScores) del juego.
  * 
  * @author Garbino y Rodríguez Murphy
  *
@@ -28,7 +27,7 @@ public class Ranking {
 			scores = (ArrayList<HighScore>) input.readObject();
 			input.close();
 		} catch (Exception e) {
-			System.out.println("No se encontro el archivo de ranking. Se crea.");
+			System.out.println("No se encontró el archivo de ranking. Se crea.");
 			Jugador jug;
 			jug = new Jugador("Tati", 8900);
 			agregarHighScore(new HighScore(jug));
@@ -61,17 +60,23 @@ public class Ranking {
 		}
 	}
 
+	/**
+	 * 
+	 * @return una lista ordenada descendentemente con los
+	 * 5 mejores puntajes históricos
+	 */
 	public List<HighScore> getTop5() {
-		return this.copia();
+		return this.scores;
+		//return this.copia();
 	}
 
-	private List<HighScore> copia() {
-		Iterator<HighScore> iterator = scores.iterator();
-		List<HighScore> lista = new ArrayList<>();
-		while (iterator.hasNext()) {
-			lista.add(iterator.next());
-		}
-		return lista;
-	}
+//	private List<HighScore> copia() {
+//		Iterator<HighScore> iterator = scores.iterator();
+//		List<HighScore> lista = new ArrayList<>();
+//		while (iterator.hasNext()) {
+//			lista.add(iterator.next());
+//		}
+//		return lista;
+//	}
 
 }

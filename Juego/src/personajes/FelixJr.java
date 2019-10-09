@@ -13,7 +13,7 @@ import utils.Posicion;
 import ventanas.Ventana;
 
 /**
- * Representa al FelixJr de un determinado nivel. 
+ * Representa al FelixJr de un determinado nivel.
  * 
  * @author Garbino y Rodríguez Murphy
  *
@@ -78,14 +78,10 @@ public class FelixJr extends Personaje {
 				break;
 			}
 			System.out.println("Felix se mueve a la posicion " + getPosicion());
-			if (ventanaActual.estaRota()) {
-				System.out.println(ventanaActual.getPosicion() + "La ventana esta rota");
-			} else {
-				System.out.println(ventanaActual.getPosicion() + "La ventana esta SANA");
-			}
+			System.out.println(ventanaActual.estaRota() ? "La ventana está ROTA" : "La ventana está SANA");
 			comerPastel();
 		} else {
-			System.out.println("Felix no se puede mover a la " + o + ". Hay un obstaculo");
+			System.out.println("Felix no se puede mover a " + o + ". Hay un obstaculo");
 		}
 	}
 
@@ -106,7 +102,7 @@ public class FelixJr extends Personaje {
 			}
 		}
 	}
-	
+
 	/**
 	 * Responde a que un pájaro lo golpee, reiniciando la sección donde ese
 	 * encuentra
@@ -128,14 +124,14 @@ public class FelixJr extends Personaje {
 		ventanaActual = s.getVentanaInicial();
 		inmune = false;
 	}
-	
+
 	public void comerPastel() {
 		if (ventanaActual.hayPastel()) {
 			ventanaActual.comerPastel();
 			inmunizar();
 		}
 	}
-	
+
 	private void inmunizar() {
 		timer.resetear();
 		inmune = true;

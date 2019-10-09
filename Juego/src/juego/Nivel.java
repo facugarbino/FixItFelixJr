@@ -16,7 +16,7 @@ import utils.Posicion;
  *
  */
 public class Nivel {
-	private final int velocidadNube = 500;
+	private final int velocidadNube = 250;
 	private int nivelMax;
 	private int nroNivel;
 	private int cantVentanasRotas;
@@ -63,8 +63,8 @@ public class Nivel {
 		Edificio e = new Edificio(new Posicion(50, 0), secciones);
 		Mapa m = new Mapa(e);
 		m.agregarComponente(new Nube(new Posicion(0, 60), velocidadNube));
-		m.agregarComponente(new Nube(new Posicion(50, 130), velocidadNube));
-		m.agregarComponente(new Nube(new Posicion(100, 245), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, 130), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(Edificio.ANCHO*2, 245), velocidadNube));
 		// Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
 		// y dos pajaros en la ultima seccion
 //		if (Math.random() < 0.5) {
@@ -129,6 +129,10 @@ public class Nivel {
 
 	public int getCantLadrillos() {
 		return cantLadrillos;
+	}
+
+	public int getVelocidadNube() {
+		return velocidadNube;
 	}
 
 }

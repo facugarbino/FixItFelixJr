@@ -4,7 +4,7 @@ package utils;
  * Se usa para el timing de las acciones que se deben llevar a cabo
  * repetidamente en el tiempo.
  * 
- * @author facu
+ * @author Garbino y Rodríguez Murphy
  *
  */
 public class Contador {
@@ -12,7 +12,7 @@ public class Contador {
 	/*
 	 * Las sentencias comentadas son la forma anterior en que estaba implementada la
 	 * clase Contador, pero posiblemente la cantidad de veces por segundo que se
-	 * ejecutan los métodos pueda variar según la carga del procesador. Por eso,
+	 * ejecutan los métodos pueda variar según el procesador y su carga de trabajo. Por eso,
 	 * mejor usamos el tiempo del sistema para comparar si ya ha pasado cierta
 	 * cantidad de milisegundos.
 	 */
@@ -30,8 +30,6 @@ public class Contador {
 		// contador = 0;
 		
 		this.limite = (int) (limite);
-		//el 10 lo usamos como escala, podrían cambiarse
-		//de acá todas las frecuencias a la vez
 		contador = System.currentTimeMillis();
 	}
 

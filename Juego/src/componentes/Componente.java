@@ -9,6 +9,13 @@ import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 
+/**
+ * Clase abstracta que representa a los componentes
+ * que están en el aire en el mapa y se mueven.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public abstract class Componente implements Dibujable {
 	protected Posicion posicion;
 	protected Contador timer;

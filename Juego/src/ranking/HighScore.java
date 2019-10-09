@@ -3,7 +3,12 @@ package ranking;
 import java.io.Serializable;
 
 import juego.Jugador;
-
+/**
+ * 
+ * Representa a un HighScore (con el nombre del jugador y su puntaje)
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 //Implementa Serializable para poder ser escrito/leído de un archivo binario.
 @SuppressWarnings("serial")
 public class HighScore implements Comparable<HighScore>, Serializable {
@@ -24,9 +29,6 @@ public class HighScore implements Comparable<HighScore>, Serializable {
 	}
 
 	public int compareTo(HighScore j) {
-		// Devolvemos > 0 si el receptor es menor, para ordenar
-		// el arreglo descendentemente.
-		//return (int) (j.getPuntaje() - this.puntaje);
 		return (int) (this.puntaje - j.getPuntaje());
 	}
 	

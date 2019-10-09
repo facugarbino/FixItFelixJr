@@ -18,6 +18,12 @@ import ventanas.paneles.Panel;
 import ventanas.paneles.Roto;
 import ventanas.paneles.Sano;
 
+/**
+ * Clase abstracta que representa a una ventana de cualquier tipo. 
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public abstract class Ventana implements Dibujable {
 
 	public static final int ANCHO = 10;

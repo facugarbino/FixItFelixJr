@@ -1,11 +1,8 @@
 package test;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,10 +25,21 @@ public class TestJuego {
 	public static Juego j;
 
 	public static void main(String[] args) {
-		String nombre = JOptionPane.showInputDialog(new JFrame("Fix it Felix Jr."), "Nombre: ");		
+		String nombre = preguntarNombre();
+		while (nombre != null && nombre.equals("")) {
+			nombre = preguntarNombre();
+		}
+		if (nombre == null) {
+			System.exit(0);
+		}
 		j = Juego.getInstance();
 		j.setJugador(nombre);
 		loop();
+	}
+
+	private static String preguntarNombre() {
+		return JOptionPane.showInputDialog(null, "Fix it Felix Jr.", "Inserte su Nombre: ",
+				JOptionPane.QUESTION_MESSAGE);
 	}
 
 	private static void loop() {
@@ -46,17 +54,23 @@ public class TestJuego {
 					 * Pero mayoritariamente es golpeado por un ladrillo o tarda mucho en romper
 					 * todos los paneles.
 					 * 
-					 * ---------------------IMPORTANTE--------------------- Entonces, investigamos e
-					 * hicimos que se pueda jugar desde el graficador, usando las teclas.
-					 * ----------------------------------------------------
+					 * --------------------------------IMPORTANTE----------------------------------
+					 * Entonces, hicimos que se pueda jugar desde el graficador, usando las teclas.
+					 * ----------------------------------------------------------------------------
 					 * 
-					 * double rnd = Math.random(); if (rnd < 0.25)
-					 * j.getFelix().mover(Orientacion.IZQUIERDA); else if (rnd < 0.50)
-					 * j.getFelix().mover(Orientacion.DERECHA); else if (rnd < 0.75)
-					 * j.getFelix().mover(Orientacion.ABAJO); else
-					 * j.getFelix().mover(Orientacion.ARRIBA);
-					 * System.out.println("Felix se ha movido a " + j.getFelix().getPosicion()); for
-					 * (int i = 0; i < 4; i++) { j.darMartillazo(); }
+					 * double rnd = Math.random(); 
+					 * if (rnd < 0.25)
+					 * 		j.getFelix().mover(Orientacion.IZQUIERDA); 
+					 * else if (rnd < 0.50)
+					 * 		j.getFelix().mover(Orientacion.DERECHA); 
+					 * else if (rnd < 0.75)
+					 * 		j.getFelix().mover(Orientacion.ABAJO); 
+					 * else
+					 * 		j.getFelix().mover(Orientacion.ARRIBA);
+					 * for(int i = 0; i < 4; i++) { 
+					 * 		j.darMartillazo(); 
+					 * }
+					 * 
 					 */
 					timer.resetear();
 					// Grafica todo
@@ -82,10 +96,10 @@ public class TestJuego {
 		System.out.println(j.getRanking().getTop5().toString());
 		mostrarRanking();
 	}
-	
+
 	private static void mostrarRanking() {
 		JFrame frame = new JFrame("Ranking");
-		frame.setSize(500,100);
+		frame.setSize(500, 100);
 		JLabel label = new JLabel(j.getRanking().getTop5().toString());
 		frame.add(label);
 		frame.setVisible(true);

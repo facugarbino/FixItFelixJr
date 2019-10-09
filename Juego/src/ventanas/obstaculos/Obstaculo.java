@@ -2,6 +2,12 @@ package ventanas.obstaculos;
 
 import utils.Orientacion;
 
+/**
+ * Clase abstracta que representa a un obstáculo de cualquier tipo.
+ * 
+ * @author Garbino y Rodríguez Murphy
+ *
+ */
 public abstract class Obstaculo {
 
 	/**
