@@ -143,6 +143,7 @@ public class Ralph extends Personaje {
 				estaTirando = true;
 				orientacion = Orientacion.ABAJO;
 				ladrillosTirados = 0;
+				//Cantidad variable de ladrillos que Ralph tira cada vez que se pone a tirar
 				ladrillosQueTieneQuetirar = (int)(Math.random()*3+1);
 				timerFrecuencia.resetear();
 				// System.out.println("Ralph se pone a tirar ladrillos");

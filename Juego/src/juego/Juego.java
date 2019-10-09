@@ -130,8 +130,8 @@ public class Juego {
 			avanzarSeccion();
 		}
 		/*
-		 * Agregamos este TRY porque cuando Felix choca con un pajaro, nos
-		 * tira un error de concurrencia...
+		 * Agregamos este TRY porque cuando Felix choca con un pajaro, nos tira un error
+		 * de concurrencia...
 		 * 
 		 * try { mapa.avanzarComponentes(); } catch(Exception e) { e.printStackTrace();}
 		 * 
@@ -209,6 +209,20 @@ public class Juego {
 					nivel.getVelocidadPajaro(), Orientacion.DERECHA, mapa));
 		}
 	}
+	
+	private void agregarNubes(int nroSeccion) {
+		if (nroSeccion == 1) {
+			mapa.agregarComponente(new Nube(new Posicion(0, Edificio.ALTO/7), nivel.getVelocidadNube()));
+		} else {
+			if (nroSeccion==2) {
+				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO/2, Edificio.ALTO/3), nivel.getVelocidadNube()));
+				agregarNubes(1);
+			} else {
+				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, (int)(Edificio.ALTO/1.6)), nivel.getVelocidadNube()));
+				agregarNubes(2);
+			}
+		}
+	}
 
 	public void avanzarSeccion() {
 		int nroSeccion = seccionActual.getNroSeccion();
@@ -217,6 +231,7 @@ public class Juego {
 			// Crear pajaros acá
 			agregarPajaros(nroSeccion + 1);
 			mapa.borrarComponentesDeSeccion(seccionActual.getNroSeccion());
+			agregarNubes(nroSeccion);
 			seccionActual = mapa.getEdificio().avanzarSeccion();
 			tiempo = nivel.getTiempo();
 			felix.subirDeSeccion(seccionActual);
@@ -268,11 +283,7 @@ public class Juego {
 		mapa.getEdificio().reemplazarSeccion(seccionActual);
 		seccionActual = mapa.getEdificio().getSeccionActual();
 		agregarPajaros(seccionActual.getNroSeccion());
-		switch (seccionActual.getNroSeccion()){
-			case 1: mapa.agregarComponente(new Nube(new Posicion(0, 60), nivel.getVelocidadNube())); break;
-			case 2: mapa.agregarComponente(new Nube(new Posicion(0, 130), nivel.getVelocidadNube())); break;
-			case 3: mapa.agregarComponente(new Nube(new Posicion(0, 245), nivel.getVelocidadNube())); break;
-		}
+		agregarNubes(seccionActual.getNroSeccion());
 		Ventana v = seccionActual.getVentanaInicial();
 		felix.setVentana(v);
 		felix.setPosicion(v.getPosicion().copia());
