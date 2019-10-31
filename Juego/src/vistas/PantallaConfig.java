@@ -25,7 +25,7 @@ public class PantallaConfig extends JFrame {
 	private JPanel contentPane;
 	private JLabel titulo;
 	private JComboBox<String> comboLetras = new JComboBox<>();
-	private JComboBox<String> comboNivel = new JComboBox<>();
+	private JComboBox<Integer> comboNivel = new JComboBox<>();
 	private JLabel lblLetras = new JLabel();
 	private JLabel lblNivel = new JLabel();
 	private static PantallaConfig INSTANCE;
@@ -69,7 +69,7 @@ public class PantallaConfig extends JFrame {
 		contentPane.add(comboLetras);
 
 		comboNivel.setModel(
-				new DefaultComboBoxModel<String>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+				new DefaultComboBoxModel<Integer>(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }));
 		comboNivel.setBounds(276, 176, 116, 24);
 		comboNivel.setBackground(Color.BLACK);
 		comboNivel.setForeground(Color.RED);
@@ -77,18 +77,18 @@ public class PantallaConfig extends JFrame {
 		comboNivel.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-			          int item = Integer.parseInt((String) arg0.getItem());
+			          int item = (int) arg0.getItem();
 			       }
 			}
 		});
 		contentPane.add(comboNivel);
 
 		lblLetras.setBounds(42, 118, 177, 34);
-		lblLetras.setIcon(new ImagenTextual("letras_a_usar:", 1.5, ColorDeLetra.ROJO).getImageIcon());
+		lblLetras.setIcon(new ImagenTextual("letras a usar:", 1.5, ColorDeLetra.ROJO).getImageIcon());
 		contentPane.add(lblLetras);
 
 		lblNivel.setBounds(42, 176, 216, 24);
-		lblNivel.setIcon(new ImagenTextual("nivel_de_comienzo:", 1.5, ColorDeLetra.ROJO).getImageIcon());
+		lblNivel.setIcon(new ImagenTextual("nivel de comienzo:", 1.5, ColorDeLetra.ROJO).getImageIcon());
 		contentPane.add(lblNivel);
 	}
 

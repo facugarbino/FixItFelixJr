@@ -8,6 +8,16 @@ import javax.sound.sampled.LineUnavailableException;
 public class Audio {
 
 	private Clip musicaApertura;
+	private Clip arregloPanel;
+	private Clip choqueLadrillo;
+	private Clip comerPastel;
+	private Clip inicioDeJuego;
+	private Clip musicaFondo;
+	private Clip bloqueado;
+	private Clip levelUp;
+	private Clip perdio;
+	private Clip seccionUp;
+	
 	private static Audio INSTANCE = null;
 
 	public static Audio getInstance() {
@@ -32,13 +42,8 @@ public class Audio {
 		}
 	}
 
-	public void musicaApertura(boolean bool) {
-		if (bool) {
-			musicaApertura.start();
-			musicaApertura.loop(0);
-		} else {
-			musicaApertura.stop();
-		}
+	public void musicaApertura() {
+		musicaApertura.start();
 	}
 	
 	/*

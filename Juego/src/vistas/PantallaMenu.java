@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Audio;
+import test.TestJuego;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -48,7 +49,6 @@ public class PantallaMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaMenu() {
-		Audio.getInstance().musicaApertura(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 360);
 		//Esto es para que el frame se abra en el centro de la pantalla
@@ -63,7 +63,7 @@ public class PantallaMenu extends JFrame {
 		
 		botonConfiguracion = new JLabel();
 		botonConfiguracion.setHorizontalAlignment(SwingConstants.CENTER);
-		botonConfiguracion.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoConfig.png")));
+		botonConfiguracion.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoConfig.png")));
 		botonConfiguracion.setBounds(487,12,70,70);
 		botonConfiguracion.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -83,7 +83,7 @@ public class PantallaMenu extends JFrame {
 		botonInstrucciones.setBounds(49, 150, 130, 130);
 		botonInstrucciones.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
+				PantallaInstrucciones.getInstance().setVisible(true);
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoInstrucciones130.png")));
@@ -100,7 +100,9 @@ public class PantallaMenu extends JFrame {
 		botonJugar.setBounds(228, 150, 130, 130);
 		botonJugar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
+				TestJuego.main(new String[] {
+						
+				});
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay130.png")));
@@ -136,5 +138,6 @@ public class PantallaMenu extends JFrame {
 		contentPane.add(botonRanking);
 		contentPane.add(botonConfiguracion);
 		contentPane.add(titulo);
+		Audio.getInstance().musicaApertura();
 	}
 }

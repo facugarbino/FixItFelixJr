@@ -32,6 +32,7 @@ public class PantallaRanking extends JFrame {
 		if (INSTANCE == null) {
 			INSTANCE = new PantallaRanking();
 		}
+		INSTANCE.actualizar();
 		return INSTANCE;
 	}
 
@@ -64,29 +65,7 @@ public class PantallaRanking extends JFrame {
 		tabla.setRowHeight(70);
 		tabla.setBackground(Color.BLACK);
 		tabla.setBounds(25, 100, 700, 400);
-		Object[][] rows = new Object[5][2];
-		List<HighScore> tops = ranking.getTop5();
-		int tamaño = 3;
-		
-		for (int i=0;i<5;i++) {
-			rows[i][0] = new ImagenTextual(tops.get(i).getNombre(), tamaño, ColorDeLetra.ROJO).getImageIcon();
-			rows[i][1] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO).getImageIcon();
-		}
-		/*
-		rows[0][0] = new ImagenTextual("abc",tamaño, ColorDeLetra.ROJO).getImageIcon();
-		rows[0][1] = new ImagenTextual("abcabcc",tamaño, ColorDeLetra.ROJO).getImageIcon();
-		rows[1][0] = new ImagenTextual("acabcabc",tamaño, ColorDeLetra.ROJO).getImageIcon();
-		rows[1][1] = new ImagenTextual("abcabccc",tamaño, ColorDeLetra.ROJO).getImageIcon();
-		rows[2][0] = new ImagenTextual("abacc",tamaño, ColorDeLetra.ROJO).getImageIcon();
-		rows[2][1] = new ImagenTextual("abccaabcc",tamaño, ColorDeLetra.ROJO).getImageIcon();
-		*/
-		String[] columns = {"nombre","puntaje"};
-		tabla.setModel( new DefaultTableModel(rows, columns) {			
-			 @Override
-			    public Class<?> getColumnClass(int column) {
-				 return ImageIcon.class;
-			    }
-		});
+		actualizar();
 		tabla.getColumnModel().getColumn(0).setPreferredWidth(400);
 		tabla.getColumnModel().getColumn(1).setPreferredWidth(300);
 		contentPane.add(tabla);
@@ -96,5 +75,23 @@ public class PantallaRanking extends JFrame {
 		titulo.setIcon(new ImagenTextual("ranking", 5, ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
 
+	}
+
+	private void actualizar() {
+		Object[][] rows = new Object[5][2];
+		List<HighScore> tops = ranking.getTop5();
+		int tamaño = 3;
+		
+		for (int i=0;i<5;i++) {
+			rows[i][0] = new ImagenTextual(tops.get(i).getNombre(), tamaño, ColorDeLetra.ROJO).getImageIcon();
+			rows[i][1] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO).getImageIcon();
+		}
+		String[] columns = {"nombre","puntaje"};
+		tabla.setModel( new DefaultTableModel(rows, columns) {			
+			 @Override
+			    public Class<?> getColumnClass(int column) {
+				 return ImageIcon.class;
+			    }
+		});
 	}
 }
