@@ -1,17 +1,21 @@
 package vistas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import juego.Juego;
+import ranking.HighScore;
 import ranking.Ranking;
+import utils.ColorDeLetra;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+
 import javax.swing.JTable;
 import javax.swing.JLabel;
 
@@ -21,7 +25,8 @@ public class PantallaRanking extends JFrame {
 	private JPanel contentPane;
 	private Ranking ranking;
 	private static PantallaRanking INSTANCE;
-	private JTable table;
+	private JTable tabla;
+	private JLabel titulo;
 
 	public static PantallaRanking getInstance() {
 		if (INSTANCE == null) {
@@ -53,14 +58,43 @@ public class PantallaRanking extends JFrame {
 		//getGraphics().drawImage((new ImagenTextual("abc").getBufferedImage()), 0, 0, null);
 		
 
-		table = new JTable();
-		// table.setModel(new );
-		table.setBounds(106, 53, 511, 337);
-		contentPane.add(table);
+		tabla = new JTable();
+		tabla.setShowGrid(false);
+		tabla.setEnabled(false);
+		tabla.setRowHeight(70);
+		tabla.setBackground(Color.BLACK);
+		tabla.setBounds(25, 100, 700, 400);
+		Object[][] rows = new Object[5][2];
+		List<HighScore> tops = ranking.getTop5();
+		int tamaño = 3;
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(12, 12, 66, 15);
-		lblNewLabel.setIcon(new ImagenTextual("abcaccbabccbacb").getImageIcon());
-		contentPane.add(lblNewLabel);
+		for (int i=0;i<5;i++) {
+			rows[i][0] = new ImagenTextual(tops.get(i).getNombre(), tamaño, ColorDeLetra.ROJO).getImageIcon();
+			rows[i][1] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO).getImageIcon();
+		}
+		/*
+		rows[0][0] = new ImagenTextual("abc",tamaño, ColorDeLetra.ROJO).getImageIcon();
+		rows[0][1] = new ImagenTextual("abcabcc",tamaño, ColorDeLetra.ROJO).getImageIcon();
+		rows[1][0] = new ImagenTextual("acabcabc",tamaño, ColorDeLetra.ROJO).getImageIcon();
+		rows[1][1] = new ImagenTextual("abcabccc",tamaño, ColorDeLetra.ROJO).getImageIcon();
+		rows[2][0] = new ImagenTextual("abacc",tamaño, ColorDeLetra.ROJO).getImageIcon();
+		rows[2][1] = new ImagenTextual("abccaabcc",tamaño, ColorDeLetra.ROJO).getImageIcon();
+		*/
+		String[] columns = {"nombre","puntaje"};
+		tabla.setModel( new DefaultTableModel(rows, columns) {			
+			 @Override
+			    public Class<?> getColumnClass(int column) {
+				 return ImageIcon.class;
+			    }
+		});
+		tabla.getColumnModel().getColumn(0).setPreferredWidth(400);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(300);
+		contentPane.add(tabla);
+		
+		titulo = new JLabel();
+		titulo.setBounds(235, 25, 280, 45);
+		titulo.setIcon(new ImagenTextual("ranking", 5, ColorDeLetra.CELESTE).getImageIcon());
+		contentPane.add(titulo);
+
 	}
 }

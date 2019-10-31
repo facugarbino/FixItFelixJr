@@ -3,6 +3,7 @@ package vistas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Audio;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -46,6 +48,7 @@ public class PantallaMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaMenu() {
+		Audio.getInstance().musicaApertura(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 360);
 		//Esto es para que el frame se abra en el centro de la pantalla
@@ -60,71 +63,74 @@ public class PantallaMenu extends JFrame {
 		
 		botonConfiguracion = new JLabel();
 		botonConfiguracion.setHorizontalAlignment(SwingConstants.CENTER);
-		botonConfiguracion.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoConfig.png")));
+		botonConfiguracion.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoConfig.png")));
 		botonConfiguracion.setBounds(487,12,70,70);
 		botonConfiguracion.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
+				PantallaConfig.getInstance().setVisible(true);
 			}
 			public void mouseEntered(MouseEvent e) {
-				botonConfiguracion.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoConfig70.png")));
+				botonConfiguracion.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoConfig.png")).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT)));
 			}
 			public void mouseExited(MouseEvent e){
-				botonConfiguracion.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoConfig.png")));
+				botonConfiguracion.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoConfig.png")));
 			}
 		});
 		
 		botonInstrucciones = new JLabel();
 		botonInstrucciones.setHorizontalAlignment(SwingConstants.CENTER);
-		botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoInstrucciones.png")));
+		botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoInstrucciones.png")));
 		botonInstrucciones.setBounds(49, 150, 130, 130);
 		botonInstrucciones.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 			}
 			public void mouseEntered(MouseEvent e) {
-				botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoInstrucciones130.png")));
+				//botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoInstrucciones130.png")));
+				botonInstrucciones.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoInstrucciones.png")).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
 			}
 			public void mouseExited(MouseEvent e){
-				botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoInstrucciones.png")));
+				botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoInstrucciones.png")));
 			}
 		});
 		
 		botonJugar = new JLabel();
 		botonJugar.setHorizontalAlignment(SwingConstants.CENTER);
-		botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay.png")));
+		botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoPlay.png")));
 		botonJugar.setBounds(228, 150, 130, 130);
 		botonJugar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 			}
 			public void mouseEntered(MouseEvent e) {
-				botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay130.png")));
+				//botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay130.png")));
+				botonJugar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoPlay.png")).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
 			}
 			public void mouseExited(MouseEvent e){
-				botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay.png")));
+				botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoPlay.png")));
 			}
 		});
 		
 		botonRanking = new JLabel();
 		botonRanking.setHorizontalAlignment(SwingConstants.CENTER);
-		botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoRanking.png")));
+		botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoRanking.png")));
 		botonRanking.setBounds(407, 150, 130, 130);
 		botonRanking.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				PantallaRanking.getInstance().setVisible(true);
 			}
 			public void mouseEntered(MouseEvent e) {
-				botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoRanking130.png")));
+				//botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoRanking130.png")));
+				botonRanking.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoRanking.png")).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
 			}
 			public void mouseExited(MouseEvent e){
-				botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoRanking.png")));
+				botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoRanking.png")));
 			}
 		});
 		
 		titulo = new JLabel();
 		titulo.setBounds(68, 12, 450, 129);
-		titulo.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoTitulo.png")));
+		titulo.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoTitulo.png")));
 		contentPane.add(botonJugar);
 		contentPane.add(botonInstrucciones);
 		contentPane.add(botonRanking);
