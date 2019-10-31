@@ -34,9 +34,28 @@ public class Audio {
 			e1.printStackTrace();
 		}
 
-		URL urlInicio = getClass().getResource("/recursos/audio/musicaApertura.wav");
+		URL urlMusicaApertura = getClass().getResource("/recursos/audio/musicaApertura.wav");
+		URL urlArregloPanel = getClass().getResource("/recursos/audio/arregloPanel.wav");
+		URL urlChoqueLadrillo = getClass().getResource("/recursos/audio/choqueLadrillo.wav");
+		URL urlComerPastel = getClass().getResource("/recursos/audio/comerPastel.wav");
+		URL urlInicioDeJuego = getClass().getResource("/recursos/audio/inicioDeJuego.wav");
+		URL urlMusicaFondo = getClass().getResource("/recursos/audio/musicaFondo.wav");
+		URL urlBLoqueado = getClass().getResource("/recursos/audio/bloqueado.wav");
+		URL urlLevelUp = getClass().getResource("/recursos/audio/levelUp.wav");
+		URL urlPerdio = getClass().getResource("/recursos/audio/perdio.wav");
+		URL urlSeccionUp = getClass().getResource("/recursos/audio/seccionUp.wav");
+		
 		try {
-			musicaApertura.open(AudioSystem.getAudioInputStream(urlInicio));
+			musicaApertura.open(AudioSystem.getAudioInputStream(urlMusicaApertura));
+			choqueLadrillo.open(AudioSystem.getAudioInputStream(urlChoqueLadrillo));
+			comerPastel.open(AudioSystem.getAudioInputStream(urlComerPastel));
+			inicioDeJuego.open(AudioSystem.getAudioInputStream(urlInicioDeJuego));
+			arregloPanel.open(AudioSystem.getAudioInputStream(urlArregloPanel));
+			musicaFondo.open(AudioSystem.getAudioInputStream(urlMusicaFondo));
+			bloqueado.open(AudioSystem.getAudioInputStream(urlBLoqueado));
+			levelUp.open(AudioSystem.getAudioInputStream(urlLevelUp));
+			perdio.open(AudioSystem.getAudioInputStream(urlPerdio));
+			seccionUp.open(AudioSystem.getAudioInputStream(urlSeccionUp));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,6 +64,43 @@ public class Audio {
 	public void musicaApertura() {
 		musicaApertura.start();
 	}
+	
+	public void musicaArregloPanel() {
+		arregloPanel.start();
+	}
+	
+	public void musicaChoqueLadrillo() {
+		choqueLadrillo.start();
+	}
+	
+	public void musicaComerPastel() {
+		comerPastel.start();
+	}
+	
+	public void musicaInicioDeJuego() {
+		inicioDeJuego.start();
+	}
+	
+	public void musicaDeFondo() {
+		musicaFondo.start();
+	}
+	
+	public void musicaBLoqueado() {
+		bloqueado.start();
+	}
+	
+	public void musicaLevelUp() {
+		levelUp.start();
+	}
+	
+	public void musicaPerdio() {
+		perdio.start();
+	}
+	
+	public void musicaSeccionUp() {
+		seccionUp.start();
+	}
+
 	
 	/*
 	public void MusicaSuperOn() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
