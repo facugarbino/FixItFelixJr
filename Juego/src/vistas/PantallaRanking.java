@@ -66,8 +66,6 @@ public class PantallaRanking extends JFrame {
 		tabla.setBackground(Color.BLACK);
 		tabla.setBounds(25, 100, 700, 400);
 		actualizar();
-		tabla.getColumnModel().getColumn(0).setPreferredWidth(400);
-		tabla.getColumnModel().getColumn(1).setPreferredWidth(300);
 		contentPane.add(tabla);
 		
 		titulo = new JLabel();
@@ -78,20 +76,23 @@ public class PantallaRanking extends JFrame {
 	}
 
 	private void actualizar() {
-		Object[][] rows = new Object[5][2];
+		Object[][] rows = new Object[5][3];
 		List<HighScore> tops = ranking.getTop5();
 		int tamaño = 3;
-		
-		for (int i=0;i<5;i++) {
-			rows[i][0] = new ImagenTextual(tops.get(i).getNombre(), tamaño, ColorDeLetra.ROJO).getImageIcon();
-			rows[i][1] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO).getImageIcon();
+		for (int i=0;i<tops.size();i++) {
+			rows[i][0] = new ImagenTextual(Integer.toString(i+1), tamaño, ColorDeLetra.ROJO).getImageIcon();
+			rows[i][1] = new ImagenTextual(tops.get(i).getNombre(), tamaño, ColorDeLetra.ROJO).getImageIcon();
+			rows[i][2] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO).getImageIcon();
 		}
-		String[] columns = {"nombre","puntaje"};
+		String[] columns = {"numero","nombre","puntaje"};
 		tabla.setModel( new DefaultTableModel(rows, columns) {			
 			 @Override
 			    public Class<?> getColumnClass(int column) {
 				 return ImageIcon.class;
 			    }
 		});
+		tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(450);
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(200);
 	}
 }

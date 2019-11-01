@@ -1,6 +1,7 @@
 package juego;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -75,6 +76,13 @@ public class Seccion {
 			}
 		}
 
+	}
+	public List<Ventana> getVentanas() {
+	    List<Ventana> lista = new ArrayList<>();
+	    for (Ventana[] arreglo: ventanas) {
+	        lista.addAll(Arrays.asList(arreglo));
+	    }
+	    return lista;	
 	}
 
 	public boolean hayNicelander() {

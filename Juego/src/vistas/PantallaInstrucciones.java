@@ -1,25 +1,22 @@
 package vistas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import utils.ColorDeLetra;
 
+@SuppressWarnings("serial")
 public class PantallaInstrucciones extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel titulo;
-	private JLabel ventanilla;
+	private JLabel ventanilla = new JLabel();
 	private JLabel introLetras1 = new JLabel();
 	private JLabel introLetras2 = new JLabel();
 	private JLabel evitaLetras = new JLabel();
@@ -36,7 +33,7 @@ public class PantallaInstrucciones extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 1000, 800);
+		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,38 +41,37 @@ public class PantallaInstrucciones extends JFrame {
 		setContentPane(contentPane);
 		
 		titulo = new JLabel();
-		titulo.setBounds(188, 128, 624, 54);
+		titulo.setBounds(138, 65, 624, 54);
 		titulo.setIcon(new ImagenTextual("Instrucciones",6,ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
 		
 		int tamaño=2;
-		introLetras1.setBounds(94,233,869,27);
+		introLetras1.setBounds(92,152,869,27);
 		introLetras1.setIcon(new ImagenTextual("arregla todas las ventanas rotas en cada piso",tamaño,ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(introLetras1);
 		
-		introLetras2.setBounds(94,254,739,27);
+		introLetras2.setBounds(92,173,739,27);
 		introLetras2.setIcon(new ImagenTextual("para avanzar al proximo nivel",tamaño,ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(introLetras2);
 		
-		evitaLetras.setBounds(124,396,94,50);
+		evitaLetras.setBounds(120,295,94,50);
 		evitaLetras.setIcon(new ImagenTextual("evita",tamaño,ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(evitaLetras);
 		
-		agarraLetras.setBounds(109,530,144,50);
+		agarraLetras.setBounds(92,403,144,50);
 		agarraLetras.setIcon(new ImagenTextual("agarra",tamaño,ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(agarraLetras);
 		
-		moveteLetras.setBounds(749,349,153,50);
+		moveteLetras.setBounds(645,252,153,50);
 		moveteLetras.setIcon(new ImagenTextual("movete",tamaño,ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(moveteLetras);
 		
-		arreglaLetras.setBounds(749,562,175,50);
+		arreglaLetras.setBounds(669,403,175,50);
 		arreglaLetras.setIcon(new ImagenTextual("arregla",tamaño,ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(arreglaLetras);
 		
-		ventanilla = new JLabel();
-		ventanilla.setIcon(new ImageIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/imagenInstrucciones.png")).getImage().getScaledInstance(1000, 800, Image.SCALE_DEFAULT)));
-		ventanilla.setBounds(5,0,1000,800);
+		ventanilla.setIcon(new ImageIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/imagenInstrucciones.png")).getImage().getScaledInstance(900, 600, Image.SCALE_DEFAULT)));
+		ventanilla.setBounds(5,0,900,600);
 		contentPane.add(ventanilla);
 		
 	}

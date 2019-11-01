@@ -28,6 +28,7 @@ public class PantallaMenu extends JFrame {
 	private JLabel botonRanking;
 	private JLabel botonConfiguracion;	
 	private JLabel titulo;
+	private PantallaJuego pantallaJuego; 
 
 	/**
 	 * Launch the application.
@@ -100,9 +101,8 @@ public class PantallaMenu extends JFrame {
 		botonJugar.setBounds(228, 150, 130, 130);
 		botonJugar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				TestJuego.main(new String[] {
-						
-				});
+				pantallaJuego = new PantallaJuego((int) PantallaConfig.getInstance().getComboNivel().getSelectedItem());
+				pantallaJuego.setVisible(true);
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay130.png")));
@@ -120,6 +120,7 @@ public class PantallaMenu extends JFrame {
 		botonRanking.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				PantallaRanking.getInstance().setVisible(true);
+				Audio.getInstance().inicioDeJuego();
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoRanking130.png")));
@@ -138,6 +139,6 @@ public class PantallaMenu extends JFrame {
 		contentPane.add(botonRanking);
 		contentPane.add(botonConfiguracion);
 		contentPane.add(titulo);
-		Audio.getInstance().musicaApertura();
+		Audio.getInstance().apertura();
 	}
 }

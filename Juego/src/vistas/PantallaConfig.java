@@ -99,4 +99,11 @@ public class PantallaConfig extends JFrame {
 		return (INSTANCE = new PantallaConfig());
 
 	}
+	
+	public JComboBox<Integer> getComboNivel(){
+		return comboNivel;
+	}
+	public JComboBox<String> getComboLetras(){
+		return comboLetras;
+	}
 }

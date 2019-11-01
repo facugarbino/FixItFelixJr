@@ -34,6 +34,7 @@ public class Juego {
 	private boolean pausa;
 	private boolean primeraVez;
 	private boolean yaGano;
+	private int nivelAComenzar;
 
 	/**
 	 * 
@@ -60,9 +61,13 @@ public class Juego {
 		jugador = new Jugador("Anonimo");
 		ranking = new Ranking();
 		primeraVez = true;
-		pasarDeNivel();
+		nivelAComenzar = 1;
+		//pasarDeNivel(); deben llamarlo de afuera
 		pausa = false;
 
+	}
+	public void setNivelAComenzar(int nivel) {
+		this.nivelAComenzar = nivel;
 	}
 
 	public Ranking getRanking() {
@@ -145,6 +150,9 @@ public class Juego {
 
 	public void pasarDeNivel() {
 		if (primeraVez) {
+			for (int i=1;i<nivelAComenzar;i++) {
+				nivel.avanzarDeNivel();
+			}
 			reiniciarNivel(3);
 			primeraVez = false;
 		} else {
