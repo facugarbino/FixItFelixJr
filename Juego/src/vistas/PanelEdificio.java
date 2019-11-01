@@ -65,7 +65,7 @@ public class PanelEdificio extends JPanel {
 			Seccion s = edificio.getSeccion(i);
 			List<Ventana> lista = s.getVentanas();
 			for (Ventana v : lista) {
-				g.drawImage(imagenes[1], v.getPosicion().getX(), ALTO - v.getPosicion().getY(), null);
+				//g.drawImage(imagenes[1], v.getPosicion().getX(), ALTO - v.getPosicion().getY(), null);
 			}
 
 		}
