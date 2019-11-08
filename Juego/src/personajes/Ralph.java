@@ -1,6 +1,8 @@
 package personajes;
 
 import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import componentes.Ladrillo;
 import graficador.modelo.Dibujable;
@@ -36,6 +38,10 @@ public class Ralph extends Personaje {
 	private Contador timerCaminar;
 	private static final int LIMITE_IZQUIERDO = Edificio.ANCHO / 2 + Ventana.ANCHO;
 	private static final int LIMITE_DERECHO = LIMITE_IZQUIERDO + Edificio.ANCHO - 2 * Ventana.ANCHO;
+	//true y false representan dos posiciones
+	//para tirar ladrillos (en las q va alternando)
+	private boolean posicionDeTiro;
+	private Timer timerDeTiro;
 
 	public Ralph(Posicion p, int cantLadrillos, int frecuencia, int velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
@@ -47,7 +53,26 @@ public class Ralph extends Personaje {
 		estaTirando = false;
 		caracter = 'R';
 		orientacion = Orientacion.ABAJO;
+		timerDeTiro = new Timer();
+		
+		timerDeTiro.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				posicionDeTiro = !posicionDeTiro;
+			}
+		}, 0, 200);
 	}
+	
+	public Orientacion getOrientacion() {
+		return orientacion;
+	}
+	public boolean estaTirandoLadrillos() {
+		return estaTirando;
+	}
+	public boolean getPosicionDeTiro() {
+		return posicionDeTiro;
+	}
+	
 
 	/**
 	 * Ralph decide si se mueve y hacia dónde
@@ -70,7 +95,6 @@ public class Ralph extends Personaje {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -127,6 +151,7 @@ public class Ralph extends Personaje {
 			if (ladrillosTirados == ladrillosQueTieneQuetirar || cantLadrillos == 0) {
 				// Deja de tirar
 				estaTirando = false;
+				//timerDeTiro.cancel();
 				// System.out.println("Ralph deja de tirar ladrillos");
 			} else {
 				if (timerEntreLadrillos.contar()) {
@@ -141,6 +166,12 @@ public class Ralph extends Personaje {
 		} else {
 			if (cantLadrillos > 0 && timerFrecuencia.contar()) {
 				estaTirando = true;
+//				timerDeTiro.schedule(new TimerTask() {
+//					@Override
+//					public void run() {
+//						posicionDeTiro = !posicionDeTiro;
+//					}
+//				}, 300);
 				orientacion = Orientacion.ABAJO;
 				ladrillosTirados = 0;
 				//Cantidad variable de ladrillos que Ralph tira cada vez que se pone a tirar

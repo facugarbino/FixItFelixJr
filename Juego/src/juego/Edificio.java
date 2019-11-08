@@ -11,8 +11,11 @@ import utils.Posicion;
  */
 public class Edificio {
 
-	public static final int ANCHO = 100;
-	public static final int ALTO = 3*ANCHO;
+	public static final int ANCHO = 240;
+	public static final int ALTO = 650;
+	
+//	public static final int ANCHO = 100;
+//	public static final int ALTO = 3*ANCHO;
 	private Posicion posicion;
 	private List<Seccion> secciones;
 	private Seccion seccionActual;

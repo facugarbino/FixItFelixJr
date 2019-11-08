@@ -37,8 +37,8 @@ public class Ranking {
 			agregarHighScore(new HighScore(jug));
 			jug = new Jugador("Uciel", 20000);
 			agregarHighScore(new HighScore(jug));
-//			jug = new Jugador("Julio", 1000);
-//			agregarHighScore(new HighScore(jug));
+			jug = new Jugador("Julio", 1000);
+			agregarHighScore(new HighScore(jug));
 		}
 	}
 

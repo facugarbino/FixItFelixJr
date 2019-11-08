@@ -22,7 +22,7 @@ import ventanas.extra.Pastel;
  */
 public class Seccion {
 	public static final int ANCHO = Edificio.ANCHO;
-	public static final int ALTO = Edificio.ANCHO;
+	public static final int ALTO = 166;
 	private static final int FILAS = 3;
 	private static final int COLUMNAS = 5;
 	protected int ventanasRotas;
@@ -68,11 +68,12 @@ public class Seccion {
 		ventanas = new Ventana[FILAS][COLUMNAS];
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
-				Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2 - i) * 30);
+				Posicion posicion = new Posicion(Edificio.ANCHO/2+ (int)(Ventana.ANCHO*1.1) + (int)(Ventana.ANCHO*1.4)*(j), 5+(nroSeccion-1)*166+(2-i)*50);
+				//Posicion Posicion = new Posicion(50 + 15 * (j + 1), 10 + (nroSeccion - 1) * 100 + (2 - i) * 30);
 				// Esta posicion luego la genereremos con valores CONSTANTES para poder
 				// modificar más simplemente
 				// el tamaño/posición del edificio, el tamaño de las ventanas, etc.
-				ventanas[i][j] = ventanaRandom(Posicion, rotas[i][j], conObstaculo[i][j]);
+				ventanas[i][j] = ventanaRandom(posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}
 
@@ -91,6 +92,14 @@ public class Seccion {
 
 	public int getNroSeccion() {
 		return nroSeccion;
+	}
+	
+	public Nicelander getNicelander() {
+		return nicelander;
+	}
+
+	public List<Pastel> getPasteles() {
+		return pasteles;
 	}
 
 	/**

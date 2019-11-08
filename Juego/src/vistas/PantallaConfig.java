@@ -2,6 +2,9 @@ package vistas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,6 +41,7 @@ public class PantallaConfig extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				setVisible(false);
+				PantallaMenu.getInstance().setVisible(true);
 			}
 		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -61,15 +65,14 @@ public class PantallaConfig extends JFrame {
 		comboLetras.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-			          String item = (String) arg0.getItem();
-			          System.out.println(item);
-			       }
+					String item = (String) arg0.getItem();
+					System.out.println(item);
+				}
 			}
 		});
 		contentPane.add(comboLetras);
 
-		comboNivel.setModel(
-				new DefaultComboBoxModel<Integer>(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }));
+		comboNivel.setModel(new DefaultComboBoxModel<Integer>(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }));
 		comboNivel.setBounds(276, 176, 116, 24);
 		comboNivel.setBackground(Color.BLACK);
 		comboNivel.setForeground(Color.RED);
@@ -77,8 +80,8 @@ public class PantallaConfig extends JFrame {
 		comboNivel.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-			          int item = (int) arg0.getItem();
-			       }
+					int item = (int) arg0.getItem();
+				}
 			}
 		});
 		contentPane.add(comboNivel);
@@ -93,17 +96,22 @@ public class PantallaConfig extends JFrame {
 	}
 
 	public static PantallaConfig getInstance() {
-		if (INSTANCE != null) {
-			return INSTANCE;
+		if (INSTANCE == null) {
+			INSTANCE = new PantallaConfig();
 		}
-		return (INSTANCE = new PantallaConfig());
+		//Esto es para que el frame se abra en el centro de la pantalla
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		INSTANCE.setLocation(dim.width/2-INSTANCE.getSize().width/2, dim.height/2-INSTANCE.getSize().height/2);
+	
+		return INSTANCE;
 
 	}
-	
-	public JComboBox<Integer> getComboNivel(){
+
+	public JComboBox<Integer> getComboNivel() {
 		return comboNivel;
 	}
-	public JComboBox<String> getComboLetras(){
+
+	public JComboBox<String> getComboLetras() {
 		return comboLetras;
 	}
 }

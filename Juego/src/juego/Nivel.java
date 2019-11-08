@@ -60,11 +60,11 @@ public class Nivel {
 		secciones.add((Seccion) new PrimeraSeccion(sec1, (int) (ventanasConObstaculo * 0.1)));
 		secciones.add(new Seccion(sec2, (int) (ventanasConObstaculo * 0.3), 2));
 		secciones.add(new Seccion(sec3, (int) (ventanasConObstaculo * 0.6), 3));
-		Edificio e = new Edificio(new Posicion(50, 0), secciones);
+		Edificio e = new Edificio(new Posicion(Edificio.ANCHO/2, 0), secciones);
 		Mapa m = new Mapa(e);
-		m.agregarComponente(new Nube(new Posicion(0, 60), velocidadNube));
-		m.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, 130), velocidadNube));
-		m.agregarComponente(new Nube(new Posicion(Edificio.ANCHO*2, 245), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(0, 10), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, 300), velocidadNube));
+		m.agregarComponente(new Nube(new Posicion(Edificio.ANCHO*2, 500), velocidadNube));
 		// Agrega un pajaro aleatoramiente en la seccion 2 (segundo o tercer piso)
 		// y dos pajaros en la ultima seccion
 //		if (Math.random() < 0.5) {

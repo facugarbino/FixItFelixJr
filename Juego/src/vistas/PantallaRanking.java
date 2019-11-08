@@ -1,6 +1,9 @@
 package vistas;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -44,6 +47,7 @@ public class PantallaRanking extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				setVisible(false);
+				PantallaMenu.getInstance().setVisible(true);
 			}
 		});
 		ranking = Juego.getInstance().getRanking();
@@ -51,13 +55,14 @@ public class PantallaRanking extends JFrame {
 		// WindowListener
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 750, 500);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
-		//getGraphics().drawImage((new ImagenTextual("abc").getBufferedImage()), 0, 0, null);
-		
+		// getGraphics().drawImage((new ImagenTextual("abc").getBufferedImage()), 0, 0,
+		// null);
 
 		tabla = new JTable();
 		tabla.setShowGrid(false);
@@ -67,7 +72,7 @@ public class PantallaRanking extends JFrame {
 		tabla.setBounds(25, 100, 700, 400);
 		actualizar();
 		contentPane.add(tabla);
-		
+
 		titulo = new JLabel();
 		titulo.setBounds(235, 25, 280, 45);
 		titulo.setIcon(new ImagenTextual("ranking", 5, ColorDeLetra.CELESTE).getImageIcon());
@@ -79,20 +84,25 @@ public class PantallaRanking extends JFrame {
 		Object[][] rows = new Object[5][3];
 		List<HighScore> tops = ranking.getTop5();
 		int tamaño = 3;
-		for (int i=0;i<tops.size();i++) {
-			rows[i][0] = new ImagenTextual(Integer.toString(i+1), tamaño, ColorDeLetra.ROJO).getImageIcon();
+		for (int i = 0; i < tops.size(); i++) {
+			rows[i][0] = new ImagenTextual(Integer.toString(i + 1), tamaño, ColorDeLetra.ROJO).getImageIcon();
 			rows[i][1] = new ImagenTextual(tops.get(i).getNombre(), tamaño, ColorDeLetra.ROJO).getImageIcon();
-			rows[i][2] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO).getImageIcon();
+			rows[i][2] = new ImagenTextual(Long.toString(tops.get(i).getPuntaje()), tamaño, ColorDeLetra.ROJO)
+					.getImageIcon();
 		}
-		String[] columns = {"numero","nombre","puntaje"};
-		tabla.setModel( new DefaultTableModel(rows, columns) {			
-			 @Override
-			    public Class<?> getColumnClass(int column) {
-				 return ImageIcon.class;
-			    }
+		String[] columns = { "numero", "nombre", "puntaje" };
+		tabla.setModel(new DefaultTableModel(rows, columns) {
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return ImageIcon.class;
+			}
 		});
 		tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
 		tabla.getColumnModel().getColumn(1).setPreferredWidth(450);
 		tabla.getColumnModel().getColumn(2).setPreferredWidth(200);
+		// Esto es para que el frame se abra en el centro de la pantalla
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
 	}
 }

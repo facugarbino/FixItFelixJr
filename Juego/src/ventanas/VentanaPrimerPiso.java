@@ -10,6 +10,7 @@ import ventanas.paneles.Sano;
 public class VentanaPrimerPiso extends Ventana {
 
 	public static final int CANT_PANELES = 8;
+	public static Posicion[] posiciones = getPosiciones(8);
 	
 	public VentanaPrimerPiso(Posicion posicion, Seccion seccion, boolean estaRota) {
 		this.posicion = posicion;
@@ -24,7 +25,7 @@ public class VentanaPrimerPiso extends Ventana {
 		} else {
 			//caracter ='□';
 			for (int i = 0; i < CANT_PANELES; i++) {
-				paneles.add(new Panel(new Sano()));
+				paneles.add(new Panel(new Sano(), posiciones[i]));
 			}
 		}
 	}

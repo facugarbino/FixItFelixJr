@@ -19,15 +19,15 @@ import ventanas.paneles.Roto;
 import ventanas.paneles.Sano;
 
 /**
- * Clase abstracta que representa a una ventana de cualquier tipo. 
+ * Clase abstracta que representa a una ventana de cualquier tipo.
  * 
  * @author Garbino y Rodriguez Murphy
  *
  */
 public abstract class Ventana implements Dibujable {
 
-	public static final int ANCHO = 10;
-	public static final int ALTO = 20;
+	public static final int ANCHO = 24;
+	public static final int ALTO = 39;
 
 	protected Posicion posicion;
 	protected Seccion seccion;
@@ -39,6 +39,26 @@ public abstract class Ventana implements Dibujable {
 	protected int panelesRotos;
 	protected int panelesReparados;
 	Character caracter = '□';
+	private static Posicion[] posicion2 = new Posicion[] {
+			new Posicion(6,8), new Posicion(6,21)
+	};
+	private static Posicion[] posicion4 = new Posicion[] {
+			new Posicion(9,9),
+			new Posicion(22,9),
+			new Posicion(9,21),
+			new Posicion(22,21)
+	};
+	private static Posicion[] posicion5 = new Posicion[] {
+			new Posicion(7,4),
+			new Posicion(13,4),
+			new Posicion(22,4),
+			new Posicion(28,4),
+			new Posicion(7,13),
+			new Posicion(13,13),
+			new Posicion(22,13),
+			new Posicion(28,13)
+	};
+	
 
 	/**
 	 * Método llamado por Felix para moverse
@@ -54,6 +74,14 @@ public abstract class Ventana implements Dibujable {
 				return v;
 		}
 		return null;
+	}
+
+	public List<Obstaculo> getObstaculos() {
+		return obstaculos;
+	}
+
+	public List<Panel> getPaneles() {
+		return paneles;
 	}
 
 	public Seccion getSeccion() {
@@ -80,6 +108,12 @@ public abstract class Ventana implements Dibujable {
 		if (estaRota()) {
 			cantMartillazos++;
 			if (cantMartillazos == 2) {
+				
+				if (nicelander != null) {
+					this.nicelander = null;
+					seccion.setNicelander(null);
+				}
+				
 				Iterator<Panel> i = paneles.iterator();
 				while (i.hasNext() && !i.next().reparar())
 					;
@@ -87,11 +121,11 @@ public abstract class Ventana implements Dibujable {
 				cantMartillazos = 0;
 				if (!estaRota()) {
 					seccion.seArregloUnaVentana();
-					//caracter = '□';
-					if (nicelander != null) {
-						this.nicelander = null;
-						seccion.setNicelander(null);
-					}
+					// caracter = '□';
+//					if (nicelander != null) {
+//						this.nicelander = null;
+//						seccion.setNicelander(null);
+//					}
 				}
 				return true;
 			}
@@ -127,9 +161,12 @@ public abstract class Ventana implements Dibujable {
 	public void ponerPastel(Pastel comida) {
 		this.pastel = comida;
 		seccion.agregarPastel(pastel);
-		if (Juego.getInstance().getMapa().estaFelix(posicion, 1)) {
+		if (Juego.getInstance().getFelix().getVentana().equals(this)) {
 			Juego.getInstance().getFelix().comerPastel();
 		}
+//		if (Juego.getInstance().getMapa().estaFelix(posicion, 1,1)) {
+//			Juego.getInstance().getFelix().comerPastel();
+//		}
 	}
 
 	private boolean tieneObstaculo(Orientacion o) {
@@ -150,6 +187,7 @@ public abstract class Ventana implements Dibujable {
 	 * @return una lista de paneles, aleatoramiente rotos
 	 */
 	protected List<Panel> getPanelesRotosRandom(int cantPaneles) {
+		Posicion posiciones[] = getPosiciones(cantPaneles);
 		boolean algunoRoto = false;
 		EstadoPanel p;
 		List<Panel> lista = new ArrayList<>();
@@ -173,13 +211,30 @@ public abstract class Ventana implements Dibujable {
 			default:
 				p = new Roto();
 			}
-			lista.add(new Panel(p));
+			lista.add(new Panel(p, posiciones[lista.size()]));
 		}
 		if (!algunoRoto) {
 			return getPanelesRotosRandom(cantPaneles);
 		}
 		panelesRotos = cuantosRotos;
 		return lista;
+	}
+
+	public static Posicion[] getPosiciones(int cantPaneles) {
+		switch (cantPaneles) {
+		case 2:{
+			return posicion2;
+			
+		}
+		case 4:{
+			return posicion4;
+			
+		}
+		case 8:{
+			return posicion5;
+		}
+		}
+		return null;
 	}
 
 	public boolean estaRota() {

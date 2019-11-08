@@ -20,6 +20,7 @@ public class VentanaComun extends Ventana {
 	Contador timer = new Contador((int)(Math.random() * 5000 + 5000));
 
 	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
+		Posicion posiciones[] = getPosiciones(2);
 		this.posicion = posicion;
 		this.seccion = seccion;
 		panelesReparados = 0;
@@ -32,9 +33,10 @@ public class VentanaComun extends Ventana {
 			//caracter = '□';
 			panelesRotos = 0;
 			for (int i = 0; i < CANT_PANELES; i++) {
-				paneles.add(new Panel(new Sano()));
+				paneles.add(new Panel(new Sano(), posiciones[i]));
 			}
 		}
+		
 		if (tieneObstaculo) {
 			double random = Math.random();
 			if (random < (1 / 3)) {
@@ -56,7 +58,7 @@ public class VentanaComun extends Ventana {
 	 */
 	public void generarNicelander() {
 		if (!seccion.hayNicelander() && !yaHuboNicelander && elDeAbajoEstaRoto() && timer.contar()) {
-			nicelander = new Nicelander(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
+			nicelander = new Nicelander( (int) (Math.random()*3+1) ,new Color((float) Math.random(), (float) Math.random(), (float) Math.random()),
 					this);
 			seccion.setNicelander(nicelander);
 			yaHuboNicelander = true;
