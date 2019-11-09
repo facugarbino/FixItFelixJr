@@ -40,7 +40,7 @@ public class JuegoMain {
 		if (pantallaJuego == null) {
 			Juego.reiniciarJuego();
 			juego = Juego.getInstance();
-			juego.setJugador("");
+			juego.setJugador("anonimo");
 			juego.pasarDeNivel();
 			int nivelAComenzar = (int) PantallaConfig.getInstance().getComboNivel().getSelectedItem();
 			for (int i = 1; i < nivelAComenzar; i++) {

@@ -24,7 +24,7 @@ public class Ralph extends Personaje {
 	// El edificio mide 100x300
 	// La ventana mide 10x20
 	// Ralph mide en X: 25
-	private static final int ANCHO = 25;
+	private static final int ANCHO = 50;
 	private static final int VELOCIDAD = 50;
 
 	private Orientacion orientacion;
@@ -36,8 +36,8 @@ public class Ralph extends Personaje {
 	private Contador timerFrecuencia;
 	private Contador timerEntreLadrillos;
 	private Contador timerCaminar;
-	private static final int LIMITE_IZQUIERDO = Edificio.ANCHO / 2 + Ventana.ANCHO;
-	private static final int LIMITE_DERECHO = LIMITE_IZQUIERDO + Edificio.ANCHO - 2 * Ventana.ANCHO;
+	private static final int LIMITE_IZQUIERDO = Edificio.ANCHO / 2;
+	private static final int LIMITE_DERECHO = LIMITE_IZQUIERDO + Edificio.ANCHO - ANCHO*2;
 	//true y false representan dos posiciones
 	//para tirar ladrillos (en las q va alternando)
 	private boolean posicionDeTiro;
@@ -83,16 +83,39 @@ public class Ralph extends Personaje {
 			if (timerCaminar.contar()) {
 				timerCaminar.resetear();
 				double random = Math.random();
-				if (random < 0.45) {
-					darPaso(Orientacion.IZQUIERDA);
-				} else {
-					if (random < 0.9) {
+				if (orientacion == Orientacion.DERECHA) {
+					if (random <0.8) {
 						darPaso(Orientacion.DERECHA);
 					} else {
-						orientacion = Orientacion.ABAJO;
-						// System.out.println("Ralph mira para adelante");
+						darPaso(Orientacion.IZQUIERDA);
+					}
+				} else if (orientacion == Orientacion.IZQUIERDA){
+					if (random < 0.8) {
+						darPaso(Orientacion.IZQUIERDA);
+					} else {
+						darPaso(Orientacion.DERECHA);
+					}
+				} else {
+					if (random < 0.4) {
+						
+					} else if (random < 0.7) {
+						darPaso(Orientacion.IZQUIERDA);
+					} else {
+						darPaso(Orientacion.DERECHA);
 					}
 				}
+			
+//				if (random < 0.45) {
+//					darPaso(Orientacion.IZQUIERDA);
+//				} else {
+//					if (random < 0.9) {
+//						darPaso(Orientacion.DERECHA);
+//					} else {
+//						orientacion = Orientacion.ABAJO;
+//						// System.out.println("Ralph mira para adelante");
+//					}
+//				}
+				
 			}
 		}
 	}
@@ -133,7 +156,7 @@ public class Ralph extends Personaje {
 	public void subirDeSeccion() {
 		Posicion p = Juego.getInstance().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion()
 				.copia();
-		p.moverY(100);
+		p.moverY(160);
 		posicion = p;
 		estaTirando = false;
 
@@ -159,7 +182,7 @@ public class Ralph extends Personaje {
 					cantLadrillos--;
 					timerEntreLadrillos.resetear();
 					System.out.println("Ralph tira una roca");
-					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY() - ANCHO / 2), velocidadLadrillo,
+					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY() ), velocidadLadrillo,
 							Juego.getInstance().getMapa());
 				}
 			}
@@ -188,7 +211,7 @@ public class Ralph extends Personaje {
 	 * @return un valor de x aleatorio para la trayectoria de un ladrillo
 	 */
 	private int obtenerXRandom() {
-		return (int) ((Math.floor(Math.random() * ANCHO) - (ANCHO / 2)) + (posicion.getX()));
+		return (int) ((Math.floor(Math.random() * ANCHO)) + (posicion.getX()));
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JOptionPane;
+
 import graficador.modelo.Dibujable;
 import graficador.vista.Graficador;
 import juego.Juego;
@@ -38,6 +40,9 @@ public class JuegoLoop implements Runnable {
 				juego.actualizar();
 			} else {
 				if (juego.yaGano()) {
+					String nombreJugador = preguntarNombre();					
+					juego.setJugador(nombreJugador);
+					juego.agregarRanking();
 					//Graficador.mensaje("HAS GANADO!");
 					break;
 				}
@@ -52,6 +57,10 @@ public class JuegoLoop implements Runnable {
 		PantallaRanking.getInstance().setVisible(true);
 		JuegoMain.getPantallaJuego().dispose();
 
+	}
+	private static String preguntarNombre() {
+		return JOptionPane.showInputDialog(null, "Fix it Felix Jr.", "Inserte su Nombre: ",
+				JOptionPane.QUESTION_MESSAGE);
 	}
 
 }

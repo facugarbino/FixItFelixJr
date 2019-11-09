@@ -39,10 +39,10 @@ public class VentanaComun extends Ventana {
 		
 		if (tieneObstaculo) {
 			double random = Math.random();
-			if (random < (1 / 3)) {
+			if (random < 0.33) {
 				obstaculos.add(new Macetero());
 			} else {
-				if (random < (2 / 3)) {
+				if (random < 0.66) {
 					obstaculos.add(new Moldura());
 				} else {
 					obstaculos.add(new Macetero());

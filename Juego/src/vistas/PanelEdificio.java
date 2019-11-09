@@ -334,7 +334,8 @@ public class PanelEdificio extends JPanel {
 				continue;
 			}
 			imagen = imagenes[numImagen + 21];
-			g.drawImage(imagen, c.getPosicion().getX(), ALTO - c.getPosicion().getY() - imagen.getHeight(null), null);
+			g.drawImage(imagen, c.getPosicion().getX()- imagen.getWidth(null)/2, 
+					ALTO - c.getPosicion().getY() - imagen.getHeight(null)/2, null);
 		}
 	}
 
