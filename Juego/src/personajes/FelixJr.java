@@ -1,9 +1,12 @@
 package personajes;
 
 import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import componentes.Ladrillo;
 import componentes.Pajaro;
+import controlador.Audio;
 import graficador.modelo.InformacionDibujable;
 import juego.Juego;
 import juego.Seccion;
@@ -25,6 +28,9 @@ public class FelixJr extends Personaje {
 	private boolean inmune;
 	private long puntajeNivel;
 	private long puntajeSeccion;
+	private boolean saltando;
+	private int saltoHorizontal;
+	private int saltoVertical;
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;
@@ -34,8 +40,14 @@ public class FelixJr extends Personaje {
 		this.vidas = vidas;
 		caracter = 'F';
 		timer = new Contador(5000);
+		saltoHorizontal = (int)(Ventana.ANCHO*1.4);
+		saltoVertical = 50;
 	}
 
+	public boolean estaSaltando() {
+		return saltando;
+	}
+	
 	/**
 	 * Martilla la ventana en la que se encuentra y acumula puntaje en caso de
 	 * repararla
@@ -43,7 +55,9 @@ public class FelixJr extends Personaje {
 	public void darMartillazo() {
 		System.out.println("Felix ha dado un martillazo!");
 		if (ventanaActual.reparar()) {
+			Audio.getInstance().arregloPanel();
 			if (ventanaActual.getSeccion().estaSana()) {
+				Audio.getInstance().seccionUp();
 				puntajeSeccion += 500;
 				puntajeNivel += puntajeSeccion;
 				puntajeSeccion = 0;
@@ -62,25 +76,34 @@ public class FelixJr extends Personaje {
 	public void mover(Orientacion o) {
 		Ventana v = ventanaActual.getVentana(o);
 		if (v != null) {
+			saltando=true;
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					saltando=false;
+				}
+			}, 100);
 			ventanaActual = v;
-			switch (o) {
-			case IZQUIERDA:
-				posicion.moverX(-15);
-				break;
-			case DERECHA:
-				posicion.moverX(15);
-				break;
-			case ABAJO:
-				posicion.moverY(-30);
-				break;
-			case ARRIBA:
-				posicion.moverY(30);
-				break;
-			}
+			posicion = v.getPosicion().copia();
+//			switch (o) {
+//			case IZQUIERDA:
+//				posicion.moverX(-saltoHorizontal);
+//				break;
+//			case DERECHA:
+//				posicion.moverX(saltoHorizontal);
+//				break;
+//			case ABAJO:
+//				posicion.moverY(-saltoVertical);
+//				break;
+//			case ARRIBA:
+//				posicion.moverY(saltoVertical);
+//				break;
+//			}
 			System.out.println("Felix se mueve a la posicion " + getPosicion());
 			System.out.println(ventanaActual.estaRota() ? "La ventana está ROTA" : "La ventana está SANA");
 			comerPastel();
 		} else {
+			Audio.getInstance().bloqueado();
 			System.out.println("Felix no se puede mover a " + o + ". Hay un obstaculo");
 		}
 	}
@@ -91,6 +114,7 @@ public class FelixJr extends Personaje {
 	 */
 	public void golpear(Ladrillo ladrillo) {
 		if (!inmune) {
+			Audio.getInstance().choqueLadrillo();
 			System.out.println("Un ladrillo en la posicion " + ladrillo.getPosicion() + " golpea a Felix");
 			if (--vidas > 0) {
 				Juego.getInstance().reiniciarNivel(vidas);
@@ -109,6 +133,7 @@ public class FelixJr extends Personaje {
 	 */
 	public void golpear(Pajaro pajaro) {
 		if (!inmune) {
+			Audio.getInstance().choqueLadrillo();
 			Juego.getInstance().reiniciarSeccion();
 			puntajeSeccion = 0;
 			System.out.println("Felix es golpeado por un pájaro, reinicia la seccion");
@@ -127,6 +152,7 @@ public class FelixJr extends Personaje {
 
 	public void comerPastel() {
 		if (ventanaActual.hayPastel()) {
+			Audio.getInstance().comerPastel();
 			ventanaActual.comerPastel();
 			inmunizar();
 		}
@@ -167,5 +193,9 @@ public class FelixJr extends Personaje {
 	public InformacionDibujable getInformacionDibujable() {
 		Character c = ((inmune) ? 'ƒ' : 'F');
 		return new InformacionDibujable(posicion.getX(), posicion.getY(), c, Color.BLUE);
+	}
+
+	public Ventana getVentana() {
+		return ventanaActual;
 	}
 }

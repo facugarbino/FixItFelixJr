@@ -1,6 +1,7 @@
 package ventanas.obstaculos;
 
 import utils.Orientacion;
+import utils.Posicion;
 
 /**
  * Clase abstracta que representa a un obstáculo de cualquier tipo.
@@ -10,6 +11,11 @@ import utils.Orientacion;
  */
 public abstract class Obstaculo {
 
+	protected Posicion posicion;
+	protected Posicion posicionMacetero = new Posicion(0,-5);
+	protected Posicion posicionMoldura = new Posicion(0,35);
+	protected Posicion posicionHojaIzquierda = new Posicion(0,7);
+	protected Posicion posicionHojaDerecha = new Posicion(22,7);
 	/**
 	 * 
 	 * @return <b>true</b> si el obstáculo se encuentra
@@ -19,5 +25,10 @@ public abstract class Obstaculo {
 	 * si el sentido es <i>abajo</i>
 	 */
 	public abstract boolean estasEn(Orientacion orientacion);
+	
+	public Posicion getPosicion() {
+		return posicion;
+	}
 
 }
+

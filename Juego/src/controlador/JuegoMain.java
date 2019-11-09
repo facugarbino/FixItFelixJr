@@ -11,31 +11,51 @@ import graficador.modelo.Dibujable;
 import graficador.vista.Graficador;
 import juego.Juego;
 import utils.Contador;
+import vistas.PantallaConfig;
+import vistas.PantallaJuego;
 import vistas.PantallaMenu;
 import vistas.PantallaRanking;
 
 public class JuegoMain {
 
 	private static Juego juego;
-	public static void main(String[] args) {
-		
-		PantallaMenu menu = new PantallaMenu();
-		menu.setVisible(true);
-		juego = Juego.getInstance();
-		
-		String nombre = preguntarNombre();
-		while (nombre != null && nombre.equals("")) {
-			nombre = preguntarNombre();
-		}
-		if (nombre == null) {
-			System.exit(0);
-		}
-		juego = Juego.getInstance();
-		juego.setJugador(nombre);
-		loop();
+	private static PantallaMenu menu;
+	private static PantallaJuego pantallaJuego;
 
-	}
 	
+	public static PantallaJuego getPantallaJuego() {
+		return pantallaJuego;
+	}
+
+	private static Thread t;
+	private static boolean corriendo;
+
+	public static void main(String[] args) {
+
+		menu = PantallaMenu.getInstance();
+		menu.setVisible(true);
+	}
+
+	public static void comenzarJuego() {
+		if (pantallaJuego == null) {
+			Juego.reiniciarJuego();
+			juego = Juego.getInstance();
+			juego.setJugador("");
+			juego.pasarDeNivel();
+			int nivelAComenzar = (int) PantallaConfig.getInstance().getComboNivel().getSelectedItem();
+			for (int i = 1; i < nivelAComenzar; i++) {
+				juego.pasarDeNivel();
+			}
+			pantallaJuego = new PantallaJuego();
+			t = new Thread(new JuegoLoop(Juego.getInstance()));
+			t.start();
+			corriendo = true;
+			// loop();
+		}
+		pantallaJuego.setVisible(true);
+		menu.setVisible(false);
+	}
+
 	private static String preguntarNombre() {
 		return JOptionPane.showInputDialog(null, "Fix it Felix Jr.", "Inserte su Nombre: ",
 				JOptionPane.QUESTION_MESSAGE);
@@ -53,6 +73,7 @@ public class JuegoMain {
 					lista = juego.getMapa().getComponentesDibujables();
 					lista.add(juego.getRalph());
 					lista.add(juego.getFelix());
+					pantallaJuego.repaint();
 					Graficador.refrescarTopDown(lista);
 				}
 				juego.actualizar();
@@ -71,6 +92,5 @@ public class JuegoMain {
 		}
 		PantallaRanking.getInstance().setVisible(true);
 	}
-
 
 }

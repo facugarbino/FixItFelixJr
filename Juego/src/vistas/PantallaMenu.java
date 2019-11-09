@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Audio;
+import controlador.JuegoMain;
 import test.TestJuego;
 
 import javax.swing.ImageIcon;
@@ -29,32 +30,26 @@ public class PantallaMenu extends JFrame {
 	private JLabel botonConfiguracion;	
 	private JLabel titulo;
 	private PantallaJuego pantallaJuego; 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaMenu frame = new PantallaMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private static PantallaMenu INSTANCE;
+	
+	
+	public static PantallaMenu getInstance() {
+		if (INSTANCE==null) {
+			INSTANCE = new PantallaMenu();
+		}
+		//Esto es para que el frame se abra en el centro de la pantalla
+				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+				INSTANCE.setLocation(dim.width/2-INSTANCE.getSize().width/2, dim.height/2-INSTANCE.getSize().height/2);
+				
+		return INSTANCE;
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public PantallaMenu() {
+	private PantallaMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 360);
-		//Esto es para que el frame se abra en el centro de la pantalla
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
@@ -69,6 +64,7 @@ public class PantallaMenu extends JFrame {
 		botonConfiguracion.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				PantallaConfig.getInstance().setVisible(true);
+				setVisible(false);
 			}
 			public void mouseEntered(MouseEvent e) {
 				botonConfiguracion.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoConfig.png")).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT)));
@@ -85,6 +81,7 @@ public class PantallaMenu extends JFrame {
 		botonInstrucciones.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				PantallaInstrucciones.getInstance().setVisible(true);
+				setVisible(false);
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonInstrucciones.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoInstrucciones130.png")));
@@ -101,8 +98,7 @@ public class PantallaMenu extends JFrame {
 		botonJugar.setBounds(228, 150, 130, 130);
 		botonJugar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				pantallaJuego = new PantallaJuego((int) PantallaConfig.getInstance().getComboNivel().getSelectedItem());
-				pantallaJuego.setVisible(true);
+				JuegoMain.comenzarJuego();
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonJugar.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/iconoPlay130.png")));
@@ -121,6 +117,7 @@ public class PantallaMenu extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				PantallaRanking.getInstance().setVisible(true);
 				Audio.getInstance().inicioDeJuego();
+				setVisible(false);
 			}
 			public void mouseEntered(MouseEvent e) {
 				//botonRanking.setIcon(new ImageIcon(getClass().getResource("/recursos/iconoRanking130.png")));

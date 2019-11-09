@@ -10,7 +10,9 @@ import utils.Posicion;
 
 public class Pajaro extends Componente {
 
-	private final int ANCHO = 15;
+	private static final int ANCHO = 21;
+	private static final int ALTO = 13;
+	private boolean aleteo;
 	//sus coordenadas indican el centro
 	public Pajaro(Posicion p, int frecuencia, Orientacion o, Mapa m) {
 		posicion = p;
@@ -30,6 +32,7 @@ public class Pajaro extends Componente {
 		if (orientacion == Orientacion.IZQUIERDA) {
 			if (posicion.getX() > 0) {
 				posicion.moverX(-1);
+				aleteo=!aleteo;
 			} else {
 				setOrientacion(Orientacion.DERECHA);
 				comoAvanzo();
@@ -37,14 +40,22 @@ public class Pajaro extends Componente {
 		} else {
 			if (posicion.getX() < (Mapa.ANCHO - (ANCHO))) {
 				posicion.moverX(1);
+				aleteo=!aleteo;
 			} else {
 				setOrientacion(Orientacion.IZQUIERDA);
 				comoAvanzo();
 			}
 		}
-		if (mapa.estaFelix(posicion, ANCHO)) {
+		if (mapa.estaFelix(posicion, ANCHO, ALTO)) {
 			Juego.getInstance().golpearFelix(this);
 		}
+	}
+	
+	public Orientacion getOrientacion() {
+		return orientacion;
+	}
+	public boolean getAleteo() {
+		return aleteo;
 	}
 
 }

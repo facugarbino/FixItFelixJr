@@ -3,6 +3,7 @@ package juego;
 import componentes.Ladrillo;
 import componentes.Nube;
 import componentes.Pajaro;
+import controlador.Audio;
 import personajes.FelixJr;
 import personajes.Ralph;
 import ranking.HighScore;
@@ -21,7 +22,7 @@ import ventanas.Ventana;
  *
  */
 public class Juego {
-	private static Juego juego;
+	private static Juego INSTANCE;
 	private Ranking ranking;
 	private Jugador jugador;
 	private Nivel nivel;
@@ -38,14 +39,18 @@ public class Juego {
 
 	/**
 	 * 
-	 * @return la única de instancia del juuego y, si no existe, la genera
+	 * @return la única de instancia del juego y, si no existe, la genera
 	 */
 	public static Juego getInstance() {
-		if (juego == null) {
-			juego = new Juego();
-			System.out.println("Comienza el juego.");
+		if (INSTANCE == null) {
+			reiniciarJuego();
 		}
-		return juego;
+		return INSTANCE;
+	}
+	
+	public static void reiniciarJuego() {
+		INSTANCE = new Juego();
+		System.out.println("Comienza el juego.");
 	}
 
 	public void setJugador(String nombre) {
@@ -129,6 +134,7 @@ public class Juego {
 		Ladrillo l = ralph.tirarLadrillo();
 		if (l != null) {
 			mapa.agregarComponente(l);
+			
 		}
 		seccionActual.generarNicelanders();
 		if (seccionActual.estaSana()) {
@@ -156,6 +162,7 @@ public class Juego {
 			reiniciarNivel(3);
 			primeraVez = false;
 		} else {
+			Audio.getInstance().levelUp();
 			jugador.sumarPuntos(felix.getPuntaje());
 			if (nivel.hayOtroNivel()) {
 				nivel.avanzarDeNivel();
@@ -235,6 +242,7 @@ public class Juego {
 	public void avanzarSeccion() {
 		int nroSeccion = seccionActual.getNroSeccion();
 		if (nroSeccion < 3) {
+			Audio.getInstance().seccionUp();
 			System.out.println("Felix Jr. avanza de seccion");
 			// Crear pajaros acá
 			agregarPajaros(nroSeccion + 1);
@@ -274,6 +282,7 @@ public class Juego {
 	 * @param puntajeFelix - el puntaje que tenía Felix acumulado
 	 */
 	public void perder(long puntajeFelix) {
+		Audio.getInstance().perdio();
 		jugador.sumarPuntos(puntajeFelix);
 		agregarRanking();
 		pausa = true;

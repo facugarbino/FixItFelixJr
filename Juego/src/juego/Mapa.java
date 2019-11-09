@@ -18,8 +18,8 @@ import utils.Posicion;
  */
 public class Mapa {
 
-	public static final int ANCHO = 200;
-	public static final int ALTO = 400;
+	public static final int ANCHO = 480;
+	public static final int ALTO = 650;
 	private List<Componente> componentes;
 	private Edificio edificio;
 	private List<Componente> componentesABorrar;
@@ -72,13 +72,14 @@ public class Mapa {
 	 * @param diametro lado del cuadrado que forma
 	 * @return <b>true</b> si colisiona con Felix, <b>false</b> si no se chocan
 	 */
-	public boolean estaFelix(Posicion p, int diametro) {
+	public boolean estaFelix(Posicion p, int diametroX, int diametroY) {
 		Posicion pFelix = Juego.getInstance().getFelix().getPosicion();
-		int radio = diametro / 2;
-		if (estaEntre(p.getX() - radio, pFelix.getX(), pFelix.getX() + 5)
-				|| estaEntre(p.getX() + radio, pFelix.getX(), pFelix.getX() + 5)) {
-			if (estaEntre(p.getY() - radio, pFelix.getY(), pFelix.getY() + 20)
-					|| estaEntre(p.getY() + radio, pFelix.getY(), pFelix.getY() + 20)) {
+		int radioX = diametroX / 2;
+		int radioY = diametroY / 2;
+		if (estaEntre(p.getX() - radioX, pFelix.getX(), pFelix.getX() + 15)
+				|| estaEntre(p.getX() + radioX, pFelix.getX(), pFelix.getX() + 15)) {
+			if (estaEntre(p.getY() - radioY, pFelix.getY(), pFelix.getY() + 33)
+					|| estaEntre(p.getY() + radioY, pFelix.getY(), pFelix.getY() + 33)) {
 				return true;
 			}
 		}
@@ -105,5 +106,9 @@ public class Mapa {
 			}
 		}
 
+	}
+
+	public List<Componente> getComponentes() {
+		return componentes;
 	}
 }

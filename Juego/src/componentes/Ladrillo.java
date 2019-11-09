@@ -9,7 +9,8 @@ import utils.Posicion;
 
 public class Ladrillo extends Componente {
 
-	private static final int ANCHO = 3;
+	private static final int ANCHO = 12;
+	private static final int ALTO = 8;
 	private Mapa mapa;
 
 	public Ladrillo(Posicion p, int velocidad, Mapa m) {
@@ -27,7 +28,7 @@ public class Ladrillo extends Componente {
 	protected void comoAvanzo() {
 		posicion.moverY(-1);
 		//System.out.println("Un ladrillo avanza a la posicion " + posicion);
-		if (mapa.estaFelix(posicion, ANCHO)) {
+		if (mapa.estaFelix(posicion, ANCHO, ALTO)) {
 			Juego.getInstance().golpearFelix(this);
 		}
 		if (posicion.getY()==0) {

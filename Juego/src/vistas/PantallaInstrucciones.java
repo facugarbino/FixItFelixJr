@@ -1,7 +1,9 @@
 package vistas;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
@@ -30,52 +32,61 @@ public class PantallaInstrucciones extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				setVisible(false);
+				PantallaMenu.getInstance().setVisible(true);
 			}
 		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
+		// Esto es para que el frame se abra en el centro de la pantalla
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
-		
+
 		titulo = new JLabel();
 		titulo.setBounds(138, 65, 624, 54);
-		titulo.setIcon(new ImagenTextual("Instrucciones",6,ColorDeLetra.CELESTE).getImageIcon());
+		titulo.setIcon(new ImagenTextual("Instrucciones", 5, ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
-		
-		int tamaño=2;
-		introLetras1.setBounds(92,152,869,27);
-		introLetras1.setIcon(new ImagenTextual("arregla todas las ventanas rotas en cada piso",tamaño,ColorDeLetra.VERDE).getImageIcon());
+
+		int tamaño = 2;
+		introLetras1.setBounds(92, 152, 869, 27);
+		introLetras1
+				.setIcon(new ImagenTextual("arregla todas las ventanas rotas en cada piso", tamaño, ColorDeLetra.VERDE)
+						.getImageIcon());
 		contentPane.add(introLetras1);
-		
-		introLetras2.setBounds(92,173,739,27);
-		introLetras2.setIcon(new ImagenTextual("para avanzar al proximo nivel",tamaño,ColorDeLetra.VERDE).getImageIcon());
+
+		introLetras2.setBounds(92, 173, 739, 27);
+		introLetras2
+				.setIcon(new ImagenTextual("para avanzar al proximo nivel", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(introLetras2);
-		
-		evitaLetras.setBounds(120,295,94,50);
-		evitaLetras.setIcon(new ImagenTextual("evita",tamaño,ColorDeLetra.VERDE).getImageIcon());
+
+		evitaLetras.setBounds(120, 295, 94, 50);
+		evitaLetras.setIcon(new ImagenTextual("evita", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(evitaLetras);
-		
-		agarraLetras.setBounds(92,403,144,50);
-		agarraLetras.setIcon(new ImagenTextual("agarra",tamaño,ColorDeLetra.VERDE).getImageIcon());
+
+		agarraLetras.setBounds(92, 403, 144, 50);
+		agarraLetras.setIcon(new ImagenTextual("agarra", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(agarraLetras);
-		
-		moveteLetras.setBounds(645,252,153,50);
-		moveteLetras.setIcon(new ImagenTextual("movete",tamaño,ColorDeLetra.VERDE).getImageIcon());
+
+		moveteLetras.setBounds(645, 252, 153, 50);
+		moveteLetras.setIcon(new ImagenTextual("movete", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(moveteLetras);
-		
-		arreglaLetras.setBounds(669,403,175,50);
-		arreglaLetras.setIcon(new ImagenTextual("arregla",tamaño,ColorDeLetra.VERDE).getImageIcon());
+
+		arreglaLetras.setBounds(669, 403, 175, 50);
+		arreglaLetras.setIcon(new ImagenTextual("arregla", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(arreglaLetras);
-		
-		ventanilla.setIcon(new ImageIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/imagenInstrucciones.png")).getImage().getScaledInstance(900, 600, Image.SCALE_DEFAULT)));
-		ventanilla.setBounds(5,0,900,600);
+
+		ventanilla.setIcon(new ImageIcon(
+				new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/imagenInstrucciones.png")).getImage()
+						.getScaledInstance(900, 600, Image.SCALE_DEFAULT)));
+		ventanilla.setBounds(5, 0, 900, 550);
 		contentPane.add(ventanilla);
-		
+
 	}
-	
+
 	public static PantallaInstrucciones getInstance() {
 		if (INSTANCE != null) {
 			return INSTANCE;
