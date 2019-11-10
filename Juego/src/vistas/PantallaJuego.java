@@ -14,21 +14,26 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.border.EmptyBorder;
 
 import controlador.AdaptadorFlechas;
 import controlador.AdaptadorWASD;
 import controlador.JuegoMain;
+import juego.Edificio;
 import juego.Juego;
 import utils.ColorDeLetra;
 import utils.Contador;
 import utils.Orientacion;
+import utils.Posicion;
 
 import javax.swing.JButton;
 
@@ -72,6 +77,7 @@ public class PantallaJuego extends JFrame {
 		contentPane.add(panelInfo);
 
 		scroll.setViewportView(panelMapa);
+		scroll.getViewport().setBackground(Color.BLACK);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		pointScroll = new Point(0, scroll.getHeight());
 		scroll.getViewport().setViewPosition(pointScroll);
@@ -95,11 +101,47 @@ public class PantallaJuego extends JFrame {
 		nroSeccion = juego.getMapa().getEdificio().getSeccionActual().getNroSeccion();
 	}
 
+	public Thread scrollHacia(Posicion posicion) {
+		int yDeseado = Edificio.ALTO - 400 - posicion.getY();
+		System.out.println(yDeseado);
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				final boolean[] terminado = new boolean[1];
+				JViewport viewport = scroll.getViewport();
+				Timer timer = new Timer();
+				timer.scheduleAtFixedRate(new TimerTask() {
+					int actualY = (int) viewport.getViewPosition().getY();
+					public void run() {
+						System.out.println(actualY);
+						if (actualY > yDeseado) {
+							viewport.setViewPosition(new Point(0, actualY--));
+							System.out.println("bajo");
+						} else if (actualY < yDeseado) {
+							System.out.println("subo");
+							viewport.setViewPosition(new Point(0, actualY++));
+						} else {
+							System.out.println("cancelo");
+							timer.cancel();
+							terminado[0]=true;
+						}
+					}
+				}, 0, 10);
+				
+				while (!terminado[0]) {
+					System.out.println("no terine");
+				}
+				System.out.println("llegue");
+			}
+		});
+		t.start();
+		return t;
+	}
+
 	public void scrollearUp(int pixeles) {
 		Contador timer = new Contador(10);
-		int nuevoY = (int) (scroll.getViewport().getViewPosition().getY()-pixeles);
-		if (nuevoY<0) {
-			nuevoY=0;
+		int nuevoY = (int) (scroll.getViewport().getViewPosition().getY() - pixeles);
+		if (nuevoY < 0) {
+			nuevoY = 0;
 		}
 		scroll.getViewport().setViewPosition(new Point(0, nuevoY));
 //		int actual = scroll.getVerticalScrollBar().getValue(); 
@@ -113,12 +155,8 @@ public class PantallaJuego extends JFrame {
 	}
 
 	public void paintComponent(Graphics g) {
+
 		super.paintComponents(g);
-		int seccionNueva;
-		if (nroSeccion != (seccionNueva = juego.getMapa().getEdificio().getSeccionActual().getNroSeccion())) {
-			nroSeccion = seccionNueva;
-			scrollearUp(166);
-		}
 	}
 
 }
