@@ -59,8 +59,8 @@ public class Juego {
 	}
 
 	private Juego() {
-		// nivel = new Nivel(10, 15, 1000, 10, 10, 5, 600, 10, 40);
-		nivel = new Nivel(10, 25, 10000, 50, 130, 6, 300, 10, 40);
+		// nivel = new Nivel(10, 15, 1000, 20, 50, 5, 600, 10, 40);
+		nivel = new Nivel(10, 25, 10000, 20, 50, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador("anonimo");

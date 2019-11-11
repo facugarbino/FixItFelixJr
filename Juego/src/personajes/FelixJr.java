@@ -1,5 +1,6 @@
 package personajes;
 
+
 import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,6 +32,9 @@ public class FelixJr extends Personaje {
 	private boolean saltando;
 	private int saltoHorizontal;
 	private int saltoVertical;
+	private boolean estaMartillando;
+	private Timer timerDeMartillo;
+	private boolean martilloArriba;
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;
@@ -42,12 +46,18 @@ public class FelixJr extends Personaje {
 		timer = new Contador(5000);
 		saltoHorizontal = (int)(Ventana.ANCHO*1.4);
 		saltoVertical = 50;
+		estaMartillando= false;
+		timerDeMartillo = new Timer();
+		martilloArriba = true;
 	}
 
 	public boolean estaSaltando() {
 		return saltando;
 	}
 	
+	public boolean estaMartillando() {
+		return estaMartillando;
+	}
 	/**
 	 * Martilla la ventana en la que se encuentra y acumula puntaje en caso de
 	 * repararla
@@ -67,6 +77,22 @@ public class FelixJr extends Personaje {
 				System.out.println("Felix repara un panel. Gana 100 puntos.");
 			}
 		}
+		estaMartillando = true;
+		timerDeMartillo.scheduleAtFixedRate(new TimerTask() {
+			int cant = 1;
+			@Override
+			public void run() {
+				if (cant==1) {
+					martilloArriba = !martilloArriba;
+					cant ++;
+				} else {
+					martilloArriba = !martilloArriba;
+					estaMartillando = !estaMartillando;
+					timerDeMartillo.cancel();
+				}
+			}
+		}, 0, 100);
+		
 	}
 
 	/**
