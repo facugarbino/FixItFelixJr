@@ -47,7 +47,7 @@ public class PantallaInstrucciones extends JFrame {
 		setContentPane(contentPane);
 
 		titulo = new JLabel();
-		titulo.setBounds(138, 65, 624, 54);
+		titulo.setBounds(182, 65, 536, 54);
 		titulo.setIcon(new ImagenTextual("Instrucciones", 5, ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
 
@@ -63,19 +63,19 @@ public class PantallaInstrucciones extends JFrame {
 				.setIcon(new ImagenTextual("para avanzar al proximo nivel", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(introLetras2);
 
-		evitaLetras.setBounds(120, 295, 94, 50);
+		evitaLetras.setBounds(121, 279, 94, 50);
 		evitaLetras.setIcon(new ImagenTextual("evita", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(evitaLetras);
 
-		agarraLetras.setBounds(92, 403, 144, 50);
+		agarraLetras.setBounds(121, 375, 144, 50);
 		agarraLetras.setIcon(new ImagenTextual("agarra", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(agarraLetras);
 
-		moveteLetras.setBounds(645, 252, 153, 50);
+		moveteLetras.setBounds(637, 242, 106, 50);
 		moveteLetras.setIcon(new ImagenTextual("movete", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(moveteLetras);
 
-		arreglaLetras.setBounds(669, 403, 175, 50);
+		arreglaLetras.setBounds(669, 403, 127, 50);
 		arreglaLetras.setIcon(new ImagenTextual("arregla", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(arreglaLetras);
 

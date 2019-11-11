@@ -24,6 +24,7 @@ public class PrimeraSeccion extends Seccion {
 				ventanas[2][2].estaRota());
 		ventanas[1][2] = new VentanaPrimerPiso(posPrimerPiso, ventanas[1][2].getSeccion(),
 				ventanas[1][2].estaRota());
+		posicion = new Posicion(0,0);
 	}
 
 	public PrimeraSeccion(Seccion s) {

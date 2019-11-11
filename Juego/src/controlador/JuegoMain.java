@@ -21,6 +21,7 @@ public class JuegoMain {
 	private static Juego juego;
 	private static PantallaMenu menu;
 	private static PantallaJuego pantallaJuego;
+	public final static double MULTIPLICADOR = 1.5;
 
 	
 	public static PantallaJuego getPantallaJuego() {
@@ -37,21 +38,21 @@ public class JuegoMain {
 	}
 
 	public static void comenzarJuego() {
-		if (pantallaJuego == null) {
+//		if (pantallaJuego == null) {
 			Juego.reiniciarJuego();
 			juego = Juego.getInstance();
-			juego.setJugador("");
+			juego.setJugador("anonimo");
 			juego.pasarDeNivel();
 			int nivelAComenzar = (int) PantallaConfig.getInstance().getComboNivel().getSelectedItem();
 			for (int i = 1; i < nivelAComenzar; i++) {
 				juego.pasarDeNivel();
 			}
 			pantallaJuego = new PantallaJuego();
-			t = new Thread(new JuegoLoop(Juego.getInstance()));
+			t = new Thread(new JuegoLoop(juego));
 			t.start();
 			corriendo = true;
 			// loop();
-		}
+//		}
 		pantallaJuego.setVisible(true);
 		menu.setVisible(false);
 	}

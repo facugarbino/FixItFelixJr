@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.Color;
 import java.util.*;
 
+import controlador.JuegoMain;
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
 import juego.Juego;
@@ -39,6 +40,26 @@ public abstract class Ventana implements Dibujable {
 	protected int panelesRotos;
 	protected int panelesReparados;
 	Character caracter = '□';
+//	private static Posicion[] posicion2 = new Posicion[] {
+//			new Posicion(6,8), new Posicion(6,21)
+//	};
+//	private static Posicion[] posicion4 = new Posicion[] {
+//			new Posicion(9,9),
+//			new Posicion(22,9),
+//			new Posicion(9,21),
+//			new Posicion(22,21)
+//	};
+//	private static Posicion[] posicion5 = new Posicion[] {
+//			new Posicion(7,4),
+//			new Posicion(13,4),
+//			new Posicion(22,4),
+//			new Posicion(28,4),
+//			new Posicion(7,13),
+//			new Posicion(13,13),
+//			new Posicion(22,13),
+//			new Posicion(28,13)
+//	};
+	
 	private static Posicion[] posicion2 = new Posicion[] {
 			new Posicion(6,8), new Posicion(6,21)
 	};

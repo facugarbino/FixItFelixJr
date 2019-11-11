@@ -45,6 +45,9 @@ public class AdaptadorFlechas extends KeyAdapter {
 				case (KeyEvent.VK_R):
 					JuegoMain.getPantallaJuego().scrollearUp(20);
 					break;
+				case (KeyEvent.VK_D):
+					JuegoMain.getPantallaJuego().scrollearUp(-20);
+					break;
 				}
 			}
 		}

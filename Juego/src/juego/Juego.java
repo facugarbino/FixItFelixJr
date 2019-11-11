@@ -63,7 +63,7 @@ public class Juego {
 		nivel = new Nivel(10, 25, 10000, 50, 130, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
-		jugador = new Jugador("Anonimo");
+		jugador = new Jugador("anonimo");
 		ranking = new Ranking();
 		primeraVez = true;
 		nivelAComenzar = 1;
@@ -179,13 +179,13 @@ public class Juego {
 	}
 
 	private void ganar() {
-		agregarRanking();
+		//agregarRanking();
 		pausa = true;
 		yaGano = true;
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
 	}
 
-	private void agregarRanking() {
+	public void agregarRanking() {
 		HighScore hs = new HighScore(jugador);
 		ranking.agregarHighScore(hs);
 	}

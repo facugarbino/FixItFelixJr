@@ -32,6 +32,7 @@ public class Seccion {
 	protected Ventana[][] ventanas;
 	protected Nicelander nicelander;
 	protected List<Pastel> pasteles;
+	protected Posicion posicion;
 
 	/**
 	 * Constructor usado para reiniciar una sección (debe generarse aleatoriamente
@@ -76,8 +77,18 @@ public class Seccion {
 				ventanas[i][j] = ventanaRandom(posicion, rotas[i][j], conObstaculo[i][j]);
 			}
 		}
+		if (nroSeccion==2) {
+			posicion = new Posicion(0,166);
+		} else {
+			posicion = new Posicion(0,332);
+		}
 
 	}
+	
+	public Posicion getPosicion() {
+		return posicion;
+	}
+	
 	public List<Ventana> getVentanas() {
 	    List<Ventana> lista = new ArrayList<>();
 	    for (Ventana[] arreglo: ventanas) {
@@ -116,7 +127,7 @@ public class Seccion {
 		 * System.out.println( "La ventana en " + posicion + (rota ? "está rota" :
 		 * "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
 		 */
-		if (random < 0.2 && !rota) {
+		if ( !rota && ((random < 0.15 && !tieneObstaculo) || (random < 0.8 && tieneObstaculo)) ) {
 			// Con hojas
 			return new VentanaConHojas(posicion, this, tieneObstaculo);
 		} else {
