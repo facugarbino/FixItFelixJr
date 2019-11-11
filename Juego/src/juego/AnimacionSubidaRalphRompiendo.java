@@ -34,7 +34,7 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 						ralph.setSubida(true);
 					}
 				} else {
-					if (!(ralph.getPosicion().getY() == maxAltura)) {
+					if (ralph.getPosicion().getY() < maxAltura) {
 						if (ralph.getPosicion().getY() < (maxAltura / 3)) {
 							ralph.getPosicion().moverY(1);
 						} else {
@@ -60,7 +60,9 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 
 			}
 		}, 0, 50);
-		while (!llego);
+		while (!llego) {
+			System.out.println("caca");
+		}
 		timerDeSubida.cancel();
 		ralph.setSubida(false);
 	}
