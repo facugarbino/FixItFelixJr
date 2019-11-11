@@ -227,13 +227,13 @@ public class Juego {
 	
 	private void agregarNubes(int nroSeccion) {
 		if (nroSeccion == 1) {
-			mapa.agregarComponente(new Nube(new Posicion(0, Edificio.ALTO/7), nivel.getVelocidadNube()));
+			mapa.agregarComponente(new Nube(new Posicion(0, 200), nivel.getVelocidadNube()));
 		} else {
 			if (nroSeccion==2) {
-				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO/2, Edificio.ALTO/3), nivel.getVelocidadNube()));
+				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO/2, 400), nivel.getVelocidadNube()));
 				agregarNubes(1);
 			} else {
-				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, (int)(Edificio.ALTO/1.6)), nivel.getVelocidadNube()));
+				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, 600), nivel.getVelocidadNube()));
 				agregarNubes(2);
 			}
 		}

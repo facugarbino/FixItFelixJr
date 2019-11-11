@@ -127,7 +127,7 @@ public class Seccion {
 		 * System.out.println( "La ventana en " + posicion + (rota ? "está rota" :
 		 * "está sana") + (tieneObstaculo ? " y tiene obstáculo" : ""));
 		 */
-		if ( !rota && ((random < 0.15 && !tieneObstaculo) || (random < 0.8 && tieneObstaculo)) ) {
+		if ( !rota && ((random < 0.1 && !tieneObstaculo) || (random < 0.8 && tieneObstaculo)) ) {
 			// Con hojas
 			return new VentanaConHojas(posicion, this, tieneObstaculo);
 		} else {

@@ -58,6 +58,9 @@ public class FelixJr extends Personaje {
 	public boolean estaMartillando() {
 		return estaMartillando;
 	}
+	public boolean martilloArriba() {
+		return martilloArriba;
+	}
 	/**
 	 * Martilla la ventana en la que se encuentra y acumula puntaje en caso de
 	 * repararla
@@ -78,20 +81,23 @@ public class FelixJr extends Personaje {
 			}
 		}
 		estaMartillando = true;
-		timerDeMartillo.scheduleAtFixedRate(new TimerTask() {
+		martilloArriba=true;
+		timerDeMartillo = new Timer();
+		timerDeMartillo.schedule(new TimerTask() {
 			int cant = 1;
+			Timer timer = timerDeMartillo;
 			@Override
 			public void run() {
 				if (cant==1) {
-					martilloArriba = !martilloArriba;
-					cant ++;
+					martilloArriba = false;
+					cant++;
 				} else {
-					martilloArriba = !martilloArriba;
-					estaMartillando = !estaMartillando;
-					timerDeMartillo.cancel();
+					martilloArriba = true;
+					estaMartillando = false;
+					timer.cancel();
 				}
 			}
-		}, 0, 100);
+		}, 50, 50);
 		
 	}
 
@@ -101,14 +107,14 @@ public class FelixJr extends Personaje {
 	 */
 	public void mover(Orientacion o) {
 		Ventana v = ventanaActual.getVentana(o);
+		saltando=true;
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				saltando=false;
+			}
+		}, 200);
 		if (v != null) {
-			saltando=true;
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					saltando=false;
-				}
-			}, 100);
 			ventanaActual = v;
 			posicion = v.getPosicion().copia();
 //			switch (o) {

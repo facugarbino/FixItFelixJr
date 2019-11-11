@@ -16,6 +16,7 @@ public class VentanaConHojas extends Ventana {
 	private boolean hojaDerecha;
 	private boolean hojaIzquierda;
 
+
 	public VentanaConHojas(Posicion posicion, Seccion seccion, boolean tieneObstaculo) {
 		Posicion posiciones[] = getPosiciones(2);
 		this.posicion = posicion;

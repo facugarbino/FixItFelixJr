@@ -28,7 +28,7 @@ public class JuegoLoop implements Runnable {
 	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
-		Contador timer = new Contador(100);
+		Contador timer = new Contador(10);
 		System.out.println("Felix comienza en la posición " + juego.getFelix().getPosicion());
 		seccionActual=Juego.getInstance().getMapa().getEdificio().getSeccionActual();
 		while (true) {
@@ -40,7 +40,7 @@ public class JuegoLoop implements Runnable {
 					//Esto refresca la gráfica
 					JuegoMain.getPantallaJuego().repaint();
 				}
-				System.out.println("entre a !juego.estaPausado()");
+				//System.out.println("entre a !juego.estaPausado()");
 				juego.actualizar();
 				seccionNueva = Juego.getInstance().getMapa().getEdificio().getSeccionActual();
 				if (seccionNueva!= seccionActual) {
@@ -66,7 +66,7 @@ public class JuegoLoop implements Runnable {
 				}
 				if (juego.getTiempo() > 0 && juego.getFelix().getVidas() > 0) {
 					//Graficador.mensaje("PAUSA");
-					System.out.println("entre a tieneVidas()");
+					//System.out.println("entre a tieneVidas()");
 				} else {
 					//Graficador.mensaje("GAME OVER");
 					System.out.println("entre a perdio()");

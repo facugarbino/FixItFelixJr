@@ -21,7 +21,7 @@ public class JuegoMain {
 	private static Juego juego;
 	private static PantallaMenu menu;
 	private static PantallaJuego pantallaJuego;
-	public final static double MULTIPLICADOR = 2;
+	public final static double MULTIPLICADOR = 1.8;
 
 	
 	public static PantallaJuego getPantallaJuego() {

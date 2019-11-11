@@ -32,7 +32,8 @@ public class Pajaro extends Componente {
 		if (orientacion == Orientacion.IZQUIERDA) {
 			if (posicion.getX() > 0) {
 				posicion.moverX(-1);
-				aleteo=!aleteo;
+				if (posicion.getX()%5==0)
+					aleteo=!aleteo;
 			} else {
 				setOrientacion(Orientacion.DERECHA);
 				comoAvanzo();
@@ -40,7 +41,8 @@ public class Pajaro extends Componente {
 		} else {
 			if (posicion.getX() < (Mapa.ANCHO - (ANCHO))) {
 				posicion.moverX(1);
-				aleteo=!aleteo;
+				if (posicion.getX()%5==0)
+					aleteo=!aleteo;
 			} else {
 				setOrientacion(Orientacion.IZQUIERDA);
 				comoAvanzo();

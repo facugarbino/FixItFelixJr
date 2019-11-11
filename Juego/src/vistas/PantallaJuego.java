@@ -2,9 +2,12 @@ package vistas;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
@@ -37,6 +40,19 @@ public class PantallaJuego extends JFrame {
 	 */
 	public PantallaJuego() {
 		setResizable(false);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//PREGUNTAR
+				
+				//PantallaMenu.getInstance().setVisible(true);
+			}
+			public void windowIconified(WindowEvent e) {
+				juego.pausar();
+			}
+			
+		});
+		
 		juego = Juego.getInstance();
 		if (PantallaConfig.getInstance().getComboLetras().getSelectedIndex() == 0) {
 			addKeyListener(new AdaptadorFlechas());
@@ -94,14 +110,16 @@ public class PantallaJuego extends JFrame {
 				final boolean[] terminado = new boolean[1];
 				JViewport viewport = scroll.getViewport();
 				Timer timer = new Timer();
-				timer.scheduleAtFixedRate(new TimerTask() {
+				timer.schedule(new TimerTask() {
 					int actualY = (int) viewport.getViewPosition().getY();
 					public void run() {
 						System.out.println(actualY);
 						if (actualY > yDeseado) {
-							viewport.setViewPosition(new Point(0, actualY--));
+							actualY-=5;
+							viewport.setViewPosition(new Point(0, actualY));
 							System.out.println("bajo");
 						} else if (actualY < yDeseado) {
+							actualY+=5;
 							System.out.println("subo");
 							viewport.setViewPosition(new Point(0, actualY++));
 						} else {
@@ -110,7 +128,7 @@ public class PantallaJuego extends JFrame {
 							terminado[0]=true;
 						}
 					}
-				}, 0, 5);
+				}, 0, 20);
 				
 				while (!terminado[0]) {
 					System.out.println("no terine");

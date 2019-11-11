@@ -36,10 +36,14 @@ public class PanelInfo extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		actualizar();
-		g.drawImage(new ImagenTextual("Nivel: "+nroNivel, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 10, 10, null);
-		g.drawImage(new ImagenTextual("Puntaje: "+puntaje, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 10, 30, null);
-		g.drawImage(new ImagenTextual("Vidas: "+vidas, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 250, 10, null);
-		g.drawImage(new ImagenTextual("Tiempo: "+tiempo, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 250, 30, null);
+		g.drawImage(new ImagenTextual("Nivel: "+nroNivel, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 
+				(int)(10*JuegoMain.MULTIPLICADOR), (int)(10*JuegoMain.MULTIPLICADOR), null);
+		g.drawImage(new ImagenTextual("Puntaje: "+puntaje, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 
+				(int)(10*JuegoMain.MULTIPLICADOR), (int)(30*JuegoMain.MULTIPLICADOR), null);
+		g.drawImage(new ImagenTextual("Vidas: "+vidas, 1.5, ColorDeLetra.ROJO).getBufferedImage(),
+				(int)(250*JuegoMain.MULTIPLICADOR), (int)(10*JuegoMain.MULTIPLICADOR), null);
+		g.drawImage(new ImagenTextual("Tiempo: "+tiempo, 1.5, ColorDeLetra.ROJO).getBufferedImage(), 
+				(int)(250*JuegoMain.MULTIPLICADOR), (int)(30*JuegoMain.MULTIPLICADOR), null);
 	}
 	
 	private void actualizar() {

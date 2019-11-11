@@ -182,7 +182,7 @@ public class Ralph extends Personaje {
 					cantLadrillos--;
 					timerEntreLadrillos.resetear();
 					System.out.println("Ralph tira una roca");
-					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY() ), velocidadLadrillo,
+					return new Ladrillo(new Posicion(obtenerXRandom(), posicion.getY()+7 ), velocidadLadrillo,
 							Juego.getInstance().getMapa());
 				}
 			}
@@ -198,7 +198,7 @@ public class Ralph extends Personaje {
 				orientacion = Orientacion.ABAJO;
 				ladrillosTirados = 0;
 				//Cantidad variable de ladrillos que Ralph tira cada vez que se pone a tirar
-				ladrillosQueTieneQuetirar = (int)(Math.random()*3+1);
+				ladrillosQueTieneQuetirar = (int)(Math.random()*3+2);
 				timerFrecuencia.resetear();
 				// System.out.println("Ralph se pone a tirar ladrillos");
 			}

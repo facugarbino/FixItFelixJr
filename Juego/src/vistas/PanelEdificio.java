@@ -90,9 +90,9 @@ public class PanelEdificio extends JPanel {
 		dibujarNubes(g);
 		dibujarEdificio(g);
 		dibujarVentanas(g);
-		dibujarComponentes(g);
 		dibujarPastelesYNicelanders(g);
 		dibujarPersonajes(g);
+		dibujarComponentes(g);
 	}
 
 	private void dibujarPastelesYNicelanders(Graphics g) {
