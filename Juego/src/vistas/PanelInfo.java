@@ -6,6 +6,7 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
+import controlador.JuegoMain;
 import juego.Juego;
 import utils.ColorDeLetra;
 
@@ -21,7 +22,7 @@ public class PanelInfo extends JPanel {
 	private int tiempo;
 
 	public PanelInfo() {
-		setBounds(0, 0, 420, 50);
+		setBounds(0, 0, (int)(420*JuegoMain.MULTIPLICADOR), (int)(50*JuegoMain.MULTIPLICADOR));
 		setLayout(null);
 		setBackground(Color.BLACK);
 //		JLabel label = new JLabel();
