@@ -37,6 +37,7 @@ public class PantallaConfig extends JFrame {
 	 * Create the frame.
 	 */
 	private PantallaConfig() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

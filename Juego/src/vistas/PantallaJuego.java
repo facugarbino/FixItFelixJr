@@ -36,6 +36,7 @@ public class PantallaJuego extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaJuego() {
+		setResizable(false);
 		juego = Juego.getInstance();
 		if (PantallaConfig.getInstance().getComboLetras().getSelectedIndex() == 0) {
 			addKeyListener(new AdaptadorFlechas());
@@ -44,7 +45,7 @@ public class PantallaJuego extends JFrame {
 		}
 		scroll = new JScrollPane();
 		// scroll.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
-		scroll.setBounds(0, 50, (int)(420*JuegoMain.MULTIPLICADOR), (int)(400*JuegoMain.MULTIPLICADOR));
+		scroll.setBounds(0, (int)(50*JuegoMain.MULTIPLICADOR), (int)(420*JuegoMain.MULTIPLICADOR), (int)(400*JuegoMain.MULTIPLICADOR));
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 //		scroll.setBounds(0, 50, 420, 800);
 		panelMapa = new PanelEdificio();

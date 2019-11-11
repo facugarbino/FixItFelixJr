@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controlador.JuegoMain;
 import juego.Juego;
 import ranking.HighScore;
 import ranking.Ranking;
@@ -43,6 +44,7 @@ public class PantallaRanking extends JFrame {
 	 * Create the frame.
 	 */
 	private PantallaRanking() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -54,7 +56,7 @@ public class PantallaRanking extends JFrame {
 		// Le ponemos DO_NOTHING porque el cierre lo manejamos nosotros con el
 		// WindowListener
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 750, 500);
+		setBounds(100, 100, (int)(750*JuegoMain.MULTIPLICADOR), (int)(500*JuegoMain.MULTIPLICADOR));
 
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
@@ -67,14 +69,16 @@ public class PantallaRanking extends JFrame {
 		tabla = new JTable();
 		tabla.setShowGrid(false);
 		tabla.setEnabled(false);
-		tabla.setRowHeight(70);
+		tabla.setRowHeight((int)(70*JuegoMain.MULTIPLICADOR));
 		tabla.setBackground(Color.BLACK);
-		tabla.setBounds(25, 100, 700, 400);
+		tabla.setBounds((int)(25*JuegoMain.MULTIPLICADOR), (int)(100*JuegoMain.MULTIPLICADOR), 
+				(int)(700*JuegoMain.MULTIPLICADOR), (int)(400*JuegoMain.MULTIPLICADOR));
 		actualizar();
 		contentPane.add(tabla);
 
 		titulo = new JLabel();
-		titulo.setBounds(235, 25, 280, 45);
+		titulo.setBounds((int)(235*JuegoMain.MULTIPLICADOR), (int)(25*JuegoMain.MULTIPLICADOR),
+				(int)(280*JuegoMain.MULTIPLICADOR), (int)(45*JuegoMain.MULTIPLICADOR));
 		titulo.setIcon(new ImagenTextual("ranking", 5, ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
 
@@ -97,9 +101,9 @@ public class PantallaRanking extends JFrame {
 				return ImageIcon.class;
 			}
 		});
-		tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
-		tabla.getColumnModel().getColumn(1).setPreferredWidth(450);
-		tabla.getColumnModel().getColumn(2).setPreferredWidth(200);
+		tabla.getColumnModel().getColumn(0).setPreferredWidth((int)(50*JuegoMain.MULTIPLICADOR));
+		tabla.getColumnModel().getColumn(1).setPreferredWidth((int)(450*JuegoMain.MULTIPLICADOR));
+		tabla.getColumnModel().getColumn(2).setPreferredWidth((int)(200*JuegoMain.MULTIPLICADOR));
 		// Esto es para que el frame se abra en el centro de la pantalla
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);

@@ -8,12 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import controlador.JuegoMain;
 import utils.ColorDeLetra;
 
 public class ImagenTextual {
 	private BufferedImage imagen;
 
 	public ImagenTextual(String texto, double multiplicador, ColorDeLetra color) {
+		multiplicador*=JuegoMain.MULTIPLICADOR;
 		String textoColor = color.toString().toLowerCase();
 		imagen = new BufferedImage((int) (8 * texto.length() * multiplicador), (int) (9 * multiplicador),
 				BufferedImage.TYPE_INT_RGB);
