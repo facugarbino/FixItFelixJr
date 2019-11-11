@@ -4,6 +4,7 @@ import componentes.Ladrillo;
 import componentes.Nube;
 import componentes.Pajaro;
 import controlador.Audio;
+import controlador.JuegoMain;
 import personajes.FelixJr;
 import personajes.Ralph;
 import ranking.HighScore;
@@ -36,6 +37,7 @@ public class Juego {
 	private boolean primeraVez;
 	private boolean yaGano;
 	private int nivelAComenzar;
+	private int cantLadrillos;
 
 	/**
 	 * 
@@ -240,6 +242,7 @@ public class Juego {
 	}
 
 	public void avanzarSeccion() {
+		cantLadrillos = ralph.getCantLadrillos();
 		int nroSeccion = seccionActual.getNroSeccion();
 		if (nroSeccion < 3) {
 			Audio.getInstance().seccionUp();
@@ -252,9 +255,25 @@ public class Juego {
 			tiempo = nivel.getTiempo();
 			felix.subirDeSeccion(seccionActual);
 			ralph.subirDeSeccion();
+			Thread t = new Thread(new AnimacionSubidaRalph());
+			t.start();
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
 			pasarDeNivel();
 			System.out.println("Felix Jr. pasa de nivel");
+		}
+		Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -304,6 +323,7 @@ public class Juego {
 		Ventana v = seccionActual.getVentanaInicial();
 		felix.setVentana(v);
 		felix.setPosicion(v.getPosicion().copia());
+		ralph.setCantLadrillos(cantLadrillos);
 	}
 
 	public Mapa getMapa() {

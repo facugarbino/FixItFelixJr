@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import graficador.modelo.Dibujable;
 import graficador.vista.Graficador;
+import juego.AnimacionSubidaRalphRompiendo;
 import juego.Juego;
 import juego.Seccion;
 import utils.Contador;
@@ -31,28 +32,43 @@ public class JuegoLoop implements Runnable {
 		Contador timer = new Contador(10);
 		System.out.println("Felix comienza en la posición " + juego.getFelix().getPosicion());
 		seccionActual=Juego.getInstance().getMapa().getEdificio().getSeccionActual();
+		(new Timer()).schedule(new TimerTask() {
+			public void run () {
+				JuegoMain.getPantallaJuego().repaint();
+			}
+		}, 0,10);
+		Thread t = new Thread(new AnimacionSubidaRalphRompiendo());
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		
 		while (true) {
 			if (!juego.estaPausado()) {
-				if (timer.contar()) {
-					timer.resetear();
-					// Grafica todo
-					//Graficador.refrescarTopDown(lista);
-					//Esto refresca la gráfica
-					JuegoMain.getPantallaJuego().repaint();
-				}
+				
+//				if (timer.contar()) {
+//					timer.resetear();
+//					// Grafica todo
+//					//Graficador.refrescarTopDown(lista);
+//					//Esto refresca la gráfica
+//					JuegoMain.getPantallaJuego().repaint();
+//				}
 				//System.out.println("entre a !juego.estaPausado()");
 				juego.actualizar();
-				seccionNueva = Juego.getInstance().getMapa().getEdificio().getSeccionActual();
-				if (seccionNueva!= seccionActual) {
-					seccionActual = seccionNueva;
-					Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionNueva.getPosicion());
-					try {
-						t.join();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					
-				}
+//				seccionNueva = Juego.getInstance().getMapa().getEdificio().getSeccionActual();
+//				if (seccionNueva!= seccionActual) {
+//					seccionActual = seccionNueva;
+//					Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionNueva.getPosicion());
+//					try {
+//						t.join();
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//					
+//				}
 				
 				
 			} else {
