@@ -30,18 +30,18 @@ import ventanas.paneles.Panel;
 @SuppressWarnings("serial")
 public class PanelEdificio extends JPanel {
 
-	private final int ANCHO = 420;
-	private final int ALTO = 650;
+	private final int ANCHO = Edificio.ANCHO;
+	private final int ALTO = Edificio.ALTO;
 //	private final int ANCHO = 300;
 //	private final int ALTO = 900;
 	private Image[] imagenes;
 	private Edificio edificio;
 	private Mapa mapa;
+	private static final double MULTIPLICADOR = JuegoMain.MULTIPLICADOR;
 
 	public PanelEdificio() {
 		setBackground(Color.BLACK);
-		this.setPreferredSize(
-				new Dimension((int) (ANCHO * JuegoMain.MULTIPLICADOR), (int) (ALTO * JuegoMain.MULTIPLICADOR)));
+		this.setPreferredSize(new Dimension((int) (ANCHO * MULTIPLICADOR), (int) (ALTO * MULTIPLICADOR)));
 		this.setVisible(true);
 		try {
 			imagenes = getImagenes();
@@ -53,29 +53,39 @@ public class PanelEdificio extends JPanel {
 	}
 
 	private void dibujarImagen(Graphics g, Image imagen, int x, int y) {
-		g.drawImage(imagen, (int) (x * JuegoMain.MULTIPLICADOR), (int) (y * JuegoMain.MULTIPLICADOR),
-				(int) (imagen.getWidth(null) * JuegoMain.MULTIPLICADOR),
-				(int) (imagen.getHeight(null) * JuegoMain.MULTIPLICADOR), null);
+		g.drawImage(imagen, (int) (x * MULTIPLICADOR), (int) (y * MULTIPLICADOR),
+				(int) (imagen.getWidth(null) * MULTIPLICADOR), (int) (imagen.getHeight(null) * MULTIPLICADOR), null);
 
 	}
 
 	private Image[] getImagenes() throws IOException {
-		Image img[] = new Image[43];
+		Image img[] = new Image[55];
 		String url;
 		String[] urls = new String[] { "edificio/edificio", "ventanas/ventanaComun", "ventanas/ventanaPrimerPiso",
 				"ventanas/ventanaConHojas", "puertas/puerta", "obstaculos/macetero", "obstaculos/moldura",
 				"obstaculos/hojaIzquierda", "obstaculos/hojaDerecha", "nicelanders/nicelanderCompleto1",
 				"nicelanders/nicelanderCompleto2", "nicelanders/nicelanderCompleto3", "nicelanders/nicelanderOculto1",
 				"nicelanders/nicelanderOculto2", "nicelanders/nicelanderOculto3", "pastel/pastel1", "pastel/pastel2",
-				"paneles/panelRoto", "paneles/panelSano", "paneles/panelMedioRoto1", "paneles/panelMedioRoto2",
-
+				"paneles/ventanaComun/panelRoto", "paneles/ventanaComun/panelSano",
+				"paneles/ventanaComun/panelMedioRoto1", "paneles/ventanaComun/panelMedioRoto2",
+				
 				"nubes/nube", "pajaros/pajaroDer1", "pajaros/pajaroDer2", "pajaros/pajaroIzq1", "pajaros/pajaroIzq2",
 				"felix/felixConPastel", "felix/felixConMartillo1", "felix/felixConMartillo2", "felix/felixCorre",
 				"felix/felixFrente", "felix/felixGolpeado", "ralph/ralphCaminaIzq1", "ralph/ralphCaminaIzq2",
 				"ralph/ralphCaminaDer1", "ralph/ralphCaminaDer2", "ralph/ralphTiraLadrillo1",
 				"ralph/ralphTiraLadrillo2", "ralph/ralphDeFrente", "ralph/ralphSube1", "ralph/ralphSube2",
-				"ladrillos/ladrillo1", "ladrillos/ladrillo2" };
-		for (int i = 0; i < 43; i++) {
+				"ladrillos/ladrillo1", "ladrillos/ladrillo2",
+
+				"botones/botonPausa", "botones/botonMutear", "botones/botonDesmutear", "extra/fondo", "extra/pausa",
+				"extra/gameover",
+				
+				"paneles/puerta/panelSano",	"paneles/puerta/panelMedioRoto",
+				"paneles/puerta/panelRoto",
+				"paneles/primerPiso/panelSano","paneles/primerPiso/panelMedioRoto",
+				"paneles/primerPiso/panelRoto"
+
+				};
+		for (int i = 0; i < 55; i++) {
 			url = urls[i];
 			img[i] = ImageIO.read(getClass().getResource("/recursos/imagenes/" + urls[i] + ".png"));
 		}
@@ -87,12 +97,18 @@ public class PanelEdificio extends JPanel {
 		super.paintComponent(g);
 		mapa = Juego.getInstance().getMapa();
 		edificio = mapa.getEdificio();
+		dibujarFondo(g);
 		dibujarNubes(g);
 		dibujarEdificio(g);
 		dibujarVentanas(g);
 		dibujarPastelesYNicelanders(g);
 		dibujarPersonajes(g);
 		dibujarComponentes(g);
+	}
+
+	private void dibujarFondo(Graphics g) {
+		dibujarImagen(g, imagenes[46], 0, ALTO - imagenes[46].getHeight(null));
+
 	}
 
 	private void dibujarPastelesYNicelanders(Graphics g) {
@@ -250,24 +266,40 @@ public class PanelEdificio extends JPanel {
 	private int dibujarPaneles(Graphics g, Ventana v) {
 		Image imagen;
 		int numImagen = 18;
-		String clase;
+		String clase = claseDe(v);
+		int imagenesPaneles[];
+		switch (clase) {
+		case "VentanaPrimerPiso": {
+			imagenesPaneles = new int[]{52,53,54};
+			break;
+		}
+		case "VentanaPuerta": {
+			imagenesPaneles = new int[]{49,50,51};
+			break;
+		}
+		default: {
+			imagenesPaneles = new int[]{18,19,17};
+			break;
+		}
+		}
 		List<Panel> paneles = v.getPaneles();
 		for (Panel p : paneles) {
 			clase = claseDe(p.getEstado());
 			switch (clase) {
 			case "Sano": {
-				numImagen = 18;
+				numImagen = imagenesPaneles[0];
 				break;
 			}
 			case "MedioRoto": {
-				numImagen = 19;
+				numImagen = imagenesPaneles[1];
 				break;
 			}
 			case "Roto": {
-				numImagen = 17;
+				numImagen = imagenesPaneles[2];
 				break;
 			}
 			}
+
 			imagen = imagenes[numImagen];
 //			g.drawImage(imagen, v.getPosicion().getX() + p.getPosicion().getX(),
 //					ALTO - (v.getPosicion().getY() + p.getPosicion().getY()) - imagen.getHeight(null), null);
@@ -289,19 +321,19 @@ public class PanelEdificio extends JPanel {
 		int numImagen = 0;
 		FelixJr felix = Juego.getInstance().getFelix();
 		if (felix.estaSaltando()) {
-			numImagen = 8;
+			numImagen = 29;
 		} else {
 			if (felix.estaMartillando()) {
 				if (felix.martilloArriba()) {
-					numImagen = 6;
+					numImagen = 27;
 				} else {
-					numImagen = 7;
+					numImagen = 28;
 				}
 			} else {
-				numImagen = 9;
+				numImagen = 30;
 			}
 		}
-		imagen = imagenes[numImagen + 21];
+		imagen = imagenes[numImagen];
 //		g.drawImage(imagen, felix.getPosicion().getX(), ALTO - felix.getPosicion().getY() - imagen.getHeight(null),
 //				null);
 		dibujarImagen(g, imagen, felix.getPosicion().getX(),
@@ -311,34 +343,41 @@ public class PanelEdificio extends JPanel {
 		switch (ralph.getOrientacion()) {
 		case DERECHA: {
 			if (ralph.getPosicionDeTiro()) {
-				numImagen = 13;
+				numImagen = 34;
 			} else {
-				numImagen = 14;
+				numImagen = 35;
 			}
 			break;
 		}
 		case IZQUIERDA: {
 			if (ralph.getPosicionDeTiro()) {
-				numImagen = 11;
+				numImagen = 32;
 			} else {
-				numImagen = 12;
+				numImagen = 33;
 			}
 			break;
 		}
-		default: {
+		case ABAJO: {
 			if (ralph.estaTirandoLadrillos()) {
 				if (ralph.getPosicionDeTiro()) {
-					numImagen = 15;
+					numImagen = 36;
 				} else {
-					numImagen = 16;
+					numImagen = 37;
 				}
 			} else {
-				numImagen = 17;
+				numImagen = 38;
 			}
 			break;
 		}
+		case ARRIBA: {
+			if (ralph.getPosicionDeTiro()) {
+				numImagen = 39;
+			} else {
+				numImagen = 40;
+			}
 		}
-		imagen = imagenes[numImagen + 21];
+		}
+		imagen = imagenes[numImagen];
 //		g.drawImage(imagen, ralph.getPosicion().getX(), ALTO - ralph.getPosicion().getY() - imagen.getHeight(null),
 //				null);
 
@@ -355,9 +394,9 @@ public class PanelEdificio extends JPanel {
 			switch (clase) {
 			case "Ladrillo": {
 				if (((Ladrillo) c).swap()) {
-					numImagen = 20;
+					numImagen = 41;
 				} else {
-					numImagen = 21;
+					numImagen = 42;
 				}
 				break;
 			}
@@ -365,15 +404,15 @@ public class PanelEdificio extends JPanel {
 				Pajaro p = (Pajaro) c;
 				if (p.getOrientacion() == Orientacion.DERECHA) {
 					if (p.getAleteo()) {
-						numImagen = 1;
+						numImagen = 22;
 					} else {
-						numImagen = 2;
+						numImagen = 23;
 					}
 				} else {
 					if (p.getAleteo()) {
-						numImagen = 3;
+						numImagen = 24;
 					} else {
-						numImagen = 4;
+						numImagen = 25;
 					}
 				}
 				break;
@@ -381,7 +420,7 @@ public class PanelEdificio extends JPanel {
 			default:
 				continue;
 			}
-			imagen = imagenes[numImagen + 21];
+			imagen = imagenes[numImagen];
 //			g.drawImage(imagen, c.getPosicion().getX()- imagen.getWidth(null)/2, 
 //					ALTO - c.getPosicion().getY() - imagen.getHeight(null)/2, null);
 

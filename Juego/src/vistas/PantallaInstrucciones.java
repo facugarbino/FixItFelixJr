@@ -29,11 +29,12 @@ public class PantallaInstrucciones extends JFrame {
 	private JLabel moveteLetras = new JLabel();
 	private JLabel arreglaLetras = new JLabel();
 	private static PantallaInstrucciones INSTANCE;
+	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
 
 	
 	private void setBounds2(JComponent comp, int x1, int y1, int x2, int y2) {
-		comp.setBounds((int)(x1*JuegoMain.MULTIPLICADOR), (int)(y1*JuegoMain.MULTIPLICADOR),
-				(int)(x2*JuegoMain.MULTIPLICADOR), (int)(y2*JuegoMain.MULTIPLICADOR));
+		comp.setBounds((int)(x1*MULTIPLICADOR), (int)(y1*MULTIPLICADOR),
+				(int)(x2*MULTIPLICADOR), (int)(y2*MULTIPLICADOR));
 	}
 	
 	private PantallaInstrucciones() {
@@ -46,8 +47,8 @@ public class PantallaInstrucciones extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds((int)(100*JuegoMain.MULTIPLICADOR), (int)(100*JuegoMain.MULTIPLICADOR),
-				(int)(900*JuegoMain.MULTIPLICADOR),(int)(600*JuegoMain.MULTIPLICADOR));
+		setBounds((int)(100*MULTIPLICADOR), (int)(100*MULTIPLICADOR),
+				(int)(900*MULTIPLICADOR),(int)(600*MULTIPLICADOR));
 		//setBounds(100, 100, 900,600);
 		// Esto es para que el frame se abra en el centro de la pantalla
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -99,9 +100,9 @@ public class PantallaInstrucciones extends JFrame {
 		contentPane.add(arreglaLetras);
 
 		ventanilla.setIcon(new ImageIcon(
-				new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/imagenInstrucciones.png")).getImage()
-						.getScaledInstance((int)(900*JuegoMain.MULTIPLICADOR),
-								(int)(600*JuegoMain.MULTIPLICADOR), Image.SCALE_DEFAULT)));
+				new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/extra/imagenInstrucciones.png")).getImage()
+						.getScaledInstance((int)(900*MULTIPLICADOR),
+								(int)(600*MULTIPLICADOR), Image.SCALE_DEFAULT)));
 		setBounds2(ventanilla,5, 0, 900, 550);
 //		ventanilla.setBounds(5, 0, 900, 550);
 		contentPane.add(ventanilla);

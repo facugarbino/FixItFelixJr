@@ -12,7 +12,7 @@ import utils.Posicion;
  */
 public class Edificio {
 
-	public static final int ANCHO = 240;
+	public static final int ANCHO = 210;
 	public static final int ALTO = 650;
 	
 //	public static final int ANCHO = 100;

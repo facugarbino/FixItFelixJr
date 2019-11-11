@@ -1,5 +1,7 @@
 package controlador;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,8 @@ public class JuegoMain {
 	private static Juego juego;
 	private static PantallaMenu menu;
 	private static PantallaJuego pantallaJuego;
-	public final static double MULTIPLICADOR = 1.8;
+	public final static double MULTIPLICADOR = Toolkit.getDefaultToolkit().getScreenSize().getWidth()/800;
+	public final static double MULTIPLICADOR_MENU = Toolkit.getDefaultToolkit().getScreenSize().getWidth()/1400;
 
 	
 	public static PantallaJuego getPantallaJuego() {

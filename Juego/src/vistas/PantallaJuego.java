@@ -39,7 +39,7 @@ public class PantallaJuego extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaJuego() {
-		setResizable(false);
+		setResizable(true);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -61,13 +61,14 @@ public class PantallaJuego extends JFrame {
 		}
 		scroll = new JScrollPane();
 		// scroll.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
-		scroll.setBounds(0, (int)(50*JuegoMain.MULTIPLICADOR), (int)(420*JuegoMain.MULTIPLICADOR), (int)(400*JuegoMain.MULTIPLICADOR));
+		scroll.setBounds(0, (int)(50*JuegoMain.MULTIPLICADOR), 
+				(int)(Edificio.ANCHO*2*JuegoMain.MULTIPLICADOR), (int)(250*JuegoMain.MULTIPLICADOR));
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 //		scroll.setBounds(0, 50, 420, 800);
 		panelMapa = new PanelEdificio();
 		panelInfo = new PanelInfo();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(0, 0, (int)(420*JuegoMain.MULTIPLICADOR), (int)(480*JuegoMain.MULTIPLICADOR));
+		setBounds(0, 0, (int)(Edificio.ANCHO*2*JuegoMain.MULTIPLICADOR), (int)(330*JuegoMain.MULTIPLICADOR));
 //		setBounds(0, 50, 420, 802);
 		// Esto es para que el frame se abra en el centro de la pantalla
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -78,9 +79,8 @@ public class PantallaJuego extends JFrame {
 		contentPane.add(panelInfo);
 
 		scroll.setViewportView(panelMapa);
-		scroll.getViewport().setBackground(Color.BLACK);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		pointScroll = new Point(0, scroll.getHeight());
+		pointScroll = new Point(0, (int)(Edificio.ALTO*JuegoMain.MULTIPLICADOR) - scroll.getHeight());
 		scroll.getViewport().setViewPosition(pointScroll);
 
 		// scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum());
@@ -103,7 +103,7 @@ public class PantallaJuego extends JFrame {
 	}
 
 	public Thread scrollHacia(Posicion posicion) {
-		int yDeseado = (int)(Edificio.ALTO*JuegoMain.MULTIPLICADOR) - (int)(400*JuegoMain.MULTIPLICADOR) - (int)(posicion.getY()*JuegoMain.MULTIPLICADOR);
+		int yDeseado = (int)(Edificio.ALTO*JuegoMain.MULTIPLICADOR) - (int)(250*JuegoMain.MULTIPLICADOR) - (int)(posicion.getY()*JuegoMain.MULTIPLICADOR);
 		System.out.println(yDeseado);
 		Thread t = new Thread(new Runnable() {
 			public void run() {

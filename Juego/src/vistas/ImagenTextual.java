@@ -13,9 +13,11 @@ import utils.ColorDeLetra;
 
 public class ImagenTextual {
 	private BufferedImage imagen;
+	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
+	
 
 	public ImagenTextual(String texto, double multiplicador, ColorDeLetra color) {
-		multiplicador*=JuegoMain.MULTIPLICADOR;
+		multiplicador*=MULTIPLICADOR;
 		String textoColor = color.toString().toLowerCase();
 		imagen = new BufferedImage((int) (8 * texto.length() * multiplicador), (int) (9 * multiplicador),
 				BufferedImage.TYPE_INT_RGB);

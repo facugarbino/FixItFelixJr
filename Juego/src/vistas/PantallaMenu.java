@@ -31,6 +31,7 @@ public class PantallaMenu extends JFrame {
 	private JLabel titulo;
 	private PantallaJuego pantallaJuego; 
 	private static PantallaMenu INSTANCE;
+	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
 	
 	
 	public static PantallaMenu getInstance() {

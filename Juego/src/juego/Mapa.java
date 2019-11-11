@@ -18,7 +18,7 @@ import utils.Posicion;
  */
 public class Mapa {
 
-	public static final int ANCHO = 480;
+	public static final int ANCHO = 420;
 	public static final int ALTO = 650;
 	private List<Componente> componentes;
 	private Edificio edificio;
