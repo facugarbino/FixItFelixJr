@@ -59,7 +59,7 @@ public class PanelEdificio extends JPanel {
 	}
 
 	private Image[] getImagenes() throws IOException {
-		Image img[] = new Image[55];
+		Image img[] = new Image[57];
 		String url;
 		String[] urls = new String[] { "edificio/edificio", "ventanas/ventanaComun", "ventanas/ventanaPrimerPiso",
 				"ventanas/ventanaConHojas", "puertas/puerta", "obstaculos/macetero", "obstaculos/moldura",
@@ -82,10 +82,11 @@ public class PanelEdificio extends JPanel {
 				"paneles/puerta/panelSano",	"paneles/puerta/panelMedioRoto",
 				"paneles/puerta/panelRoto",
 				"paneles/primerPiso/panelSano","paneles/primerPiso/panelMedioRoto",
-				"paneles/primerPiso/panelRoto"
+				"paneles/primerPiso/panelRoto",
+				"ralph/ralphEnojado1", "ralph/ralphEnojado2"
 
 				};
-		for (int i = 0; i < 55; i++) {
+		for (int i = 0; i < 57; i++) {
 			url = urls[i];
 			img[i] = ImageIO.read(getClass().getResource("/recursos/imagenes/" + urls[i] + ".png"));
 		}
@@ -367,6 +368,13 @@ public class PanelEdificio extends JPanel {
 			} else {
 				numImagen = 38;
 			}
+			if(ralph.estaEnojado()) {
+				if (ralph.getPosicionDeTiro()) {
+					numImagen = 55;
+				} else {
+					numImagen = 56;
+				}
+			}
 			break;
 		}
 		case ARRIBA: {
@@ -376,6 +384,7 @@ public class PanelEdificio extends JPanel {
 				numImagen = 40;
 			}
 		}
+		
 		}
 		imagen = imagenes[numImagen];
 //		g.drawImage(imagen, ralph.getPosicion().getX(), ALTO - ralph.getPosicion().getY() - imagen.getHeight(null),

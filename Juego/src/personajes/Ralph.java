@@ -44,6 +44,7 @@ public class Ralph extends Personaje {
 	private boolean posicionDeTiro;
 	private Timer timerDeTiro;
 	private boolean estaSubiendo;
+	private boolean estaEnojado;
 
 	public Ralph(Posicion p, int cantLadrillos, int frecuencia, int velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
@@ -57,6 +58,7 @@ public class Ralph extends Personaje {
 		orientacion = Orientacion.ABAJO;
 		estaSubiendo = false;
 		timerDeTiro = new Timer();
+		boolean estaEnojado = false;
 
 		timerDeTiro.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -66,6 +68,13 @@ public class Ralph extends Personaje {
 		}, 0, 200);
 	}
 
+	public boolean estaEnojado() {
+		return estaEnojado;
+	}
+	
+	public void setEnojado(boolean booleano) {
+		estaEnojado = booleano;
+	}
 	
 	public void setOrientacion(Orientacion o) {
 		orientacion = o;
