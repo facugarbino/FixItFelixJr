@@ -19,6 +19,7 @@ public class AdaptadorFlechas extends KeyAdapter {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_P) {
 			juego.pausar();
+			juego.graficarPausar();
 		} else {
 			if (!juego.estaPausado()) {
 				// teclaPresionada = true;

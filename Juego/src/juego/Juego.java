@@ -1,12 +1,19 @@
 package juego;
 
-import componentes.Ladrillo;
-import componentes.Nube;
-import componentes.Pajaro;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
+import animaciones.AnimacionGolpeFelix;
+import animaciones.AnimacionSubidaRalph;
+import componentes.*;
 import controlador.Audio;
 import controlador.JuegoMain;
-import personajes.FelixJr;
-import personajes.Ralph;
+import excepciones.*;
+import personajes.*;
 import ranking.HighScore;
 import ranking.Ranking;
 import utils.Contador;
@@ -38,6 +45,8 @@ public class Juego {
 	private boolean yaGano;
 	private int nivelAComenzar;
 	private int cantLadrillos;
+	private boolean graficarPausa;
+	Set<Character> conjuntoValidos;
 
 	/**
 	 * 
@@ -49,14 +58,14 @@ public class Juego {
 		}
 		return INSTANCE;
 	}
-	
+
 	public static void reiniciarJuego() {
 		INSTANCE = new Juego();
 		System.out.println("Comienza el juego.");
 	}
 
 	public void setJugador(String nombre) {
-		jugador = new Jugador(nombre);
+		jugador = new Jugador(nombre, jugador.getPuntaje());
 		System.out.println("Juega: " + nombre);
 	}
 
@@ -66,13 +75,22 @@ public class Juego {
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador("anonimo");
-		ranking = new Ranking();
+		ranking = JuegoMain.getRanking();
 		primeraVez = true;
 		nivelAComenzar = 1;
-		//pasarDeNivel(); deben llamarlo de afuera
+		// pasarDeNivel(); deben llamarlo de afuera
 		pausa = false;
+		conjuntoValidos = new HashSet<Character>();
+		conjuntoValidos.addAll(Arrays.asList(new Character[] {
+				'a','b','c','d','e','f','g','h','i','j','k','l',
+				'm','n','o','p','q','r','s','t','u','v','w','x',
+				'y','z','.','_','-',',','!','?','"','(',')','\'',
+				'[',']','{','}','@','*','&','%','$','#','>','<',
+				'=','1','2','3','4','5','6','7','8','9','0'}));
 
 	}
+	
+
 	public void setNivelAComenzar(int nivel) {
 		this.nivelAComenzar = nivel;
 	}
@@ -100,6 +118,7 @@ public class Juego {
 			System.out.println("JUEGO PAUSADO");
 		}
 		pausa = !pausa;
+		ralph.pausar();
 
 	}
 
@@ -136,7 +155,7 @@ public class Juego {
 		Ladrillo l = ralph.tirarLadrillo();
 		if (l != null) {
 			mapa.agregarComponente(l);
-			
+
 		}
 		seccionActual.generarNicelanders();
 		if (seccionActual.estaSana()) {
@@ -157,8 +176,9 @@ public class Juego {
 	}
 
 	public void pasarDeNivel() {
+
 		if (primeraVez) {
-			for (int i=1;i<nivelAComenzar;i++) {
+			for (int i = 1; i < nivelAComenzar; i++) {
 				nivel.avanzarDeNivel();
 			}
 			reiniciarNivel(3);
@@ -169,6 +189,14 @@ public class Juego {
 			if (nivel.hayOtroNivel()) {
 				nivel.avanzarDeNivel();
 				reiniciarNivel(3);
+				Juego.getInstance().pausar();
+				Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+				try {
+					t.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Juego.getInstance().pausar();
 			} else {
 				ganar();
 			}
@@ -181,15 +209,52 @@ public class Juego {
 	}
 
 	private void ganar() {
-		//agregarRanking();
+//		agregarRanking();
+
+		//Esto se hace para que no se grafique un puntaje erróneo al ganar
+		felix.sacarPuntaje();
 		pausa = true;
 		yaGano = true;
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
 	}
 
 	public void agregarRanking() {
-		HighScore hs = new HighScore(jugador);
-		ranking.agregarHighScore(hs);
+		if (ranking.entraEnElTop(jugador.getPuntaje())) {
+			String nombreJugador;
+			boolean nombreInvalido = true;
+			while (nombreInvalido) {
+				try {
+					nombreJugador = preguntarNombre();
+					setJugador(nombreJugador);
+					ranking.agregarHighScore(new HighScore(jugador));
+					nombreInvalido = false;
+				} catch (ExcepcionNombreInvalido e) {
+					nombreInvalido = true;
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+
+		}
+	}
+
+	private String preguntarNombre() throws ExcepcionNombreInvalido {
+		String nombre = JOptionPane.showInputDialog(null, "Inserte su Nombre: ", "Fix it Felix Jr.",
+				JOptionPane.QUESTION_MESSAGE);
+		for (int i=0;i<nombre.length();i++) {
+			if (!conjuntoValidos.contains(nombre.charAt(i))) {
+				throw new ExcepcionNombreCaracterInvalido();
+			}
+		}
+		if (ranking.existe(nombre)) {
+			throw new ExcepcionNombreUsado();
+		} else {
+			if (nombre.length() < 2) {
+				throw new ExcepcionNombreCorto();
+			} else if (nombre.length() > 20) {
+				nombre = nombre.substring(0, 20);
+			}
+		}
+		return nombre;
 	}
 
 	/**
@@ -226,13 +291,13 @@ public class Juego {
 					nivel.getVelocidadPajaro(), Orientacion.DERECHA, mapa));
 		}
 	}
-	
+
 	private void agregarNubes(int nroSeccion) {
 		if (nroSeccion == 1) {
 			mapa.agregarComponente(new Nube(new Posicion(0, 200), nivel.getVelocidadNube()));
 		} else {
-			if (nroSeccion==2) {
-				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO/2, 400), nivel.getVelocidadNube()));
+			if (nroSeccion == 2) {
+				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO / 2, 400), nivel.getVelocidadNube()));
 				agregarNubes(1);
 			} else {
 				mapa.agregarComponente(new Nube(new Posicion(Edificio.ANCHO, 600), nivel.getVelocidadNube()));
@@ -255,26 +320,22 @@ public class Juego {
 			tiempo = nivel.getTiempo();
 			felix.subirDeSeccion(seccionActual);
 			ralph.subirDeSeccion();
+			pausar();
 			Thread t = new Thread(new AnimacionSubidaRalph());
 			t.start();
+			Thread t2 = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
 			try {
 				t.join();
+				t2.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			pausar();
 		} else {
 			pasarDeNivel();
 			System.out.println("Felix Jr. pasa de nivel");
 		}
-		Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	/**
@@ -285,6 +346,17 @@ public class Juego {
 	public void reiniciarNivel(int vidasDeFelix) {
 		mapa = nivel.crearMapa();
 		seccionActual = mapa.getEdificio().getSeccionActual();
+		if (vidasDeFelix < 3) {
+			Thread t2 = new Thread(new AnimacionGolpeFelix());
+			t2.start();
+			Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+			try {
+				t.join();
+				t2.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		felix = new FelixJr(seccionActual.getVentanaInicial().getPosicion().copia(), seccionActual.getVentanaInicial(),
 				vidasDeFelix);
 		ralph = new Ralph(seccionActual.getVentanaInicial().getPosicion().copia(), nivel.getCantLadrillos(),
@@ -293,6 +365,7 @@ public class Juego {
 		ralph.getPosicion().moverY(Seccion.ALTO);
 		tiempo = nivel.getTiempo();
 		timer = new Contador(500);
+		
 	}
 
 	/**
@@ -303,7 +376,6 @@ public class Juego {
 	public void perder(long puntajeFelix) {
 		Audio.getInstance().perdio();
 		jugador.sumarPuntos(puntajeFelix);
-		agregarRanking();
 		pausa = true;
 		System.out.println("GAME OVER");
 		System.out.println("Perdió con " + jugador.getPuntaje() + " puntos.");
@@ -315,6 +387,13 @@ public class Juego {
 	 * donde se encuentra
 	 */
 	public void reiniciarSeccion() {
+		Thread t = new Thread(new AnimacionGolpeFelix());
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		mapa.borrarComponentesDeSeccion(seccionActual.getNroSeccion());
 		mapa.getEdificio().reemplazarSeccion(seccionActual);
 		seccionActual = mapa.getEdificio().getSeccionActual();
@@ -332,5 +411,13 @@ public class Juego {
 
 	public Jugador getJugador() {
 		return jugador;
+	}
+
+	public void graficarPausar() {
+		graficarPausa = !graficarPausa;
+	}
+
+	public boolean deboGraficarPausa() {
+		return graficarPausa;
 	}
 }

@@ -82,7 +82,7 @@ public class PanelMapa extends JPanel {
 		Ralph ralph = Juego.getInstance().getRalph();
 		switch (ralph.getOrientacion()) {
 		case DERECHA: {
-			if (ralph.getPosicionDeTiro()) {
+			if (ralph.getSwap()) {
 				numImagen=13;
 			} else {
 				numImagen=14;
@@ -90,7 +90,7 @@ public class PanelMapa extends JPanel {
 			break;
 		}
 		case IZQUIERDA: {
-			if (ralph.getPosicionDeTiro()) {
+			if (ralph.getSwap()) {
 				numImagen=11;
 			} else {
 				numImagen=12;
@@ -99,7 +99,7 @@ public class PanelMapa extends JPanel {
 		}
 		default: {
 			if (ralph.estaTirandoLadrillos()) {
-				if (ralph.getPosicionDeTiro()) {
+				if (ralph.getSwap()) {
 					numImagen=15;
 				} else {
 					numImagen=16;

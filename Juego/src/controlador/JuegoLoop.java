@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 
+import animaciones.AnimacionSubidaRalphRompiendo;
 import graficador.modelo.Dibujable;
 import graficador.vista.Graficador;
-import juego.AnimacionSubidaRalphRompiendo;
 import juego.Juego;
 import juego.Seccion;
 import utils.Contador;
@@ -37,16 +37,20 @@ public class JuegoLoop implements Runnable {
 				JuegoMain.getPantallaJuego().repaint();
 			}
 		}, 0,10);
+		juego.pausar();
 		Thread t = new Thread(new AnimacionSubidaRalphRompiendo());
 		t.start();
 		try {
 			t.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		juego.pausar();
 //		
 		while (true) {
+			if (juego!=Juego.getInstance()) {
+				break;
+			}
 			if (!juego.estaPausado()) {
 				
 //				if (timer.contar()) {
@@ -70,33 +74,28 @@ public class JuegoLoop implements Runnable {
 //					
 //				}
 				
-				
 			} else {
 				if (juego.yaGano()) {
-					String nombreJugador = preguntarNombre();					
-					juego.setJugador(nombreJugador);
 					juego.agregarRanking();
 					//Graficador.mensaje("HAS GANADO!");
 					System.out.println("entre a juego.yaGano()");
+					PantallaRanking.getInstance().setVisible(true);
 					break;
 				}
-				if (juego.getTiempo() > 0 && juego.getFelix().getVidas() > 0) {
+				if (!(juego.getTiempo() > 0 && juego.getFelix().getVidas() > 0)) {
+					juego.agregarRanking();
+					PantallaRanking.getInstance().setVisible(true);
+					break;
+				}else {
 					//Graficador.mensaje("PAUSA");
 					//System.out.println("entre a tieneVidas()");
-				} else {
-					//Graficador.mensaje("GAME OVER");
-					System.out.println("entre a perdio()");
-					break;
+					System.out.print("");
 				}
 			}
 		}
-		PantallaRanking.getInstance().setVisible(true);
+		
 		JuegoMain.getPantallaJuego().setVisible(false);
 
-	}
-	private static String preguntarNombre() {
-		return JOptionPane.showInputDialog(null, "Fix it Felix Jr.", "Inserte su Nombre: ",
-				JOptionPane.QUESTION_MESSAGE);
 	}
 
 }

@@ -103,8 +103,8 @@ public class PantallaRanking extends JFrame {
 			}
 		});
 		tabla.getColumnModel().getColumn(0).setPreferredWidth((int)(50*MULTIPLICADOR));
-		tabla.getColumnModel().getColumn(1).setPreferredWidth((int)(450*MULTIPLICADOR));
-		tabla.getColumnModel().getColumn(2).setPreferredWidth((int)(200*MULTIPLICADOR));
+		tabla.getColumnModel().getColumn(1).setPreferredWidth((int)(500*MULTIPLICADOR));
+		tabla.getColumnModel().getColumn(2).setPreferredWidth((int)(150*MULTIPLICADOR));
 		// Esto es para que el frame se abra en el centro de la pantalla
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import graficador.modelo.Dibujable;
 import graficador.vista.Graficador;
 import juego.Juego;
+import ranking.Ranking;
 import utils.Contador;
 import vistas.PantallaConfig;
 import vistas.PantallaJuego;
@@ -25,6 +26,7 @@ public class JuegoMain {
 	private static PantallaJuego pantallaJuego;
 	public final static double MULTIPLICADOR = Toolkit.getDefaultToolkit().getScreenSize().getWidth()/800;
 	public final static double MULTIPLICADOR_MENU = Toolkit.getDefaultToolkit().getScreenSize().getWidth()/1400;
+	private static Ranking ranking;
 
 	
 	public static PantallaJuego getPantallaJuego() {
@@ -35,11 +37,14 @@ public class JuegoMain {
 	private static boolean corriendo;
 
 	public static void main(String[] args) {
-
+		ranking = new Ranking();
 		menu = PantallaMenu.getInstance();
 		menu.setVisible(true);
 	}
 
+	public static Ranking getRanking() {
+		return ranking;
+	}
 	public static void comenzarJuego() {
 //		if (pantallaJuego == null) {
 			Juego.reiniciarJuego();

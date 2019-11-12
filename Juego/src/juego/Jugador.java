@@ -9,7 +9,7 @@ public class Jugador {
 		this.nombre = nombre;
 		this.puntaje = 0;
 	}
-	public Jugador(String nombre, int puntaje) {
+	public Jugador(String nombre, long puntaje) {
 		this.nombre = nombre;
 		this.puntaje = puntaje;
 	}

@@ -27,18 +27,18 @@ public class Ranking {
 			scores = (ArrayList<HighScore>) input.readObject();
 			input.close();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			System.out.println("No se encontró el archivo de ranking. Se crea.");
 			Jugador jug;
-			jug = new Jugador("Tati", 8900);
+			jug = new Jugador("Tati", 1900);
 			agregarHighScore(new HighScore(jug));
-			jug = new Jugador("Euge", 12500);
+			jug = new Jugador("Euge", 10000);
 			agregarHighScore(new HighScore(jug));
 			jug = new Jugador("Martina", 5000);
 			agregarHighScore(new HighScore(jug));
 			jug = new Jugador("Uciel", 20000);
 			agregarHighScore(new HighScore(jug));
-			jug = new Jugador("Julio", 1000);
-			agregarHighScore(new HighScore(jug));
+			
 		}
 	}
 
@@ -51,6 +51,7 @@ public class Ranking {
 			}
 		}
 		scores.sort(new ComparadorHighScoreDescendente());
+		System.out.println(scores);
 		try {
 			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("ranking.dat"));
 			output.writeObject(scores);
@@ -58,6 +59,17 @@ public class Ranking {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean entraEnElTop(long puntaje) {
+		if (scores.size() < 5) {
+			return true;
+		} else {
+			if (puntaje > scores.get(4).getPuntaje()) {
+				return true;
+			}
+		}
+		return false;
+		
 	}
 
 	/**
@@ -68,6 +80,16 @@ public class Ranking {
 	public List<HighScore> getTop5() {
 		return this.scores;
 		//return this.copia();
+	}
+
+	public boolean existe(String nombre) {
+		Iterator<HighScore> iterator = scores.iterator();
+		while (iterator.hasNext()) {
+			if (iterator.next().getNombre().equals(nombre)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 //	private List<HighScore> copia() {

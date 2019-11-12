@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
@@ -39,16 +40,29 @@ public class PantallaJuego extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaJuego() {
-		setResizable(true);
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				//PREGUNTAR
+				String ObjButtons[] = {"Sí", "No"};
+                int PromptResult = JOptionPane.showOptionDialog(null, 
+                		"¿Desea cerrar el programa?", "Cerrar", 
+                		JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                		null, ObjButtons, ObjButtons[1]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                	Juego.reiniciarJuego();
+                	setVisible(false);
+                	PantallaMenu.getInstance().setVisible(true);
+                }
 				
 				//PantallaMenu.getInstance().setVisible(true);
 			}
 			public void windowIconified(WindowEvent e) {
-				juego.pausar();
+				if (!juego.estaPausado()) {
+					juego.pausar();
+					juego.graficarPausar();
+				}
 			}
 			
 		});
@@ -106,8 +120,8 @@ public class PantallaJuego extends JFrame {
 		int yDeseado = (int)(Edificio.ALTO*JuegoMain.MULTIPLICADOR) - (int)(250*JuegoMain.MULTIPLICADOR) - (int)(posicion.getY()*JuegoMain.MULTIPLICADOR);
 		System.out.println(yDeseado);
 		Thread t = new Thread(new Runnable() {
+			boolean terminado;
 			public void run() {
-				final boolean[] terminado = new boolean[1];
 				JViewport viewport = scroll.getViewport();
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
@@ -125,13 +139,12 @@ public class PantallaJuego extends JFrame {
 						} else {
 							System.out.println("cancelo");
 							timer.cancel();
-							terminado[0]=true;
+							terminado=true;
 						}
 					}
 				}, 0, 20);
-				
-				while (!terminado[0]) {
-					System.out.println("no terine");
+				while (!terminado) {
+					System.out.println("no termine");
 				}
 				System.out.println("llegue");
 			}

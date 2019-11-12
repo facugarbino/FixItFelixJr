@@ -35,6 +35,7 @@ public class FelixJr extends Personaje {
 	private boolean estaMartillando;
 	private Timer timerDeMartillo;
 	private boolean martilloArriba;
+	private boolean asustado;
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;
@@ -176,6 +177,10 @@ public class FelixJr extends Personaje {
 		return vidas;
 	}
 
+	public boolean estaInmune() {
+		return inmune;
+	}
+	
 	public void subirDeSeccion(Seccion s) {
 		posicion = s.getVentanaInicial().getPosicion().copia();
 		ventanaActual = s.getVentanaInicial();
@@ -229,5 +234,18 @@ public class FelixJr extends Personaje {
 
 	public Ventana getVentana() {
 		return ventanaActual;
+	}
+
+	public void sacarPuntaje() {
+		puntajeNivel=0;
+		puntajeSeccion=0;
+		
+	}
+	public boolean estaAsustado() {
+		return asustado;
+	}
+	public void asustarse() {
+		asustado=!asustado;
+		
 	}
 }

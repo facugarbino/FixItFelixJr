@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import animaciones.AnimacionSubidaRalph;
 import componentes.Ladrillo;
 import graficador.modelo.Dibujable;
 import graficador.modelo.InformacionDibujable;
-import juego.AnimacionSubidaRalph;
 import juego.Edificio;
 import juego.Juego;
 import utils.Contador;
@@ -37,11 +37,12 @@ public class Ralph extends Personaje {
 	private Contador timerFrecuencia;
 	private Contador timerEntreLadrillos;
 	private Contador timerCaminar;
+	private Contador timerSwap;
 	private static final int LIMITE_IZQUIERDO = Edificio.ANCHO / 2;
 	private static final int LIMITE_DERECHO = LIMITE_IZQUIERDO + Edificio.ANCHO - ANCHO * 2;
 	// true y false representan dos posiciones
 	// para tirar ladrillos (en las q va alternando)
-	private boolean posicionDeTiro;
+	private boolean swap;
 	private Timer timerDeTiro;
 	private boolean estaSubiendo;
 	private boolean estaEnojado;
@@ -58,14 +59,15 @@ public class Ralph extends Personaje {
 		orientacion = Orientacion.ABAJO;
 		estaSubiendo = false;
 		timerDeTiro = new Timer();
+		timerSwap = new Contador(200);
 		boolean estaEnojado = false;
 
-		timerDeTiro.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {
-				posicionDeTiro = !posicionDeTiro;
-			}
-		}, 0, 200);
+//		timerDeTiro.scheduleAtFixedRate(new TimerTask() {
+//			@Override
+//			public void run() {
+//				posicionDeTiro = !posicionDeTiro;
+//			}
+//		}, 0, 200);
 	}
 
 	public boolean estaEnojado() {
@@ -96,27 +98,34 @@ public class Ralph extends Personaje {
 		return estaTirando;
 	}
 
-	public boolean getPosicionDeTiro() {
-		return posicionDeTiro;
+	public boolean getSwap() {
+		return swap;
+	}
+	public void swap() {
+		swap = !swap;
 	}
 
 	/**
 	 * Ralph decide si se mueve y hacia dónde
 	 */
 	public void mover() {
+		if (timerSwap.contar()) {
+			swap=!swap;
+			timerSwap.resetear();
+		}
 		caracter = caracterSegunOrientacion(orientacion);
 		if (!estaTirando) {
 			if (timerCaminar.contar()) {
 				timerCaminar.resetear();
 				double random = Math.random();
 				if (orientacion == Orientacion.DERECHA) {
-					if (random < 0.8) {
+					if (random < 0.9) {
 						darPaso(Orientacion.DERECHA);
 					} else {
 						darPaso(Orientacion.IZQUIERDA);
 					}
 				} else if (orientacion == Orientacion.IZQUIERDA) {
-					if (random < 0.8) {
+					if (random < 0.9) {
 						darPaso(Orientacion.IZQUIERDA);
 					} else {
 						darPaso(Orientacion.DERECHA);
@@ -256,5 +265,11 @@ public class Ralph extends Personaje {
 
 	public void setPosicion(Posicion p) {
 		posicion = p;
+	}
+	public void pausar() {
+		timerFrecuencia.pausar();
+		timerCaminar.pausar();
+		timerEntreLadrillos.pausar();
+		timerSwap.pausar();
 	}
 }

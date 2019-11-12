@@ -1,27 +1,38 @@
-package juego;
+package animaciones;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import juego.Juego;
 import personajes.Ralph;
+import utils.Contador;
 import utils.Posicion;
 
 public class AnimacionSubidaRalph implements Runnable {
 
 	private Timer timerDeSubida;
-	boolean llego = false;
-	int maxAltura;
+	private boolean llego = false;
+	private int maxAltura;
+	private Contador timer;
+	private Ralph ralph;
+	
+	public AnimacionSubidaRalph() {
+		ralph = Juego.getInstance().getRalph();
+		timer = new Contador(200);
+	}
 
 	@Override
 	public void run() {
-		Ralph ralph = Juego.getInstance().getRalph();
 		ralph.setSubida(true);
 		maxAltura = ralph.getPosicion().getY() + 160;
 		timerDeSubida = new Timer();
-
 		timerDeSubida.schedule(new TimerTask() {
 			@Override
 			public void run() {
+				if (timer.contar()) {
+					ralph.swap();
+					timer.resetear();
+				}
 				if (ralph.getPosicion().getY() < maxAltura) {
 					Posicion posNueva = ralph.getPosicion().copia();
 					posNueva.moverY(1);

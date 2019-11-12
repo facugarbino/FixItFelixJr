@@ -1,8 +1,12 @@
-package juego;
+package animaciones;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import juego.Edificio;
+import juego.Juego;
 import personajes.Ralph;
+import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 
@@ -10,15 +14,27 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 
 	private Timer timerDeSubida;
 	private Timer timerDeEnojo;
-	boolean llego = false;
-	boolean termino = false;
-	boolean llegoBase = false;
-	int maxAltura;
-	int maxBase;
+	private boolean llego;
+	private boolean termino;
+	private boolean llegoBase;
+	private int maxAltura;
+	private int maxBase;
+	private Ralph ralph;
+	private Timer timerSwap;
+	
+	public AnimacionSubidaRalphRompiendo() {
+		ralph = Juego.getInstance().getRalph();
+		timerSwap = new Timer();
+	}
 
 	@Override
 	public void run() {
-		Ralph ralph = Juego.getInstance().getRalph();
+		
+		timerSwap.schedule(new TimerTask() {
+			public void run() {
+				ralph.swap();
+			}
+		}, 0,200);
 		maxAltura = 166;
 		ralph.setOrientacion(Orientacion.IZQUIERDA);
 		ralph.setPosicion(new Posicion(Edificio.ANCHO * 2, 0));
@@ -142,5 +158,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 		while (!termino) {
 			System.out.println("ralph sigue enojado");
 		}
+		timerSwap.cancel();
 	}
 }
