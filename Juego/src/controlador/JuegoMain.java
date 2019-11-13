@@ -53,13 +53,19 @@ public class JuegoMain {
 				juego.pasarDeNivel();
 			}
 			pantallaJuego = new PantallaJuego();
-			t = new Thread(new JuegoLoop(juego));
-			t.start();
-			corriendo = true;
+			
+//			t = new Thread(new JuegoLoop(juego));
+//			t.start();
+//			corriendo = true;
+			
 			// loop();
 //		}
-		pantallaJuego.setVisible(true);
+			
+		new Thread(new JuegoLoop(juego)).start();
 		menu.setVisible(false);
+		pantallaJuego.setVisible(true);
+		
+		
 	}
 
 	private static String preguntarNombre() {

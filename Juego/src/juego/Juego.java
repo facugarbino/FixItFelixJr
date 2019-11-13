@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.JOptionPane;
-
 import animaciones.AnimacionFinalDeNivel;
 import animaciones.AnimacionGolpeFelix;
 import animaciones.AnimacionSubidaRalph;
@@ -48,7 +46,8 @@ public class Juego {
 	private int nivelAComenzar;
 	private int cantLadrillos;
 	private boolean graficarPausa;
-	Set<Character> conjuntoValidos;
+	private Set<Character> conjuntoValidos;
+	private boolean graficarGameOver;
 
 	/**
 	 * 
@@ -347,11 +346,14 @@ public class Juego {
 			felix.subirDeSeccion(seccionActual);
 			ralph.subirDeSeccion();
 			pausar();
-			Thread t = new Thread(new AnimacionSubidaRalph());
-			t.start();
 			Thread t2 = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+			new AnimacionSubidaRalph().run();
+			
+//			Thread t = new Thread(new AnimacionSubidaRalph());
+//			t.start();
+			
 			try {
-				t.join();
+//				t.join();
 				t2.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -443,6 +445,10 @@ public class Juego {
 		graficarPausa = !graficarPausa;
 	}
 
+	public void graficarGameOver() {
+		graficarGameOver = !graficarGameOver;
+	}
+	
 	public boolean deboGraficarPausa() {
 		return graficarPausa;
 	}

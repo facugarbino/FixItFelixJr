@@ -2,6 +2,7 @@ package animaciones;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import juego.Juego;
 import personajes.Ralph;
@@ -47,6 +48,11 @@ public class AnimacionSubidaRalph implements Runnable {
 			}
 		}, 0, 10);
 		while (!llego) {
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			System.out.println(llego);
 		}
 		//timerDeSubida.cancel();

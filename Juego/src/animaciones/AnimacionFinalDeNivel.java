@@ -2,6 +2,7 @@ package animaciones;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import juego.Edificio;
 import juego.Juego;
@@ -41,6 +42,11 @@ public class AnimacionFinalDeNivel implements Runnable {
 			}
 		}, 0, 30);
 		while (!termino) {
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			System.out.println("felix aun no alcanzo a ralph");
 		}
 		termino = false;
@@ -62,6 +68,11 @@ public class AnimacionFinalDeNivel implements Runnable {
 			}
 		}, 0, 10);
 		while (!termino) {
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			System.out.println("aun no salto");
 		}
 		termino = false;
@@ -82,6 +93,11 @@ public class AnimacionFinalDeNivel implements Runnable {
 			}
 		}, 0, 10);
 		while (!termino) {
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			System.out.println("aun no llego al piso");
 		}
 		felix.setPosicion(felix.getVentana().getPosicion().copia());

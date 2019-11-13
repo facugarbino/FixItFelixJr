@@ -32,75 +32,96 @@ public class JuegoLoop implements Runnable {
 		Contador timer = new Contador(10);
 		System.out.println("Felix comienza en la posición " + juego.getFelix().getPosicion());
 		seccionActual=Juego.getInstance().getMapa().getEdificio().getSeccionActual();
-		(new Timer()).schedule(new TimerTask() {
+		
+		Timer timerPintado = new Timer();
+		timerPintado.schedule(new TimerTask() {
 			public void run () {
 				JuegoMain.getPantallaJuego().repaint();
 			}
-		}, 0,50);
-		juego.pausar();
-		Thread t = new Thread(new AnimacionSubidaRalphRompiendo());
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		juego.pausar();
+		}, 0,50);		
+//		Thread t = new Thread(new AnimacionSubidaRalphRompiendo());
+//		t.start();
+//		try {
+//			t.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+		
+		
 //		
-		while (true) {
-			if (juego!=Juego.getInstance()) {
-				break;
+		
+		Timer timerJuego = new Timer();
+		
+		timerJuego.schedule(new TimerTask() {
+			public void run() {
+
+				if (juego!=Juego.getInstance()) {
+					timerJuego.cancel();
+				}
+				if (!juego.estaPausado()) {
+					try {
+						TimeUnit.MILLISECONDS.sleep(5);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					juego.actualizar();
+				} else {
+					if (juego.yaGano()) {
+						juego.agregarRanking();
+						//Graficador.mensaje("HAS GANADO!");
+						System.out.println("entre a juego.yaGano()");
+						PantallaRanking.getInstance().setVisible(true);
+						JuegoMain.getPantallaJuego().setVisible(false);
+						timerJuego.cancel();
+					}
+					if (!(juego.getTiempo() > 0 && juego.getFelix().getVidas() > 0)) {
+						juego.agregarRanking();
+						PantallaRanking.getInstance().setVisible(true);
+						JuegoMain.getPantallaJuego().setVisible(false);
+						timerJuego.cancel();
+					}else {
+						//Graficador.mensaje("PAUSA");
+						//System.out.println("entre a tieneVidas()");
+						System.out.print("");
+					}
+				}
 			}
-			if (!juego.estaPausado()) {
+		}, 0,5);
+		new AnimacionSubidaRalphRompiendo().run();
+		
+//		while (true) {
+//			if (juego!=Juego.getInstance()) {
+//				break;
+//			}
+//			if (!juego.estaPausado()) {
 //				try {
 //					TimeUnit.MILLISECONDS.sleep(5);
 //				} catch (InterruptedException e) {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
-				
-//				if (timer.contar()) {
-//					timer.resetear();
-//					// Grafica todo
-//					//Graficador.refrescarTopDown(lista);
-//					//Esto refresca la gráfica
-//					JuegoMain.getPantallaJuego().repaint();
+//				juego.actualizar();
+//			} else {
+//				if (juego.yaGano()) {
+//					juego.agregarRanking();
+//					//Graficador.mensaje("HAS GANADO!");
+//					System.out.println("entre a juego.yaGano()");
+//					PantallaRanking.getInstance().setVisible(true);
+//					break;
 //				}
-				//System.out.println("entre a !juego.estaPausado()");
-				juego.actualizar();
-//				seccionNueva = Juego.getInstance().getMapa().getEdificio().getSeccionActual();
-//				if (seccionNueva!= seccionActual) {
-//					seccionActual = seccionNueva;
-//					Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionNueva.getPosicion());
-//					try {
-//						t.join();
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//					
+//				if (!(juego.getTiempo() > 0 && juego.getFelix().getVidas() > 0)) {
+//					juego.agregarRanking();
+//					PantallaRanking.getInstance().setVisible(true);
+//					break;
+//				}else {
+//					//Graficador.mensaje("PAUSA");
+//					//System.out.println("entre a tieneVidas()");
+//					System.out.print("");
 //				}
-				
-			} else {
-				if (juego.yaGano()) {
-					juego.agregarRanking();
-					//Graficador.mensaje("HAS GANADO!");
-					System.out.println("entre a juego.yaGano()");
-					PantallaRanking.getInstance().setVisible(true);
-					break;
-				}
-				if (!(juego.getTiempo() > 0 && juego.getFelix().getVidas() > 0)) {
-					juego.agregarRanking();
-					PantallaRanking.getInstance().setVisible(true);
-					break;
-				}else {
-					//Graficador.mensaje("PAUSA");
-					//System.out.println("entre a tieneVidas()");
-					System.out.print("");
-				}
-			}
-		}
+//			}
+//		}
 		
-		JuegoMain.getPantallaJuego().setVisible(false);
 
 	}
 
