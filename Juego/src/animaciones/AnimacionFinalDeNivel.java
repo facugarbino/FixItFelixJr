@@ -57,7 +57,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 		ralphSalta.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (ralph.getPosicion().getX() < 300) {
+				if (ralph.getPosicion().getX() < 320) {
 					ralph.getPosicion().moverY(1);
 					ralph.getPosicion().moverX(5);
 				} else {
@@ -81,14 +81,14 @@ public class AnimacionFinalDeNivel implements Runnable {
 		ralphSalta.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (ralph.getPosicion().getY() > -72) {
+				if (ralph.getPosicion().getY() > 0) {
 					ralph.getPosicion().moverY(-1);
 				} else {
 					System.out.println("ya llego al piso");
 					termino = true;
 					ralph.setEnojado(false);
-					ralph.setOrientacion(Orientacion.IZQUIERDA);
 					ralphSalta.cancel();
+					ralph.setMuerto(true);
 				}
 			}
 		}, 0, 10);
@@ -98,8 +98,14 @@ public class AnimacionFinalDeNivel implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("aun no llego al piso");
 		}
+		try {
+			TimeUnit.MILLISECONDS.sleep(1000);
+			ralph.setMuerto(false);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		felix.setPosicion(felix.getVentana().getPosicion().copia());
 //		felix.setPosicion(Juego.getInstance().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion().copia());
 		Juego.getInstance().pausar();

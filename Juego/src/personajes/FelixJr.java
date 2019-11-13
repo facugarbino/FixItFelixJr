@@ -25,6 +25,7 @@ import ventanas.Ventana;
  */
 public class FelixJr extends Personaje {
 	private Contador timer;
+	private Contador timerParpadeo;
 	private int vidas;
 	private Ventana ventanaActual;
 	private boolean inmune;
@@ -37,7 +38,8 @@ public class FelixJr extends Personaje {
 	private Timer timerDeMartillo;
 	private boolean martilloArriba;
 	private boolean asustado;
-	
+	private boolean invisible;
+	public static int ANCHO = 15;
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;
@@ -54,6 +56,9 @@ public class FelixJr extends Personaje {
 		martilloArriba = true;
 	}
 
+	public boolean estaInvisible() {
+		return invisible;
+	}
 	public boolean estaSaltando() {
 		return saltando;
 	}
@@ -126,20 +131,6 @@ public class FelixJr extends Personaje {
 		if (v != null) {
 			ventanaActual = v;
 			posicion = v.getPosicion().copia();
-//			switch (o) {
-//			case IZQUIERDA:
-//				posicion.moverX(-saltoHorizontal);
-//				break;
-//			case DERECHA:
-//				posicion.moverX(saltoHorizontal);
-//				break;
-//			case ABAJO:
-//				posicion.moverY(-saltoVertical);
-//				break;
-//			case ARRIBA:
-//				posicion.moverY(saltoVertical);
-//				break;
-//			}
 			System.out.println("Felix se mueve a la posicion " + getPosicion());
 			System.out.println(ventanaActual.estaRota() ? "La ventana está ROTA" : "La ventana está SANA");
 			comerPastel();
@@ -220,6 +211,11 @@ public class FelixJr extends Personaje {
 			inmune = false;
 			System.out.println("Felix deja de ser inmune");
 		}
+		if (inmune && timerParpadeo.contar()) {
+			timer.resetear();
+			inmune = false;
+			System.out.println("Felix deja de ser inmune");
+		}
 	}
 
 	public long getPuntaje() {
@@ -255,5 +251,8 @@ public class FelixJr extends Personaje {
 	public void asustarse() {
 		asustado=!asustado;
 		
+	}
+	public void pausar() {
+		timer.pausar();				
 	}
 }

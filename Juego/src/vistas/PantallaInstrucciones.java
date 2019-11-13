@@ -26,6 +26,9 @@ public class PantallaInstrucciones extends JFrame {
 	private JLabel introLetras2 = new JLabel();
 	private JLabel evitaLetras = new JLabel();
 	private JLabel agarraLetras = new JLabel();
+	private JLabel ladrilloLetras = new JLabel();
+	private JLabel pajaroLetras = new JLabel();
+	private JLabel pastelLetras = new JLabel();
 	private JLabel moveteLetras = new JLabel();
 	private JLabel arreglaLetras = new JLabel();
 	private static PantallaInstrucciones INSTANCE;
@@ -79,15 +82,27 @@ public class PantallaInstrucciones extends JFrame {
 				.setIcon(new ImagenTextual("para avanzar al proximo nivel", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(introLetras2);
 
-		setBounds2(evitaLetras,121, 279, 94, 50);
+		setBounds2(evitaLetras,121, 240, 94, 50);
 //		evitaLetras.setBounds(121, 279, 94, 50);
 		evitaLetras.setIcon(new ImagenTextual("evita", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(evitaLetras);
+		
+		setBounds2(pajaroLetras,170, 310, 270, 50);
+		pajaroLetras.setIcon(new ImagenTextual("reinicia seccion", tamaño, ColorDeLetra.AMARILLO).getImageIcon());
+		contentPane.add(pajaroLetras);
+		
+		setBounds2(ladrilloLetras,170, 280, 260, 50);
+		ladrilloLetras.setIcon(new ImagenTextual("reinicia nivel", tamaño, ColorDeLetra.AMARILLO).getImageIcon());
+		contentPane.add(ladrilloLetras);
 
 		setBounds2(agarraLetras,121, 375, 144, 50);
 //		agarraLetras.setBounds(121, 375, 144, 50);
 		agarraLetras.setIcon(new ImagenTextual("agarra", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(agarraLetras);
+		
+		setBounds2(pastelLetras,170, 420, 400, 50);
+		pastelLetras.setIcon(new ImagenTextual("inmuniza a felix", tamaño, ColorDeLetra.AMARILLO).getImageIcon());
+		contentPane.add(pastelLetras);
 
 		setBounds2(moveteLetras,637, 242, 106, 50);
 //		moveteLetras.setBounds(637, 242, 106, 50);

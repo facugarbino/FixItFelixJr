@@ -46,6 +46,7 @@ public class Ralph extends Personaje {
 	private Timer timerDeTiro;
 	private boolean estaSubiendo;
 	private boolean estaEnojado;
+	private boolean estaMuerto;
 
 	public Ralph(Posicion p, int cantLadrillos, int frecuencia, int velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
@@ -76,6 +77,13 @@ public class Ralph extends Personaje {
 	
 	public void setEnojado(boolean booleano) {
 		estaEnojado = booleano;
+	}
+	public boolean estaMuerto() {
+		return estaMuerto;
+	}
+	
+	public void setMuerto(boolean booleano) {
+		estaMuerto= booleano;
 	}
 	
 	public void setOrientacion(Orientacion o) {

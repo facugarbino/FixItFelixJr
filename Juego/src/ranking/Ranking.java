@@ -30,13 +30,13 @@ public class Ranking {
 			System.out.println(e.getMessage());
 			System.out.println("No se encontró el archivo de ranking. Se crea.");
 			Jugador jug;
-			jug = new Jugador("Tati", 1900);
+			jug = new Jugador("tati", 1900);
 			agregarHighScore(new HighScore(jug));
-			jug = new Jugador("Euge", 10000);
+			jug = new Jugador("euge", 10000);
 			agregarHighScore(new HighScore(jug));
-			jug = new Jugador("Martina", 5000);
+			jug = new Jugador("martina", 5000);
 			agregarHighScore(new HighScore(jug));
-			jug = new Jugador("Uciel", 20000);
+			jug = new Jugador("uciel", 20000);
 			agregarHighScore(new HighScore(jug));
 			
 		}

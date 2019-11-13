@@ -1,6 +1,7 @@
 package componentes;
 
 import juego.Mapa;
+import personajes.FelixJr;
 import utils.Contador;
 import utils.Posicion;
 
@@ -11,9 +12,10 @@ public class Puntaje extends Componente  {
 	
 	public Puntaje(int puntaje, Posicion posicion, Mapa mapa) {
 		this.posicion = posicion;
+		posicion.moverX(FelixJr.ANCHO);
 		this.puntaje = puntaje;
-		timer = new Contador(10);
-		yFinal=posicion.getY()+20;
+		timer = new Contador(15);
+		yFinal=posicion.getY()+30;
 		this.mapa=mapa;
 	}
 	public int getPuntaje() {

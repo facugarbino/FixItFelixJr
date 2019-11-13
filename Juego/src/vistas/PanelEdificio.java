@@ -62,7 +62,7 @@ public class PanelEdificio extends JPanel {
 	}
 
 	private Image[] getImagenes() throws IOException {
-		Image img[] = new Image[65];
+		Image img[] = new Image[66];
 		String url;
 		String[] urls = new String[] { "edificio/edificio", "ventanas/ventanaComun", "ventanas/ventanaPrimerPiso",
 				"ventanas/ventanaConHojas", "puertas/puerta", "obstaculos/macetero", "obstaculos/moldura",
@@ -88,11 +88,13 @@ public class PanelEdificio extends JPanel {
 				"felix/felixConPastelInmune", "felix/felixConMartillo1Inmune", "felix/felixConMartillo2Inmune",
 				"felix/felixCorreInmune", "felix/felixFrenteInmune", "felix/felixGolpeadoInmune",
 				
-				"puntaje/100", "puntaje/500"
+				"puntaje/100", "puntaje/500",
+				
+				"ralph/ralphMuerto"
 				
 
 		};
-		for (int i = 0; i < 65; i++) {
+		for (int i = 0; i < 66; i++) {
 			url = urls[i];
 			img[i] = ImageIO.read(getClass().getResource("/recursos/imagenes/" + urls[i] + ".png"));
 		}
@@ -391,7 +393,11 @@ public class PanelEdificio extends JPanel {
 						numImagen = 56;
 					}
 				} else {
-					numImagen = 38;
+					if (ralph.estaMuerto()) {
+						numImagen = 65;
+					} else {
+						numImagen = 38;
+					}
 				}
 			}
 

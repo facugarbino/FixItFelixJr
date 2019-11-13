@@ -3,6 +3,8 @@ package juego;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import animaciones.AnimacionFinalDeNivel;
@@ -118,6 +120,7 @@ public class Juego {
 		pausa = !pausa;
 		ralph.pausar();
 		seccionActual.pausar();
+		felix.pausar();
 	}
 
 	public FelixJr getFelix() {
@@ -194,30 +197,13 @@ public class Juego {
 				//	e.printStackTrace();
 				//}
 				//Juego.getInstance().pausar();
-				
-				Thread t = new Thread(new AnimacionFinalDeNivel());
-				t.start();
-				try {
-					TimeUnit.MILLISECONDS.sleep(2000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Thread t2 = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
-				try {
-					t.join();
-					t2.join();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				Thread t3 = new Thread(new AnimacionSubidaRalphRompiendo());
-				t3.start();
-				try {
-					t3.join();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				(new Timer()).schedule(new TimerTask() {
+					public void run() {
+						JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());						
+					}
+				}, 2500);
+				(new AnimacionFinalDeNivel()).run();
+				(new AnimacionSubidaRalphRompiendo()).run();
 			} else {
 				ganar();
 			}
@@ -265,6 +251,7 @@ public class Juego {
 		if (nombre == null) {
 			throw new ExcepcionNombreCorto();
 		}
+		nombre = nombre.toLowerCase();
 		for (int i = 0; i < nombre.length(); i++) {
 			if (!conjuntoValidos.contains(nombre.charAt(i))) {
 				throw new ExcepcionNombreCaracterInvalido();
