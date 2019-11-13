@@ -15,6 +15,7 @@ import componentes.Componente;
 import componentes.Ladrillo;
 import componentes.Nube;
 import componentes.Pajaro;
+import componentes.Puntaje;
 import controlador.JuegoMain;
 import juego.Edificio;
 import juego.Juego;
@@ -61,7 +62,7 @@ public class PanelEdificio extends JPanel {
 	}
 
 	private Image[] getImagenes() throws IOException {
-		Image img[] = new Image[63];
+		Image img[] = new Image[65];
 		String url;
 		String[] urls = new String[] { "edificio/edificio", "ventanas/ventanaComun", "ventanas/ventanaPrimerPiso",
 				"ventanas/ventanaConHojas", "puertas/puerta", "obstaculos/macetero", "obstaculos/moldura",
@@ -85,10 +86,13 @@ public class PanelEdificio extends JPanel {
 				"paneles/primerPiso/panelSano", "paneles/primerPiso/panelMedioRoto", "paneles/primerPiso/panelRoto",
 				"ralph/ralphEnojado1", "ralph/ralphEnojado2", 
 				"felix/felixConPastelInmune", "felix/felixConMartillo1Inmune", "felix/felixConMartillo2Inmune",
-				"felix/felixCorreInmune", "felix/felixFrenteInmune", "felix/felixGolpeadoInmune"
+				"felix/felixCorreInmune", "felix/felixFrenteInmune", "felix/felixGolpeadoInmune",
+				
+				"puntaje/100", "puntaje/500"
+				
 
 		};
-		for (int i = 0; i < 63; i++) {
+		for (int i = 0; i < 65; i++) {
 			url = urls[i];
 			img[i] = ImageIO.read(getClass().getResource("/recursos/imagenes/" + urls[i] + ".png"));
 		}
@@ -441,6 +445,15 @@ public class PanelEdificio extends JPanel {
 					} else {
 						numImagen = 25;
 					}
+				}
+				break;
+			}
+			case "Puntaje": {
+				Puntaje p = (Puntaje) c;
+				if (p.getPuntaje()==100) {
+					numImagen=63;
+				} else if (p.getPuntaje()==500) {
+					numImagen=64;
 				}
 				break;
 			}

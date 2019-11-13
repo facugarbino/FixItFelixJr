@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import componentes.Ladrillo;
 import componentes.Pajaro;
+import componentes.Puntaje;
 import controlador.Audio;
 import graficador.modelo.InformacionDibujable;
 import juego.Juego;
@@ -77,11 +78,13 @@ public class FelixJr extends Personaje {
 			Audio.getInstance().arregloPanel();
 			if (ventanaActual.getSeccion().estaSana()) {
 				Audio.getInstance().seccionUp();
+				Juego.getInstance().getMapa().agregarComponente(new Puntaje(500,posicion.copia(), Juego.getInstance().getMapa()));
 				puntajeSeccion += 500;
 				puntajeNivel += puntajeSeccion;
 				puntajeSeccion = 0;
 				System.out.println("Felix repara el ultimo panel de la seccion. Gana 500 puntos.");
 			} else {
+				Juego.getInstance().getMapa().agregarComponente(new Puntaje(100,posicion.copia(), Juego.getInstance().getMapa()));
 				puntajeSeccion += 100;
 				System.out.println("Felix repara un panel. Gana 100 puntos.");
 			}

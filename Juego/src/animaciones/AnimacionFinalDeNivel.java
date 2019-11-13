@@ -70,7 +70,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 		ralphSalta.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (ralph.getPosicion().getY() > 0) {
+				if (ralph.getPosicion().getY() > -72) {
 					ralph.getPosicion().moverY(-1);
 				} else {
 					System.out.println("ya llego al piso");

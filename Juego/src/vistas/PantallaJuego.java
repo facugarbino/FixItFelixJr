@@ -47,8 +47,8 @@ public class PantallaJuego extends JFrame {
 				//PREGUNTAR
 				String ObjButtons[] = {"Sí", "No"};
                 int PromptResult = JOptionPane.showOptionDialog(null, 
-                		"¿Desea cerrar el programa?", "Cerrar", 
-                		JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                		"¿Desea cerrar el juego?", "Cerrar", 
+                		JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
                 		null, ObjButtons, ObjButtons[1]);
                 if (PromptResult == JOptionPane.YES_OPTION) {
                 	Juego.reiniciarJuego();

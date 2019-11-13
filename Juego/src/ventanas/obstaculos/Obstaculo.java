@@ -14,8 +14,8 @@ public abstract class Obstaculo {
 	protected Posicion posicion;
 	protected Posicion posicionMacetero = new Posicion(0,-5);
 	protected Posicion posicionMoldura = new Posicion(0,35);
-	protected Posicion posicionHojaIzquierda = new Posicion(-2,0);
-	protected Posicion posicionHojaDerecha = new Posicion(24,0);
+	protected Posicion posicionHojaIzquierda = new Posicion(-7,0);
+	protected Posicion posicionHojaDerecha = new Posicion(21,0);
 	/**
 	 * 
 	 * @return <b>true</b> si el obstáculo se encuentra
