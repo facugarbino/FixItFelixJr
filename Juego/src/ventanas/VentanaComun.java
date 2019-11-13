@@ -7,7 +7,6 @@ import juego.Seccion;
 import utils.Contador;
 import utils.Posicion;
 import ventanas.extra.Nicelander;
-import ventanas.extra.Pastel;
 import ventanas.obstaculos.Macetero;
 import ventanas.obstaculos.Moldura;
 import ventanas.paneles.Panel;

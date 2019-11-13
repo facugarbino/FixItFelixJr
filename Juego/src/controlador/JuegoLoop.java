@@ -52,6 +52,12 @@ public class JuegoLoop implements Runnable {
 				break;
 			}
 			if (!juego.estaPausado()) {
+//				try {
+//					TimeUnit.MILLISECONDS.sleep(5);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 //				if (timer.contar()) {
 //					timer.resetear();

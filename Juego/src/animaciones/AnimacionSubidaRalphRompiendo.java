@@ -2,23 +2,21 @@ package animaciones;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import juego.Edificio;
 import juego.Juego;
 import personajes.Ralph;
-import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 
 public class AnimacionSubidaRalphRompiendo implements Runnable {
 
-	private Timer timerDeSubida;
-	private Timer timerDeEnojo;
+	private Timer timer;
 	private boolean llego;
 	private boolean termino;
 	private boolean llegoBase;
 	private int maxAltura;
-	private int maxBase;
 	private Ralph ralph;
 	private Timer timerSwap;
 	
@@ -38,8 +36,8 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 		maxAltura = 166;
 		ralph.setOrientacion(Orientacion.IZQUIERDA);
 		ralph.setPosicion(new Posicion(Edificio.ANCHO * 2, 0));
-		timerDeSubida = new Timer();
-		timerDeSubida.schedule(new TimerTask() {
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (ralph.getPosicion().getX() > (Edificio.ANCHO+40)) {
@@ -48,100 +46,130 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 					llegoBase = true;
 					System.out.println("llego a la base");
 					ralph.setSubida(true);
-					timerDeSubida.cancel();
+					timer.cancel();
 				}
 			}
 		}, 0, 10);
 		while(!llegoBase) {
-			System.out.println("aun no llego a la base");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("aun no llego a la base");
 		}
-		timerDeSubida = new Timer();
-		timerDeSubida.schedule(new TimerTask() {
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (ralph.getPosicion().getY() < (maxAltura/3)) {
 					ralph.getPosicion().moverY(1);
 				} else {
 					llego = true;
-					timerDeSubida.cancel();
+					timer.cancel();
 					System.out.println("llego al primer piso");
 				}
 			}
 		}, 0, 10);
 		while(!llego) {
-			System.out.println("aun no llego al primer piso");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("aun no llego al primer piso");
 		}
-		timerDeSubida = new Timer();
+		timer = new Timer();
 		llego = false;
-		timerDeSubida.schedule(new TimerTask() {
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (ralph.getPosicion().getX() > 140) {
 					ralph.getPosicion().moverX(-1);;
 				} else {
 					llego = true;
-					timerDeSubida.cancel();
+					timer.cancel();
 					System.out.println("llego al borde");
 				}
 			}
 		}, 0, 10);
 		while(!llego) {
-			System.out.println("aun no llego al borde");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("aun no llego al borde");
 		}
-		timerDeSubida = new Timer();
+		timer = new Timer();
 		llego = false;
-		timerDeSubida.schedule(new TimerTask() {
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (ralph.getPosicion().getY() < (2*(maxAltura/3))) {
 					ralph.getPosicion().moverY(1);;
 				} else {
 					llego = true;
-					timerDeSubida.cancel();
+					timer.cancel();
 					System.out.println("llego al segundo piso");
 				}
 			}
 		}, 0, 10);
 		while(!llego) {
-			System.out.println("aun no llego al segundo piso");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("aun no llego al segundo piso");
 		}
-		timerDeSubida = new Timer();
+		timer = new Timer();
 		llego = false;
-		timerDeSubida.schedule(new TimerTask() {
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (ralph.getPosicion().getX() < 180) {
 					ralph.getPosicion().moverX(1);
 				} else {
 					llego = true;
-					timerDeSubida.cancel();
+					timer.cancel();
 					System.out.println("llego al centro del 2do piso");
 				}
 			}
 		}, 0, 10);
 		while(!llego) {
-			System.out.println("aun no llego al centro del 2do piso");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("aun no llego al centro del 2do piso");
 		}
-		timerDeSubida = new Timer();
+		timer = new Timer();
 		llego = false;
-		timerDeSubida.schedule(new TimerTask() {
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (ralph.getPosicion().getY() < maxAltura) {
 					ralph.getPosicion().moverY(1);;
 				} else {
 					llego = true;
-					timerDeSubida.cancel();
+					timer.cancel();
 					System.out.println("llego al tercer piso");
 				}
 			}
 		}, 0, 10);
 		while(!llego) {
-			System.out.println("aun no llego al 3er piso");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("aun no llego al 3er piso");
 		}
 		ralph.setSubida(false);
-		timerDeEnojo = new Timer();
-		timerDeEnojo.schedule(new TimerTask() {
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
 			int cant = 1;
 			@Override
 			public void run() {
@@ -150,13 +178,18 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 					cant ++;
 				} else {
 					ralph.setEnojado(false);
-					timerDeEnojo.cancel();
+					timer.cancel();
 					termino = true;
 				}
 			}
 		}, 0, 2000);
 		while (!termino) {
-			System.out.println("ralph sigue enojado");
+			try {
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			System.out.println("ralph sigue enojado");
 		}
 		timerSwap.cancel();
 	}
