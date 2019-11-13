@@ -36,6 +36,7 @@ public class FelixJr extends Personaje {
 	private Timer timerDeMartillo;
 	private boolean martilloArriba;
 	private boolean asustado;
+	
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;
@@ -58,6 +59,10 @@ public class FelixJr extends Personaje {
 	
 	public boolean estaMartillando() {
 		return estaMartillando;
+	}
+	
+	public void setMartillo() {
+		estaMartillando = !estaMartillando;
 	}
 	public boolean martilloArriba() {
 		return martilloArriba;

@@ -3,9 +3,14 @@ package juego;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.JOptionPane;
+
+import animaciones.AnimacionFinalDeNivel;
 import animaciones.AnimacionGolpeFelix;
 import animaciones.AnimacionSubidaRalph;
+import animaciones.AnimacionSubidaRalphRompiendo;
 import componentes.*;
 import controlador.Audio;
 import controlador.JuegoMain;
@@ -78,15 +83,12 @@ public class Juego {
 		// pasarDeNivel(); deben llamarlo de afuera
 		pausa = false;
 		conjuntoValidos = new HashSet<Character>();
-		conjuntoValidos.addAll(Arrays.asList(new Character[] {
-				'a','b','c','d','e','f','g','h','i','j','k','l',
-				'm','n','o','p','q','r','s','t','u','v','w','x',
-				'y','z','.','_','-',',','!','?','"','(',')','\'',
-				'[',']','{','}','@','*','&','%','$','#','>','<',
-				'=','1','2','3','4','5','6','7','8','9','0'}));
+		conjuntoValidos.addAll(Arrays.asList(new Character[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '_', '-', ',', '!', '?',
+				'"', '(', ')', '\'', '[', ']', '{', '}', '@', '*', '&', '%', '$', '#', '>', '<', '=', '1', '2', '3',
+				'4', '5', '6', '7', '8', '9', '0' }));
 
 	}
-	
 
 	public void setNivelAComenzar(int nivel) {
 		this.nivelAComenzar = nivel;
@@ -185,14 +187,38 @@ public class Juego {
 			if (nivel.hayOtroNivel()) {
 				nivel.avanzarDeNivel();
 				reiniciarNivel(3);
-				Juego.getInstance().pausar();
-				Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+				//Juego.getInstance().pausar();
+				//Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+				//try {
+				//	t.join();
+				//} catch (InterruptedException e) {
+				//	e.printStackTrace();
+				//}
+				//Juego.getInstance().pausar();
+				
+				Thread t = new Thread(new AnimacionFinalDeNivel());
+				t.start();
+				try {
+					TimeUnit.MILLISECONDS.sleep(2000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Thread t2 = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
 				try {
 					t.join();
+					t2.join();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				Juego.getInstance().pausar();
+				Thread t3 = new Thread(new AnimacionSubidaRalphRompiendo());
+				t3.start();
+				try {
+					t3.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
 				ganar();
 			}
@@ -207,7 +233,7 @@ public class Juego {
 	private void ganar() {
 //		agregarRanking();
 
-		//Esto se hace para que no se grafique un puntaje erróneo al ganar
+		// Esto se hace para que no se grafique un puntaje erróneo al ganar
 		felix.sacarPuntaje();
 		pausa = true;
 		yaGano = true;
@@ -236,11 +262,11 @@ public class Juego {
 	private String preguntarNombre() throws ExcepcionNombreInvalido {
 		String nombre = JOptionPane.showInputDialog(null, "Inserte su Nombre: ", "Fix it Felix Jr.",
 				JOptionPane.QUESTION_MESSAGE);
-		//Esto es por si le dan a CANCEL
-		if (nombre==null) {
+		// Esto es por si le dan a CANCEL
+		if (nombre == null) {
 			throw new ExcepcionNombreCorto();
 		}
-		for (int i=0;i<nombre.length();i++) {
+		for (int i = 0; i < nombre.length(); i++) {
 			if (!conjuntoValidos.contains(nombre.charAt(i))) {
 				throw new ExcepcionNombreCaracterInvalido();
 			}
@@ -365,7 +391,7 @@ public class Juego {
 		ralph.getPosicion().moverY(Seccion.ALTO);
 		tiempo = nivel.getTiempo();
 		timer = new Contador(500);
-		
+
 	}
 
 	/**

@@ -14,7 +14,7 @@ public class AdaptadorFlechas extends KeyAdapter {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
+	public void keyPressed(KeyEvent e) {
 		// Usamos keyReleased porque
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_P) {

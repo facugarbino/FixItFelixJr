@@ -61,7 +61,7 @@ public class PanelEdificio extends JPanel {
 	}
 
 	private Image[] getImagenes() throws IOException {
-		Image img[] = new Image[57];
+		Image img[] = new Image[63];
 		String url;
 		String[] urls = new String[] { "edificio/edificio", "ventanas/ventanaComun", "ventanas/ventanaPrimerPiso",
 				"ventanas/ventanaConHojas", "puertas/puerta", "obstaculos/macetero", "obstaculos/moldura",
@@ -83,10 +83,12 @@ public class PanelEdificio extends JPanel {
 
 				"paneles/puerta/panelSano", "paneles/puerta/panelMedioRoto", "paneles/puerta/panelRoto",
 				"paneles/primerPiso/panelSano", "paneles/primerPiso/panelMedioRoto", "paneles/primerPiso/panelRoto",
-				"ralph/ralphEnojado1", "ralph/ralphEnojado2"
+				"ralph/ralphEnojado1", "ralph/ralphEnojado2", 
+				"felix/felixConPastelInmune", "felix/felixConMartillo1Inmune", "felix/felixConMartillo2Inmune",
+				"felix/felixCorreInmune", "felix/felixFrenteInmune", "felix/felixGolpeadoInmune"
 
 		};
-		for (int i = 0; i < 57; i++) {
+		for (int i = 0; i < 63; i++) {
 			url = urls[i];
 			img[i] = ImageIO.read(getClass().getResource("/recursos/imagenes/" + urls[i] + ".png"));
 		}
@@ -106,8 +108,9 @@ public class PanelEdificio extends JPanel {
 		dibujarPersonajes(g);
 		dibujarComponentes(g);
 		if (Juego.getInstance().deboGraficarPausa()) {
-			dibujarImagen(g,imagenes[47],Edificio.ANCHO-imagenes[47].getWidth(null)/2,
-					ALTO-(edificio.getSeccionActual().getPosicion().getY()+(Seccion.ALTO/2))- imagenes[47].getHeight(null));
+			dibujarImagen(g, imagenes[47], Edificio.ANCHO - imagenes[47].getWidth(null) / 2,
+					ALTO - (edificio.getSeccionActual().getPosicion().getY() + (Seccion.ALTO / 2))
+							- imagenes[47].getHeight(null));
 		}
 	}
 
@@ -338,9 +341,12 @@ public class PanelEdificio extends JPanel {
 				if (felix.estaAsustado()) {
 					numImagen = 31;
 				} else {
-					numImagen = 30;
+						numImagen = 30;
 				}
 			}
+		}
+		if (felix.estaInmune()) {
+			numImagen = numImagen + 31;
 		}
 		imagen = imagenes[numImagen];
 //		g.drawImage(imagen, felix.getPosicion().getX(), ALTO - felix.getPosicion().getY() - imagen.getHeight(null),
@@ -403,7 +409,9 @@ public class PanelEdificio extends JPanel {
 		dibujarImagen(g, imagen, ralph.getPosicion().getX(),
 				ALTO - ralph.getPosicion().getY() - imagen.getHeight(null));
 	}
+
 	
+
 	private void dibujarComponentes(Graphics g) {
 		Image imagen;
 		List<Componente> componentes = mapa.getComponentes();
