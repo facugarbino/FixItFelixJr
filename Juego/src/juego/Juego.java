@@ -119,7 +119,7 @@ public class Juego {
 		}
 		pausa = !pausa;
 		ralph.pausar();
-
+		seccionActual.pausar();
 	}
 
 	public FelixJr getFelix() {
@@ -155,7 +155,6 @@ public class Juego {
 		Ladrillo l = ralph.tirarLadrillo();
 		if (l != null) {
 			mapa.agregarComponente(l);
-
 		}
 		seccionActual.generarNicelanders();
 		if (seccionActual.estaSana()) {
@@ -240,6 +239,10 @@ public class Juego {
 	private String preguntarNombre() throws ExcepcionNombreInvalido {
 		String nombre = JOptionPane.showInputDialog(null, "Inserte su Nombre: ", "Fix it Felix Jr.",
 				JOptionPane.QUESTION_MESSAGE);
+		//Esto es por si le dan a CANCEL
+		if (nombre==null) {
+			throw new ExcepcionNombreCorto();
+		}
 		for (int i=0;i<nombre.length();i++) {
 			if (!conjuntoValidos.contains(nombre.charAt(i))) {
 				throw new ExcepcionNombreCaracterInvalido();

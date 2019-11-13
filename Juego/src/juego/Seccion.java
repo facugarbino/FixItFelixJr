@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import graficador.modelo.Dibujable;
 import utils.Orientacion;
@@ -61,7 +62,7 @@ public class Seccion {
 		this.ventanasRotas = ventanasRotas;
 		this.ventanasConObstaculo = ventanasConObstaculo;
 		this.nroSeccion = nroSeccion;
-		pasteles = new ArrayList<>();
+		pasteles = new CopyOnWriteArrayList<>();
 		nicelander = null;
 		ventanasReparadas = 0;
 		boolean[][] conObstaculo = getMatrizRandom(ventanasConObstaculo);
@@ -273,5 +274,17 @@ public class Seccion {
 
 	public void borrarPastel(Pastel pastel) {
 		pasteles.remove(pastel);
+	}
+
+	public void pausar() {
+		if (nicelander!=null) {
+			nicelander.pausar();
+		}
+		for (int i = 0; i < FILAS; i++) {
+			for (int j = 0; j < COLUMNAS; j++) {
+				ventanas[i][j].pausar();
+			}
+		}
+		
 	}
 }

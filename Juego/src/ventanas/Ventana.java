@@ -25,7 +25,7 @@ import ventanas.paneles.Sano;
  * @author Garbino y Rodriguez Murphy
  *
  */
-public abstract class Ventana implements Dibujable {
+public abstract class Ventana implements Dibujable{
 
 	public static final int ANCHO = 24;
 	public static final int ALTO = 39;
@@ -260,5 +260,9 @@ public abstract class Ventana implements Dibujable {
 
 	public boolean estaRota() {
 		return panelesRotos != panelesReparados;
+	}
+
+	public void pausar() {
+		
 	}
 }

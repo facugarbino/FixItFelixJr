@@ -78,6 +78,11 @@ public class VentanaComun extends Ventana {
 	public void resetTimer() {
 		timer.resetear();
 	}
+	
+	@Override
+	public void pausar() {
+		timer.pausar();
+	}
 
 	/**
 	 * 

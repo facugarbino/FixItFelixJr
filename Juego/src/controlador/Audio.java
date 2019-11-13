@@ -31,7 +31,7 @@ public class Audio {
 		return (INSTANCE = new Audio());
 	}
 
-	public Audio() {
+	private Audio() {
 		try {
 			apertura = AudioSystem.getClip();
 			arregloPanel = AudioSystem.getClip();
@@ -76,6 +76,7 @@ public class Audio {
 	public void apertura() {
 		apertura.setFramePosition(0);
 		apertura.start();
+
 	}
 
 	public void arregloPanel() {

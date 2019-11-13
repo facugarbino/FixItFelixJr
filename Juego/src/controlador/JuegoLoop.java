@@ -36,7 +36,7 @@ public class JuegoLoop implements Runnable {
 			public void run () {
 				JuegoMain.getPantallaJuego().repaint();
 			}
-		}, 0,10);
+		}, 0,50);
 		juego.pausar();
 		Thread t = new Thread(new AnimacionSubidaRalphRompiendo());
 		t.start();

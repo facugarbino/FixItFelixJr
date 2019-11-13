@@ -9,7 +9,7 @@ import utils.Contador;
 import utils.Posicion;
 import ventanas.Ventana;
 
-public class Nicelander implements Dibujable{
+public class Nicelander implements Dibujable {
 
 	private Color color;
 	private Ventana ventana;
@@ -17,28 +17,31 @@ public class Nicelander implements Dibujable{
 	private boolean oculto;
 	private Posicion posicion;
 	private int tipo;
+	private Contador timer2;
 
 	public Nicelander(int tipo, Color color, Ventana ventana) {
 		this.color = color;
 		this.tipo = tipo;
 		this.ventana = ventana;
+
 		timer = new Contador(5000);
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				oculto=false;
-			}
-		}, 2500);
+		timer2 = new Contador(2500);
+//		new Timer().schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				oculto = false;
+//			}
+//		}, 2500);
 		oculto = true;
 		Posicion posVentana = ventana.getPosicion();
 		Posicion posPanel = Ventana.getPosiciones(2)[0];
-		posicion = new Posicion(posVentana.getX()+posPanel.getX(),posVentana.getY()+posPanel.getY());
+		posicion = new Posicion(posVentana.getX() + posPanel.getX(), posVentana.getY() + posPanel.getY());
 	}
 
 	public int getTipo() {
 		return tipo;
 	}
-	
+
 	public Posicion getPosicion() {
 		return posicion;
 	}
@@ -48,17 +51,26 @@ public class Nicelander implements Dibujable{
 	}
 
 	public boolean ponerPastel() {
+		if (timer2.contar()) {
+			oculto = false;
+		}
 		if (timer.contar()) {
 			ventana.ponerPastel(new Pastel(posicion));
 			ventana.getSeccion().setNicelander(null);
 			System.out.println("Nicelander pone pastel en " + ventana.getPosicion());
 			return true;
 		}
+
 		return false;
 	}
 
 	@Override
 	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(ventana.getPosicion().getX(), ventana.getPosicion().getY(),'@', color);
+		return new InformacionDibujable(ventana.getPosicion().getX(), ventana.getPosicion().getY(), '@', color);
+	}
+
+	public void pausar() {
+		timer.pausar();
+		timer2.pausar();
 	}
 }
