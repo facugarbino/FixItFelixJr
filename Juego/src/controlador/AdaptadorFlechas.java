@@ -14,7 +14,7 @@ public class AdaptadorFlechas extends KeyAdapter {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyReleased(KeyEvent e) {
 		// Usamos keyReleased porque
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_P) {
@@ -38,17 +38,17 @@ public class AdaptadorFlechas extends KeyAdapter {
 					break;
 				case (KeyEvent.VK_H):
 					// hack para pasar de nivel con la h (para testear)
-					juego.pasarDeNivel();
+					juego.pasarDeNivelConHack();
 					break;
 				case (KeyEvent.VK_SPACE):
 					juego.darMartillazo();
 					break;
-				case (KeyEvent.VK_R):
-					JuegoMain.getPantallaJuego().scrollearUp(20);
-					break;
-				case (KeyEvent.VK_D):
-					JuegoMain.getPantallaJuego().scrollearUp(-20);
-					break;
+//				case (KeyEvent.VK_R):
+//					JuegoMain.getPantallaJuego().scrollearUp(20);
+//					break;
+//				case (KeyEvent.VK_D):
+//					JuegoMain.getPantallaJuego().scrollearUp(-20);
+//					break;
 				}
 			}
 		}

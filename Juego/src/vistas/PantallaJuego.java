@@ -10,6 +10,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -144,6 +146,11 @@ public class PantallaJuego extends JFrame {
 					}
 				}, 0, 20);
 				while (!terminado) {
+					try {
+						TimeUnit.MILLISECONDS.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					System.out.println("no termine");
 				}
 				System.out.println("llegue");
@@ -170,8 +177,8 @@ public class PantallaJuego extends JFrame {
 //		}
 	}
 
-	public void paintComponent(Graphics g) {
-		super.paintComponents(g);
-	}
+//	public void paintComponent(Graphics g) {
+//		super.paintComponents(g);
+//	}
 
 }

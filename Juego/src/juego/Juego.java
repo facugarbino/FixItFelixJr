@@ -46,7 +46,7 @@ public class Juego {
 	private boolean primeraVez;
 	private boolean yaGano;
 	private int nivelAComenzar;
-	private int cantLadrillos;
+	private int cantLadrillosDeEstaSeccion;
 	private boolean graficarPausa;
 	private Set<Character> conjuntoValidos;
 	private boolean graficarGameOver;
@@ -176,7 +176,6 @@ public class Juego {
 	}
 
 	public void pasarDeNivel() {
-
 		if (primeraVez) {
 			for (int i = 1; i < nivelAComenzar; i++) {
 				nivel.avanzarDeNivel();
@@ -189,14 +188,7 @@ public class Juego {
 			if (nivel.hayOtroNivel()) {
 				nivel.avanzarDeNivel();
 				reiniciarNivel(3);
-				//Juego.getInstance().pausar();
-				//Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
-				//try {
-				//	t.join();
-				//} catch (InterruptedException e) {
-				//	e.printStackTrace();
-				//}
-				//Juego.getInstance().pausar();
+				
 				(new Timer()).schedule(new TimerTask() {
 					public void run() {
 						JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());						
@@ -210,6 +202,16 @@ public class Juego {
 		}
 
 	}
+	public void pasarDeNivelConHack() {
+		jugador.sumarPuntos(felix.getPuntaje());
+		if (nivel.hayOtroNivel()) {
+			nivel.avanzarDeNivel();
+			reiniciarNivel(3);
+			JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+		} else {
+			ganar();
+		}
+	}
 
 	public boolean yaGano() {
 		return yaGano;
@@ -217,7 +219,6 @@ public class Juego {
 
 	private void ganar() {
 //		agregarRanking();
-
 		// Esto se hace para que no se grafique un puntaje erróneo al ganar
 		felix.sacarPuntaje();
 		pausa = true;
@@ -319,7 +320,7 @@ public class Juego {
 	}
 
 	public void avanzarSeccion() {
-		cantLadrillos = ralph.getCantLadrillos();
+		cantLadrillosDeEstaSeccion = ralph.getCantLadrillos();
 		int nroSeccion = seccionActual.getNroSeccion();
 		if (nroSeccion < 3) {
 			Audio.getInstance().seccionUp();
@@ -333,15 +334,10 @@ public class Juego {
 			felix.subirDeSeccion(seccionActual);
 			ralph.subirDeSeccion();
 			pausar();
-			Thread t2 = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+			Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
 			new AnimacionSubidaRalph().run();
-			
-//			Thread t = new Thread(new AnimacionSubidaRalph());
-//			t.start();
-			
 			try {
-//				t.join();
-				t2.join();
+				t.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -417,7 +413,7 @@ public class Juego {
 		Ventana v = seccionActual.getVentanaInicial();
 		felix.setVentana(v);
 		felix.setPosicion(v.getPosicion().copia());
-		ralph.setCantLadrillos(cantLadrillos);
+		ralph.setCantLadrillos(cantLadrillosDeEstaSeccion);
 	}
 
 	public Mapa getMapa() {

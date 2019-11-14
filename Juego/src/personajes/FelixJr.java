@@ -211,11 +211,11 @@ public class FelixJr extends Personaje {
 			inmune = false;
 			System.out.println("Felix deja de ser inmune");
 		}
-		if (inmune && timerParpadeo.contar()) {
-			timer.resetear();
-			inmune = false;
-			System.out.println("Felix deja de ser inmune");
-		}
+//		if (inmune && timerParpadeo.contar()) {
+//			timer.resetear();
+//			inmune = false;
+//			System.out.println("Felix deja de ser inmune");
+//		}
 	}
 
 	public long getPuntaje() {

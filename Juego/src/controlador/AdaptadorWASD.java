@@ -17,6 +17,7 @@ public class AdaptadorWASD extends KeyAdapter {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_P) {
 			juego.pausar();
+			juego.graficarPausar();
 		} else {
 			if (!juego.estaPausado()) {
 				// teclaPresionada = true;
@@ -35,7 +36,7 @@ public class AdaptadorWASD extends KeyAdapter {
 					break;
 				case (KeyEvent.VK_H): {
 					// hack para pasar de nivel con la h (para testear)
-					juego.pasarDeNivel();
+					juego.pasarDeNivelConHack();
 					break;
 				}
 				case (KeyEvent.VK_SPACE):
