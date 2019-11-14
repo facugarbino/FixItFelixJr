@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
@@ -11,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.JuegoMain;
@@ -31,6 +34,7 @@ public class PantallaInstrucciones extends JFrame {
 	private JLabel pastelLetras = new JLabel();
 	private JLabel moveteLetras = new JLabel();
 	private JLabel arreglaLetras = new JLabel();
+	private JLabel botonAtras = new JLabel();
 	private static PantallaInstrucciones INSTANCE;
 	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
 
@@ -41,6 +45,7 @@ public class PantallaInstrucciones extends JFrame {
 	}
 	
 	private PantallaInstrucciones() {
+		setUndecorated(true);
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -50,7 +55,7 @@ public class PantallaInstrucciones extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds((int)(100*MULTIPLICADOR), (int)(100*MULTIPLICADOR),
+		setBounds((int)(0*MULTIPLICADOR), (int)(0*MULTIPLICADOR),
 				(int)(900*MULTIPLICADOR),(int)(600*MULTIPLICADOR));
 		//setBounds(100, 100, 900,600);
 		// Esto es para que el frame se abra en el centro de la pantalla
@@ -67,6 +72,23 @@ public class PantallaInstrucciones extends JFrame {
 		//titulo.setBounds(182, 65, 536, 54);
 		titulo.setIcon(new ImagenTextual("Instrucciones", 5, ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
+		
+		botonAtras.setHorizontalAlignment(SwingConstants.CENTER);
+		botonAtras.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoAtras.png")));
+		setBounds2(botonAtras,750,507,100,100);
+		botonAtras.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				PantallaMenu.getInstance().setVisible(true);
+				setVisible(false);
+			}
+			public void mouseEntered(MouseEvent e) {
+				botonAtras.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoAtras.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+			}
+			public void mouseExited(MouseEvent e){
+				botonAtras.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoAtras.png")));
+			}
+		});
+		contentPane.add(botonAtras);
 
 		int tamaño = 2;
 		setBounds2(introLetras1,92, 152, 869, 27);
@@ -108,6 +130,7 @@ public class PantallaInstrucciones extends JFrame {
 //		moveteLetras.setBounds(637, 242, 106, 50);
 		moveteLetras.setIcon(new ImagenTextual("movete", tamaño, ColorDeLetra.VERDE).getImageIcon());
 		contentPane.add(moveteLetras);
+		
 
 		setBounds2(arreglaLetras,669, 403, 127, 50);
 //		arreglaLetras.setBounds(669, 403, 127, 50);
@@ -121,6 +144,8 @@ public class PantallaInstrucciones extends JFrame {
 		setBounds2(ventanilla,5, 0, 900, 550);
 //		ventanilla.setBounds(5, 0, 900, 550);
 		contentPane.add(ventanilla);
+		
+		
 
 	}
 

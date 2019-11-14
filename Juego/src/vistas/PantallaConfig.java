@@ -3,11 +3,13 @@ package vistas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.JuegoMain;
@@ -15,10 +17,13 @@ import utils.ColorDeLetra;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,6 +39,7 @@ public class PantallaConfig extends JFrame {
 	private JComboBox<Integer> comboNivel = new JComboBox<>();
 	private JLabel lblLetras = new JLabel();
 	private JLabel lblNivel = new JLabel();
+	private JLabel botonAtras;
 	private static PantallaConfig INSTANCE;
 	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
 
@@ -44,6 +50,7 @@ public class PantallaConfig extends JFrame {
 	
 	
 	private PantallaConfig() {
+		setUndecorated(true);
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -66,6 +73,24 @@ public class PantallaConfig extends JFrame {
 //		titulo.setBounds(42, 25, 520, 45);
 		titulo.setIcon(new ImagenTextual("configuracion", 5, ColorDeLetra.CELESTE).getImageIcon());
 		contentPane.add(titulo);
+		
+		botonAtras = new JLabel();
+		botonAtras.setHorizontalAlignment(SwingConstants.CENTER);
+		botonAtras.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoAtras.png")));
+		setBounds2(botonAtras,500,180,100,100);
+		botonAtras.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				PantallaMenu.getInstance().setVisible(true);
+				setVisible(false);
+			}
+			public void mouseEntered(MouseEvent e) {
+				botonAtras.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoAtras.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+			}
+			public void mouseExited(MouseEvent e){
+				botonAtras.setIcon(new ImageIcon(PantallaMenu.class.getResource("/recursos/imagenes/iconos/iconoAtras.png")));
+			}
+		});
+		contentPane.add(botonAtras);
 
 		comboLetras.setModel(new DefaultComboBoxModel<String>(new String[] { "↑←↓→", "WASD" }));
 		setBounds2(comboLetras,225, 123, 116, 24);
@@ -105,6 +130,8 @@ public class PantallaConfig extends JFrame {
 //		lblNivel.setBounds(42, 176, 216, 24);
 		lblNivel.setIcon(new ImagenTextual("nivel de comienzo:", 1.5, ColorDeLetra.ROJO).getImageIcon());
 		contentPane.add(lblNivel);
+		
+		
 	}
 
 	public static PantallaConfig getInstance() {

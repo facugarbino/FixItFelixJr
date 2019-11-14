@@ -3,16 +3,21 @@ package vistas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import controlador.JuegoMain;
 import juego.Juego;
 import utils.ColorDeLetra;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -24,6 +29,16 @@ public class PanelInfo extends JPanel {
 	private long puntaje;
 	private int tiempo;
 	private Image cabezaFelix;
+	private JPanel contentPane;
+	private JLabel botonPausa = new JLabel();
+	private JLabel botonAudio = new JLabel();
+	private static double MULTIPLICADOR =  JuegoMain.MULTIPLICADOR;
+	
+	
+	private void setBounds2(JComponent comp, int x1, int y1, int x2, int y2) {
+		comp.setBounds((int)(x1*MULTIPLICADOR), (int)(y1*MULTIPLICADOR),
+				(int)(x2*MULTIPLICADOR), (int)(y2*MULTIPLICADOR));
+	}
 
 	public PanelInfo() {
 		setBounds(0, 0, (int) (420 * JuegoMain.MULTIPLICADOR), (int) (50 * JuegoMain.MULTIPLICADOR));
@@ -33,7 +48,19 @@ public class PanelInfo extends JPanel {
 //		label.setBounds(12, 12, 98, 20);
 //		label.setIcon(new ImagenTextual("Puntaje: 23", 1.5, ColorDeLetra.ROJO).getImageIcon());
 		// add(label);
-
+		
+		botonPausa.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/botones/botonPausa.png")));
+		botonPausa.setBounds((int)(395*JuegoMain.MULTIPLICADOR),(int)(20*JuegoMain.MULTIPLICADOR),28,28);
+		botonPausa.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Juego.getInstance().pausar();
+				Juego.getInstance().graficarPausar();
+			}
+		});
+		add(botonPausa);
+		
+		
+		
 		juego = Juego.getInstance();
 		try {
 			cabezaFelix = ImageIO.read(getClass().getResource("/recursos/imagenes/extra/cabezaFelix.png"));
