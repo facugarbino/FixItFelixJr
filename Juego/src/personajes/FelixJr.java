@@ -25,20 +25,16 @@ import ventanas.Ventana;
  */
 public class FelixJr extends Personaje {
 	private Contador timer;
-	private Contador timerParpadeo;
 	private int vidas;
 	private Ventana ventanaActual;
 	private boolean inmune;
 	private long puntajeNivel;
 	private long puntajeSeccion;
 	private boolean saltando;
-	private int saltoHorizontal;
-	private int saltoVertical;
 	private boolean estaMartillando;
 	private Timer timerDeMartillo;
 	private boolean martilloArriba;
 	private boolean asustado;
-	private boolean invisible;
 	public static int ANCHO = 15;
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
@@ -49,16 +45,11 @@ public class FelixJr extends Personaje {
 		this.vidas = vidas;
 		caracter = 'F';
 		timer = new Contador(5000);
-		saltoHorizontal = (int)(Ventana.ANCHO*1.4);
-		saltoVertical = 50;
 		estaMartillando= false;
 		timerDeMartillo = new Timer();
 		martilloArriba = true;
 	}
 
-	public boolean estaInvisible() {
-		return invisible;
-	}
 	public boolean estaSaltando() {
 		return saltando;
 	}
