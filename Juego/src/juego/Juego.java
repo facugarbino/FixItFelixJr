@@ -85,8 +85,8 @@ public class Juego {
 		pausa = false;
 		conjuntoValidos = new HashSet<Character>();
 		conjuntoValidos.addAll(Arrays.asList(new Character[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '_', '-', ',', '!', '?',
-				'"', '(', ')', '\'', '[', ']', '{', '}', '@', '*', '&', '%', '$', '#', '>', '<', '=', '1', '2', '3',
+				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '-', ',', '!', '?',
+				'"', '(', ')', '\'', '[', ']', '@', '*', '&', '%', '$', '#', '>', '<', '=', '1', '2', '3',
 				'4', '5', '6', '7', '8', '9', '0' }));
 
 	}
@@ -229,8 +229,9 @@ public class Juego {
 	public void agregarRanking() {
 		if (ranking.entraEnElTop(jugador.getPuntaje())) {
 			String nombreJugador;
-			boolean nombreInvalido = true;
-			while (nombreInvalido) {
+			boolean nombreInvalido = false;
+			
+			do {
 				try {
 					nombreJugador = preguntarNombre();
 					setJugador(nombreJugador);
@@ -240,7 +241,19 @@ public class Juego {
 					nombreInvalido = true;
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
-			}
+			} while (nombreInvalido);
+			
+//			while (nombreInvalido) {
+//				try {
+//					nombreJugador = preguntarNombre();
+//					setJugador(nombreJugador);
+//					ranking.agregarHighScore(new HighScore(jugador));
+//					nombreInvalido = false;
+//				} catch (ExcepcionNombreInvalido e) {
+//					nombreInvalido = true;
+//					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//				}
+//			}
 
 		}
 	}

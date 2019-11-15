@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import controlador.Audio;
 import controlador.JuegoMain;
 import test.TestJuego;
+import utils.ColorDeLetra;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -29,6 +30,7 @@ public class PantallaMenu extends JFrame {
 	private JLabel botonRanking;
 	private JLabel botonConfiguracion;	
 	private JLabel titulo;
+	private JLabel copyright;
 	private PantallaJuego pantallaJuego; 
 	private static PantallaMenu INSTANCE;
 	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
@@ -59,6 +61,10 @@ public class PantallaMenu extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
+		copyright = new JLabel();
+		copyright.setIcon(new ImagenTextual("facundo garbino - uciel rodriguez murphy",1.5, ColorDeLetra.ROJO).getImageIcon());
+		copyright.setBounds(59,300,468,30);
+		contentPane.add(copyright);
 		botonConfiguracion = new JLabel();
 		botonConfiguracion.setHorizontalAlignment(SwingConstants.CENTER);
 		botonConfiguracion.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoConfig.png")));
