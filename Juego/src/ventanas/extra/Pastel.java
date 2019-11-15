@@ -24,7 +24,6 @@ public class Pastel implements Dibujable {
 			@Override
 			public void run() {
 				estado = !estado;
-				
 			}
 		}, 0,300);
 	}
@@ -42,6 +41,9 @@ public class Pastel implements Dibujable {
 		return posicion;
 	}
 	
+	public void comer() {
+		timer.cancel();
+	}
 	
 
 }

@@ -40,7 +40,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 					felixCamina.cancel();
 				}
 			}
-		}, 0, 30);
+		}, 0, 20);
 		while (!termino) {
 			try {
 				TimeUnit.MILLISECONDS.sleep(50);
@@ -91,7 +91,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 					ralph.setMuerto(true);
 				}
 			}
-		}, 0, 10);
+		}, 0, 5);
 		while (!termino) {
 			try {
 				TimeUnit.MILLISECONDS.sleep(50);

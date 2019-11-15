@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 import animaciones.AnimacionSubidaRalphRompiendo;
@@ -27,7 +28,6 @@ public class JuegoLoop implements Runnable {
 		
 		timerJuego.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-
 				if (juego!=Juego.getInstance()) {
 					timerJuego.cancel();
 				}
@@ -51,6 +51,7 @@ public class JuegoLoop implements Runnable {
 			}
 		}, 0,5);
 		new AnimacionSubidaRalphRompiendo().run();
+		Audio.getInstance().fondo();
 
 	}
 

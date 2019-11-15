@@ -42,6 +42,7 @@ public class Ladrillo extends Componente {
 			Juego.getInstance().golpearFelix(this);
 		}
 		if (posicion.getY()==0) {
+			timerSwap.cancel();
 			mapa.borrarComponente(this);
 		}
 	}

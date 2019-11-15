@@ -1,13 +1,8 @@
 package controlador;
 
-import java.io.IOException;
 import java.net.URL;
-
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Audio {
 
@@ -23,6 +18,11 @@ public class Audio {
 	private Clip seccionUp;
 
 	private static Audio INSTANCE = null;
+	private static boolean activado = true;
+
+	public static void setActivado(boolean activado) {
+		Audio.activado = activado;
+	}
 
 	public static Audio getInstance() {
 		if (INSTANCE != null) {
@@ -43,8 +43,8 @@ public class Audio {
 			levelUp = AudioSystem.getClip();
 			perdio = AudioSystem.getClip();
 			seccionUp = AudioSystem.getClip();
-		} catch (LineUnavailableException e1) {
-			e1.printStackTrace();
+		} catch (Exception e1) {
+			System.out.println("Error. No se podrá jugar con audio");
 		}
 		URL urlApertura = getClass().getResource("/recursos/audio/musicaApertura.wav");
 		URL urlArregloPanel = getClass().getResource("/recursos/audio/arregloPanel.wav");
@@ -74,53 +74,122 @@ public class Audio {
 	}
 
 	public void apertura() {
-		apertura.setFramePosition(0);
-		apertura.start();
+		if (activado) {
+			try {
+				apertura.setFramePosition(0);
+				apertura.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
 	public void arregloPanel() {
-		arregloPanel.setFramePosition(0);
-		arregloPanel.start();
+		if (activado) {
+			try {
+				arregloPanel.setFramePosition(0);
+				arregloPanel.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void choqueLadrillo() {
-		choqueLadrillo.setFramePosition(0);
-		choqueLadrillo.start();
+		if (activado) {
+			try {
+				choqueLadrillo.setFramePosition(0);
+				choqueLadrillo.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void comerPastel() {
-		comerPastel.setFramePosition(0);
-		comerPastel.start();
+		if (activado) {
+			try {
+				comerPastel.setFramePosition(0);
+				comerPastel.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void inicioDeJuego() {
-		inicioDeJuego.setFramePosition(0);
-		inicioDeJuego.start();
+		if (activado) {
+			try {
+				inicioDeJuego.setFramePosition(0);
+				inicioDeJuego.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void fondo() {
-		fondo.setFramePosition(0);
-		fondo.start();
+		if (activado) {
+			try {
+				fondo.loop(Clip.LOOP_CONTINUOUSLY);
+//				fondo.setFramePosition(0);
+//				fondo.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void bloqueado() {
-		bloqueado.setFramePosition(0);
-		bloqueado.start();
+		if (activado) {
+			try {
+
+				bloqueado.setFramePosition(0);
+				bloqueado.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void levelUp() {
-		levelUp.setFramePosition(0);
-		levelUp.start();
+		if (activado) {
+			try {
+				levelUp.setFramePosition(0);
+				levelUp.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void perdio() {
-		perdio.setFramePosition(0);
-		perdio.start();
+		if (activado) {
+			try {
+				perdio.setFramePosition(0);
+				perdio.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public void seccionUp() {
-		seccionUp.setFramePosition(0);
-		seccionUp.start();
+		if (activado) {
+			try {
+				seccionUp.setFramePosition(0);
+				seccionUp.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 }

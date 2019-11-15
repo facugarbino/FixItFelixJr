@@ -24,7 +24,7 @@ public class AnimacionGolpeFelix implements Runnable {
 			@Override
 			public void run() {
 				if (bajar) {
-					felix.getPosicion().moverY(-1);
+					felix.getPosicion().moverY(-2);
 				} else {
 					felix.getPosicion().moverY(1);
 					if (cuantoSubi++==15) {

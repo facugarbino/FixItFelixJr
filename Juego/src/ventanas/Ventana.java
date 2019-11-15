@@ -160,6 +160,7 @@ public abstract class Ventana implements Dibujable{
 
 	public void comerPastel() {
 		seccion.borrarPastel(pastel);
+		pastel.comer();
 		pastel = null;
 	}
 
