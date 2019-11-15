@@ -43,7 +43,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 					ralph.getPosicion().moverX(-1);;
 				} else {
 					llego = true;
-					System.out.println("llego a la base");
 					ralph.setSubida(true);
 					timer.cancel();
 				}
@@ -55,7 +54,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			System.out.println("aun no llego a la base");
 		}
 		llego=false;
 		timer = new Timer();
@@ -67,7 +65,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				} else {
 					llego = true;
 					timer.cancel();
-					System.out.println("llego al primer piso");
 				}
 			}
 		}, 0, 10);
@@ -77,7 +74,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			System.out.println("aun no llego al primer piso");
 		}
 		timer = new Timer();
 		llego = false;
@@ -89,7 +85,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				} else {
 					llego = true;
 					timer.cancel();
-					System.out.println("llego al borde");
 				}
 			}
 		}, 0, 10);
@@ -99,7 +94,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			System.out.println("aun no llego al borde");
 		}
 		timer = new Timer();
 		llego = false;
@@ -111,7 +105,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				} else {
 					llego = true;
 					timer.cancel();
-					System.out.println("llego al segundo piso");
 				}
 			}
 		}, 0, 10);
@@ -121,7 +114,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			System.out.println("aun no llego al segundo piso");
 		}
 		timer = new Timer();
 		llego = false;
@@ -133,7 +125,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				} else {
 					llego = true;
 					timer.cancel();
-					System.out.println("llego al centro del 2do piso");
 				}
 			}
 		}, 0, 10);
@@ -155,7 +146,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				} else {
 					llego = true;
 					timer.cancel();
-					System.out.println("llego al tercer piso");
 				}
 			}
 		}, 0, 10);
@@ -165,7 +155,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			System.out.println("aun no llego al 3er piso");
 		}
 		llego=false;
 		ralph.setSubida(false);
@@ -190,7 +179,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-//			System.out.println("ralph sigue enojado");
 		}
 		timerSwap.cancel();
 		Juego.getInstance().pausar();

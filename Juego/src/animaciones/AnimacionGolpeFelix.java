@@ -44,9 +44,7 @@ public class AnimacionGolpeFelix implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("no llego felix");
 		}
-		System.out.println("LLEGO FELIX");
 		Juego.getInstance().pausar();
 	}
 

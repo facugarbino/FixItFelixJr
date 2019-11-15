@@ -38,11 +38,9 @@ public class AnimacionSubidaRalph implements Runnable {
 					Posicion posNueva = ralph.getPosicion().copia();
 					posNueva.moverY(1);
 					ralph.setPosicion(posNueva);
-					System.out.println("subio 1");
 				} else {
 					llego = true;
 					timerDeSubida.cancel();
-					System.out.println("llego");
 				}
 
 			}
@@ -53,7 +51,6 @@ public class AnimacionSubidaRalph implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println(llego);
 		}
 		//timerDeSubida.cancel();
 		ralph.setSubida(false);

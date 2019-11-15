@@ -20,10 +20,14 @@ public class Audio {
 	private Clip perdio;
 	private Clip seccionUp;
 	private static Audio INSTANCE = null;
-	private static boolean activado = true;
+	private boolean activado;
 
-	public static void setActivado(boolean activado) {
-		Audio.activado = activado;
+	public void setActivado() {
+		activado = !activado;
+	}
+	
+	public boolean getActivado() {
+		return activado;
 	}
 
 	public static Audio getInstance() {
@@ -34,7 +38,7 @@ public class Audio {
 	}
 
 	private Audio() {
-
+		activado=true;
 		try {
 			apertura = AudioSystem.getClip();
 			arregloPanel = AudioSystem.getClip();

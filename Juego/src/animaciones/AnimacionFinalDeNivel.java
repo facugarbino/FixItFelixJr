@@ -35,7 +35,6 @@ public class AnimacionFinalDeNivel implements Runnable {
 					cant ++;
 				} else {
 					felix.setMartillo();
-					System.out.println("felix se mueve hacia ralph");
 					termino = true;
 					felixCamina.cancel();
 				}
@@ -47,7 +46,6 @@ public class AnimacionFinalDeNivel implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("felix aun no alcanzo a ralph");
 		}
 		termino = false;
 
@@ -61,7 +59,6 @@ public class AnimacionFinalDeNivel implements Runnable {
 					ralph.getPosicion().moverY(1);
 					ralph.getPosicion().moverX(5);
 				} else {
-					System.out.println("ya salto");
 					termino = true;
 					ralphSalta.cancel();
 				}
@@ -72,8 +69,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 				TimeUnit.MILLISECONDS.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			System.out.println("aun no salto");
+			}			
 		}
 		termino = false;
 		
@@ -84,7 +80,6 @@ public class AnimacionFinalDeNivel implements Runnable {
 				if (ralph.getPosicion().getY() > 0) {
 					ralph.getPosicion().moverY(-1);
 				} else {
-					System.out.println("ya llego al piso");
 					termino = true;
 					ralph.setEnojado(false);
 					ralphSalta.cancel();
