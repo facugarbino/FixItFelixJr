@@ -1,8 +1,11 @@
 package controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Audio {
 
@@ -16,16 +19,11 @@ public class Audio {
 	private Clip levelUp;
 	private Clip perdio;
 	private Clip seccionUp;
-	private boolean fondoOn;
 	private static Audio INSTANCE = null;
 	private static boolean activado = true;
 
-	public static void setActivado() {
-		Audio.activado = !activado;
-	}
-
-	public static boolean getActivado() {
-		return activado;
+	public static void setActivado(boolean activado) {
+		Audio.activado = activado;
 	}
 
 	public static Audio getInstance() {
@@ -36,6 +34,7 @@ public class Audio {
 	}
 
 	private Audio() {
+
 		try {
 			apertura = AudioSystem.getClip();
 			arregloPanel = AudioSystem.getClip();
@@ -47,9 +46,10 @@ public class Audio {
 			levelUp = AudioSystem.getClip();
 			perdio = AudioSystem.getClip();
 			seccionUp = AudioSystem.getClip();
-		} catch (Exception e1) {
-			System.out.println("Error. No se podrá jugar con audio");
+		} catch (LineUnavailableException | IllegalArgumentException e) {
+			System.out.println("Error. No se podrá jugar con audio.");
 		}
+
 		URL urlApertura = getClass().getResource("/recursos/audio/musicaApertura.wav");
 		URL urlArregloPanel = getClass().getResource("/recursos/audio/arregloPanel.wav");
 		URL urlChoqueLadrillo = getClass().getResource("/recursos/audio/choqueLadrillo.wav");
@@ -72,8 +72,10 @@ public class Audio {
 			levelUp.open(AudioSystem.getAudioInputStream(urlLevelUp));
 			perdio.open(AudioSystem.getAudioInputStream(urlPerdio));
 			seccionUp.open(AudioSystem.getAudioInputStream(urlSeccionUp));
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+			System.out.println("Error. Problema al cargar los archivos de audio.");
+		} catch (NullPointerException e) {
+			;
 		}
 	}
 
@@ -82,8 +84,8 @@ public class Audio {
 			try {
 				apertura.setFramePosition(0);
 				apertura.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de la apertura.");
 			}
 		}
 
@@ -94,8 +96,8 @@ public class Audio {
 			try {
 				arregloPanel.setFramePosition(0);
 				arregloPanel.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio del arreglo de panel.");
 			}
 		}
 
@@ -106,8 +108,8 @@ public class Audio {
 			try {
 				choqueLadrillo.setFramePosition(0);
 				choqueLadrillo.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio del golpe a Felix.");
 			}
 		}
 
@@ -118,8 +120,8 @@ public class Audio {
 			try {
 				comerPastel.setFramePosition(0);
 				comerPastel.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio del pastel comido.");
 			}
 		}
 
@@ -130,8 +132,8 @@ public class Audio {
 			try {
 				inicioDeJuego.setFramePosition(0);
 				inicioDeJuego.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de inicio de juego.");
 			}
 		}
 
@@ -141,17 +143,14 @@ public class Audio {
 		if (bool) {
 			try {
 				fondo.loop(Clip.LOOP_CONTINUOUSLY);
-				fondoOn = true;
-//				fondo.setFramePosition(0);
-//				fondo.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de fondo de juego.");
 			}
 		} else {
 			try {
 				fondo.stop();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				;
 			}
 		}
 	}
@@ -159,11 +158,10 @@ public class Audio {
 	public void bloqueado() {
 		if (activado) {
 			try {
-
 				bloqueado.setFramePosition(0);
 				bloqueado.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de movimiento inválido.");
 			}
 		}
 	}
@@ -173,8 +171,8 @@ public class Audio {
 			try {
 				levelUp.setFramePosition(0);
 				levelUp.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de pase de nivel.");
 			}
 		}
 
@@ -185,8 +183,8 @@ public class Audio {
 			try {
 				perdio.setFramePosition(0);
 				perdio.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de game over.");
 			}
 		}
 
@@ -197,8 +195,8 @@ public class Audio {
 			try {
 				seccionUp.setFramePosition(0);
 				seccionUp.start();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NullPointerException e) {
+				System.out.println("No se pudo ejecutar el audio de pase de sección.");
 			}
 		}
 
