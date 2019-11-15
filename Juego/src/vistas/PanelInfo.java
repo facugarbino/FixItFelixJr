@@ -1,5 +1,6 @@
 package vistas;
 
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import controlador.Audio;
 import controlador.JuegoMain;
 import juego.Juego;
 import utils.ColorDeLetra;
@@ -50,7 +52,7 @@ public class PanelInfo extends JPanel {
 		// add(label);
 		
 		botonPausa.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/botones/botonPausa.png")));
-		botonPausa.setBounds((int)(395*JuegoMain.MULTIPLICADOR),(int)(20*JuegoMain.MULTIPLICADOR),28,28);
+		botonPausa.setBounds((int)(395*JuegoMain.MULTIPLICADOR),(int)(25*JuegoMain.MULTIPLICADOR),28,28);
 		botonPausa.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Juego.getInstance().pausar();
@@ -58,6 +60,21 @@ public class PanelInfo extends JPanel {
 			}
 		});
 		add(botonPausa);
+		
+		botonAudio.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/botones/botonDesmutear.png")));
+		botonAudio.setBounds((int)(395*JuegoMain.MULTIPLICADOR),(int)(10*JuegoMain.MULTIPLICADOR),28,28);
+		botonAudio.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Audio.setActivado();
+				Audio.getInstance().fondo(Audio.getActivado());
+				if(Audio.getActivado()) {
+					botonAudio.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/botones/botonDesmutear.png")));
+				} else {
+					botonAudio.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/botones/botonMutear.png")));
+				}
+			}
+		});
+		add(botonAudio);
 		
 		
 		

@@ -31,6 +31,7 @@ public class PantallaMenu extends JFrame {
 	private JLabel botonConfiguracion;	
 	private JLabel titulo;
 	private JLabel copyright;
+	private JLabel copyright2;
 	private PantallaJuego pantallaJuego; 
 	private static PantallaMenu INSTANCE;
 	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;
@@ -53,7 +54,7 @@ public class PantallaMenu extends JFrame {
 	private PantallaMenu() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 586, 360);
+		setBounds(100, 100, 586, 380);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
@@ -62,9 +63,14 @@ public class PantallaMenu extends JFrame {
 		setContentPane(contentPane);
 		
 		copyright = new JLabel();
-		copyright.setIcon(new ImagenTextual("facundo garbino - uciel rodriguez murphy",1.5, ColorDeLetra.ROJO).getImageIcon());
-		copyright.setBounds(59,300,468,30);
+		copyright.setIcon(new ImagenTextual("facundo garbino",1.5, ColorDeLetra.ROJO).getImageIcon());
+		copyright.setBounds(59,290,468,30);
+		copyright2 = new JLabel();
+		copyright2.setIcon(new ImagenTextual("uciel rodriguez murphy",1.5,ColorDeLetra.ROJO).getImageIcon());
+		copyright2.setBounds(59,315,468,30);
+		
 		contentPane.add(copyright);
+		contentPane.add(copyright2);
 		botonConfiguracion = new JLabel();
 		botonConfiguracion.setHorizontalAlignment(SwingConstants.CENTER);
 		botonConfiguracion.setIcon(new ImageIcon(getClass().getResource("/recursos/imagenes/iconos/iconoConfig.png")));

@@ -20,8 +20,12 @@ public class Audio {
 	private static Audio INSTANCE = null;
 	private static boolean activado = true;
 
-	public static void setActivado(boolean activado) {
-		Audio.activado = activado;
+	public static void setActivado() {
+		Audio.activado = !activado;
+	}
+
+	public static boolean getActivado() {
+		return activado;
 	}
 
 	public static Audio getInstance() {
