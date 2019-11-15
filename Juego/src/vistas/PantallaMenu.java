@@ -106,6 +106,7 @@ public class PantallaMenu extends JFrame {
 		botonJugar.setBounds(228, 150, 130, 130);
 		botonJugar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				Audio.getInstance().inicioDeJuego();
 				JuegoMain.comenzarJuego();
 			}
 			public void mouseEntered(MouseEvent e) {
@@ -124,7 +125,6 @@ public class PantallaMenu extends JFrame {
 		botonRanking.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				PantallaRanking.getInstance().setVisible(true);
-				Audio.getInstance().inicioDeJuego();
 				setVisible(false);
 			}
 			public void mouseEntered(MouseEvent e) {

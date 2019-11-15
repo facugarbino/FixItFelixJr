@@ -74,7 +74,7 @@ public class Juego {
 
 	private Juego() {
 		// nivel = new Nivel(10, 15, 1000, 20, 50, 5, 600, 10, 40);
-		nivel = new Nivel(10, 25, 10000, 20, 50, 6, 300, 10, 40);
+		nivel = new Nivel(10, 25, 9000, 15, 40, 6, 300, 10, 40);
 		// nivelMax, cantVentanasRotas, frecuenciaLadrillo, velocidadLadrillo,
 		// velocidadPajaro, ventanasConObstaculo, tiempo, porcentaje, cantLadrillos
 		jugador = new Jugador("anonimo");
@@ -129,7 +129,6 @@ public class Juego {
 
 	public void moverFelix(Orientacion o) {
 		felix.mover(o);
-
 	}
 
 	public void golpearFelix(Ladrillo l) {
@@ -188,7 +187,6 @@ public class Juego {
 			if (nivel.hayOtroNivel()) {
 				nivel.avanzarDeNivel();
 				reiniciarNivel(3);
-				
 				(new Timer()).schedule(new TimerTask() {
 					public void run() {
 						JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());						
@@ -200,7 +198,6 @@ public class Juego {
 				ganar();
 			}
 		}
-
 	}
 	public void pasarDeNivelConHack() {
 		jugador.sumarPuntos(felix.getPuntaje());
@@ -218,8 +215,8 @@ public class Juego {
 	}
 
 	private void ganar() {
-//		agregarRanking();
 		// Esto se hace para que no se grafique un puntaje erróneo al ganar
+		Audio.getInstance().fondo(false);
 		felix.sacarPuntaje();
 		pausa = true;
 		yaGano = true;
@@ -230,7 +227,6 @@ public class Juego {
 		if (ranking.entraEnElTop(jugador.getPuntaje())) {
 			String nombreJugador;
 			boolean nombreInvalido = false;
-			
 			do {
 				try {
 					nombreJugador = preguntarNombre();
@@ -242,19 +238,6 @@ public class Juego {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			} while (nombreInvalido);
-			
-//			while (nombreInvalido) {
-//				try {
-//					nombreJugador = preguntarNombre();
-//					setJugador(nombreJugador);
-//					ranking.agregarHighScore(new HighScore(jugador));
-//					nombreInvalido = false;
-//				} catch (ExcepcionNombreInvalido e) {
-//					nombreInvalido = true;
-//					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//				}
-//			}
-
 		}
 	}
 
@@ -399,6 +382,7 @@ public class Juego {
 	 */
 	public void perder(long puntajeFelix) {
 		Audio.getInstance().perdio();
+		Audio.getInstance().fondo(false);
 		jugador.sumarPuntos(puntajeFelix);
 		pausa = true;
 		System.out.println("GAME OVER");

@@ -14,8 +14,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 
 	private Timer timer;
 	private boolean llego;
-	private boolean termino;
-	private boolean llegoBase;
 	private int maxAltura;
 	private Ralph ralph;
 	private Timer timerSwap;
@@ -34,6 +32,7 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			}
 		}, 0,200);
 		maxAltura = 166;
+		llego=false;
 		ralph.setOrientacion(Orientacion.IZQUIERDA);
 		ralph.setPosicion(new Posicion(Edificio.ANCHO * 2, 0));
 		timer = new Timer();
@@ -43,14 +42,14 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				if (ralph.getPosicion().getX() > (Edificio.ANCHO+40)) {
 					ralph.getPosicion().moverX(-1);;
 				} else {
-					llegoBase = true;
+					llego = true;
 					System.out.println("llego a la base");
 					ralph.setSubida(true);
 					timer.cancel();
 				}
 			}
 		}, 0, 10);
-		while(!llegoBase) {
+		while(!llego) {
 			try {
 				TimeUnit.MILLISECONDS.sleep(50);
 			} catch (InterruptedException e) {
@@ -58,6 +57,7 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			}
 //			System.out.println("aun no llego a la base");
 		}
+		llego=false;
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
@@ -167,6 +167,7 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			}
 //			System.out.println("aun no llego al 3er piso");
 		}
+		llego=false;
 		ralph.setSubida(false);
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -179,11 +180,11 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 				} else {
 					ralph.setEnojado(false);
 					timer.cancel();
-					termino = true;
+					llego = true;
 				}
 			}
 		}, 0, 2000);
-		while (!termino) {
+		while (!llego) {
 			try {
 				TimeUnit.MILLISECONDS.sleep(50);
 			} catch (InterruptedException e) {

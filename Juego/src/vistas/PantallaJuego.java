@@ -21,6 +21,7 @@ import javax.swing.JViewport;
 import javax.swing.border.EmptyBorder;
 import controlador.AdaptadorFlechas;
 import controlador.AdaptadorWASD;
+import controlador.Audio;
 import controlador.JuegoMain;
 import juego.Edificio;
 import juego.Juego;
@@ -56,6 +57,7 @@ public class PantallaJuego extends JFrame {
                 	Juego.reiniciarJuego();
                 	setVisible(false);
                 	PantallaMenu.getInstance().setVisible(true);
+                	Audio.getInstance().fondo(false);
                 }
 				
 				//PantallaMenu.getInstance().setVisible(true);

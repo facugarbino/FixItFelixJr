@@ -1,0 +1,8 @@
+#!/bin/bash
+cant=0
+for i in $(find . -name '*.java')
+do
+let cant=cant+$(cat $i | wc -l)
+done
+echo $cant
+exit 0

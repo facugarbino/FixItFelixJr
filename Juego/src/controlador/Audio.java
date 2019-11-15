@@ -16,7 +16,7 @@ public class Audio {
 	private Clip levelUp;
 	private Clip perdio;
 	private Clip seccionUp;
-
+	private boolean fondoOn;
 	private static Audio INSTANCE = null;
 	private static boolean activado = true;
 
@@ -133,12 +133,19 @@ public class Audio {
 
 	}
 
-	public void fondo() {
-		if (activado) {
+	public void fondo(boolean bool) {
+		if (bool) {
 			try {
 				fondo.loop(Clip.LOOP_CONTINUOUSLY);
+				fondoOn = true;
 //				fondo.setFramePosition(0);
 //				fondo.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				fondo.stop();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

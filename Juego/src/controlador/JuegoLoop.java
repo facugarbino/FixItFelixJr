@@ -51,7 +51,7 @@ public class JuegoLoop implements Runnable {
 			}
 		}, 0,5);
 		new AnimacionSubidaRalphRompiendo().run();
-		Audio.getInstance().fondo();
+		Audio.getInstance().fondo(true);
 
 	}
 
