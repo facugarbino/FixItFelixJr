@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import componentes.Componente;
-import componentes.Nube;
-import graficador.modelo.Dibujable;
 import utils.Posicion;
 
 /**
@@ -46,15 +43,6 @@ public class Mapa {
 
 	public void borrarComponente(Componente c) {
 		componentesABorrar.add(c);
-	}
-
-	public List<Dibujable> getComponentesDibujables() {
-		List<Dibujable> lista = new ArrayList<>();
-		lista.addAll(componentes);
-		lista.addAll(edificio.getSeccion(1).getComponentesDibujables());
-		lista.addAll(edificio.getSeccion(2).getComponentesDibujables());
-		lista.addAll(edificio.getSeccion(3).getComponentesDibujables());
-		return lista;
 	}
 
 	public void avanzarComponentes() {
@@ -107,7 +95,6 @@ public class Mapa {
 		}
 
 	}
-
 	public List<Componente> getComponentes() {
 		return componentes;
 	}

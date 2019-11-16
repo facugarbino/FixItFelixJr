@@ -1,32 +1,22 @@
 package vistas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
 import controlador.JuegoMain;
 import utils.ColorDeLetra;
-
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -98,14 +88,6 @@ public class PantallaConfig extends JFrame {
 		comboLetras.setBackground(Color.BLACK);
 		comboLetras.setForeground(Color.RED);
 		comboLetras.setFocusable(false);
-		comboLetras.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-					String item = (String) arg0.getItem();
-					System.out.println(item);
-				}
-			}
-		});
 		contentPane.add(comboLetras);
 
 		comboNivel.setModel(new DefaultComboBoxModel<Integer>(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }));
@@ -114,14 +96,8 @@ public class PantallaConfig extends JFrame {
 		comboNivel.setBackground(Color.BLACK);
 		comboNivel.setForeground(Color.RED);
 		comboNivel.setFocusable(false);
-		comboNivel.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-					int item = (int) arg0.getItem();
-				}
-			}
-		});
 		contentPane.add(comboNivel);
+		
 		setBounds2(lblLetras,42,118,177,34);
 //		lblLetras.setBounds(42, 118, 177, 34);
 		lblLetras.setIcon(new ImagenTextual("letras a usar:", 1.5, ColorDeLetra.ROJO).getImageIcon());

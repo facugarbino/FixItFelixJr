@@ -1,19 +1,11 @@
 package personajes;
 
-import java.awt.Color;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import animaciones.AnimacionSubidaRalph;
 import componentes.Ladrillo;
-import graficador.modelo.Dibujable;
-import graficador.modelo.InformacionDibujable;
 import juego.Edificio;
 import juego.Juego;
 import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
-import ventanas.Ventana;
 
 /**
  * Representa a Ralph, el demoledor, el enemigo del personaje principal.
@@ -40,14 +32,12 @@ public class Ralph extends Personaje {
 	private Contador timerSwap;
 	private static final int LIMITE_IZQUIERDO = Edificio.ANCHO / 2;
 	private static final int LIMITE_DERECHO = LIMITE_IZQUIERDO + Edificio.ANCHO - ANCHO * 2;
-	// true y false representan dos posiciones
-	// para tirar ladrillos (en las q va alternando)
+	// true y false representan dos estados
+	// que van alternando
 	private boolean swap;
-	private Timer timerDeTiro;
-	private boolean estaSubiendo;
 	private boolean estaEnojado;
 	private boolean estaMuerto;
-
+	
 	public Ralph(Posicion p, int cantLadrillos, int frecuencia, int velocidadLadrillo) {
 		this.cantLadrillos = cantLadrillos;
 		timerFrecuencia = new Contador(frecuencia);
@@ -56,41 +46,32 @@ public class Ralph extends Personaje {
 		this.velocidadLadrillo = velocidadLadrillo;
 		posicion = p;
 		estaTirando = false;
-		caracter = 'R';
 		orientacion = Orientacion.ABAJO;
-		estaSubiendo = false;
-		timerDeTiro = new Timer();
 		timerSwap = new Contador(200);
-		boolean estaEnojado = false;
-
-//		timerDeTiro.scheduleAtFixedRate(new TimerTask() {
-//			@Override
-//			public void run() {
-//				posicionDeTiro = !posicionDeTiro;
-//			}
-//		}, 0, 200);
+		estaEnojado = false;
 	}
 
 	public boolean estaEnojado() {
 		return estaEnojado;
 	}
-	
+
 	public void setEnojado(boolean booleano) {
 		estaEnojado = booleano;
 	}
+
 	public boolean estaMuerto() {
 		return estaMuerto;
 	}
-	
+
 	public void setMuerto(boolean booleano) {
-		estaMuerto= booleano;
+		estaMuerto = booleano;
 	}
-	
+
 	public void setOrientacion(Orientacion o) {
 		orientacion = o;
 	}
+
 	public void setSubida(boolean booleano) {
-		estaSubiendo = booleano;
 		if (booleano) {
 			orientacion = Orientacion.ARRIBA;
 		} else {
@@ -109,6 +90,7 @@ public class Ralph extends Personaje {
 	public boolean getSwap() {
 		return swap;
 	}
+
 	public void swap() {
 		swap = !swap;
 	}
@@ -118,10 +100,9 @@ public class Ralph extends Personaje {
 	 */
 	public void mover() {
 		if (timerSwap.contar()) {
-			swap=!swap;
+			swap = !swap;
 			timerSwap.resetear();
 		}
-		caracter = caracterSegunOrientacion(orientacion);
 		if (!estaTirando) {
 			if (timerCaminar.contar()) {
 				timerCaminar.resetear();
@@ -129,36 +110,28 @@ public class Ralph extends Personaje {
 				if (orientacion == Orientacion.DERECHA) {
 					if (random < 0.9) {
 						darPaso(Orientacion.DERECHA);
-					} else {
+					} else if (random<0.99){
 						darPaso(Orientacion.IZQUIERDA);
+					} else {
+						orientacion=Orientacion.ABAJO;
 					}
 				} else if (orientacion == Orientacion.IZQUIERDA) {
 					if (random < 0.9) {
 						darPaso(Orientacion.IZQUIERDA);
-					} else {
+					} else if (random<0.99){
 						darPaso(Orientacion.DERECHA);
+					} else {
+						orientacion=Orientacion.ABAJO;
 					}
 				} else {
-					if (random < 0.4) {
-
-					} else if (random < 0.7) {
+					if (random < 0.9) {
+						;
+					} else if (random < 0.95) {
 						darPaso(Orientacion.IZQUIERDA);
 					} else {
 						darPaso(Orientacion.DERECHA);
 					}
 				}
-
-//				if (random < 0.45) {
-//					darPaso(Orientacion.IZQUIERDA);
-//				} else {
-//					if (random < 0.9) {
-//						darPaso(Orientacion.DERECHA);
-//					} else {
-//						orientacion = Orientacion.ABAJO;
-//						// System.out.println("Ralph mira para adelante");
-//					}
-//				}
-
 			}
 		}
 	}
@@ -185,25 +158,12 @@ public class Ralph extends Personaje {
 		}
 	}
 
-	private Character caracterSegunOrientacion(Orientacion o) {
-		switch (o) {
-		case DERECHA:
-			return 'R';
-		case IZQUIERDA:
-			return 'Я';
-		default:
-			return 'A';
-		}
-	}
-
 	public void subirDeSeccion() {
 //		Posicion p = Juego.getInstance().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion()
 //				.copia();
 //		p.moverY(160);
 //		posicion = p;
 		estaTirando = false;
-		
-
 	}
 
 	/**
@@ -218,7 +178,6 @@ public class Ralph extends Personaje {
 			if (ladrillosTirados == ladrillosQueTieneQuetirar || cantLadrillos == 0) {
 				// Deja de tirar
 				estaTirando = false;
-				// timerDeTiro.cancel();
 				// System.out.println("Ralph deja de tirar ladrillos");
 			} else {
 				if (timerEntreLadrillos.contar()) {
@@ -233,15 +192,9 @@ public class Ralph extends Personaje {
 		} else {
 			if (cantLadrillos > 0 && timerFrecuencia.contar()) {
 				estaTirando = true;
-//				timerDeTiro.schedule(new TimerTask() {
-//					@Override
-//					public void run() {
-//						posicionDeTiro = !posicionDeTiro;
-//					}
-//				}, 300);
 				orientacion = Orientacion.ABAJO;
 				ladrillosTirados = 0;
-				// Cantidad variable de ladrillos que Ralph tira cada vez que se pone a tirar
+				// Cantidad variable de ladrillos que Ralph tira cada vez que se pone a tirar (entre 2 y 4 inclusive)
 				ladrillosQueTieneQuetirar = (int) (Math.random() * 3 + 2);
 				timerFrecuencia.resetear();
 				// System.out.println("Ralph se pone a tirar ladrillos");
@@ -258,11 +211,6 @@ public class Ralph extends Personaje {
 		return (int) ((Math.floor(Math.random() * ANCHO)) + (posicion.getX()));
 	}
 
-	@Override
-	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter, Color.BLACK);
-	}
-
 	public int getCantLadrillos() {
 		return cantLadrillos;
 	}
@@ -274,6 +222,7 @@ public class Ralph extends Personaje {
 	public void setPosicion(Posicion p) {
 		posicion = p;
 	}
+
 	public void pausar() {
 		timerFrecuencia.pausar();
 		timerCaminar.pausar();

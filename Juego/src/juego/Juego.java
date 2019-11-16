@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import animaciones.AnimacionFinalDeNivel;
 import animaciones.AnimacionGolpeFelix;
@@ -49,7 +48,7 @@ public class Juego {
 	private int cantLadrillosDeEstaSeccion;
 	private boolean graficarPausa;
 	private Set<Character> conjuntoValidos;
-	private boolean graficarGameOver;
+	private boolean pausaParaAnimacion;
 
 	/**
 	 * 
@@ -85,9 +84,9 @@ public class Juego {
 		pausa = false;
 		conjuntoValidos = new HashSet<Character>();
 		conjuntoValidos.addAll(Arrays.asList(new Character[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '-', ',', '!', '?',
-				'"', '(', ')', '\'', '[', ']', '@', '*', '&', '%', '$', '#', '>', '<', '=', '1', '2', '3',
-				'4', '5', '6', '7', '8', '9', '0' }));
+				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '-', ',', '!', '?', '"',
+				'(', ')', '\'', '[', ']', '@', '*', '&', '%', '$', '#', '>', '<', '=', '1', '2', '3', '4', '5', '6',
+				'7', '8', '9', '0' }));
 
 	}
 
@@ -112,11 +111,22 @@ public class Juego {
 	}
 
 	public void pausar() {
-		if (pausa) {
-			System.out.println("JUEGO DESPAUSADO");
-		} else {
-			System.out.println("JUEGO PAUSADO");
+		if (!pausaParaAnimacion) {
+			if (pausa) {
+				System.out.println("JUEGO DESPAUSADO");
+			} else {
+				System.out.println("JUEGO PAUSADO");
+			}
+			graficarPausa=!graficarPausa;
+			pausa = !pausa;
+			ralph.pausar();
+			seccionActual.pausar();
+			felix.pausar();
 		}
+	}
+
+	public void pausarParaAnimacion() {
+		pausaParaAnimacion=!pausaParaAnimacion;
 		pausa = !pausa;
 		ralph.pausar();
 		seccionActual.pausar();
@@ -160,14 +170,6 @@ public class Juego {
 		if (seccionActual.estaSana()) {
 			avanzarSeccion();
 		}
-		/*
-		 * Agregamos este TRY porque cuando Felix choca con un pajaro, nos tira un error
-		 * de concurrencia...
-		 * 
-		 * try { mapa.avanzarComponentes(); } catch(Exception e) { e.printStackTrace();}
-		 * 
-		 * Al final, lo solucionamos con el CopyOnWriteArrayList
-		 */
 		mapa.avanzarComponentes();
 		checkTiempo();
 		felix.chequearInmunizacion();
@@ -189,7 +191,7 @@ public class Juego {
 				reiniciarNivel(3);
 				(new Timer()).schedule(new TimerTask() {
 					public void run() {
-						JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());						
+						JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
 					}
 				}, 2500);
 				(new AnimacionFinalDeNivel()).run();
@@ -199,6 +201,7 @@ public class Juego {
 			}
 		}
 	}
+
 	public void pasarDeNivelConHack() {
 		jugador.sumarPuntos(felix.getPuntaje());
 		if (nivel.hayOtroNivel()) {
@@ -216,8 +219,9 @@ public class Juego {
 
 	private void ganar() {
 		// Esto se hace para que no se grafique un puntaje erróneo al ganar
-		Audio.getInstance().fondo(false);
 		felix.sacarPuntaje();
+
+		Audio.getInstance().fondo(false);
 		pausa = true;
 		yaGano = true;
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
@@ -327,17 +331,15 @@ public class Juego {
 			agregarNubes(nroSeccion);
 			seccionActual = mapa.getEdificio().avanzarSeccion();
 			tiempo = nivel.getTiempo();
-			felix.subirDeSeccion(seccionActual);
 			ralph.subirDeSeccion();
-			pausar();
 			Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
 			new AnimacionSubidaRalph().run();
+			felix.subirDeSeccion(seccionActual);
 			try {
 				t.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			pausar();
 		} else {
 			pasarDeNivel();
 			System.out.println("Felix Jr. pasa de nivel");
@@ -354,12 +356,15 @@ public class Juego {
 		mapa = nivel.crearMapa();
 		seccionActual = mapa.getEdificio().getSeccionActual();
 		if (vidasDeFelix < 3) {
-			Thread t2 = new Thread(new AnimacionGolpeFelix());
-			t2.start();
+
+//			Thread t2 = new Thread(new AnimacionGolpeFelix());
+//			t2.start();
 			Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
+			new AnimacionGolpeFelix().run();
+
 			try {
 				t.join();
-				t2.join();
+//				t2.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -421,14 +426,6 @@ public class Juego {
 		return jugador;
 	}
 
-	public void graficarPausar() {
-		graficarPausa = !graficarPausa;
-	}
-
-	public void graficarGameOver() {
-		graficarGameOver = !graficarGameOver;
-	}
-	
 	public boolean deboGraficarPausa() {
 		return graficarPausa;
 	}

@@ -1,28 +1,22 @@
 package componentes;
 
-import java.awt.Color;
-
-import graficador.modelo.Dibujable;
-import graficador.modelo.InformacionDibujable;
 import juego.Mapa;
 import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 
 /**
- * Clase abstracta que representa a los componentes
- * que están en el aire en el mapa y se mueven.
+ * Clase abstracta que representa a los componentes que están en el aire en el
+ * mapa y se mueven.
  * 
  * @author Garbino y Rodriguez Murphy
  *
  */
-public abstract class Componente implements Dibujable {
+public abstract class Componente {
 	protected Posicion posicion;
 	protected Contador timer;
 	protected Mapa mapa;
 	protected Orientacion orientacion;
-	protected Character caracter;
-	protected Color color;
 
 	public Posicion getPosicion() {
 		return posicion;
@@ -33,10 +27,6 @@ public abstract class Componente implements Dibujable {
 			timer.resetear();
 			comoAvanzo();
 		}
-	}
-
-	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter, color);
 	}
 
 	protected abstract void comoAvanzo();

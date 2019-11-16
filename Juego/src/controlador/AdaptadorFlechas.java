@@ -18,8 +18,10 @@ public class AdaptadorFlechas extends KeyAdapter {
 		// Usamos keyReleased porque
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_P) {
-			juego.pausar();
-			juego.graficarPausar();
+			juego.pausar();			
+		} else if (key == KeyEvent.VK_M) {
+			Audio.getInstance().setActivado();
+			Audio.getInstance().fondo(Audio.getInstance().getActivado());
 		} else {
 			if (!juego.estaPausado()) {
 				// teclaPresionada = true;
@@ -38,16 +40,17 @@ public class AdaptadorFlechas extends KeyAdapter {
 					break;
 				case (KeyEvent.VK_H):
 					// hack para pasar de nivel con la h (para testear)
+					//solo usarlo cuando no está corriendo una animación
 					juego.pasarDeNivelConHack();
 					break;
 				case (KeyEvent.VK_SPACE):
 					juego.darMartillazo();
 					break;
-//				case (KeyEvent.VK_R):
-//					JuegoMain.getPantallaJuego().scrollearUp(20);
+//				case (KeyEvent.VK_U):
+//					JuegoMain.getPantallaJuego().scrollearUp(40);
 //					break;
 //				case (KeyEvent.VK_D):
-//					JuegoMain.getPantallaJuego().scrollearUp(-20);
+//					JuegoMain.getPantallaJuego().scrollearUp(-40);
 //					break;
 				}
 			}

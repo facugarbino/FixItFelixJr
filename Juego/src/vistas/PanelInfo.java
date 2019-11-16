@@ -7,28 +7,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import controlador.Audio;
 import controlador.JuegoMain;
 import juego.Juego;
 import utils.ColorDeLetra;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class PanelInfo extends JPanel {
 
 	private Juego juego;
-	private int vidas;
 	private int nroNivel;
 	private long puntaje;
 	private int tiempo;
+	private int vidas;
 	private Image cabezaFelix;
 	private JLabel botonPausa = new JLabel();
 	private JLabel botonAudio = new JLabel();
@@ -36,11 +31,18 @@ public class PanelInfo extends JPanel {
 	private static ImageIcon imgBotonPausa;
 	private static ImageIcon imgBotonMutear;
 	private static ImageIcon imgBotonDesmutear;
+	private static ImageIcon imgBotonPausa2;
+	private static ImageIcon imgBotonMutear2;
+	private static ImageIcon imgBotonDesmutear2;
 
 	static {
 		imgBotonPausa = new ImageIcon(PanelInfo.class.getResource("/recursos/imagenes/botones/botonPausa.png"));
 		imgBotonMutear = new ImageIcon(PanelInfo.class.getResource("/recursos/imagenes/botones/botonMutear.png"));
 		imgBotonDesmutear = new ImageIcon(PanelInfo.class.getResource("/recursos/imagenes/botones/botonDesmutear.png"));
+		imgBotonPausa2 = new ImageIcon(PanelInfo.class.getResource("/recursos/imagenes/botones/botonPausa2.png"));
+		imgBotonMutear2 = new ImageIcon(PanelInfo.class.getResource("/recursos/imagenes/botones/botonMutear2.png"));
+		imgBotonDesmutear2 = new ImageIcon(
+				PanelInfo.class.getResource("/recursos/imagenes/botones/botonDesmutear2.png"));
 	}
 
 	public PanelInfo() {
@@ -53,21 +55,42 @@ public class PanelInfo extends JPanel {
 		botonPausa.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Juego.getInstance().pausar();
-				Juego.getInstance().graficarPausar();
+			}
+			public void mouseEntered(MouseEvent e) {
+				botonPausa.setIcon(imgBotonPausa2);
+			}
+
+			public void mouseExited(MouseEvent e) {
+				botonPausa.setIcon(imgBotonPausa);
 			}
 		});
 		add(botonPausa);
 
-		botonAudio.setIcon(imgBotonDesmutear);
+		botonAudio.setIcon(imgBotonMutear);
 		botonAudio.setBounds((int) (395 * MULTIPLICADOR), (int) (10 * MULTIPLICADOR), 28, 28);
 		botonAudio.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Audio.getInstance().setActivado();
 				Audio.getInstance().fondo(Audio.getInstance().getActivado());
 				if (Audio.getInstance().getActivado()) {
-					botonAudio.setIcon(imgBotonDesmutear);
-				} else {
 					botonAudio.setIcon(imgBotonMutear);
+				} else {
+					botonAudio.setIcon(imgBotonDesmutear);
+				}
+			}
+			public void mouseEntered(MouseEvent e) {
+				if (Audio.getInstance().getActivado()) {
+					botonAudio.setIcon(imgBotonMutear2);
+				} else {
+					botonAudio.setIcon(imgBotonDesmutear2);
+				}
+			}
+
+			public void mouseExited(MouseEvent e) {
+				if (Audio.getInstance().getActivado()) {
+					botonAudio.setIcon(imgBotonMutear);
+				} else {
+					botonAudio.setIcon(imgBotonDesmutear);
 				}
 			}
 		});
@@ -90,7 +113,7 @@ public class PanelInfo extends JPanel {
 				(int) (10 * MULTIPLICADOR), (int) (30 * MULTIPLICADOR), null);
 		BufferedImage textVidas = new ImagenTextual("Vidas: ", tamañoLetras, ColorDeLetra.ROJO).getBufferedImage();
 		g.drawImage(textVidas, (int) (250 * MULTIPLICADOR), (int) (10 * MULTIPLICADOR), null);
-		for (int i = 0; i < juego.getFelix().getVidas(); i++) {
+		for (int i = 0; i < vidas; i++) {
 			g.drawImage(cabezaFelix,
 					(int) (250 * MULTIPLICADOR) + (int) (textVidas.getWidth())
 							+ i * 2 * (int) (cabezaFelix.getWidth(null) * MULTIPLICADOR),

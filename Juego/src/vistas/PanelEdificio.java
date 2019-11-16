@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Transparency;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
 import componentes.Componente;
 import componentes.Ladrillo;
 import componentes.Nube;
@@ -35,8 +32,6 @@ public class PanelEdificio extends JPanel {
 
 	private final int ANCHO = Edificio.ANCHO;
 	private final int ALTO = Edificio.ALTO;
-//	private final int ANCHO = 300;
-//	private final int ALTO = 900;
 	private Image[] imagenes;
 	private Edificio edificio;
 	private Mapa mapa;
@@ -63,7 +58,6 @@ public class PanelEdificio extends JPanel {
 
 	private Image[] getImagenes() throws IOException {
 		Image img[] = new Image[66];
-		String url;
 		String[] urls = new String[] { "edificio/edificio", "ventanas/ventanaComun", "ventanas/ventanaPrimerPiso",
 				"ventanas/ventanaConHojas", "puertas/puerta", "obstaculos/macetero", "obstaculos/moldura",
 				"obstaculos/hojaIzquierda", "obstaculos/hojaDerecha", "nicelanders/nicelanderCompleto1",
@@ -84,18 +78,16 @@ public class PanelEdificio extends JPanel {
 
 				"paneles/puerta/panelSano", "paneles/puerta/panelMedioRoto", "paneles/puerta/panelRoto",
 				"paneles/primerPiso/panelSano", "paneles/primerPiso/panelMedioRoto", "paneles/primerPiso/panelRoto",
-				"ralph/ralphEnojado1", "ralph/ralphEnojado2", 
-				"felix/felixConPastelInmune", "felix/felixConMartillo1Inmune", "felix/felixConMartillo2Inmune",
-				"felix/felixCorreInmune", "felix/felixFrenteInmune", "felix/felixGolpeadoInmune",
-				
+				"ralph/ralphEnojado1", "ralph/ralphEnojado2", "felix/felixConPastelInmune",
+				"felix/felixConMartillo1Inmune", "felix/felixConMartillo2Inmune", "felix/felixCorreInmune",
+				"felix/felixFrenteInmune", "felix/felixGolpeadoInmune",
+
 				"puntaje/100", "puntaje/500",
-				
+
 				"ralph/ralphMuerto"
-				
 
 		};
 		for (int i = 0; i < 66; i++) {
-			url = urls[i];
 			img[i] = ImageIO.read(getClass().getResource("/recursos/imagenes/" + urls[i] + ".png"));
 		}
 		return img;
@@ -178,6 +170,11 @@ public class PanelEdificio extends JPanel {
 	}
 
 	private void dibujarNubes(Graphics g) {
+		/*
+		 * Este método dibuja las nubes por separado de los otros componentes ya que se
+		 * deben graficar en diferente orden (las nubes van detrás del edificio)
+		 */
+
 		List<Componente> componentes = mapa.getComponentes();
 		for (Componente c : componentes) {
 			if (c instanceof Nube) {
@@ -185,10 +182,8 @@ public class PanelEdificio extends JPanel {
 //						ALTO - c.getPosicion().getY() - imagenes[21].getHeight(null), null);
 				dibujarImagen(g, imagenes[21], c.getPosicion().getX(),
 						ALTO - c.getPosicion().getY() - imagenes[21].getHeight(null));
-
 			}
 		}
-
 	}
 
 	private void dibujarVentanas(Graphics g) {
@@ -199,7 +194,7 @@ public class PanelEdificio extends JPanel {
 			List<Ventana> lista = s.getVentanas();
 			for (Ventana v : lista) {
 				dibujarPaneles(g, v);
-				clase = claseDe(v);
+				clase = v.getClass().getSimpleName();
 				int numImagen = 1;
 				switch (clase) {
 				case "VentanaComun": {
@@ -237,19 +232,12 @@ public class PanelEdificio extends JPanel {
 		}
 	}
 
-	private String claseDe(Object o) {
-		String clase = o.getClass().toString();
-		clase = clase.substring(clase.indexOf('.') + 1, clase.length());
-		clase = clase.substring(clase.indexOf('.') + 1, clase.length());
-		return clase;
-	}
-
 	private void dibujarObstaculos(Graphics g, Ventana v) {
 		Image imagen;
 		int numImagen = 1;
 		String clase;
 		for (Obstaculo o : v.getObstaculos()) {
-			clase = claseDe(o);
+			clase = o.getClass().getSimpleName();
 			switch (clase) {
 			case "Moldura": {
 				numImagen = 6;
@@ -280,7 +268,7 @@ public class PanelEdificio extends JPanel {
 	private int dibujarPaneles(Graphics g, Ventana v) {
 		Image imagen;
 		int numImagen = 18;
-		String clase = claseDe(v);
+		String clase = v.getClass().getSimpleName();
 		int imagenesPaneles[];
 		switch (clase) {
 		case "VentanaPrimerPiso": {
@@ -298,7 +286,7 @@ public class PanelEdificio extends JPanel {
 		}
 		List<Panel> paneles = v.getPaneles();
 		for (Panel p : paneles) {
-			clase = claseDe(p.getEstado());
+			clase = p.getEstado().getClass().getSimpleName();
 			switch (clase) {
 			case "Sano": {
 				numImagen = imagenesPaneles[0];
@@ -347,7 +335,7 @@ public class PanelEdificio extends JPanel {
 				if (felix.estaAsustado()) {
 					numImagen = 31;
 				} else {
-						numImagen = 30;
+					numImagen = 30;
 				}
 			}
 		}
@@ -420,14 +408,12 @@ public class PanelEdificio extends JPanel {
 				ALTO - ralph.getPosicion().getY() - imagen.getHeight(null));
 	}
 
-	
-
 	private void dibujarComponentes(Graphics g) {
 		Image imagen;
 		List<Componente> componentes = mapa.getComponentes();
 		for (Componente c : componentes) {
 			int numImagen = 0;
-			String clase = claseDe(c);
+			String clase = c.getClass().getSimpleName();
 			switch (clase) {
 			case "Ladrillo": {
 				if (((Ladrillo) c).swap()) {
@@ -456,10 +442,10 @@ public class PanelEdificio extends JPanel {
 			}
 			case "Puntaje": {
 				Puntaje p = (Puntaje) c;
-				if (p.getPuntaje()==100) {
-					numImagen=63;
-				} else if (p.getPuntaje()==500) {
-					numImagen=64;
+				if (p.getPuntaje() == 100) {
+					numImagen = 63;
+				} else if (p.getPuntaje() == 500) {
+					numImagen = 64;
 				}
 				break;
 			}

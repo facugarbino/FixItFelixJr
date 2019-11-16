@@ -1,7 +1,5 @@
 package componentes;
 
-import java.awt.Color;
-
 import juego.Juego;
 import juego.Mapa;
 import utils.Contador;
@@ -18,8 +16,6 @@ public class Pajaro extends Componente {
 		posicion = p;
 		timer = new Contador(frecuencia);
 		orientacion = o;
-		caracter = 'P';
-		color = Color.BLACK;
 		mapa = m;
 	}
 

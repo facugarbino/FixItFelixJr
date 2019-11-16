@@ -16,8 +16,10 @@ public class AdaptadorWASD extends KeyAdapter {
 		// Usamos keyReleased porque
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_P) {
-			juego.pausar();
-			juego.graficarPausar();
+			juego.pausar();			
+		} else if (key == KeyEvent.VK_M) {
+			Audio.getInstance().setActivado();
+			Audio.getInstance().fondo(Audio.getInstance().getActivado());
 		} else {
 			if (!juego.estaPausado()) {
 				// teclaPresionada = true;
@@ -34,13 +36,16 @@ public class AdaptadorWASD extends KeyAdapter {
 				case (KeyEvent.VK_S):
 					juego.moverFelix(Orientacion.ABAJO);
 					break;
-				case (KeyEvent.VK_H): {
+				case (KeyEvent.VK_H):
 					// hack para pasar de nivel con la h (para testear)
 					juego.pasarDeNivelConHack();
 					break;
-				}
 				case (KeyEvent.VK_SPACE):
 					juego.darMartillazo();
+					break;
+				case (KeyEvent.VK_M):
+					Audio.getInstance().setActivado();
+					Audio.getInstance().fondo(Audio.getInstance().getActivado());
 					break;
 				}
 			}

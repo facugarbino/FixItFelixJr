@@ -1,15 +1,11 @@
 package personajes;
 
-
-import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import componentes.Ladrillo;
 import componentes.Pajaro;
 import componentes.Puntaje;
 import controlador.Audio;
-import graficador.modelo.InformacionDibujable;
 import juego.Juego;
 import juego.Seccion;
 import utils.Contador;
@@ -43,7 +39,6 @@ public class FelixJr extends Personaje {
 		puntajeNivel = 0;
 		puntajeSeccion = 0;
 		this.vidas = vidas;
-		caracter = 'F';
 		timer = new Contador(5000);
 		estaMartillando= false;
 		timerDeMartillo = new Timer();
@@ -219,12 +214,6 @@ public class FelixJr extends Personaje {
 
 	public void setVentana(Ventana v) {
 		ventanaActual = v;
-	}
-
-	@Override
-	public InformacionDibujable getInformacionDibujable() {
-		Character c = ((inmune) ? 'ƒ' : 'F');
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), c, Color.BLUE);
 	}
 
 	public Ventana getVentana() {

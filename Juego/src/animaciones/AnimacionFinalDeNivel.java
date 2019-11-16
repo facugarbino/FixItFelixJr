@@ -20,7 +20,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 	private boolean termino = false;
 
 	public void run() {
-		Juego.getInstance().pausar();
+		Juego.getInstance().pausarParaAnimacion();
 		ralph.setPosicion(new Posicion(Edificio.ANCHO/2+155,495));
 		felix.setPosicion(new Posicion(Edificio.ANCHO/2+75,495));
 		felix.setMartillo();
@@ -83,6 +83,7 @@ public class AnimacionFinalDeNivel implements Runnable {
 					termino = true;
 					ralph.setEnojado(false);
 					ralphSalta.cancel();
+					ralph.getPosicion().moverX(-15);
 					ralph.setMuerto(true);
 				}
 			}
@@ -103,6 +104,6 @@ public class AnimacionFinalDeNivel implements Runnable {
 		
 		felix.setPosicion(felix.getVentana().getPosicion().copia());
 //		felix.setPosicion(Juego.getInstance().getMapa().getEdificio().getSeccionActual().getVentanaInicial().getPosicion().copia());
-		Juego.getInstance().pausar();
+		Juego.getInstance().pausarParaAnimacion();
 	}
 }

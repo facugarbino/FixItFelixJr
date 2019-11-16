@@ -1,17 +1,12 @@
 package ventanas.extra;
 
 import java.awt.Color;
-import java.util.Timer;
-import java.util.TimerTask;
-import graficador.modelo.Dibujable;
-import graficador.modelo.InformacionDibujable;
 import utils.Contador;
 import utils.Posicion;
 import ventanas.Ventana;
 
-public class Nicelander implements Dibujable {
+public class Nicelander  {
 
-	private Color color;
 	private Ventana ventana;
 	private Contador timer;
 	private boolean oculto;
@@ -20,18 +15,11 @@ public class Nicelander implements Dibujable {
 	private Contador timer2;
 
 	public Nicelander(int tipo, Color color, Ventana ventana) {
-		this.color = color;
 		this.tipo = tipo;
 		this.ventana = ventana;
 
 		timer = new Contador(5000);
 		timer2 = new Contador(2500);
-//		new Timer().schedule(new TimerTask() {
-//			@Override
-//			public void run() {
-//				oculto = false;
-//			}
-//		}, 2500);
 		oculto = true;
 		Posicion posVentana = ventana.getPosicion();
 		Posicion posPanel = Ventana.getPosiciones(2)[0];
@@ -62,11 +50,6 @@ public class Nicelander implements Dibujable {
 		}
 
 		return false;
-	}
-
-	@Override
-	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(ventana.getPosicion().getX(), ventana.getPosicion().getY(), '@', color);
 	}
 
 	public void pausar() {

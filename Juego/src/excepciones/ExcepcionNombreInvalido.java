@@ -1,5 +1,6 @@
 package excepciones;
 
-public class ExcepcionNombreInvalido extends Exception {
+@SuppressWarnings("serial")
+public abstract class ExcepcionNombreInvalido extends Exception {
 	
 }

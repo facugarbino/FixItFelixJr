@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import graficador.modelo.Dibujable;
 import utils.Orientacion;
 import utils.Posicion;
 import ventanas.Ventana;
@@ -250,19 +248,6 @@ public class Seccion {
 		return matriz;
 	}
 
-	public List<Dibujable> getComponentesDibujables() {
-		List<Dibujable> lista = new ArrayList<>();
-		for (int i = 0; i < FILAS; i++) {
-			for (int j = 0; j < COLUMNAS; j++) {
-				lista.add(ventanas[i][j]);
-			}
-		}
-		if (nicelander!=null)
-				lista.add(nicelander);
-		lista.addAll(pasteles);
-		return lista;
-	}
-
 	public void setNicelander(Nicelander nicelander) {
 		this.nicelander = nicelander;
 	}
@@ -275,6 +260,11 @@ public class Seccion {
 		pasteles.remove(pastel);
 	}
 
+	/**
+	 * Se debe llamar al pausar el juego para que los nicelanders
+	 * también se pausen y respeten el tiempo que se deben tomar 
+	 * para colocar el pastel.
+	 */
 	public void pausar() {
 		if (nicelander!=null) {
 			nicelander.pausar();

@@ -43,15 +43,12 @@ public class ImagenTextual {
 
 	public ImagenTextual(String texto, double multiplicador, ColorDeLetra color) {
 		multiplicador*=MULTIPLICADOR;
-//		String textoColor = color.toString().toLowerCase();
 		imagen = new BufferedImage((int) (8 * texto.length() * multiplicador), (int) (9 * multiplicador),
 				BufferedImage.TYPE_INT_RGB);
 		Graphics g = imagen.getGraphics();
 		texto = texto.toLowerCase();
 		texto = texto.replace(' ','_');
 		for (int i = 0; i < texto.length(); i++) {
-//				Image imagen = ImageIO.read(
-//						getClass().getResource("/recursos/imagenes/letras/" + textoColor + "/" + texto.charAt(i) + ".png"));
 			Image imagen = imagenes.get(color).get(texto.charAt(i));
 			g.drawImage(
 					imagen.getScaledInstance((int) (imagen.getWidth(null) * multiplicador),

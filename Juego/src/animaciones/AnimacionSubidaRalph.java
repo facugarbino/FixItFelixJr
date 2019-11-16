@@ -24,6 +24,7 @@ public class AnimacionSubidaRalph implements Runnable {
 
 	@Override
 	public void run() {
+		Juego.getInstance().pausarParaAnimacion();
 		ralph.setSubida(true);
 		maxAltura = ralph.getPosicion().getY() + 160;
 		timerDeSubida = new Timer();
@@ -54,6 +55,7 @@ public class AnimacionSubidaRalph implements Runnable {
 		}
 		//timerDeSubida.cancel();
 		ralph.setSubida(false);
+		Juego.getInstance().pausarParaAnimacion();
 	}
 
 }

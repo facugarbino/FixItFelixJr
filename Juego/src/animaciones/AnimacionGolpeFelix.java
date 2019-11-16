@@ -13,7 +13,7 @@ public class AnimacionGolpeFelix implements Runnable {
 	private boolean termino = false;
 	private Timer timer; 
 	public void run() {
-		Juego.getInstance().pausar();
+		Juego.getInstance().pausarParaAnimacion();
 		timer = new Timer();
 		felix.asustarse();
 		timer = new Timer();
@@ -45,7 +45,7 @@ public class AnimacionGolpeFelix implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		Juego.getInstance().pausar();
+		Juego.getInstance().pausarParaAnimacion();
 	}
 
 }

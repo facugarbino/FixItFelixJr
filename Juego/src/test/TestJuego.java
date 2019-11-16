@@ -1,21 +1,13 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import graficador.modelo.Dibujable;
-import graficador.vista.Graficador;
 import juego.Juego;
-import ranking.HighScore;
 import utils.Contador;
 
 /**
- * Clase que permite testear el juego, con mensajes en la consola y un
- * graficador básico que permite jugar con las teclas.
+ * Clase que permite testear el juego, con mensajes en la consola.
  * 
  * @author Garbino y Rodriguez Murphy
  *
@@ -45,27 +37,19 @@ public class TestJuego {
 	private static void loop() {
 		Contador timer = new Contador(100);
 		System.out.println("Felix comienza en la posición " + j.getFelix().getPosicion());
-		List<Dibujable> lista = new ArrayList<Dibujable>();
 		while (true) {
 			if (!j.estaPausado()) {
 				if (timer.contar()) {
 					timer.resetear();
-					// Grafica todo
-					lista = j.getMapa().getComponentesDibujables();
-					lista.add(j.getRalph());
-					lista.add(j.getFelix());
-					Graficador.refrescarTopDown(lista);
 				}
 				j.actualizar();
 			} else {
 				if (j.yaGano()) {
-					Graficador.mensaje("HAS GANADO!");
 					break;
 				}
 				if (j.getTiempo() > 0 && j.getFelix().getVidas() > 0) {
-					Graficador.mensaje("PAUSA");
+					;
 				} else {
-					Graficador.mensaje("GAME OVER");
 					break;
 				}
 			}

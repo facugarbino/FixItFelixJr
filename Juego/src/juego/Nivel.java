@@ -1,11 +1,7 @@
 package juego;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import componentes.Nube;
-import componentes.Pajaro;
-import utils.Orientacion;
 import utils.Posicion;
 
 /**

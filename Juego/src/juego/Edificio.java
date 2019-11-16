@@ -1,8 +1,6 @@
 package juego;
 
 import java.util.List;
-
-import controlador.JuegoMain;
 import utils.Posicion;
 /**
  * Representa al edificio con sus 3 secciones

@@ -25,7 +25,7 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 
 	@Override
 	public void run() {
-		Juego.getInstance().pausar();
+		Juego.getInstance().pausarParaAnimacion();
 		timerSwap.schedule(new TimerTask() {
 			public void run() {
 				ralph.swap();
@@ -181,6 +181,6 @@ public class AnimacionSubidaRalphRompiendo implements Runnable {
 			}
 		}
 		timerSwap.cancel();
-		Juego.getInstance().pausar();
+		Juego.getInstance().pausarParaAnimacion();
 	}
 }

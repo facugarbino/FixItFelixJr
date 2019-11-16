@@ -1,6 +1,5 @@
 package controlador;
 
-import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 import animaciones.AnimacionSubidaRalphRompiendo;

@@ -1,11 +1,6 @@
 package ventanas;
 
-import java.awt.Color;
 import java.util.*;
-
-import controlador.JuegoMain;
-import graficador.modelo.Dibujable;
-import graficador.modelo.InformacionDibujable;
 import juego.Juego;
 import juego.Seccion;
 import utils.Orientacion;
@@ -25,7 +20,7 @@ import ventanas.paneles.Sano;
  * @author Garbino y Rodriguez Murphy
  *
  */
-public abstract class Ventana implements Dibujable{
+public abstract class Ventana {
 
 	public static final int ANCHO = 24;
 	public static final int ALTO = 39;
@@ -40,26 +35,7 @@ public abstract class Ventana implements Dibujable{
 	protected int panelesRotos;
 	protected int panelesReparados;
 	Character caracter = '□';
-//	private static Posicion[] posicion2 = new Posicion[] {
-//			new Posicion(6,8), new Posicion(6,21)
-//	};
-//	private static Posicion[] posicion4 = new Posicion[] {
-//			new Posicion(9,9),
-//			new Posicion(22,9),
-//			new Posicion(9,21),
-//			new Posicion(22,21)
-//	};
-//	private static Posicion[] posicion5 = new Posicion[] {
-//			new Posicion(7,4),
-//			new Posicion(13,4),
-//			new Posicion(22,4),
-//			new Posicion(28,4),
-//			new Posicion(7,13),
-//			new Posicion(13,13),
-//			new Posicion(22,13),
-//			new Posicion(28,13)
-//	};
-	
+
 	private static Posicion[] posicion2 = new Posicion[] {
 			new Posicion(6,8), new Posicion(6,21)
 	};
@@ -80,7 +56,6 @@ public abstract class Ventana implements Dibujable{
 			new Posicion(28,13)
 	};
 	
-
 	/**
 	 * Método llamado por Felix para moverse
 	 * 
@@ -111,12 +86,6 @@ public abstract class Ventana implements Dibujable{
 
 	public Posicion getPosicion() {
 		return posicion;
-	}
-
-	public InformacionDibujable getInformacionDibujable() {
-		return new InformacionDibujable(posicion.getX(), posicion.getY(), caracter,
-				(estaRota()) ? Color.RED : Color.GREEN);
-
 	}
 
 	/**
@@ -244,17 +213,12 @@ public abstract class Ventana implements Dibujable{
 
 	public static Posicion[] getPosiciones(int cantPaneles) {
 		switch (cantPaneles) {
-		case 2:{
-			return posicion2;
-			
-		}
-		case 4:{
-			return posicion4;
-			
-		}
-		case 8:{
-			return posicion5;
-		}
+			case 2:
+				return posicion2;
+			case 4:
+				return posicion4;
+			case 8:
+				return posicion5;
 		}
 		return null;
 	}

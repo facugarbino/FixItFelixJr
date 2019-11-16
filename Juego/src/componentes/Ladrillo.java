@@ -1,6 +1,5 @@
 package componentes;
 
-import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,14 +20,12 @@ public class Ladrillo extends Componente {
 		posicion = p;
 		timer = new Contador(velocidad);
 		mapa = m;
-		caracter = 'O';
 		timerSwap = new Timer();
 		timerSwap.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				swap = !swap;
 			}
 		},0,300);
-		color = new Color(95,2,31);
 	}
 
 	/**
