@@ -7,8 +7,23 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * Clase para la reproducción del sonido del juego
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Audio {
 
+	
+	/*Hicimos un tratamiento de excepciones de NullPointerException 
+	 * en todos los métodos y en la apertura de archivos ya que, 
+	 * MUY DE VEZ EN CUANDO, en alguna computadora, JAVA no encuentra
+	 * una línea de sonido para usar. 
+	 * De otro modo, si esto ocurriera, y no agarráramos esta excepción,
+	 * la ventana principal ni siquiera se abriría.  
+	 */
+	
 	private Clip apertura;
 	private Clip arregloPanel;
 	private Clip choqueLadrillo;

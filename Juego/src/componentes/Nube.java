@@ -4,6 +4,11 @@ import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
 
+/**
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Nube extends Componente {
 
 	public Nube(Posicion p, int frecuencia) {

@@ -32,6 +32,7 @@ public class FelixJr extends Personaje {
 	private boolean martilloArriba;
 	private boolean asustado;
 	public static int ANCHO = 15;
+	public static int ALTO = 33;
 
 	public FelixJr(Posicion p, Ventana v, int vidas) {
 		this.posicion = p;

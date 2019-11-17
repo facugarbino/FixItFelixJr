@@ -19,7 +19,7 @@ public class VentanaComun extends Ventana {
 	Contador timer = new Contador((int)(Math.random() * 5000 + 5000));
 
 	public VentanaComun(Posicion posicion, Seccion seccion, boolean estaRoto, boolean tieneObstaculo) {
-		Posicion posiciones[] = getPosiciones(2);
+		Posicion posiciones[] = getPosicionPaneles(2);
 		this.posicion = posicion;
 		this.seccion = seccion;
 		panelesReparados = 0;

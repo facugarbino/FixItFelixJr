@@ -2,6 +2,13 @@ package ranking;
 
 import java.util.Comparator;
 
+/**
+ * Comparador para ordenar descendentemente la colección
+ * de tops 5 jugadores con más puntaje.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class ComparadorHighScoreDescendente implements Comparator<HighScore> {
 
 	@Override

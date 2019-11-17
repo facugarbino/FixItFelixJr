@@ -5,7 +5,10 @@ import juego.Mapa;
 import utils.Contador;
 import utils.Orientacion;
 import utils.Posicion;
-
+/**
+ * @author Garbino y Rodríguez Murphy
+ *
+ */
 public class Pajaro extends Componente {
 
 	private static final int ANCHO = 21;

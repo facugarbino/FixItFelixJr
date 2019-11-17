@@ -1,5 +1,12 @@
 package utils;
 
+/**
+ * Enumerativo con las 4 orientaciones disponibles
+ * para los elementos del juego
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public enum Orientacion {
 	IZQUIERDA, DERECHA, ARRIBA, ABAJO;
 

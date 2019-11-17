@@ -158,7 +158,8 @@ public class Juego {
 	}
 
 	/**
-	 * Se encarga de actualizar el estado del juego, se ejecuta constantemente
+	 * Se encarga de actualizar el estado del juego, se debe ejectur
+	 * constantemente cada una cantidad corta de tiempo.
 	 */
 	public void actualizar() {
 		ralph.mover();
@@ -227,6 +228,11 @@ public class Juego {
 		System.out.println("¡FELICITACIONES! Ganaste el juego.");
 	}
 
+	/**
+	 * En el caso de merecer entrar en el top 5 de jugadores,
+	 * se agrega al jugador actual en el mismo.
+	 * 
+	 */
 	public void agregarRanking() {
 		if (ranking.entraEnElTop(jugador.getPuntaje())) {
 			String nombreJugador;
@@ -244,7 +250,12 @@ public class Juego {
 			} while (nombreInvalido);
 		}
 	}
-
+	/**
+	 * Pregunta el nombre del jugador que ha obtenido una cantidad
+	 * de puntos merecedora de estar en el top 5.
+	 * 
+	 * @throws una excepción si el nombre ingresado no es válido
+	 */
 	private String preguntarNombre() throws ExcepcionNombreInvalido {
 		String nombre = JOptionPane.showInputDialog(null, "Inserte su Nombre: ", "Fix it Felix Jr.",
 				JOptionPane.QUESTION_MESSAGE);

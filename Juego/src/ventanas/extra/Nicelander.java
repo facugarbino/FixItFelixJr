@@ -5,6 +5,13 @@ import utils.Contador;
 import utils.Posicion;
 import ventanas.Ventana;
 
+/**
+ * Representa a los Nicelanders que se asoman por las
+ * ventanas a dejarle un pastel a Felix
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Nicelander  {
 
 	private Ventana ventana;
@@ -22,7 +29,7 @@ public class Nicelander  {
 		timer2 = new Contador(2500);
 		oculto = true;
 		Posicion posVentana = ventana.getPosicion();
-		Posicion posPanel = Ventana.getPosiciones(2)[0];
+		Posicion posPanel = Ventana.getPosicionPaneles(2)[0];
 		posicion = new Posicion(posVentana.getX() + posPanel.getX(), posVentana.getY() + posPanel.getY());
 	}
 

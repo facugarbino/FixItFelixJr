@@ -5,6 +5,13 @@ import personajes.FelixJr;
 import utils.Contador;
 import utils.Posicion;
 
+/**
+ * Representa a una imagen de un 100 o un 500 que se muestra
+ * en la pantalla cuando Felix arregla un panel de alguna ventana.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Puntaje extends Componente  {
 	private int puntaje;
 	private final int yFinal;

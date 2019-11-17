@@ -10,20 +10,14 @@ import ventanas.paneles.Sano;
 public class VentanaPuerta extends Ventana {
 
 	public static final int CANT_PANELES = 4;
-	public static Posicion[] posiciones = {
-			new Posicion(5,2),
-			new Posicion(10,2),
-			new Posicion(15,2),
-			new Posicion(20,2)
-	};
 
 	public VentanaPuerta(Posicion posicion, Seccion seccion, boolean estaRoto) {
+		Posicion[] posiciones = getPosicionPaneles(4);
 		this.posicion = posicion;
 		this.seccion = seccion;
 		panelesReparados = 0;
 		cantMartillazos = 0;
 		paneles = new ArrayList<>();
-		caracter = 'Ω';
 		if (estaRoto) {
 			//caracter ='X';
 			paneles = getPanelesRotosRandom(CANT_PANELES);

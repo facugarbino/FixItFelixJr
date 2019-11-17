@@ -3,6 +3,7 @@ package ventanas;
 import java.util.ArrayList;
 
 import juego.Seccion;
+import utils.Orientacion;
 import utils.Posicion;
 import ventanas.obstaculos.HojaDerecha;
 import ventanas.obstaculos.HojaIzquierda;
@@ -13,19 +14,15 @@ public class VentanaConHojas extends Ventana {
 
 	public static final int CANT_PANELES = 2;
 	private boolean cerrada;
-	private boolean hojaDerecha;
-	private boolean hojaIzquierda;
-
 
 	public VentanaConHojas(Posicion posicion, Seccion seccion, boolean tieneObstaculo) {
-		Posicion posiciones[] = getPosiciones(2);
+		Posicion posiciones[] = getPosicionPaneles(2);
 		this.posicion = posicion;
 		this.seccion = seccion;
 		panelesReparados = 0;
 		cantMartillazos = 0;
 		cerrada = !tieneObstaculo;
 		paneles = new ArrayList<>();
-		// caracter ='□';
 		for (int i = 0; i < CANT_PANELES; i++) {
 			paneles.add(new Panel(new Sano(), posiciones[i]));
 		}
@@ -33,13 +30,9 @@ public class VentanaConHojas extends Ventana {
 		if (!cerrada) {
 			if (Math.random() < 0.5) {
 				obstaculos.add(new HojaIzquierda());
-				hojaIzquierda=true;
 			} else {
 				obstaculos.add(new HojaDerecha());
-				hojaDerecha=true;
 			}
-		} else {
-			caracter = '■';
 		}
 	}
 
@@ -48,11 +41,19 @@ public class VentanaConHojas extends Ventana {
 	}
 
 	public boolean tieneHojaIzquierda() {
-		return hojaIzquierda;
+		if (obstaculos.isEmpty()) {
+			return false;
+		} else {
+			return obstaculos.get(0).estasEn(Orientacion.IZQUIERDA);
+		}
 	}
 
 	public boolean tieneHojaDerecha() {
-		return hojaDerecha;
+		if (obstaculos.isEmpty()) {
+			return false;
+		} else {
+			return obstaculos.get(0).estasEn(Orientacion.DERECHA);
+		}
 	}
 
 }

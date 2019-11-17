@@ -34,18 +34,17 @@ public abstract class Ventana {
 	protected int cantMartillazos;
 	protected int panelesRotos;
 	protected int panelesReparados;
-	Character caracter = '□';
 
-	private static Posicion[] posicion2 = new Posicion[] {
+	private static Posicion[] posicionPaneles2 = new Posicion[] {
 			new Posicion(6,8), new Posicion(6,21)
 	};
-	private static Posicion[] posicion4 = new Posicion[] {
+	private static Posicion[] posicionPaneles4 = new Posicion[] {
 			new Posicion(9,9),
 			new Posicion(22,9),
 			new Posicion(9,21),
 			new Posicion(22,21)
 	};
-	private static Posicion[] posicion5 = new Posicion[] {
+	private static Posicion[] posicionPaneles8 = new Posicion[] {
 			new Posicion(7,4),
 			new Posicion(13,4),
 			new Posicion(22,4),
@@ -178,7 +177,7 @@ public abstract class Ventana {
 	 * @return una lista de paneles, aleatoramiente rotos
 	 */
 	protected List<Panel> getPanelesRotosRandom(int cantPaneles) {
-		Posicion posiciones[] = getPosiciones(cantPaneles);
+		Posicion posiciones[] = getPosicionPaneles(cantPaneles);
 		boolean algunoRoto = false;
 		EstadoPanel p;
 		List<Panel> lista = new ArrayList<>();
@@ -211,14 +210,14 @@ public abstract class Ventana {
 		return lista;
 	}
 
-	public static Posicion[] getPosiciones(int cantPaneles) {
+	public static Posicion[] getPosicionPaneles(int cantPaneles) {
 		switch (cantPaneles) {
 			case 2:
-				return posicion2;
+				return posicionPaneles2;
 			case 4:
-				return posicion4;
+				return posicionPaneles4;
 			case 8:
-				return posicion5;
+				return posicionPaneles8;
 		}
 		return null;
 	}

@@ -7,7 +7,11 @@ import juego.Juego;
 import juego.Mapa;
 import utils.Contador;
 import utils.Posicion;
-
+/**
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class Ladrillo extends Componente {
 
 	private static final int ANCHO = 12;

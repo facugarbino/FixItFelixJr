@@ -13,6 +13,13 @@ import javax.swing.ImageIcon;
 import controlador.JuegoMain;
 import utils.ColorDeLetra;
 
+/**
+ * Representa a una imagen con un texto definido con la fuente
+ * de Fix it Felix Jr.
+ * 
+ * @author Garbino y Rodriguez Murphy
+ *
+ */
 public class ImagenTextual {
 	private BufferedImage imagen;
 	private final static double MULTIPLICADOR = JuegoMain.MULTIPLICADOR_MENU;

@@ -10,7 +10,7 @@ import utils.Posicion;
 /**
  * Representa a Ralph, el demoledor, el enemigo del personaje principal.
  * 
- * @author facu
+ * @author Garbino y Rodriguez Murphy
  *
  */
 public class Ralph extends Personaje {

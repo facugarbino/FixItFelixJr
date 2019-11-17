@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import componentes.Componente;
+import personajes.FelixJr;
 import utils.Posicion;
 
 /**
@@ -64,10 +65,10 @@ public class Mapa {
 		Posicion pFelix = Juego.getInstance().getFelix().getPosicion();
 		int radioX = diametroX / 2;
 		int radioY = diametroY / 2;
-		if (estaEntre(p.getX() - radioX, pFelix.getX(), pFelix.getX() + 15)
-				|| estaEntre(p.getX() + radioX, pFelix.getX(), pFelix.getX() + 15)) {
-			if (estaEntre(p.getY() - radioY, pFelix.getY(), pFelix.getY() + 33)
-					|| estaEntre(p.getY() + radioY, pFelix.getY(), pFelix.getY() + 33)) {
+		if (estaEntre(p.getX() - radioX, pFelix.getX(), pFelix.getX() + FelixJr.ANCHO)
+				|| estaEntre(p.getX() + radioX, pFelix.getX(), pFelix.getX() + FelixJr.ANCHO)) {
+			if (estaEntre(p.getY() - radioY, pFelix.getY(), pFelix.getY() + FelixJr.ALTO)
+					|| estaEntre(p.getY() + radioY, pFelix.getY(), pFelix.getY() + FelixJr.ALTO)) {
 				return true;
 			}
 		}

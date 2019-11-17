@@ -38,14 +38,11 @@ public class AdaptadorWASD extends KeyAdapter {
 					break;
 				case (KeyEvent.VK_H):
 					// hack para pasar de nivel con la h (para testear)
+					//solo usarlo cuando no está corriendo una animación
 					juego.pasarDeNivelConHack();
 					break;
 				case (KeyEvent.VK_SPACE):
 					juego.darMartillazo();
-					break;
-				case (KeyEvent.VK_M):
-					Audio.getInstance().setActivado();
-					Audio.getInstance().fondo(Audio.getInstance().getActivado());
 					break;
 				}
 			}

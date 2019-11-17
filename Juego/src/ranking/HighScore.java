@@ -6,6 +6,7 @@ import juego.Jugador;
 /**
  * 
  * Representa a un HighScore (con el nombre del jugador y su puntaje)
+ * 
  * @author Garbino y Rodriguez Murphy
  *
  */
