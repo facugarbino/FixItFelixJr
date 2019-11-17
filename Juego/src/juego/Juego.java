@@ -169,6 +169,11 @@ public class Juego {
 		}
 		seccionActual.generarNicelanders();
 		if (seccionActual.estaSana()) {
+			/*Este yield es para darle tiempo al hilo del
+			 * KeyListener para que Felix pueda sumar su puntaje de la sección
+			 * (los 500 + el tiempo restante) 
+			 */
+			Thread.yield();
 			avanzarSeccion();
 		}
 		mapa.avanzarComponentes();
@@ -341,8 +346,8 @@ public class Juego {
 			mapa.borrarComponentesDeSeccion(seccionActual.getNroSeccion());
 			agregarNubes(nroSeccion);
 			seccionActual = mapa.getEdificio().avanzarSeccion();
-			tiempo = nivel.getTiempo();
 			ralph.subirDeSeccion();
+			tiempo = nivel.getTiempo();
 			Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
 			new AnimacionSubidaRalph().run();
 			felix.subirDeSeccion(seccionActual);

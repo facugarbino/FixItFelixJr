@@ -67,11 +67,11 @@ public class FelixJr extends Personaje {
 	public void darMartillazo() {
 		System.out.println("Felix ha dado un martillazo!");
 		if (ventanaActual.reparar()) {
-			Audio.getInstance().arregloPanel();
-			if (ventanaActual.getSeccion().estaSana()) {
-				Audio.getInstance().seccionUp();
-				Juego.getInstance().getMapa().agregarComponente(new Puntaje(500,posicion.copia(), Juego.getInstance().getMapa()));
+			if (ventanaActual.getSeccion().estaSana()) {				
 				puntajeSeccion += 500;
+				puntajeSeccion+=Juego.getInstance().getTiempo();
+				Juego.getInstance().getMapa().agregarComponente(new Puntaje(500,posicion.copia(), Juego.getInstance().getMapa()));
+				Audio.getInstance().seccionUp();
 				puntajeNivel += puntajeSeccion;
 				puntajeSeccion = 0;
 				System.out.println("Felix repara el ultimo panel de la seccion. Gana 500 puntos.");
@@ -80,6 +80,7 @@ public class FelixJr extends Personaje {
 				puntajeSeccion += 100;
 				System.out.println("Felix repara un panel. Gana 100 puntos.");
 			}
+			Audio.getInstance().arregloPanel();
 		}
 		estaMartillando = true;
 		martilloArriba=true;
