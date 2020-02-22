@@ -22,7 +22,6 @@ public class AnimacionScroll implements Runnable {
 		timer.schedule(new TimerTask() {
 			int actualY = (int) viewport.getViewPosition().getY();
 			public void run() {
-				System.out.println(actualY);
 				if (actualY > yDeseado) {
 					actualY-=5;
 					viewport.setViewPosition(new Point(0, actualY));

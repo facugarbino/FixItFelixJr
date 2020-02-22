@@ -376,7 +376,7 @@ public class Juego {
 //			Thread t2 = new Thread(new AnimacionGolpeFelix());
 //			t2.start();
 			Thread t = JuegoMain.getPantallaJuego().scrollHacia(seccionActual.getPosicion());
-			new AnimacionGolpeFelix().run();
+			//new AnimacionGolpeFelix().run();
 
 			try {
 				t.join();

@@ -31,11 +31,11 @@ public class FelixJr extends Personaje {
 	private Timer timerDeMartillo;
 	private boolean martilloArriba;
 	private boolean asustado;
-	public static int ANCHO = 15;
+	public final static int ANCHO = 15;
 	public static int ALTO = 33;
 
-	public FelixJr(Posicion p, Ventana v, int vidas) {
-		this.posicion = p;
+	public FelixJr(Posicion posicion, Ventana v, int vidas) {
+		this.posicion = posicion;
 		ventanaActual = v;
 		puntajeNivel = 0;
 		puntajeSeccion = 0;

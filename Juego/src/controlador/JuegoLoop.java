@@ -23,7 +23,7 @@ public class JuegoLoop implements Runnable {
 			public void run () {
 				JuegoMain.getPantallaJuego().repaint();
 			}
-		}, 0,10);
+		}, 0,20);
 		
 		timerJuego.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
@@ -48,7 +48,7 @@ public class JuegoLoop implements Runnable {
 					}
 				}
 			}
-		}, 0,5);
+		}, 0,10);
 		new AnimacionSubidaRalphRompiendo().run();
 		Audio.getInstance().fondo(true);
 
